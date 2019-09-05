@@ -2,4 +2,3 @@ requests
 marshmallow
 tabulate
 pytoml
-webbrowser
