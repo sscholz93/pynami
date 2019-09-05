@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pynami.constants &mdash; pynami 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pynami.constants</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pynami.constants</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module defines some constants needed for communication with the |NAMI|.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="UgId"><a class="viewcode-back" href="../../pynami.constants.html#pynami.constants.UgId">[docs]</a><span class="k">class</span> <span class="nc">UgId</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Untergliederungs ID&quot;&quot;&quot;</span>
+    <span class="n">WOE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">JUFFI</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">PFADI</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">ROVER</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">STAVO</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.value}</span><span class="s1">&#39;</span></div>
+
+
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;SERVER&#39;</span><span class="p">:</span> <span class="s1">&#39;https://nami.dpsg.de/ica/rest&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AUTH&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/auth/manual/sessionStartup&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SEARCH&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/result-list&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GETMGL&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied/filtered-for-navigation/&#39;</span>
+                  <span class="s1">&#39;gruppierung/gruppierung/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LOGOUT&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/auth/logout&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MGLTYPE&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/enum/mgltype&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LAND&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/land/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ZAHLUNGSKONDITION&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/zahlungskondition/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;REGION&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/region/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BEITRAGSART&#39;</span><span class="p">:</span> <span class="s1">&#39;/namiBeitrag/beitragsartmgl/gruppierung/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GESCHLECHT&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/geschlecht/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;STAAT&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/staatsangehoerigkeit/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;KONFESSION&#39;</span><span class="p">:</span> <span class="s1">&#39;/baseadmin/konfession/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SEARCH_ALL&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied/filtered-for-navigation/gruppierung&#39;</span>
+                      <span class="s1">&#39;/gruppierung/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HISTORY&#39;</span><span class="p">:</span> <span class="s1">&#39;/dashboard/history-entries/flist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NOTIFICATIONS&#39;</span><span class="p">:</span> <span class="s1">&#39;/dashboard/notification-entries/flist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;STATS&#39;</span><span class="p">:</span> <span class="s1">&#39;/dashboard/stats/stats&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;STATUS_LIST&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/status-list&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;TAGLIST&#39;</span><span class="p">:</span> <span class="s1">&#39;//tagging/getTagList&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BAUSTEIN&#39;</span><span class="p">:</span> <span class="s1">&#39;/module/baustein&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;UNTERGLIEDERUNG&#39;</span><span class="p">:</span> <span class="s1">&#39;/orgadmin/untergliederung&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ALLE_TAETIGKEITEN&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/all-visible-taetigkeiten&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;EBENE&#39;</span><span class="p">:</span> <span class="s1">&#39;/orgadmin/ebene/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;EBENE1&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/ebene/1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;EBENE2&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/ebene/2/gruppierung1/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;EBENE3&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/search-multi/ebene/3/gruppierung2/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MGL_TAETIGKEITEN&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/zugeordnete-taetigkeiten/&#39;</span>
+                            <span class="s1">&#39;filtered-for-navigation/gruppierung-mitglied/&#39;</span>
+                            <span class="s1">&#39;mitglied/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AUSBILDUNG&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied-ausbildung/filtered-for-navigation/&#39;</span>
+                      <span class="s1">&#39;mitglied/mitglied/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MGL_HISTORY&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied-history/filtered-for-navigation/&#39;</span>
+                       <span class="s1">&#39;mitglied/mitglied/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MGL_HISTORY_EXT&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied-history-with-values/&#39;</span>
+                           <span class="s1">&#39;filtered-for-navigation/mitglied/mitglied/&#39;</span><span class="p">}</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

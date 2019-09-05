@@ -1,0 +1,7 @@
+pynami.namitool module
+======================
+
+.. automodule:: pynami.namitool
+   :members:
+   :undoc-members:
+   :show-inheritance:

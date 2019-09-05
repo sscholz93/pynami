@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pynami.search module &mdash; pynami 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pynami.base module" href="pynami.base.html" />
+    <link rel="prev" title="pynami.util module" href="pynami.util.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="namiclass.html">Main class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">REST URLs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pynami.html">pynami package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pynami.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pynami.constants.html">pynami.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.nami.html">pynami.nami module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.schemas.html">pynami.schemas module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.util.html">pynami.util module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pynami.search module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.base.html">pynami.base module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">API reference</a> &raquo;</li>
+        
+          <li><a href="pynami.html">pynami package</a> &raquo;</li>
+        
+      <li>pynami.search module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pynami.search.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pynami.search">
+<span id="pynami-search-module"></span><h1>pynami.search module<a class="headerlink" href="#module-pynami.search" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the classes for a search for members</p>
+<dl class="class">
+<dt id="pynami.search.SearchSchema">
+<em class="property">class </em><code class="sig-name descname">SearchSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/search.html#SearchSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.search.SearchSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Base class for search parameters</p>
+<p>You could just use <a class="reference external" href="https://docs.python.org/3/library/json.html#json.dumps" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">json.dumps()</span></code></a> on a dictionary to create the search
+string but this would bypass all the type and spell checking.</p>
+<p>This also takes care of the miss-spelled search key <code class="docutils literal notranslate"><span class="pre">'mitgliedsNummber'</span></code>
+so that the user of this <abbr title="Application Programming Interface">API</abbr> can use the correct spelling.</p>
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.vorname">
+<code class="sig-name descname">vorname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.vorname" title="Permalink to this definition">¶</a></dt>
+<dd><p>First Name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.funktion">
+<code class="sig-name descname">funktion</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.funktion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unused tag</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.organisation">
+<code class="sig-name descname">organisation</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.organisation" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.nachname">
+<code class="sig-name descname">nachname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.nachname" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.alterVon">
+<code class="sig-name descname">alterVon</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.alterVon" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.alterBis">
+<code class="sig-name descname">alterBis</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.alterBis" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.mglWohnort">
+<code class="sig-name descname">mglWohnort</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.mglWohnort" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.mitgliedsNummer">
+<code class="sig-name descname">mitgliedsNummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.mitgliedsNummer" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.mglStatusId">
+<code class="sig-name descname">mglStatusId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.mglStatusId" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.mglTypeId">
+<code class="sig-name descname">mglTypeId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.mglTypeId" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.tagId">
+<code class="sig-name descname">tagId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.tagId" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.bausteinIncludeId">
+<code class="sig-name descname">bausteinIncludeId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.bausteinIncludeId" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.spitzname">
+<code class="sig-name descname">spitzname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.spitzname" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.zeitschriftenversand">
+<code class="sig-name descname">zeitschriftenversand</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.zeitschriftenversand" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung4Id">
+<code class="sig-name descname">gruppierung4Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung4Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung5Id">
+<code class="sig-name descname">gruppierung5Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung5Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung6Id">
+<code class="sig-name descname">gruppierung6Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung6Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.search.SearchSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.privacy">
+<code class="sig-name descname">privacy</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.privacy" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.searchName">
+<code class="sig-name descname">searchName</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.searchName" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.untergliederungId">
+<code class="sig-name descname">untergliederungId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.untergliederungId" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.taetigkeitId">
+<code class="sig-name descname">taetigkeitId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.taetigkeitId" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.mitAllenTaetigkeiten">
+<code class="sig-name descname">mitAllenTaetigkeiten</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.mitAllenTaetigkeiten" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.withEndedTaetigkeiten">
+<code class="sig-name descname">withEndedTaetigkeiten</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.withEndedTaetigkeiten" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.ebeneId">
+<code class="sig-name descname">ebeneId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.ebeneId" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.grpNummer">
+<code class="sig-name descname">grpNummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.grpNummer" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.grpName">
+<code class="sig-name descname">grpName</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.grpName" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung1Id">
+<code class="sig-name descname">gruppierung1Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung1Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung2Id">
+<code class="sig-name descname">gruppierung2Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung2Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.gruppierung3Id">
+<code class="sig-name descname">gruppierung3Id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.gruppierung3Id" title="Permalink to this definition">¶</a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.inGrp">
+<code class="sig-name descname">inGrp</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.inGrp" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.unterhalbGrp">
+<code class="sig-name descname">unterhalbGrp</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.unterhalbGrp" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.searchType">
+<code class="sig-name descname">searchType</code><em class="property"> = None</em><a class="headerlink" href="#pynami.search.SearchSchema.searchType" title="Permalink to this definition">¶</a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.search.SearchSchema.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="reference internal" href="_modules/pynami/search.html#SearchSchema.Meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.search.SearchSchema.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.Meta</span></code></p>
+<dl class="attribute">
+<dt id="pynami.search.SearchSchema.Meta.ordered">
+<code class="sig-name descname">ordered</code><em class="property"> = True</em><a class="headerlink" href="#pynami.search.SearchSchema.Meta.ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>All attributes shall be dumped in code order</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.search.SearchSchema.get_missing">
+<code class="sig-name descname">get_missing</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/search.html#SearchSchema.get_missing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.search.SearchSchema.get_missing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for missspelled or incorrect data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data set to be dumped</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corrected data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><strong>KeyError</strong></a> – When there is a search key that is not an attribute of
+    this class</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pynami.base.html" class="btn btn-neutral float-right" title="pynami.base module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pynami.util.html" class="btn btn-neutral float-left" title="pynami.util module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

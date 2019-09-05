@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pynami.schemas module &mdash; pynami 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pynami.util module" href="pynami.util.html" />
+    <link rel="prev" title="pynami.nami module" href="pynami.nami.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="namiclass.html">Main class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">REST URLs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pynami.html">pynami package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pynami.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pynami.constants.html">pynami.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.nami.html">pynami.nami module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pynami.schemas module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.util.html">pynami.util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.search.html">pynami.search module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pynami.base.html">pynami.base module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">API reference</a> &raquo;</li>
+        
+          <li><a href="pynami.html">pynami package</a> &raquo;</li>
+        
+      <li>pynami.schemas module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pynami.schemas.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pynami.schemas">
+<span id="pynami-schemas-module"></span><h1>pynami.schemas module<a class="headerlink" href="#module-pynami.schemas" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema" title="(in marshmallow v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Schema</span></code></a> classes corresponding to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> data structure</p>
+<p>Pretty much everything in this module depends on functions from the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/quickstart.html#module-marshmallow" title="(in marshmallow v3.0.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">marshmallow</span></code></a> module.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Include Bills</p></li>
+<li><p>Include validation when neccessary</p></li>
+</ul>
+</div>
+<dl class="class">
+<dt id="pynami.schemas.NamiKonto">
+<em class="property">class </em><code class="sig-name descname">NamiKonto</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiKonto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiKonto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Holds information about bank account and payment method of the member.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.NamiKontoSchema">
+<em class="property">class </em><code class="sig-name descname">NamiKontoSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiKontoSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiKontoSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for bank account and payment method information.</p>
+<p>This Schema will is <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/nesting.html" title="(in marshmallow v3.0.3)"><span class="xref std std-doc">nested</span></a> inside a
+<a class="reference internal" href="#pynami.schemas.MitgliedSchema" title="pynami.schemas.MitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedSchema</span></code></a> and there should be no other use for it.</p>
+<dl class="method">
+<dt id="pynami.schemas.NamiKontoSchema.make_konto">
+<code class="sig-name descname">make_konto</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiKontoSchema.make_konto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiKontoSchema.make_konto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.NamiKonto" title="pynami.schemas.NamiKonto">NamiKonto</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.NamiKontoSchema.id_to_str">
+<code class="sig-name descname">id_to_str</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiKontoSchema.id_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiKontoSchema.id_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>For some reason the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> gives the id of the payment details as an
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code></a>, but when you want to update a member it has be a
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">string</span></code></a>. Therefore this method converts incoming ids to a
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> object before loading them by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.pre_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary to be loaded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corrected data dictionary</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.NamiKontoSchema.double_dump">
+<code class="sig-name descname">double_dump</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiKontoSchema.double_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiKontoSchema.double_dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incoming data sets are nicely formatted <a class="reference external" href="https://docs.python.org/3/library/json.html#module-json" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> strings which can
+be loaded easily into the Schema but when you update a Mitglied all
+payment details have to formatted into a <a class="reference external" href="https://docs.python.org/3/library/json.html#module-json" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> string and all
+attributes have to be in a certain order.
+To achieve this the <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_dump" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_dump()</span></code></a> decorator
+is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Already dumped data set</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference external" href="https://docs.python.org/3/library/json.html#module-json" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> formatted string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.NamiKontoSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.NamiKontoSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.NamiBaseadminIdField">
+<em class="property">class </em><code class="sig-name descname">NamiBaseadminIdField</code><span class="sig-paren">(</span><em class="sig-param">default=&lt;marshmallow.missing&gt;</em>, <em class="sig-param">attribute=None</em>, <em class="sig-param">data_key=None</em>, <em class="sig-param">error=None</em>, <em class="sig-param">validate=None</em>, <em class="sig-param">required=False</em>, <em class="sig-param">allow_none=None</em>, <em class="sig-param">load_only=False</em>, <em class="sig-param">dump_only=False</em>, <em class="sig-param">missing=&lt;marshmallow.missing&gt;</em>, <em class="sig-param">error_messages=None</em>, <em class="sig-param">**metadata</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NamiBaseadminIdField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NamiBaseadminIdField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.fields.Field" title="(in marshmallow v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">marshmallow.fields.Field</span></code></a></p>
+<p>For the general <a class="reference internal" href="#pynami.schemas.BaseadminSchema" title="pynami.schemas.BaseadminSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseadminSchema</span></code></a> class the id of the actual entry
+can either by a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> oder <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> so that there is the need for a
+custom <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.fields.Field" title="(in marshmallow v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchMitglied">
+<em class="property">class </em><code class="sig-name descname">SearchMitglied</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitglied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitglied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for a Mitglied which came up as a search result. Unfortunately
+there cannot be just one Mitglied class because the search results lack
+crucal imformation (e.g. payment details).</p>
+<dl class="method">
+<dt id="pynami.schemas.SearchMitglied.table_view">
+<code class="sig-name descname">table_view</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitglied.table_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitglied.table_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare nicely formatted output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All data entries which are not in the blacklist</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.SearchMitglied.tabulate">
+<code class="sig-name descname">tabulate</code><span class="sig-paren">(</span><em class="sig-param">elements=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitglied.tabulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitglied.tabulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare ordered tabulated output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – List of keys which
+shall be included in the table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specified data entries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.SearchMitglied.get_mitglied">
+<code class="sig-name descname">get_mitglied</code><span class="sig-paren">(</span><em class="sig-param">nami</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitglied.get_mitglied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitglied.get_mitglied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a real <a class="reference internal" href="#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></a> form the search result by getting the
+corresponding data set through the member id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nami</strong> (<a class="reference internal" href="pynami.nami.html#pynami.nami.NaMi" title="pynami.nami.NaMi"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaMi</span></code></a>) – Main <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> class</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Mitglied object corresponding to this search result.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied">Mitglied</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchMitgliedSchema">
+<em class="property">class </em><code class="sig-name descname">SearchMitgliedSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitgliedSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitgliedSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for <a class="reference internal" href="#pynami.schemas.SearchMitglied" title="pynami.schemas.SearchMitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></a>.</p>
+<p>For some reason attribute naming in the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> is a bit inconsistent
+between a Mitglied which comes up as a search result and one that is
+addressed directly by its id.</p>
+<dl class="method">
+<dt id="pynami.schemas.SearchMitgliedSchema.make_user">
+<code class="sig-name descname">make_user</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchMitgliedSchema.make_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchMitgliedSchema.make_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.SearchMitglied" title="pynami.schemas.SearchMitglied">SearchMitglied</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.SearchMitgliedSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.SearchMitgliedSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Mitglied">
+<em class="property">class </em><code class="sig-name descname">Mitglied</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Mitglied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Mitglied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class representing a <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> Mitglied</p>
+<p>This class overwrites the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__getattr__" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code></a> and
+<a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__setattr__" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code></a> methods so that attributes of this class can be
+handled in a convinient way. It is intended to be instantiated by calling
+the <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data
+dictionary.</p>
+<dl class="method">
+<dt id="pynami.schemas.Mitglied.table_view">
+<code class="sig-name descname">table_view</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Mitglied.table_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Mitglied.table_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare nicely formatted output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All data entries which are not in the blacklist</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.Mitglied.tabulate">
+<code class="sig-name descname">tabulate</code><span class="sig-paren">(</span><em class="sig-param">elements=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Mitglied.tabulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Mitglied.tabulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare ordered tabulated output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – List of keys which
+shall be included in the table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specified data entries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.Mitglied.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">nami</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Mitglied.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Mitglied.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the possibly changed values to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nami</strong> (<a class="reference internal" href="pynami.nami.html#pynami.nami.NaMi" title="pynami.nami.NaMi"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaMi</span></code></a>) – Main class for communication
+with the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new Mitglied as it is returned by the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied">Mitglied</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.MitgliedSchema">
+<em class="property">class </em><code class="sig-name descname">MitgliedSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for a <a class="reference internal" href="#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></a></p>
+<dl class="class">
+<dt id="pynami.schemas.MitgliedSchema.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedSchema.Meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedSchema.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.Meta</span></code></p>
+<p>Extended <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.Meta" title="(in marshmallow v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">marshmallow.Schema.Meta</span></code></a> class for further
+configuration</p>
+<dl class="attribute">
+<dt id="pynami.schemas.MitgliedSchema.Meta.ordered">
+<code class="sig-name descname">ordered</code><em class="property"> = True</em><a class="headerlink" href="#pynami.schemas.MitgliedSchema.Meta.ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is nesseccary for the payment deatils to be dumped in the
+corrent order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.MitgliedSchema.make_user">
+<code class="sig-name descname">make_user</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedSchema.make_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedSchema.make_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied">Mitglied</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.MitgliedSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.MitgliedSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Baseadmin">
+<em class="property">class </em><code class="sig-name descname">Baseadmin</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Baseadmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Baseadmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base data class for all default values and their id mapping.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+<dl class="method">
+<dt id="pynami.schemas.Baseadmin.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#pynami.schemas.Baseadmin.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Last part of the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> class structure which is stored in the
+<code class="docutils literal notranslate"><span class="pre">representedClass</span></code> attribute for all the default values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.BaseadminSchema">
+<em class="property">class </em><code class="sig-name descname">BaseadminSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#BaseadminSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.BaseadminSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a> class</p>
+<p>All the default values only consist of the same four attributes</p>
+<dl class="method">
+<dt id="pynami.schemas.BaseadminSchema.make_baseadmin">
+<code class="sig-name descname">make_baseadmin</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#BaseadminSchema.make_baseadmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.BaseadminSchema.make_baseadmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin">Baseadmin</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.BaseadminSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.BaseadminSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Notification">
+<em class="property">class </em><code class="sig-name descname">Notification</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Notification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Notification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for notification like tier changes of a mitglied.</p>
+<p>In the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> the notifications are displayed in the dashboard.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.NotificationSchema">
+<em class="property">class </em><code class="sig-name descname">NotificationSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NotificationSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NotificationSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.Notification" title="pynami.schemas.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.NotificationSchema.make_notification">
+<code class="sig-name descname">make_notification</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#NotificationSchema.make_notification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.NotificationSchema.make_notification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Notification" title="pynami.schemas.Notification">Notification</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.NotificationSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.NotificationSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.HistoryEntry">
+<em class="property">class </em><code class="sig-name descname">HistoryEntry</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#HistoryEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.HistoryEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for history entries</p>
+<p>This contains information about an update of a Mitglied which is displayed
+on the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> dashbiard.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+<dl class="method">
+<dt id="pynami.schemas.HistoryEntry.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#pynami.schemas.HistoryEntry.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.HistoryEntrySchema">
+<em class="property">class </em><code class="sig-name descname">HistoryEntrySchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#HistoryEntrySchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.HistoryEntrySchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.HistoryEntry" title="pynami.schemas.HistoryEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntry</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.HistoryEntrySchema.make_historyEntry">
+<code class="sig-name descname">make_historyEntry</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#HistoryEntrySchema.make_historyEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.HistoryEntrySchema.make_historyEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.HistoryEntry" title="pynami.schemas.HistoryEntry">HistoryEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.HistoryEntrySchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.HistoryEntrySchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Stats">
+<em class="property">class </em><code class="sig-name descname">Stats</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for basic statistical entries.</p>
+<p>The information in this class is displayed in the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> dashboard in a pie
+chart.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.StatCategory">
+<em class="property">class </em><code class="sig-name descname">StatCategory</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#StatCategory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.StatCategory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for statistical tier numbers.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.StatCatSchema">
+<em class="property">class </em><code class="sig-name descname">StatCatSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#StatCatSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.StatCatSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.StatCategory" title="pynami.schemas.StatCategory"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatCategory</span></code></a> class.</p>
+<p>This only contains the name of the tier and its number of members.</p>
+<dl class="method">
+<dt id="pynami.schemas.StatCatSchema.make_statCat">
+<code class="sig-name descname">make_statCat</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#StatCatSchema.make_statCat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.StatCatSchema.make_statCat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.StatCategory" title="pynami.schemas.StatCategory">StatCategory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.StatCatSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.StatCatSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.StatsSchema">
+<em class="property">class </em><code class="sig-name descname">StatsSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#StatsSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.StatsSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.Stats" title="pynami.schemas.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.StatsSchema.make_stats">
+<code class="sig-name descname">make_stats</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#StatsSchema.make_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.StatsSchema.make_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Stats" title="pynami.schemas.Stats">Stats</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.StatsSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.StatsSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchActivity">
+<em class="property">class </em><code class="sig-name descname">SearchActivity</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchActivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for activities wich come up as a search result.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchActivitySchema">
+<em class="property">class </em><code class="sig-name descname">SearchActivitySchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchActivitySchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchActivitySchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.SearchActivity" title="pynami.schemas.SearchActivity"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchActivity</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.SearchActivitySchema.make_activity">
+<code class="sig-name descname">make_activity</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchActivitySchema.make_activity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchActivitySchema.make_activity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.SearchActivity" title="pynami.schemas.SearchActivity">SearchActivity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.SearchActivitySchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.SearchActivitySchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Activity">
+<em class="property">class </em><code class="sig-name descname">Activity</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Activity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Activity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for activities directly obtained by their id.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.ActivitySchema">
+<em class="property">class </em><code class="sig-name descname">ActivitySchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#ActivitySchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.ActivitySchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.Activity" title="pynami.schemas.Activity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.ActivitySchema.make_activity">
+<code class="sig-name descname">make_activity</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#ActivitySchema.make_activity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.ActivitySchema.make_activity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Activity" title="pynami.schemas.Activity">Activity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.ActivitySchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.ActivitySchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchAusbildung">
+<em class="property">class </em><code class="sig-name descname">SearchAusbildung</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchAusbildung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchAusbildung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for a training obtained as a search result.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.SearchAusbildungSchema">
+<em class="property">class </em><code class="sig-name descname">SearchAusbildungSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchAusbildungSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchAusbildungSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.SearchAusbildung" title="pynami.schemas.SearchAusbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAusbildung</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.SearchAusbildungSchema.make_ausbildung">
+<code class="sig-name descname">make_ausbildung</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#SearchAusbildungSchema.make_ausbildung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.SearchAusbildungSchema.make_ausbildung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.SearchAusbildung" title="pynami.schemas.SearchAusbildung">SearchAusbildung</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.SearchAusbildungSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.SearchAusbildungSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.Ausbildung">
+<em class="property">class </em><code class="sig-name descname">Ausbildung</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#Ausbildung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.Ausbildung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for a training obtained directly from its id.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.AusbildungSchema">
+<em class="property">class </em><code class="sig-name descname">AusbildungSchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#AusbildungSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.AusbildungSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.Ausbildung" title="pynami.schemas.Ausbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></a> class</p>
+<dl class="method">
+<dt id="pynami.schemas.AusbildungSchema.make_ausbildung">
+<code class="sig-name descname">make_ausbildung</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#AusbildungSchema.make_ausbildung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.AusbildungSchema.make_ausbildung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.Ausbildung" title="pynami.schemas.Ausbildung">Ausbildung</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.AusbildungSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.AusbildungSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.MitgliedHistory">
+<em class="property">class </em><code class="sig-name descname">MitgliedHistory</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedHistory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedHistory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Main class for a member revision history entry obtained directly from its
+id.</p>
+<p>This class is intended to be instantiated by calling the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.0.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data dictionary.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pynami.schemas.MitgliedHistorySchema">
+<em class="property">class </em><code class="sig-name descname">MitgliedHistorySchema</code><span class="sig-paren">(</span><em class="sig-param">only=()</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedHistorySchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedHistorySchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pynami.base.html#pynami.base.BaseSchema" title="pynami.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.base.BaseSchema</span></code></a></p>
+<p>Schema class for the <a class="reference internal" href="#pynami.schemas.MitgliedHistory" title="pynami.schemas.MitgliedHistory"><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedHistory</span></code></a> class</p>
+<dl class="attribute">
+<dt id="pynami.schemas.MitgliedHistorySchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#pynami.schemas.MitgliedHistorySchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pynami.schemas.MitgliedHistorySchema.make_history">
+<code class="sig-name descname">make_history</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas.html#MitgliedHistorySchema.make_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.MitgliedHistorySchema.make_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to main class after loading by making use of the
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.decorators.post_load" title="(in marshmallow v3.0.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">post_load()</span></code></a> decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Data dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Main class for this Schema</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.MitgliedHistory" title="pynami.schemas.MitgliedHistory">MitgliedHistory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pynami.util.html" class="btn btn-neutral float-right" title="pynami.util module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pynami.nami.html" class="btn btn-neutral float-left" title="pynami.nami module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1003 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nationalities &mdash; pynami 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Payment details" href="payment.html" />
+    <link rel="prev" title="Countries" href="staaten.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../namiclass.html">Main class</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../constants.html">Constants</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="regionen.html">Bundesländer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="staaten.html">Countries</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nationalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payment.html">Payment details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genders.html">Genders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confessions.html">Confessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="membertypes.html">Member types and states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bausteine.html">DPSG Bausteine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subdivision.html">Subdivision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activitytypes.html">Activities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="levels.html">Levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../constants.html">Constants</a> &raquo;</li>
+        
+      <li>Nationalities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tables/nationalities.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nationalities">
+<h1>Nationalities<a class="headerlink" href="#nationalities" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Beschreibung</p></th>
+<th class="head"><p>ID</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bosnisch</p></td>
+<td><p>1284</p></td>
+</tr>
+<tr class="row-odd"><td><p>USA/SLO</p></td>
+<td><p>1286</p></td>
+</tr>
+<tr class="row-even"><td><p>serb.montenegro</p></td>
+<td><p>1287</p></td>
+</tr>
+<tr class="row-odd"><td><p>serbisch</p></td>
+<td><p>1288</p></td>
+</tr>
+<tr class="row-even"><td><p>französich</p></td>
+<td><p>1289</p></td>
+</tr>
+<tr class="row-odd"><td><p>A</p></td>
+<td><p>1291</p></td>
+</tr>
+<tr class="row-even"><td><p>holländisch</p></td>
+<td><p>1292</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kenia</p></td>
+<td><p>1293</p></td>
+</tr>
+<tr class="row-even"><td><p>madegaschi</p></td>
+<td><p>1294</p></td>
+</tr>
+<tr class="row-odd"><td><p>+ amerikanisch</p></td>
+<td><p>1295</p></td>
+</tr>
+<tr class="row-even"><td><p>St. Lucianer</p></td>
+<td><p>1296</p></td>
+</tr>
+<tr class="row-odd"><td><p>lettisch</p></td>
+<td><p>1297</p></td>
+</tr>
+<tr class="row-even"><td><p>Iran</p></td>
+<td><p>1298</p></td>
+</tr>
+<tr class="row-odd"><td><p>japanisch</p></td>
+<td><p>1299</p></td>
+</tr>
+<tr class="row-even"><td><p>österr. + südafr.</p></td>
+<td><p>1304</p></td>
+</tr>
+<tr class="row-odd"><td><p>italiano</p></td>
+<td><p>1306</p></td>
+</tr>
+<tr class="row-even"><td><p>Ukrainerin</p></td>
+<td><p>1308</p></td>
+</tr>
+<tr class="row-odd"><td><p>deutsch</p></td>
+<td><p>1054</p></td>
+</tr>
+<tr class="row-even"><td><p>Serbien-Montenegro</p></td>
+<td><p>1310</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jugoslawisch/Kosovo</p></td>
+<td><p>1311</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>1056</p></td>
+</tr>
+<tr class="row-odd"><td><p>ungarisch</p></td>
+<td><p>1312</p></td>
+</tr>
+<tr class="row-even"><td><p>andere</p></td>
+<td><p>1057</p></td>
+</tr>
+<tr class="row-odd"><td><p>chinesisch</p></td>
+<td><p>1058</p></td>
+</tr>
+<tr class="row-even"><td><p>österreichisch</p></td>
+<td><p>1059</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thailand</p></td>
+<td><p>1315</p></td>
+</tr>
+<tr class="row-even"><td><p>italienisch</p></td>
+<td><p>1060</p></td>
+</tr>
+<tr class="row-odd"><td><p>EU</p></td>
+<td><p>1061</p></td>
+</tr>
+<tr class="row-even"><td><p>maltesisch</p></td>
+<td><p>1317</p></td>
+</tr>
+<tr class="row-odd"><td><p>Portugiesisch</p></td>
+<td><p>1318</p></td>
+</tr>
+<tr class="row-even"><td><p>niederländisch</p></td>
+<td><p>1064</p></td>
+</tr>
+<tr class="row-odd"><td><p>schweizerisch</p></td>
+<td><p>1320</p></td>
+</tr>
+<tr class="row-even"><td><p>kenianisch</p></td>
+<td><p>1065</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tschechische Republick</p></td>
+<td><p>1321</p></td>
+</tr>
+<tr class="row-even"><td><p>kroatisch</p></td>
+<td><p>1066</p></td>
+</tr>
+<tr class="row-odd"><td><p>brasilianisch</p></td>
+<td><p>1067</p></td>
+</tr>
+<tr class="row-even"><td><p>weißrussisch</p></td>
+<td><p>1323</p></td>
+</tr>
+<tr class="row-odd"><td><p>polnisch</p></td>
+<td><p>1069</p></td>
+</tr>
+<tr class="row-even"><td><p>Bolivien</p></td>
+<td><p>1326</p></td>
+</tr>
+<tr class="row-odd"><td><p>türkisch</p></td>
+<td><p>1071</p></td>
+</tr>
+<tr class="row-even"><td><p>österr.</p></td>
+<td><p>1327</p></td>
+</tr>
+<tr class="row-odd"><td><p>Grieche</p></td>
+<td><p>1329</p></td>
+</tr>
+<tr class="row-even"><td><p>portugiesisch</p></td>
+<td><p>1074</p></td>
+</tr>
+<tr class="row-odd"><td><p>Burundi</p></td>
+<td><p>1331</p></td>
+</tr>
+<tr class="row-even"><td><p>amerikanisch</p></td>
+<td><p>1076</p></td>
+</tr>
+<tr class="row-odd"><td><p>Brittisch</p></td>
+<td><p>1333</p></td>
+</tr>
+<tr class="row-even"><td><p>österreich</p></td>
+<td><p>1081</p></td>
+</tr>
+<tr class="row-odd"><td><p>Albanien</p></td>
+<td><p>1338</p></td>
+</tr>
+<tr class="row-even"><td><p>Nigeria</p></td>
+<td><p>1339</p></td>
+</tr>
+<tr class="row-odd"><td><p>GB</p></td>
+<td><p>1340</p></td>
+</tr>
+<tr class="row-even"><td><p>mazedonisch</p></td>
+<td><p>1341</p></td>
+</tr>
+<tr class="row-odd"><td><p>britisch</p></td>
+<td><p>1086</p></td>
+</tr>
+<tr class="row-even"><td><p>Togolaise</p></td>
+<td><p>1343</p></td>
+</tr>
+<tr class="row-odd"><td><p>Schweizer</p></td>
+<td><p>1088</p></td>
+</tr>
+<tr class="row-even"><td><p>pakistanisch</p></td>
+<td><p>1344</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thai</p></td>
+<td><p>1089</p></td>
+</tr>
+<tr class="row-even"><td><p>österreichschich/norwegisch</p></td>
+<td><p>1345</p></td>
+</tr>
+<tr class="row-odd"><td><p>litauisch</p></td>
+<td><p>1091</p></td>
+</tr>
+<tr class="row-even"><td><p>Portugal</p></td>
+<td><p>1347</p></td>
+</tr>
+<tr class="row-odd"><td><p>griechisch</p></td>
+<td><p>1092</p></td>
+</tr>
+<tr class="row-even"><td><p>Italienisch-Österr.</p></td>
+<td><p>1348</p></td>
+</tr>
+<tr class="row-odd"><td><p>schweizerisch</p></td>
+<td><p>1093</p></td>
+</tr>
+<tr class="row-even"><td><p>guatemaltekisch</p></td>
+<td><p>1349</p></td>
+</tr>
+<tr class="row-odd"><td><p>belgisch</p></td>
+<td><p>1094</p></td>
+</tr>
+<tr class="row-even"><td><p>nicht bekannt</p></td>
+<td><p>1350</p></td>
+</tr>
+<tr class="row-odd"><td><p>Portugiesich</p></td>
+<td><p>1352</p></td>
+</tr>
+<tr class="row-even"><td><p>lettisch</p></td>
+<td><p>1102</p></td>
+</tr>
+<tr class="row-odd"><td><p>französisch</p></td>
+<td><p>1103</p></td>
+</tr>
+<tr class="row-even"><td><p>spanisch</p></td>
+<td><p>1104</p></td>
+</tr>
+<tr class="row-odd"><td><p>british</p></td>
+<td><p>1360</p></td>
+</tr>
+<tr class="row-even"><td><p>marokkanisch</p></td>
+<td><p>1361</p></td>
+</tr>
+<tr class="row-odd"><td><p>Togo</p></td>
+<td><p>1106</p></td>
+</tr>
+<tr class="row-even"><td><p>albanisch</p></td>
+<td><p>1107</p></td>
+</tr>
+<tr class="row-odd"><td><p>Niederländer</p></td>
+<td><p>1364</p></td>
+</tr>
+<tr class="row-even"><td><p>Sri Lanka</p></td>
+<td><p>1110</p></td>
+</tr>
+<tr class="row-odd"><td><p>estnisch</p></td>
+<td><p>1366</p></td>
+</tr>
+<tr class="row-even"><td><p>Indien</p></td>
+<td><p>1111</p></td>
+</tr>
+<tr class="row-odd"><td><p>Eritrea</p></td>
+<td><p>1112</p></td>
+</tr>
+<tr class="row-even"><td><p>slowakisch</p></td>
+<td><p>1370</p></td>
+</tr>
+<tr class="row-odd"><td><p>Serbe</p></td>
+<td><p>1115</p></td>
+</tr>
+<tr class="row-even"><td><p>Algerisch</p></td>
+<td><p>1372</p></td>
+</tr>
+<tr class="row-odd"><td><p>indonesisch</p></td>
+<td><p>1117</p></td>
+</tr>
+<tr class="row-even"><td><p>griech.</p></td>
+<td><p>1373</p></td>
+</tr>
+<tr class="row-odd"><td><p>yugoslawisch</p></td>
+<td><p>1118</p></td>
+</tr>
+<tr class="row-even"><td><p>englisch/plonisch</p></td>
+<td><p>1119</p></td>
+</tr>
+<tr class="row-odd"><td><p>irisch</p></td>
+<td><p>1375</p></td>
+</tr>
+<tr class="row-even"><td><p>bosnisch-herzegow.</p></td>
+<td><p>1120</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jugoslawisch</p></td>
+<td><p>1376</p></td>
+</tr>
+<tr class="row-even"><td><p>Italienisch</p></td>
+<td><p>1121</p></td>
+</tr>
+<tr class="row-odd"><td><p>Irisch</p></td>
+<td><p>1122</p></td>
+</tr>
+<tr class="row-even"><td><p>libanesisch</p></td>
+<td><p>1123</p></td>
+</tr>
+<tr class="row-odd"><td><p>iranisch</p></td>
+<td><p>1124</p></td>
+</tr>
+<tr class="row-even"><td><p>Bulgarien/Belgien</p></td>
+<td><p>1380</p></td>
+</tr>
+<tr class="row-odd"><td><p>polnisch/italiensch</p></td>
+<td><p>1381</p></td>
+</tr>
+<tr class="row-even"><td><p>amerikanisch</p></td>
+<td><p>1126</p></td>
+</tr>
+<tr class="row-odd"><td><p>salvadorianisch</p></td>
+<td><p>1127</p></td>
+</tr>
+<tr class="row-even"><td><p>Russische Föderation</p></td>
+<td><p>1384</p></td>
+</tr>
+<tr class="row-odd"><td><p>US</p></td>
+<td><p>1129</p></td>
+</tr>
+<tr class="row-even"><td><p>Rumänisch</p></td>
+<td><p>1385</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ungarn</p></td>
+<td><p>1130</p></td>
+</tr>
+<tr class="row-even"><td><p>U.S. Amerikaner</p></td>
+<td><p>1386</p></td>
+</tr>
+<tr class="row-odd"><td><p>SERBIEN</p></td>
+<td><p>1387</p></td>
+</tr>
+<tr class="row-even"><td><p>Spanisch</p></td>
+<td><p>1132</p></td>
+</tr>
+<tr class="row-odd"><td><p>ukrainisch</p></td>
+<td><p>1133</p></td>
+</tr>
+<tr class="row-even"><td><p>Belgier</p></td>
+<td><p>1389</p></td>
+</tr>
+<tr class="row-odd"><td><p>eritreisch</p></td>
+<td><p>1134</p></td>
+</tr>
+<tr class="row-even"><td><p>philippinisch</p></td>
+<td><p>1135</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ghana</p></td>
+<td><p>1391</p></td>
+</tr>
+<tr class="row-even"><td><p>jugoslawisch</p></td>
+<td><p>1137</p></td>
+</tr>
+<tr class="row-odd"><td><p>Amerikaner</p></td>
+<td><p>1393</p></td>
+</tr>
+<tr class="row-even"><td><p>tschechisch</p></td>
+<td><p>1138</p></td>
+</tr>
+<tr class="row-odd"><td><p>kongolesisch</p></td>
+<td><p>1394</p></td>
+</tr>
+<tr class="row-even"><td><p>portugisiesch</p></td>
+<td><p>1395</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bosnien und Herzegowina</p></td>
+<td><p>1140</p></td>
+</tr>
+<tr class="row-even"><td><p>Portugisiesch</p></td>
+<td><p>1396</p></td>
+</tr>
+<tr class="row-odd"><td><p>Türkisch</p></td>
+<td><p>1141</p></td>
+</tr>
+<tr class="row-even"><td><p>nigerianisch</p></td>
+<td><p>1397</p></td>
+</tr>
+<tr class="row-odd"><td><p>bosnisch</p></td>
+<td><p>1142</p></td>
+</tr>
+<tr class="row-even"><td><p>Indonesisch</p></td>
+<td><p>1398</p></td>
+</tr>
+<tr class="row-odd"><td><p>British</p></td>
+<td><p>1143</p></td>
+</tr>
+<tr class="row-even"><td><p>griechisch-amerikanisch</p></td>
+<td><p>1399</p></td>
+</tr>
+<tr class="row-odd"><td><p>portugisisch</p></td>
+<td><p>1144</p></td>
+</tr>
+<tr class="row-even"><td><p>CH</p></td>
+<td><p>1146</p></td>
+</tr>
+<tr class="row-odd"><td><p>Malaysian</p></td>
+<td><p>1405</p></td>
+</tr>
+<tr class="row-even"><td><p>Filipina</p></td>
+<td><p>1150</p></td>
+</tr>
+<tr class="row-odd"><td><p>vietnam</p></td>
+<td><p>1151</p></td>
+</tr>
+<tr class="row-even"><td><p>Kroatien</p></td>
+<td><p>1152</p></td>
+</tr>
+<tr class="row-odd"><td><p>venezuelanisch</p></td>
+<td><p>1408</p></td>
+</tr>
+<tr class="row-even"><td><p>Brasilien</p></td>
+<td><p>1410</p></td>
+</tr>
+<tr class="row-odd"><td><p>niederländer</p></td>
+<td><p>1155</p></td>
+</tr>
+<tr class="row-even"><td><p>U.S.Amerikaner</p></td>
+<td><p>1411</p></td>
+</tr>
+<tr class="row-odd"><td><p>vietnamesisch</p></td>
+<td><p>1156</p></td>
+</tr>
+<tr class="row-even"><td><p>ECU</p></td>
+<td><p>1412</p></td>
+</tr>
+<tr class="row-odd"><td><p>Luxemburgisch</p></td>
+<td><p>1413</p></td>
+</tr>
+<tr class="row-even"><td><p>Britisch</p></td>
+<td><p>1158</p></td>
+</tr>
+<tr class="row-odd"><td><p>Österreich</p></td>
+<td><p>1159</p></td>
+</tr>
+<tr class="row-even"><td><p>amerikanisch / polnisch</p></td>
+<td><p>1415</p></td>
+</tr>
+<tr class="row-odd"><td><p>kanadisch</p></td>
+<td><p>1160</p></td>
+</tr>
+<tr class="row-even"><td><p>schweiz</p></td>
+<td><p>1416</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thailänder</p></td>
+<td><p>1417</p></td>
+</tr>
+<tr class="row-even"><td><p>Irakisch</p></td>
+<td><p>1162</p></td>
+</tr>
+<tr class="row-odd"><td><p>Peru</p></td>
+<td><p>1418</p></td>
+</tr>
+<tr class="row-even"><td><p>Italien</p></td>
+<td><p>1163</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kirgystan</p></td>
+<td><p>1164</p></td>
+</tr>
+<tr class="row-even"><td><p>australisch</p></td>
+<td><p>1420</p></td>
+</tr>
+<tr class="row-odd"><td><p>GB (EU) / USA</p></td>
+<td><p>1421</p></td>
+</tr>
+<tr class="row-even"><td><p>Tschad</p></td>
+<td><p>1166</p></td>
+</tr>
+<tr class="row-odd"><td><p>bolivisch</p></td>
+<td><p>1422</p></td>
+</tr>
+<tr class="row-even"><td><p>Bosnien</p></td>
+<td><p>1167</p></td>
+</tr>
+<tr class="row-odd"><td><p>ital./portug.</p></td>
+<td><p>1168</p></td>
+</tr>
+<tr class="row-even"><td><p>frz</p></td>
+<td><p>1426</p></td>
+</tr>
+<tr class="row-odd"><td><p>Portugisisch</p></td>
+<td><p>1427</p></td>
+</tr>
+<tr class="row-even"><td><p>croatisch</p></td>
+<td><p>1173</p></td>
+</tr>
+<tr class="row-odd"><td><p>Haiti</p></td>
+<td><p>1429</p></td>
+</tr>
+<tr class="row-even"><td><p>Kroatisch</p></td>
+<td><p>1174</p></td>
+</tr>
+<tr class="row-odd"><td><p>Belgisch</p></td>
+<td><p>1175</p></td>
+</tr>
+<tr class="row-even"><td><p>russisch</p></td>
+<td><p>1176</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mexikaner</p></td>
+<td><p>1432</p></td>
+</tr>
+<tr class="row-even"><td><p>Kongolese</p></td>
+<td><p>1433</p></td>
+</tr>
+<tr class="row-odd"><td><p>irakisch</p></td>
+<td><p>1179</p></td>
+</tr>
+<tr class="row-even"><td><p>mexikanisch</p></td>
+<td><p>1435</p></td>
+</tr>
+<tr class="row-odd"><td><p>Französisch</p></td>
+<td><p>1180</p></td>
+</tr>
+<tr class="row-even"><td><p>brasilianische</p></td>
+<td><p>1436</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kanadisch / Niederländisch</p></td>
+<td><p>1437</p></td>
+</tr>
+<tr class="row-even"><td><p>rumänisch</p></td>
+<td><p>1182</p></td>
+</tr>
+<tr class="row-odd"><td><p>moldawisch</p></td>
+<td><p>1183</p></td>
+</tr>
+<tr class="row-even"><td><p>US-Amerikaner</p></td>
+<td><p>1439</p></td>
+</tr>
+<tr class="row-odd"><td><p>Albanisch</p></td>
+<td><p>1184</p></td>
+</tr>
+<tr class="row-even"><td><p>niederländiscch</p></td>
+<td><p>1440</p></td>
+</tr>
+<tr class="row-odd"><td><p>Neiderländisch / Englisch</p></td>
+<td><p>1185</p></td>
+</tr>
+<tr class="row-even"><td><p>Ägypten</p></td>
+<td><p>1441</p></td>
+</tr>
+<tr class="row-odd"><td><p>jugosl.</p></td>
+<td><p>1186</p></td>
+</tr>
+<tr class="row-even"><td><p>und spanisch</p></td>
+<td><p>1442</p></td>
+</tr>
+<tr class="row-odd"><td><p>bolivianisch</p></td>
+<td><p>1187</p></td>
+</tr>
+<tr class="row-even"><td><p>Amerikanerin</p></td>
+<td><p>1443</p></td>
+</tr>
+<tr class="row-odd"><td><p>+italienisch</p></td>
+<td><p>1444</p></td>
+</tr>
+<tr class="row-even"><td><p>Brasilien / Österreich</p></td>
+<td><p>1446</p></td>
+</tr>
+<tr class="row-odd"><td><p>chilenisch</p></td>
+<td><p>1191</p></td>
+</tr>
+<tr class="row-even"><td><p>Polen</p></td>
+<td><p>1447</p></td>
+</tr>
+<tr class="row-odd"><td><p>Serbisch</p></td>
+<td><p>1192</p></td>
+</tr>
+<tr class="row-even"><td><p>kazachstan</p></td>
+<td><p>1193</p></td>
+</tr>
+<tr class="row-odd"><td><p>US-amerikanisch</p></td>
+<td><p>1194</p></td>
+</tr>
+<tr class="row-even"><td><p>Kongo</p></td>
+<td><p>1450</p></td>
+</tr>
+<tr class="row-odd"><td><p>thailändisch</p></td>
+<td><p>1451</p></td>
+</tr>
+<tr class="row-even"><td><p>Amerikanisch</p></td>
+<td><p>1196</p></td>
+</tr>
+<tr class="row-odd"><td><p>und australisch</p></td>
+<td><p>1452</p></td>
+</tr>
+<tr class="row-even"><td><p>togoisch</p></td>
+<td><p>1453</p></td>
+</tr>
+<tr class="row-odd"><td><p>Slowenien</p></td>
+<td><p>1199</p></td>
+</tr>
+<tr class="row-even"><td><p>Kurdisch</p></td>
+<td><p>1455</p></td>
+</tr>
+<tr class="row-odd"><td><p>Russisch</p></td>
+<td><p>1200</p></td>
+</tr>
+<tr class="row-even"><td><p>Philippiner</p></td>
+<td><p>1456</p></td>
+</tr>
+<tr class="row-odd"><td><p>tschetschenisch</p></td>
+<td><p>1457</p></td>
+</tr>
+<tr class="row-even"><td><p>Mosambik</p></td>
+<td><p>1458</p></td>
+</tr>
+<tr class="row-odd"><td><p>Schweiz</p></td>
+<td><p>1203</p></td>
+</tr>
+<tr class="row-even"><td><p>Guatemala</p></td>
+<td><p>1459</p></td>
+</tr>
+<tr class="row-odd"><td><p>Brasilianisch</p></td>
+<td><p>1460</p></td>
+</tr>
+<tr class="row-even"><td><p>Kroate</p></td>
+<td><p>1205</p></td>
+</tr>
+<tr class="row-odd"><td><p>Äthopien</p></td>
+<td><p>1461</p></td>
+</tr>
+<tr class="row-even"><td><p>usbekisch</p></td>
+<td><p>1462</p></td>
+</tr>
+<tr class="row-odd"><td><p>Indisch</p></td>
+<td><p>1463</p></td>
+</tr>
+<tr class="row-even"><td><p>USA / GB(EU)</p></td>
+<td><p>1465</p></td>
+</tr>
+<tr class="row-odd"><td><p>vietnamesich</p></td>
+<td><p>1210</p></td>
+</tr>
+<tr class="row-even"><td><p>Britsch</p></td>
+<td><p>1466</p></td>
+</tr>
+<tr class="row-odd"><td><p>syrisch</p></td>
+<td><p>1211</p></td>
+</tr>
+<tr class="row-even"><td><p>Japanisch</p></td>
+<td><p>1467</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tai</p></td>
+<td><p>1468</p></td>
+</tr>
+<tr class="row-even"><td><p>Türkei</p></td>
+<td><p>1213</p></td>
+</tr>
+<tr class="row-odd"><td><p>F</p></td>
+<td><p>1214</p></td>
+</tr>
+<tr class="row-even"><td><p>Ukraine</p></td>
+<td><p>1215</p></td>
+</tr>
+<tr class="row-odd"><td><p>Weißrussland</p></td>
+<td><p>1471</p></td>
+</tr>
+<tr class="row-even"><td><p>slowenisch</p></td>
+<td><p>1216</p></td>
+</tr>
+<tr class="row-odd"><td><p>Äthiopisch</p></td>
+<td><p>1472</p></td>
+</tr>
+<tr class="row-even"><td><p>luxemburgisch</p></td>
+<td><p>1218</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rumänien</p></td>
+<td><p>1219</p></td>
+</tr>
+<tr class="row-even"><td><p>+ Spanisch</p></td>
+<td><p>1475</p></td>
+</tr>
+<tr class="row-odd"><td><p>Serbien</p></td>
+<td><p>1220</p></td>
+</tr>
+<tr class="row-even"><td><p>Kenianer</p></td>
+<td><p>1476</p></td>
+</tr>
+<tr class="row-odd"><td><p>Griechisch</p></td>
+<td><p>1221</p></td>
+</tr>
+<tr class="row-even"><td><p>kroatische</p></td>
+<td><p>1477</p></td>
+</tr>
+<tr class="row-odd"><td><p>kosovarisch</p></td>
+<td><p>1222</p></td>
+</tr>
+<tr class="row-even"><td><p>Litauisch</p></td>
+<td><p>1479</p></td>
+</tr>
+<tr class="row-odd"><td><p>kasachisch</p></td>
+<td><p>1225</p></td>
+</tr>
+<tr class="row-even"><td><p>Südkorea</p></td>
+<td><p>1481</p></td>
+</tr>
+<tr class="row-odd"><td><p>tunesisch</p></td>
+<td><p>1482</p></td>
+</tr>
+<tr class="row-even"><td><p>kamerunesisch</p></td>
+<td><p>1229</p></td>
+</tr>
+<tr class="row-odd"><td><p>philipino</p></td>
+<td><p>1233</p></td>
+</tr>
+<tr class="row-even"><td><p>phillipino</p></td>
+<td><p>1234</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.</p></td>
+<td><p>1235</p></td>
+</tr>
+<tr class="row-even"><td><p>luxemb.</p></td>
+<td><p>1236</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-amerikanisch</p></td>
+<td><p>1237</p></td>
+</tr>
+<tr class="row-even"><td><p>F - CH</p></td>
+<td><p>1238</p></td>
+</tr>
+<tr class="row-odd"><td><p>NL</p></td>
+<td><p>1239</p></td>
+</tr>
+<tr class="row-even"><td><p>theiländisch</p></td>
+<td><p>1243</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vietnam</p></td>
+<td><p>1246</p></td>
+</tr>
+<tr class="row-even"><td><p>Bulgarien</p></td>
+<td><p>1247</p></td>
+</tr>
+<tr class="row-odd"><td><p>bulgarisch</p></td>
+<td><p>1250</p></td>
+</tr>
+<tr class="row-even"><td><p>norwegisch</p></td>
+<td><p>1251</p></td>
+</tr>
+<tr class="row-odd"><td><p>rwander</p></td>
+<td><p>1252</p></td>
+</tr>
+<tr class="row-even"><td><p>ägypt.</p></td>
+<td><p>1254</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>1255</p></td>
+</tr>
+<tr class="row-even"><td><p>dänisch</p></td>
+<td><p>1259</p></td>
+</tr>
+<tr class="row-odd"><td><p>türk.</p></td>
+<td><p>1261</p></td>
+</tr>
+<tr class="row-even"><td><p>Syrisch</p></td>
+<td><p>1262</p></td>
+</tr>
+<tr class="row-odd"><td><p>domenikanisch</p></td>
+<td><p>1263</p></td>
+</tr>
+<tr class="row-even"><td><p>tamilisch</p></td>
+<td><p>1265</p></td>
+</tr>
+<tr class="row-odd"><td><p>äthiopisch</p></td>
+<td><p>1266</p></td>
+</tr>
+<tr class="row-even"><td><p>pl</p></td>
+<td><p>1268</p></td>
+</tr>
+<tr class="row-odd"><td><p>griechisch</p></td>
+<td><p>1269</p></td>
+</tr>
+<tr class="row-even"><td><p>Togolesisch</p></td>
+<td><p>1271</p></td>
+</tr>
+<tr class="row-odd"><td><p>kamerunisch</p></td>
+<td><p>1272</p></td>
+</tr>
+<tr class="row-even"><td><p>Polnisch</p></td>
+<td><p>1273</p></td>
+</tr>
+<tr class="row-odd"><td><p>persisch</p></td>
+<td><p>1276</p></td>
+</tr>
+<tr class="row-even"><td><p>Irak</p></td>
+<td><p>1277</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ukrainisch</p></td>
+<td><p>1278</p></td>
+</tr>
+<tr class="row-even"><td><p>Tschechisch</p></td>
+<td><p>1279</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="payment.html" class="btn btn-neutral float-right" title="Payment details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="staaten.html" class="btn btn-neutral float-left" title="Countries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

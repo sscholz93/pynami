@@ -1,0 +1,16 @@
+Confessions
+===========
+
+.. csv-table::
+	:header: "Beschreibung", "ID"
+
+	"römisch-katholisch",1
+	"evangelisch / protestantisch",2
+	"orthodox",3
+	"freikirchlich",4
+	"andere christliche",5
+	"jüdisch",6
+	"muslimisch",7
+	"sonstige",8
+	"ohne Konfession",9
+	"neuapostolisch",11
