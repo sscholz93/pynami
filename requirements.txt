@@ -2,3 +2,5 @@ requests
 marshmallow
 tabulate
 pytoml
+sphinxcontrib-httpdomain
+sphinx-rtd-theme
