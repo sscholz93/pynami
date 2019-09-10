@@ -89,6 +89,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API reference</a></li>
 </ul>
 
@@ -158,17 +159,20 @@
 <h1>Main class<a class="headerlink" href="#main-class" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pynami.nami.NaMi">
-<em class="property">class </em><code class="sig-name descname">NaMi</code><span class="sig-paren">(</span><em class="sig-param">config={}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">NaMi</code><span class="sig-paren">(</span><em class="sig-param">config={}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main class for communication with the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">NaMi</span><span class="p">()</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
-    <span class="n">nami</span><span class="o">.</span><span class="n">auth</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Connect to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr>, search for all active members
+and print them in a tabulated form.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
     <span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">():</span>
         <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mgl</span><span class="o">.</span><span class="n">tabulate</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 <dl class="field-list simple">
@@ -184,8 +188,8 @@ This currently checks some very basic things.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="pynami.nami.html#pynami.nami.NamiHTTPError" title="pynami.nami.NamiHTTPError"><strong>NamiHTTPError</strong></a> – When <abbr title="Hypertext Transfer Protocol">HTTP</abbr> communication failes</p></li>
-<li><p><a class="reference internal" href="pynami.nami.html#pynami.nami.NamiResponseSuccessError" title="pynami.nami.NamiResponseSuccessError"><strong>NamiResponseSuccessError</strong></a> – When the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> returns an error</p></li>
+<li><p><a class="reference internal" href="pynami.html#pynami.nami.NamiHTTPError" title="pynami.nami.NamiHTTPError"><strong>NamiHTTPError</strong></a> – When <abbr title="Hypertext Transfer Protocol">HTTP</abbr> communication failes</p></li>
+<li><p><a class="reference internal" href="pynami.html#pynami.nami.NamiResponseSuccessError" title="pynami.nami.NamiResponseSuccessError"><strong>NamiResponseSuccessError</strong></a> – When the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> returns an error</p></li>
 </ul>
 </dd>
 </dl>
@@ -245,7 +249,7 @@ and an additional Gruppierungsnummer is nesseccary.</p></li>
 possible countries with their names and ids</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,7 +261,7 @@ possible countries with their names and ids</p>
 Bundeslaender</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -269,7 +273,7 @@ Bundeslaender</p>
 method (either bank transfer or debit)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,7 +285,7 @@ method (either bank transfer or debit)</p>
 fee</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -293,7 +297,7 @@ fee</p>
 between three genders: male, female and diverse.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -305,7 +309,7 @@ between three genders: male, female and diverse.</p>
 of different nationalities</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,7 +320,7 @@ of different nationalities</p>
 <dd><p>All denominations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -328,7 +332,7 @@ of different nationalities</p>
 of three different member types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -340,7 +344,7 @@ of three different member types</p>
 active, inactiv or already deleted</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -353,7 +357,7 @@ of fee types but with basically the same content. This one is used for
 searching members.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -365,7 +369,7 @@ searching members.</p>
 training parts</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -377,7 +381,7 @@ training parts</p>
 you are associated with. This one is only used for searching.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -389,7 +393,7 @@ you are associated with. This one is only used for searching.</p>
 activities</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -401,7 +405,7 @@ activities</p>
 in the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -413,7 +417,31 @@ in the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr></p>
 a Diözese which you belong to.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.gruppierungen">
+<em class="property">property </em><code class="sig-name descname">gruppierungen</code><a class="headerlink" href="#pynami.nami.NaMi.gruppierungen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choose from a
+list of groups that you are associated with for member admin</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.grpadmin_gruppierungen">
+<em class="property">property </em><code class="sig-name descname">grpadmin_gruppierungen</code><a class="headerlink" href="#pynami.nami.NaMi.grpadmin_gruppierungen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choose from a
+list of groups that you are associated with for group admin</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -422,11 +450,11 @@ a Diözese which you belong to.</p>
 <dt id="pynami.nami.NaMi.stats">
 <em class="property">property </em><code class="sig-name descname">stats</code><a class="headerlink" href="#pynami.nami.NaMi.stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains counts from different tiers.
-The actual list of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.StatCategory" title="pynami.schemas.StatCategory"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.schemas.StatCategory</span></code></a> is in the
+The actual list of <code class="xref py py-class docutils literal notranslate"><span class="pre">pynami.schemas.StatCategory</span></code> is in the
 ‘statsCategories’ attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Stats" title="pynami.schemas.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -439,7 +467,7 @@ notifications (like tier changes of members). In the <abbr title="Namentliche Mi
 displayed in the dashboard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Notification" title="pynami.schemas.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -452,7 +480,7 @@ like updating and creating members.In the <abbr title="Namentliche Mitgliederver
 the dashboard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.HistoryEntry" title="pynami.schemas.HistoryEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntry</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntry</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -470,7 +498,7 @@ the dashboard.</p>
 Bezirken you are associated with</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -488,7 +516,58 @@ Bezirken you are associated with</p>
 Stämmen you are associated with</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Baseadmin" title="pynami.schemas.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.invoices">
+<code class="sig-name descname">invoices</code><span class="sig-paren">(</span><em class="sig-param">groupId=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.invoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.invoices" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of all invoices of a group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>groupId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Group id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>All invoices of
+the specified group</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.grpadmin.SearchInvoice" title="pynami.schemas.grpadmin.SearchInvoice"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchInvoice</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.invoice">
+<code class="sig-name descname">invoice</code><span class="sig-paren">(</span><em class="sig-param">groupId</em>, <em class="sig-param">invId</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.invoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.invoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an invoice by its id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mgl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>invId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the invoice. This will probably originate from
+a search result, e.g. by calling <a class="reference internal" href="pynami.html#pynami.nami.NaMi.invoices" title="pynami.nami.NaMi.invoices"><code class="xref py py-meth docutils literal notranslate"><span class="pre">invoices()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Invoice object containing all
+details.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.grpadmin.Invoice" title="pynami.schemas.grpadmin.Invoice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Invoice</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.download_invoice">
+<code class="sig-name descname">download_invoice</code><span class="sig-paren">(</span><em class="sig-param">id_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.download_invoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.download_invoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads and opens an invoice as a pdf document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id_</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the invoice (not the regular invoice number)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -506,7 +585,7 @@ Stämmen you are associated with</p>
 the member (even those which have already ended)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.Activity" title="pynami.schemas.Activity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,7 +599,7 @@ the member (even those which have already ended)</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mgl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
 <li><p><strong>id_</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the activity. This will probably originate from an
-activity search result, e.g. by calling <a class="reference internal" href="pynami.nami.html#pynami.nami.NaMi.mgl_activities" title="pynami.nami.NaMi.mgl_activities"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_activities()</span></code></a>.</p></li>
+activity search result, e.g. by calling <a class="reference internal" href="pynami.html#pynami.nami.NaMi.mgl_activities" title="pynami.nami.NaMi.mgl_activities"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_activities()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -528,7 +607,7 @@ activity search result, e.g. by calling <a class="reference internal" href="pyna
 details.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Activity" title="pynami.schemas.Activity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -541,7 +620,7 @@ details.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mgl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
-<li><p><strong>act</strong> (<a class="reference internal" href="pynami.schemas.html#pynami.schemas.Activity" title="pynami.schemas.Activity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></a>) – Updated data set. The activity
+<li><p><strong>act</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code>) – Updated data set. The activity
 id is taken form this data set.</p></li>
 </ul>
 </dd>
@@ -549,7 +628,7 @@ id is taken form this data set.</p></li>
 <dd class="field-even"><p>A new updated object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Activity" title="pynami.schemas.Activity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Activity</span></code></p>
 </dd>
 </dl>
 <div class="admonition warning">
@@ -571,7 +650,7 @@ id is taken form this data set.</p></li>
 of the member</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.SearchAusbildung" title="pynami.schemas.SearchAusbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAusbildung</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAusbildung</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -586,7 +665,7 @@ of the member</p>
 <li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
 <li><p><strong>id_</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the training. This will probably originate from an
 training search result, e.g. by calling
-<a class="reference internal" href="pynami.nami.html#pynami.nami.NaMi.mgl_ausbildungen" title="pynami.nami.NaMi.mgl_ausbildungen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_ausbildungen()</span></code></a>.</p></li>
+<a class="reference internal" href="pynami.html#pynami.nami.NaMi.mgl_ausbildungen" title="pynami.nami.NaMi.mgl_ausbildungen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_ausbildungen()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -594,7 +673,7 @@ training search result, e.g. by calling
 details about the training.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Ausbildung" title="pynami.schemas.Ausbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -607,7 +686,7 @@ details about the training.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mgl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
-<li><p><strong>ausbildung</strong> (<a class="reference internal" href="pynami.schemas.html#pynami.schemas.Ausbildung" title="pynami.schemas.Ausbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></a>) – Updated data set. The
+<li><p><strong>ausbildung</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code>) – Updated data set. The
 training id is taken form this data set.</p></li>
 </ul>
 </dd>
@@ -615,7 +694,7 @@ training id is taken form this data set.</p></li>
 <dd class="field-even"><p>A new updated object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Ausbildung" title="pynami.schemas.Ausbildung"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Ausbildung</span></code></p>
 </dd>
 </dl>
 <div class="admonition warning">
@@ -641,7 +720,7 @@ be used. Defaults to <a class="reference external" href="https://docs.python.org
 of the member</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.HistoryEntry" title="pynami.schemas.HistoryEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntry</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntry</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -655,7 +734,7 @@ of the member</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
 <li><p><strong>id_</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the entry. May originate from a search result,
-e.g. by calling <a class="reference internal" href="pynami.nami.html#pynami.nami.NaMi.mgl_history" title="pynami.nami.NaMi.mgl_history"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_history()</span></code></a>.</p></li>
+e.g. by calling <a class="reference internal" href="pynami.html#pynami.nami.NaMi.mgl_history" title="pynami.nami.NaMi.mgl_history"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mgl_history()</span></code></a>.</p></li>
 <li><p><strong>ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If the extended history format should
 be used. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
 </ul>
@@ -665,10 +744,30 @@ be used. Defaults to <a class="reference external" href="https://docs.python.org
 information about this history entry.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.MitgliedHistory" title="pynami.schemas.MitgliedHistory"><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedHistory</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedHistory</span></code></p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.bescheinigungen">
+<code class="sig-name descname">bescheinigungen</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.bescheinigungen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.bescheinigungen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.get_bescheinigung">
+<code class="sig-name descname">get_bescheinigung</code><span class="sig-paren">(</span><em class="sig-param">id_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.get_bescheinigung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.get_bescheinigung" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.download_bescheinigung">
+<code class="sig-name descname">download_bescheinigung</code><span class="sig-paren">(</span><em class="sig-param">id_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.download_bescheinigung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.download_bescheinigung" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.download_beantragung">
+<code class="sig-name descname">download_beantragung</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.download_beantragung"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.download_beantragung" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="pynami.nami.NaMi.search_all">
@@ -694,7 +793,7 @@ take the values <code class="docutils literal notranslate"><span class="pre">ASC
 results</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.SearchMitglied" title="pynami.schemas.SearchMitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -706,11 +805,8 @@ results</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>Check search terms and formatting. Also some search keys can only</dt><dd><p>be used mutually exclusive.</p>
-</dd>
-</dl>
-</li>
+<li><p>Check search terms and formatting. Also some search keys can only
+be used mutually exclusive.</p></li>
 </ul>
 </div>
 <dl class="field-list simple">
@@ -724,9 +820,14 @@ amount of values.</p>
 results</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.SearchMitglied" title="pynami.schemas.SearchMitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchSchema</span></code> for a complete list of search
+keys</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -753,7 +854,7 @@ updated Mitglied. Note that the
 not part of the returned data set.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.Mitglied" title="pynami.schemas.Mitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></p>
 </dd>
 </dl>
 </dd></dl>

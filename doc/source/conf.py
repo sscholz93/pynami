@@ -40,6 +40,7 @@ rst_prolog = """
 .. |API| replace:: :abbr:`API (Application Programming Interface)`
 .. |REST| replace:: :abbr:`REST (Representational State Transfer)`
 .. |URL| replace:: :abbr:`URL (Uniform Resource Locator)`
+.. |HTML| replace:: :abbr:`HTML (Hypertext Markup Language)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -52,6 +53,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.httpdomain',
+    'sphinx-jsonschema'
     # 'sphinx_autodoc_typehints',
     # 'sphinxcontrib.tikz'
 ]
@@ -66,7 +68,12 @@ tikz_proc_suite = 'GhostScript'
 todo_include_todos = True
 
 # Autodoc settings
-autodoc_member_order = 'bysource'
+autodoc_default_options = {
+    'member-order': 'bysource',
+    'undoc-members': True,
+    # 'inherited-members': True,
+    'exclude-members': 'opts'
+}
 
 # Napoleon settings
 napoleon_google_docstring = True

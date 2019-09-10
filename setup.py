@@ -17,5 +17,6 @@ setup(name='pynami',
       author_email='sebastian.scholz@pfadfinder-weeg.de',
       packages=find_packages(),
       install_requires=['requests', 'marshmallow', 'tabulate', 'pytoml',
-                        'sphinxcontrib-httpdomain', 'sphinx-rtd-theme'],
+                        'sphinxcontrib-httpdomain', 'sphinx-rtd-theme',
+                        'sphinx-jsonschema'],
       include_package_data=True)

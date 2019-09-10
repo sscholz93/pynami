@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pynami.schemas.mgl &mdash; pynami 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../namiclass.html">Main class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../search_mitglieder.html">Search Mitglieder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../schemas.html">pynami.schemas</a> &raquo;</li>
+        
+      <li>pynami.schemas.mgl</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pynami.schemas.mgl</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Schemas for operations on members</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
+
+<div class="viewcode-block" id="NamiKonto"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKonto">[docs]</a><span class="k">class</span> <span class="nc">NamiKonto</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Holds information about bank account and payment method of the member.</span>
+
+<span class="sd">    This class is intended to be instantiated by calling the</span>
+<span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Kontodaten(Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.zahlungsKondition}</span><span class="s1">&#39;</span></div>
+
+
+<div class="viewcode-block" id="NamiKontoSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKontoSchema">[docs]</a><span class="k">class</span> <span class="nc">NamiKontoSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Schema class for bank account and payment method information.</span>
+
+<span class="sd">    This Schema will is :std:doc:`nested &lt;nesting&gt;` inside a</span>
+<span class="sd">    :class:`MitgliedSchema` and there should be no other use for it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">NamiKonto</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">zahlungsKonditionId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">mitgliedsNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">institut</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">kontoinhaber</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">kontonummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">bankleitzahl</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">iban</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">bic</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">zahlungsKondition</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NamiKontoSchema.id_to_str"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKontoSchema.id_to_str">[docs]</a>    <span class="nd">@pre_load</span>
+    <span class="k">def</span> <span class="nf">id_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For some reason the |NAMI| gives the id of the payment details as an</span>
+<span class="sd">        :obj:`integer &lt;int&gt;`, but when you want to update a member it has be a</span>
+<span class="sd">        :obj:`string &lt;str&gt;`. Therefore this method converts incoming ids to a</span>
+<span class="sd">        :obj:`str` object before loading them by making use of the</span>
+<span class="sd">        :func:`~marshmallow.decorators.pre_load` decorator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (dict): Data dictionary to be loaded</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Corrected data dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{data[&quot;id&quot;]}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="NamiKontoSchema.double_dump"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKontoSchema.double_dump">[docs]</a>    <span class="nd">@post_dump</span>
+    <span class="k">def</span> <span class="nf">double_dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Incoming data sets are nicely formatted :mod:`json` strings which can</span>
+<span class="sd">        be loaded easily into the Schema but when you update a Mitglied all</span>
+<span class="sd">        payment details have to formatted into a :mod:`json` string and all</span>
+<span class="sd">        attributes have to be in a certain order.</span>
+<span class="sd">        To achieve this the :func:`~marshmallow.decorators.post_dump` decorator</span>
+<span class="sd">        is used.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (dict): Already dumped data set</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A :mod:`json` formatted string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="SearchMitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied">[docs]</a><span class="k">class</span> <span class="nc">SearchMitglied</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main class for a Mitglied which came up as a search result. Unfortunately</span>
+<span class="sd">    there cannot be just one Mitglied class because the search results lack</span>
+<span class="sd">    crucal imformation (e.g. payment details).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchMitglied(</span><span class="si">{self.descriptor}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="SearchMitglied.table_view"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.table_view">[docs]</a>    <span class="k">def</span> <span class="nf">table_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepare nicely formatted output</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: All data entries which are not in the blacklist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;representedClass&#39;</span><span class="p">,</span> <span class="s1">&#39;mglType&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;staatsangehoerigkeit&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;geschlecht&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;wiederverwendenFlag&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;descriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;lastUpdated&#39;</span><span class="p">,</span> <span class="s1">&#39;id_id&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_blacklist</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="SearchMitglied.tabulate"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepare ordered tabulated output</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
+<span class="sd">                shall be included in the table</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`~collections.OrderedDict`: Specified data entries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">elements</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">elements</span> <span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="SearchMitglied.get_mitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.get_mitglied">[docs]</a>    <span class="k">def</span> <span class="nf">get_mitglied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a real :class:`Mitglied` form the search result by getting the</span>
+<span class="sd">        corresponding data set through the member id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Mitglied: The Mitglied object corresponding to this search result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;GET&#39;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SearchMitgliedSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchMitgliedSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Schema class for :class:`SearchMitglied`.</span>
+
+<span class="sd">    For some reason attribute naming in the |NAMI| is a bit inconsistent</span>
+<span class="sd">    between a Mitglied which comes up as a search result and one that is</span>
+<span class="sd">    addressed directly by its id.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchMitglied</span>
+
+    <span class="n">entries_austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;austrittsDatum&#39;</span><span class="p">,</span>
+                                             <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_beitragsarten</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;beitragsarten&#39;</span><span class="p">)</span>
+    <span class="n">entries_eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">)</span>
+    <span class="n">entries_email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
+    <span class="n">entries_emailVertretungsberechtigter</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;emailVertretungsberechtigter&quot;</span><span class="p">,</span>
+                      <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_ersteTaetigkeitId</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;ersteTaetigkeitId&#39;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_ersteUntergliederungId</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;ersteUntergliederungId&#39;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_fixBeitrag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;fixBeitrag&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;geburtsDatum&#39;</span><span class="p">)</span>
+    <span class="n">entries_genericField1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;genericField1&quot;</span><span class="p">,</span>
+                                          <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_genericField2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;genericField2&quot;</span><span class="p">,</span>
+                                          <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_geschlecht</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;geschlecht&#39;</span><span class="p">)</span>
+    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;id_id&#39;</span><span class="p">)</span>
+    <span class="n">entries_jungpfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;jungpfadfinder&#39;</span><span class="p">)</span>
+    <span class="n">entries_konfession</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;konfession&#39;</span><span class="p">)</span>
+    <span class="n">entries_kontoverbindung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;kontoverbindung&#39;</span><span class="p">)</span>
+    <span class="n">entries_lastUpdated</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;lastUpdated&#39;</span><span class="p">)</span>
+    <span class="n">entries_mglType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;mglType&#39;</span><span class="p">)</span>
+    <span class="n">entries_mitgliedsNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">)</span>
+    <span class="n">entries_nachname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;nachname&#39;</span><span class="p">)</span>
+    <span class="n">entries_pfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;pfadfinder&#39;</span><span class="p">)</span>
+    <span class="n">entries_rover</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;rover&#39;</span><span class="p">)</span>
+    <span class="n">entries_rowCssClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;rowCssClass&#39;</span><span class="p">)</span>
+    <span class="n">entries_spitzname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;spitzname&#39;</span><span class="p">)</span>
+    <span class="n">entries_staatangehoerigkeitText</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;staatangehoerigkeitText&#39;</span><span class="p">)</span>
+    <span class="n">entries_staatsangehoerigkeit</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;staatsangehoerigkeit&#39;</span><span class="p">)</span>
+    <span class="n">entries_status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
+    <span class="n">entries_stufe</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;stufe&#39;</span><span class="p">)</span>
+    <span class="n">entries_pfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;pfadfinder&#39;</span><span class="p">)</span>
+    <span class="n">entries_telefax</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;telefax&#39;</span><span class="p">)</span>
+    <span class="n">entries_telefon1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;telefon1&#39;</span><span class="p">)</span>
+    <span class="n">entries_telefon2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;telefon2&#39;</span><span class="p">)</span>
+    <span class="n">entries_telefon3</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;telefon3&#39;</span><span class="p">)</span>
+    <span class="n">entries_version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">)</span>
+    <span class="n">entries_vorname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;vorname&#39;</span><span class="p">)</span>
+    <span class="n">entries_pfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;pfadfinder&#39;</span><span class="p">)</span>
+    <span class="n">entries_wiederverwendenFlag</span> <span class="o">=</span> \
+        <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;wiederverwendenFlag&#39;</span><span class="p">)</span>
+    <span class="n">entries_woelfling</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;woelfling&#39;</span><span class="p">)</span>
+    <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Mitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied">[docs]</a><span class="k">class</span> <span class="nc">Mitglied</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main class representing a |NAMI| Mitglied</span>
+
+<span class="sd">    This class overwrites the :meth:`~object.__getattr__` and</span>
+<span class="sd">    :meth:`~object.__setattr__` methods so that attributes of this class can be</span>
+<span class="sd">    handled in a convinient way. It is intended to be instantiated by calling</span>
+<span class="sd">    the :meth:`~marshmallow.Schema.load` method on a corresponding data</span>
+<span class="sd">    dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Mitglied(</span><span class="si">{self.nachname}</span><span class="s1">, </span><span class="si">{self.vorname}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.vorname}</span><span class="s1"> </span><span class="si">{self.nachname}</span><span class="s1">&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Mitglied.table_view"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.table_view">[docs]</a>    <span class="k">def</span> <span class="nf">table_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepare nicely formatted output</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: All data entries which are not in the blacklist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;genericField1&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_blacklist</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="Mitglied.tabulate"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepare ordered tabulated output</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
+<span class="sd">                shall be included in the table</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`~collections.OrderedDict`: Specified data entries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">elements</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">,</span> <span class="s1">&#39;strasse&#39;</span><span class="p">,</span> <span class="s1">&#39;stufe&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">elements</span> <span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="Mitglied.update"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes the possibly changed values to the |NAMI|</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nami (:class:`~pynami.nami.NaMi`): Main class for communication</span>
+<span class="sd">                with the |NAMI|</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Mitglied: The new Mitglied as it is returned by the |NAMI|</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">userjson</span> <span class="o">=</span> <span class="n">MitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">userjson</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="MitgliedSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema">[docs]</a><span class="k">class</span> <span class="nc">MitgliedSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Schema class for a :class:`Mitglied`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Mitglied</span>
+
+    <span class="n">austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">beitragsart</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">beitragsartId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">emailVertretungsberechtigter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">ersteTaetigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ersteTaetigkeitId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ersteUntergliederung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ersteUntergliederungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fixBeitrag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">genericField1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">genericField2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">geschlecht</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">geschlechtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">jungpfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">konfession</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">konfessionId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">kontoverbindung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">NamiKontoSchema</span><span class="p">)</span>
+    <span class="n">land</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">landId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">lastUpdated</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mglType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">mglTypeId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mitgliedsNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nachname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">nameZusatz</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ort</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pfadfinder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plz</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">regionId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">rover</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sonst01</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sonst02</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">spitzname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">staatsangehoerigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">staatsangehoerigkeitId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">staatsangehoerigkeitText</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">strasse</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">stufe</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">telefax</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">telefon1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">telefon2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">telefon3</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">vorname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">wiederverwendenFlag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">()</span>
+    <span class="n">woelfling</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">zeitschriftenversand</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MitgliedSchema.Meta"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="n">BaseSchema</span><span class="o">.</span><span class="n">Meta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extended :class:`marshmallow.Schema.Meta` class for further</span>
+<span class="sd">        configuration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ordered</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="sd">&quot;&quot;&quot;bool: This is nesseccary for the payment deatils to be dumped in the</span>
+<span class="sd">        corrent order.&quot;&quot;&quot;</span></div></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

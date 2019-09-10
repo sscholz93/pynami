@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
 </ul>
 
@@ -163,23 +164,18 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">post_load</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
 
 
-<div class="viewcode-block" id="NamiKonto"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NamiKonto">[docs]</a><span class="k">class</span> <span class="nc">NamiKonto</span><span class="p">:</span>
+<div class="viewcode-block" id="NamiKonto"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NamiKonto">[docs]</a><span class="k">class</span> <span class="nc">NamiKonto</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Holds information about bank account and payment method of the member.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Kontodaten(Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -194,6 +190,8 @@
 <span class="sd">    This Schema will is :std:doc:`nested &lt;nesting&gt;` inside a</span>
 <span class="sd">    :class:`MitgliedSchema` and there should be no other use for it.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">NamiKonto</span>
+    
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">zahlungsKonditionId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">mitgliedsNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
@@ -205,22 +203,8 @@
     <span class="n">bic</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">zahlungsKondition</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NamiKontoSchema.make_konto"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NamiKontoSchema.make_konto">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_konto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            NamiKonto: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">NamiKonto</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="NamiKontoSchema.id_to_str"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NamiKontoSchema.id_to_str">[docs]</a>    <span class="nd">@pre_load</span>
-    <span class="k">def</span> <span class="nf">id_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">id_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For some reason the |NAMI| gives the id of the payment details as an</span>
 <span class="sd">        :obj:`integer &lt;int&gt;`, but when you want to update a member it has be a</span>
@@ -238,7 +222,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="NamiKontoSchema.double_dump"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NamiKontoSchema.double_dump">[docs]</a>    <span class="nd">@post_dump</span>
-    <span class="k">def</span> <span class="nf">double_dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">double_dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Incoming data sets are nicely formatted :mod:`json` strings which can</span>
 <span class="sd">        be loaded easily into the Schema but when you update a Mitglied all</span>
@@ -269,17 +253,12 @@
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SearchMitglied"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchMitglied">[docs]</a><span class="k">class</span> <span class="nc">SearchMitglied</span><span class="p">:</span>
+<div class="viewcode-block" id="SearchMitglied"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchMitglied">[docs]</a><span class="k">class</span> <span class="nc">SearchMitglied</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a Mitglied which came up as a search result. Unfortunately</span>
 <span class="sd">    there cannot be just one Mitglied class because the search results lack</span>
 <span class="sd">    crucal imformation (e.g. payment details).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchMitglied(</span><span class="si">{self.descriptor}</span><span class="s1">)&gt;&#39;</span>
 
@@ -330,10 +309,10 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Mitglied: The Mitglied object corresponding to this search result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_id</span><span class="p">,</span> <span class="s1">&#39;GET&#39;</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;GET&#39;</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SearchMitgliedSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchMitgliedSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchMitgliedSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchMitgliedSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchMitgliedSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchMitgliedSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for :class:`SearchMitglied`.</span>
 
@@ -341,7 +320,8 @@
 <span class="sd">    between a Mitglied which comes up as a search result and one that is</span>
 <span class="sd">    addressed directly by its id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchMitglied</span>
+    
     <span class="n">entries_austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;austrittsDatum&#39;</span><span class="p">,</span>
                                              <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">entries_beitragsarten</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;beitragsarten&#39;</span><span class="p">)</span>
@@ -390,27 +370,11 @@
     <span class="n">entries_wiederverwendenFlag</span> <span class="o">=</span> \
         <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;wiederverwendenFlag&#39;</span><span class="p">)</span>
     <span class="n">entries_woelfling</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;woelfling&#39;</span><span class="p">)</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;id_id&#39;</span><span class="p">)</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;representedClass&#39;</span><span class="p">)</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="SearchMitgliedSchema.make_user"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchMitgliedSchema.make_user">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            SearchMitglied: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">SearchMitglied</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Mitglied"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Mitglied">[docs]</a><span class="k">class</span> <span class="nc">Mitglied</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Mitglied"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Mitglied">[docs]</a><span class="k">class</span> <span class="nc">Mitglied</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class representing a |NAMI| Mitglied</span>
 
@@ -490,6 +454,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for a :class:`Mitglied`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Mitglied</span>
+    
     <span class="n">austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">beitragsart</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">beitragsartId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -553,35 +519,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ordered</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="sd">&quot;&quot;&quot;bool: This is nesseccary for the payment deatils to be dumped in the</span>
-<span class="sd">        corrent order.&quot;&quot;&quot;</span></div>
-
-<div class="viewcode-block" id="MitgliedSchema.make_user"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.MitgliedSchema.make_user">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Mitglied: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Mitglied</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+<span class="sd">        corrent order.&quot;&quot;&quot;</span></div></div>
 
 
-<div class="viewcode-block" id="Baseadmin"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Baseadmin">[docs]</a><span class="k">class</span> <span class="nc">Baseadmin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Baseadmin"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Baseadmin">[docs]</a><span class="k">class</span> <span class="nc">Baseadmin</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base data class for all default values and their id mapping.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;</span><span class="si">{self.type}</span><span class="s1">(</span><span class="si">{self.descriptor}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -595,33 +542,18 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">representedClass</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="BaseadminSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.BaseadminSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseadminSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseadminSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.BaseadminSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseadminSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`Baseadmin` class</span>
 
 <span class="sd">    All the default values only consist of the same four attributes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">NamiBaseadminIdField</span><span class="p">()</span>
-
-<div class="viewcode-block" id="BaseadminSchema.make_baseadmin"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.BaseadminSchema.make_baseadmin">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_baseadmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Baseadmin: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Baseadmin</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Baseadmin</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Notification"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Notification">[docs]</a><span class="k">class</span> <span class="nc">Notification</span><span class="p">:</span>
+<div class="viewcode-block" id="Notification"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Notification">[docs]</a><span class="k">class</span> <span class="nc">Notification</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for notification like tier changes of a mitglied.</span>
 
@@ -630,11 +562,6 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Notification(</span><span class="si">{self.entries_entryDate}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
                <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_operation}</span><span class="s1">)&gt;&#39;</span>
@@ -643,41 +570,26 @@
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_operation}</span><span class="s1">&#39;</span></div>
 
 
-<div class="viewcode-block" id="NotificationSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NotificationSchema">[docs]</a><span class="k">class</span> <span class="nc">NotificationSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="NotificationSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NotificationSchema">[docs]</a><span class="k">class</span> <span class="nc">NotificationSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`Notification` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Notification</span>
+    
     <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="NotificationSchema.make_notification"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.NotificationSchema.make_notification">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_notification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Notification: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Notification</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="HistoryEntry"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.HistoryEntry">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntry</span><span class="p">:</span>
+<div class="viewcode-block" id="HistoryEntry"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.HistoryEntry">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntry</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for history entries</span>
 
@@ -687,11 +599,6 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;</span><span class="si">{self.type}</span><span class="s1">(</span><span class="si">{self.entries_entryDate}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
                <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_actor}</span><span class="s1">: </span><span class="si">{self.entries_completeChanges}</span><span class="s1">)&gt;&#39;</span>
@@ -704,44 +611,29 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">representedClass</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="HistoryEntrySchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.HistoryEntrySchema">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntrySchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="HistoryEntrySchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.HistoryEntrySchema">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntrySchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`HistoryEntry` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">HistoryEntry</span>
+    
     <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entries_author</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="HistoryEntrySchema.make_historyEntry"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.HistoryEntrySchema.make_historyEntry">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_historyEntry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            HistoryEntry: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">HistoryEntry</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Stats"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Stats">[docs]</a><span class="k">class</span> <span class="nc">Stats</span><span class="p">:</span>
+<div class="viewcode-block" id="Stats"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Stats">[docs]</a><span class="k">class</span> <span class="nc">Stats</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for basic statistical entries.</span>
 
@@ -751,11 +643,6 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Stats(</span><span class="si">{self.nrMitglieder}</span><span class="s1"> Mitglieder)&gt;&#39;</span>
 
@@ -763,18 +650,13 @@
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.nrMitglieder}</span><span class="s1"> Mitglieder&#39;</span></div>
 
 
-<div class="viewcode-block" id="StatCategory"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.StatCategory">[docs]</a><span class="k">class</span> <span class="nc">StatCategory</span><span class="p">:</span>
+<div class="viewcode-block" id="StatCategory"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.StatCategory">[docs]</a><span class="k">class</span> <span class="nc">StatCategory</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for statistical tier numbers.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;StatCategory(</span><span class="si">{self.name}</span><span class="s1">: </span><span class="si">{self.count}</span><span class="s1">)&gt;&#39;</span>
 
@@ -788,58 +670,27 @@
 
 <span class="sd">    This only contains the name of the tier and its number of members.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">StatCategory</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-
-<div class="viewcode-block" id="StatCatSchema.make_statCat"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.StatCatSchema.make_statCat">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_statCat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            StatCategory: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">StatCategory</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="StatsSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.StatsSchema">[docs]</a><span class="k">class</span> <span class="nc">StatsSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`Stats` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Stats</span>
     <span class="n">nrMitglieder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">statsCategories</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">StatCatSchema</span><span class="p">))</span>
-
-<div class="viewcode-block" id="StatsSchema.make_stats"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.StatsSchema.make_stats">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Stats: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Stats</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">statsCategories</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">StatCatSchema</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="SearchActivity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchActivity">[docs]</a><span class="k">class</span> <span class="nc">SearchActivity</span><span class="p">:</span>
+<div class="viewcode-block" id="SearchActivity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchActivity">[docs]</a><span class="k">class</span> <span class="nc">SearchActivity</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for activities wich come up as a search result.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchActivity(</span><span class="si">{self.entries_taetigkeit}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -847,51 +698,31 @@
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_taetigkeit}</span><span class="s1">&#39;</span></div>
 
 
-<div class="viewcode-block" id="SearchActivitySchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchActivitySchema">[docs]</a><span class="k">class</span> <span class="nc">SearchActivitySchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchActivitySchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchActivitySchema">[docs]</a><span class="k">class</span> <span class="nc">SearchActivitySchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`SearchActivity` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchActivity</span>
+    
     <span class="n">entries_aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">entries_beitragsArt</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_caeaGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_anlagedatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">entries_caeaGroupForGf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_untergliederung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_taetigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-
-<div class="viewcode-block" id="SearchActivitySchema.make_activity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchActivitySchema.make_activity">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            SearchActivity: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">SearchActivity</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Activity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Activity">[docs]</a><span class="k">class</span> <span class="nc">Activity</span><span class="p">:</span>
+<div class="viewcode-block" id="Activity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Activity">[docs]</a><span class="k">class</span> <span class="nc">Activity</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for activities directly obtained by their id.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Activity(</span><span class="si">{self.taetigkeit}</span><span class="s1"> (</span><span class="si">{self.untergliederung}</span><span class="s1">), &#39;</span> <span class="o">+</span> \
                <span class="n">f</span><span class="s1">&#39;Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
@@ -904,6 +735,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`Activity` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Activity</span>
+    
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
@@ -917,35 +750,16 @@
     <span class="n">untergliederungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
     <span class="n">aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">beitragsArtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dump_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="ActivitySchema.make_activity"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.ActivitySchema.make_activity">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Activity: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Activity</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">beitragsArtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dump_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SearchAusbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchAusbildung">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildung</span><span class="p">:</span>
+<div class="viewcode-block" id="SearchAusbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchAusbildung">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a training obtained as a search result.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchAusbildung(</span><span class="si">{self.entries_baustein}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -953,47 +767,27 @@
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span></div>
 
 
-<div class="viewcode-block" id="SearchAusbildungSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchAusbildungSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildungSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchAusbildungSchema"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchAusbildungSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildungSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`SearchAusbildung` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchAusbildung</span>
+    
     <span class="n">entries_vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
     <span class="n">entries_veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-
-<div class="viewcode-block" id="SearchAusbildungSchema.make_ausbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.SearchAusbildungSchema.make_ausbildung">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_ausbildung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            SearchAusbildung: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">SearchAusbildung</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Ausbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Ausbildung">[docs]</a><span class="k">class</span> <span class="nc">Ausbildung</span><span class="p">:</span>
+<div class="viewcode-block" id="Ausbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.Ausbildung">[docs]</a><span class="k">class</span> <span class="nc">Ausbildung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a training obtained directly from its id.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Ausbildung(</span><span class="si">{self.baustein}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -1005,6 +799,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`Ausbildung` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Ausbildung</span>
+
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">bausteinId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
@@ -1012,24 +808,10 @@
     <span class="n">vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
     <span class="n">vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">lastModifiedFrom</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="AusbildungSchema.make_ausbildung"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.AusbildungSchema.make_ausbildung">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_ausbildung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Ausbildung: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Ausbildung</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">lastModifiedFrom</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MitgliedHistory"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.MitgliedHistory">[docs]</a><span class="k">class</span> <span class="nc">MitgliedHistory</span><span class="p">:</span>
+<div class="viewcode-block" id="MitgliedHistory"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.MitgliedHistory">[docs]</a><span class="k">class</span> <span class="nc">MitgliedHistory</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a member revision history entry obtained directly from its</span>
 <span class="sd">    id.</span>
@@ -1037,11 +819,6 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;MitgliedJistory(</span><span class="si">{self.actor}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
@@ -1053,26 +830,14 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`MitgliedHistory` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">MitgliedHistory</span>
+    
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="n">entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
     <span class="n">actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<div class="viewcode-block" id="MitgliedHistorySchema.make_history"><a class="viewcode-back" href="../../pynami.schemas.html#pynami.schemas.MitgliedHistorySchema.make_history">[docs]</a>    <span class="nd">@post_load</span>
-    <span class="k">def</span> <span class="nf">make_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts to main class after loading by making use of the</span>
-<span class="sd">        :func:`~marshmallow.decorators.post_load` decorator.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            data (dict): Data dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            MitgliedHistory: Main class for this Schema</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">MitgliedHistory</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
+    <span class="n">changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

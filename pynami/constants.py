@@ -54,4 +54,12 @@ URLS = {'SERVER': 'https://nami.dpsg.de/ica/rest',
         'MGL_HISTORY': '/nami/mitglied-history/filtered-for-navigation/'
                        'mitglied/mitglied/',
         'MGL_HISTORY_EXT': '/nami/mitglied-history-with-values/'
-                           'filtered-for-navigation/mitglied/mitglied/'}
+                           'filtered-for-navigation/mitglied/mitglied/',
+        'GRUPPIERUNGEN': '/nami/gruppierungen/filtered-for-navigation/'
+                         'gruppierung/node/root',
+        'GRPADMIN_GRPS': '/nami/gruppierungen-for-grpadmin/parentgruppierung/'
+                         '/node/root',
+        'INVOICE': '/nami/rechin-for-grpadmin/rechin/gruppierung/',
+        'INVOICE_PDF': '/nami/rechin-for-grpadmin/pdf',
+        'FZ': '/nami/fz/eigene-bescheinigungen/',
+        'BEANTRAGUNG': '/fz-beantragen/download-beantragung'}

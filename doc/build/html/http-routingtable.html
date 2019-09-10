@@ -94,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API reference</a></li>
 </ul>
 
@@ -159,17 +160,57 @@
    <h1>HTTP Routing Table</h1>
 
    <div class="modindex-jumpbox">
-   <a href="#cap-/users"><strong>/users</strong></a>
+   <a href="#cap-/nami"><strong>/nami</strong></a>
    </div>
 
    <table class="indextable modindextable">
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-/users"><td></td><td>
-       <strong>/users</strong></td><td></td></tr>
+     <tr class="cap" id="cap-/nami"><td></td><td>
+       <strong>/nami</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="urls.html#get--users-(int-user_id)-posts-(tag)"><code class="xref">GET /users/(int:user_id)/posts/(tag)</code></a></td><td>
+       <a href="urls.html#get--nami-auth-logout"><code class="xref">GET /nami/auth/logout</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-(groupId)-flist"><code class="xref">GET /nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/(groupId)/flist</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId"><code class="xref">GET /nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/{groupId}/{mglId}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--nami-search-multi-result-list"><code class="xref">GET /nami/search-multi/result-list</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-flist"><code class="xref">GET /nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/flist</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId"><code class="xref">GET /nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#post--nami-auth-manual-sessionStartup"><code class="xref">POST /nami/auth/manual/sessionStartup</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#put--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId"><code class="xref">PUT /nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/{groupId}/{mglId}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#put--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId"><code class="xref">PUT /nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}</code></a></td><td>
        <em></em></td></tr>
    </table>
 

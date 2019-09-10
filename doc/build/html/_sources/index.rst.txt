@@ -13,6 +13,7 @@ Welcome to pynami's documentation!
    namiclass
    constants
    urls
+   search_mitglieder
    modules
 
 

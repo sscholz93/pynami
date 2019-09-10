@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
 </ul>
 
@@ -155,7 +156,19 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module contains some base classes</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">post_load</span>
+
+
+<div class="viewcode-block" id="BaseModel"><a class="viewcode-back" href="../../pynami.base.html#pynami.base.BaseModel">[docs]</a><span class="k">class</span> <span class="nc">BaseModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all the main classes.</span>
+<span class="sd">    </span>
+<span class="sd">    It stores all data entries as instance attributes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BaseSchema"><a class="viewcode-back" href="../../pynami.base.html#pynami.base.BaseSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
@@ -164,7 +177,13 @@
 
 <span class="sd">    It handles the formatting of dates so that the fields in the derived</span>
 <span class="sd">    classes can be standard :class:`~marshmallow.fields.DateTime` field.</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        This class can not be used on its own but only as a derived class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;class: Main class which this Schema is modelling. Each derived class</span>
+<span class="sd">    must define this attribute.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BaseSchema.Meta"><a class="viewcode-back" href="../../pynami.base.html#pynami.base.BaseSchema.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -199,9 +218,28 @@
                           <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">data</span></div></div>
+        <span class="k">return</span> <span class="n">data</span></div>
+    
+<div class="viewcode-block" id="BaseSchema.make_object"><a class="viewcode-back" href="../../pynami.base.html#pynami.base.BaseSchema.make_object">[docs]</a>    <span class="nd">@post_load</span>
+    <span class="k">def</span> <span class="nf">make_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="BaseSearchSchema"><a class="viewcode-back" href="../../pynami.base.html#pynami.base.BaseSearchSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseSearchSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all schemas that describe search results.</span>
+<span class="sd">    </span>
+<span class="sd">    All search results share the same three attributes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Raw</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`int` ore :obj:`str`: Internal id of the object This is an integer</span>
+<span class="sd">    in most cases.&quot;&quot;&quot;</span>
+    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Object description. In some cases the same as </span>
+<span class="sd">    :attr:`representedClass`.&quot;&quot;&quot;</span>
+    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: |NAMI| class structure&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

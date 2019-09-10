@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
 </ul>
 
@@ -159,7 +160,7 @@
 <span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
 
 
-<div class="viewcode-block" id="UgId"><a class="viewcode-back" href="../../pynami.constants.html#pynami.constants.UgId">[docs]</a><span class="k">class</span> <span class="nc">UgId</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="UgId"><a class="viewcode-back" href="../../pynami.html#pynami.constants.UgId">[docs]</a><span class="k">class</span> <span class="nc">UgId</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Untergliederungs ID&quot;&quot;&quot;</span>
     <span class="n">WOE</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">JUFFI</span> <span class="o">=</span> <span class="mi">2</span>
@@ -207,7 +208,15 @@
         <span class="s1">&#39;MGL_HISTORY&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied-history/filtered-for-navigation/&#39;</span>
                        <span class="s1">&#39;mitglied/mitglied/&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MGL_HISTORY_EXT&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/mitglied-history-with-values/&#39;</span>
-                           <span class="s1">&#39;filtered-for-navigation/mitglied/mitglied/&#39;</span><span class="p">}</span>
+                           <span class="s1">&#39;filtered-for-navigation/mitglied/mitglied/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GRUPPIERUNGEN&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/gruppierungen/filtered-for-navigation/&#39;</span>
+                         <span class="s1">&#39;gruppierung/node/root&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GRPADMIN_GRPS&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/gruppierungen-for-grpadmin/parentgruppierung/&#39;</span>
+                         <span class="s1">&#39;/node/root&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;INVOICE&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/rechin-for-grpadmin/rechin/gruppierung/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;INVOICE_PDF&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/rechin-for-grpadmin/pdf&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;FZ&#39;</span><span class="p">:</span> <span class="s1">&#39;/nami/fz/eigene-bescheinigungen/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BEANTRAGUNG&#39;</span><span class="p">:</span> <span class="s1">&#39;/fz-beantragen/download-beantragung&#39;</span><span class="p">}</span>
 </pre></div>
 
            </div>

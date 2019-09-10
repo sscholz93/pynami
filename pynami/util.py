@@ -2,7 +2,11 @@
 """
 Some utility functions for convenience
 """
+import time
 import webbrowser
+import tempfile as tf
+import subprocess as sp
+from html.parser import HTMLParser
 
 
 def send_emails(to, mitglieder, method='bcc', email1=True, email2=True):
@@ -34,3 +38,32 @@ def send_emails(to, mitglieder, method='bcc', email1=True, email2=True):
     url = 'mailto:' + to + '?bcc=' + bcc
     webbrowser.open(url, new=1)
     return url
+
+
+class ExtractHrefParser(HTMLParser):
+    """
+    |HTML| parser for extracting a |URL|
+    """
+    url = None
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            for name, value in attrs:
+                if name == 'href':
+                    self.url = value
+
+
+def extract_url(htmlstr):
+    """
+    Extract a |URL| from a |HTML| string
+    """
+    parser = ExtractHrefParser()
+    parser.feed(htmlstr)
+    return parser.url
+
+def open_download_pdf(content):
+    with tf.TemporaryDirectory() as tmpdir:
+        with tf.NamedTemporaryFile(suffix='.pdf', delete=False,
+                                   dir=tmpdir) as tmpfile:
+            tmpfile.write(content)
+        sp.Popen([tmpfile.name], shell=True)
+        time.sleep(10)

@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API reference" href="modules.html" />
+    <link rel="next" title="Search Mitglieder" href="search_mitglieder.html" />
     <link rel="prev" title="Levels" href="tables/levels.html" /> 
 </head>
 
@@ -88,7 +88,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">REST URLs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST URLs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authentification">Authentification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-members">Search members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-members">Update members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#activities">Activities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API reference</a></li>
 </ul>
 
@@ -156,11 +163,319 @@
             
   <div class="section" id="rest-urls">
 <h1>REST URLs<a class="headerlink" href="#rest-urls" title="Permalink to this headline">¶</a></h1>
-<dl class="get">
-<dt id="get--users-(int-user_id)-posts-(tag)">
-<code class="sig-name descname">GET </code><code class="sig-name descname">/users/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">user_id</em><span class="sig-paren">)</span><code class="sig-name descname">/posts/</code><span class="sig-paren">(</span><em class="sig-param">tag</em><span class="sig-paren">)</span><a class="headerlink" href="#get--users-(int-user_id)-posts-(tag)" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<p>The default server <abbr title="Uniform Resource Locator">URL</abbr> for the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> is</p>
+<p class="centered">
+<strong><a class="reference external" href="https://nami.dpsg.de/ica/rest">https://nami.dpsg.de/ica/rest</a></strong></p><div class="section" id="authentification">
+<h2>Authentification<a class="headerlink" href="#authentification" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--nami-auth-manual-sessionStartup">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/nami/auth/manual/sessionStartup</code><a class="headerlink" href="#post--nami-auth-manual-sessionStartup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – The <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member id</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – Your password</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
+<dl class="get">
+<dt id="get--nami-auth-logout">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/auth/logout</code><a class="headerlink" href="#get--nami-auth-logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout. Ends the current session.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="search-members">
+<h2>Search members<a class="headerlink" href="#search-members" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-(groupId)-flist">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/</code><span class="sig-paren">(</span><em class="sig-param">groupId</em><span class="sig-paren">)</span><code class="sig-name descname">/flist</code><a class="headerlink" href="#get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-(groupId)-flist" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all group members though filtering by one value is possible</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groupId</strong> (<em>int</em>) – A chosen group id (usually your Stammesnummer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Query Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>filterString</strong> (<em>string</em>) – The filter attribute (optional)</p></li>
+<li><p><strong>searchString</strong> (<em>string</em>) – Search value. If the filter attribute refers to a date the format is <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>.</p></li>
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned member is a list entry in the form of a json array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--nami-search-multi-result-list">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/search-multi/result-list</code><a class="headerlink" href="#get--nami-search-multi-result-list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search members by multiple keys</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>searchedValues</strong> (<em>string</em>) – A json formatted string of all search values</p></li>
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned member is a list entry in the form of a json array.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/{groupId}/{mglId}</code><a class="headerlink" href="#get--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a member by its id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groupId</strong> (<em>int</em>) – A chosen group id (usually your Stammesnummer)</p></li>
+<li><p><strong>mglId</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – Contains all relevant information about the member</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="update-members">
+<h2>Update members<a class="headerlink" href="#update-members" title="Permalink to this headline">¶</a></h2>
+<dl class="put">
+<dt id="put--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId">
+<code class="sig-name descname">PUT </code><code class="sig-name descname">/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/{groupId}/{mglId}</code><a class="headerlink" href="#put--nami-mitglied-filtered-for-navigation-gruppierung-gruppierung-groupId-mglId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update information about a member.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groupId</strong> (<em>int</em>) – A chosen group id (usually your Stammesnummer)</p></li>
+<li><p><strong>mglId</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">JSON Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>beitragsArt</strong> (<em>string</em>) – Fee type</p></li>
+<li><p><strong>beitragsArtId</strong> (<em>id</em>) – Id of the fee type</p></li>
+<li><p><strong>eintrittsdatum</strong> – Begin of association (Format: <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>)</p></li>
+<li><p><strong>email</strong> (<em>string</em>) – Primary email address</p></li>
+<li><p><strong>emailVertretungsberechtigter</strong> (<em>string</em>) – Email address of an authorized representative.</p></li>
+<li><p><strong>ersteTaetigkeit</strong> (<em>string</em>) – First activity. Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>ersteUntergliederung</strong> (<em>string</em>) – First tier.</p></li>
+<li><p><strong>fixBeitrag</strong> (<em>string</em>) – Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>geburtsDatum</strong> (<em>string</em>) – Birth date (Format: <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>)</p></li>
+<li><p><strong>genericField1</strong> (<em>string</em>) – Not sure why these even exist.</p></li>
+<li><p><strong>genericField1</strong> – Not sure why these even exist.</p></li>
+<li><p><strong>geschlecht</strong> (<em>string</em>) – Gender</p></li>
+<li><p><strong>geschlechtId</strong> (<em>int</em>) – Corresponding id to the gender</p></li>
+<li><p><strong>gruppierung</strong> (<em>string</em>) – Group name including its id</p></li>
+<li><p><strong>gruppierungId</strong> (<em>string</em>) – Group id as a string</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – Member id</p></li>
+<li><p><strong>jungpfadfinder</strong> (<em>string</em>) – </p></li>
+<li><p><strong>konfession</strong> (<em>string</em>) – Confession</p></li>
+<li><p><strong>confessionId</strong> (<em>int</em>) – Id corresopnding to the confession</p></li>
+<li><p><strong>kontoverbindung</strong> (<em>string</em>) – JSON formatted string of the payment details</p></li>
+<li><p><strong>land</strong> (<em>string</em>) – Country the member lives in</p></li>
+<li><p><strong>landId</strong> (<em>int</em>) – Id corresponding to the address country</p></li>
+<li><p><strong>mglType</strong> (<em>string</em>) – Member type</p></li>
+<li><p><strong>nachname</strong> (<em>string</em>) – Surname</p></li>
+<li><p><strong>nameZusatz</strong> (<em>string</em>) – Additional name</p></li>
+<li><p><strong>ort</strong> (<em>string</em>) – Address city</p></li>
+<li><p><strong>pfadfinder</strong> (<em>string</em>) – </p></li>
+<li><p><strong>plz</strong> (<em>string</em>) – Postal code</p></li>
+<li><p><strong>region</strong> (<em>string</em>) – Name of the address state</p></li>
+<li><p><strong>regionId</strong> (<em>int</em>) – Id of the address state</p></li>
+<li><p><strong>rover</strong> (<em>string</em>) – </p></li>
+<li><p><strong>sonst01</strong> (<em>boolean</em>) – Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>sonst02</strong> (<em>boolean</em>) – Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>spitzname</strong> (<em>string</em>) – Nickname</p></li>
+<li><p><strong>staatsangehoerigkeit</strong> (<em>string</em>) – Citizenship</p></li>
+<li><p><strong>staatsangehoerigkeitId</strong> (<em>string</em>) – Id of the citizenship</p></li>
+<li><p><strong>status</strong> (<em>string</em>) – If the member is active or inactive</p></li>
+<li><p><strong>strasse</strong> (<em>string</em>) – Address street</p></li>
+<li><p><strong>stufe</strong> (<em>string</em>) – Current tier of the member</p></li>
+<li><p><strong>telefax</strong> (<em>string</em>) – Fax number</p></li>
+<li><p><strong>telefon1</strong> (<em>string</em>) – First telephone number</p></li>
+<li><p><strong>telefon2</strong> (<em>string</em>) – Second telephone number</p></li>
+<li><p><strong>telefon3</strong> (<em>string</em>) – Third telephone number</p></li>
+<li><p><strong>version</strong> (<em>int</em>) – History version number</p></li>
+<li><p><strong>vorname</strong> (<em>string</em>) – First name</p></li>
+<li><p><strong>wiederverwendenFlag</strong> (<em>boolean</em>) – If the member data may be used after the membership ends</p></li>
+<li><p><strong>woelfing</strong> (<em>string</em>) – </p></li>
+<li><p><strong>zeitschriftenversand</strong> (<em>boolean</em>) – If the member gets the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> newspaper.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">successful</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – Contains all information about the updated member</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="activities">
+<h2>Activities<a class="headerlink" href="#activities" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-flist">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/flist</code><a class="headerlink" href="#get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-flist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all activities of a member. There is also an option for filtering the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mglId</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Query Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+<li><p><strong>filterString</strong> (<em>string</em>) – The filter attribute (optional)</p></li>
+<li><p><strong>searchString</strong> (<em>string</em>) – Search value. If the filter attribute refers to a date the format is <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned activity is a list entry in the form of a json array.</p></li>
+<li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the activities themselves.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}</code><a class="headerlink" href="#get--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a single activity by its id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mglId</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>actId</strong> (<em>int</em>) – Id of the desired activity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – Contains all relevant information about the activity</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="put">
+<dt id="put--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId">
+<code class="sig-name descname">PUT </code><code class="sig-name descname">/nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}</code><a class="headerlink" href="#put--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update an activity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mglId</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>actId</strong> (<em>int</em>) – Id of the desired activity</p></li>
+</ul>
+</dd>
+<dt class="field-even">JSON Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>aktivBis</strong> (<em>string</em>) – End date of the activity (Format: <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>)</p></li>
+<li><p><strong>aktivVon</strong> (<em>string</em>) – Start date of the activity (Format: <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>)</p></li>
+<li><p><strong>beitragsArtId</strong> (<em>int</em>) – Id of the fee type (default: <code class="docutils literal notranslate"><span class="pre">null</span></code>). It has not been observed to be anything else than <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>caeaGroup</strong> (<em>string</em>) – Access rights for the group.</p></li>
+<li><p><strong>caeaGroupForGf</strong> (<em>string</em>) – Access rights for the sub group.</p></li>
+<li><p><strong>caeaGroupId</strong> (<em>int</em>) – Corresponsing id for <code class="docutils literal notranslate"><span class="pre">caeaGroup</span></code>.</p></li>
+<li><p><strong>caeaGroupForGfId</strong> (<em>int</em>) – Corresponsing id for <code class="docutils literal notranslate"><span class="pre">caeaGroupForGf</span></code>.</p></li>
+<li><p><strong>gruppierung</strong> (<em>string</em>) – Group Name including its id.</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – Id of the activity.</p></li>
+<li><p><strong>taetigkeit</strong> (<em>string</em>) – Type of the activity.</p></li>
+<li><p><strong>untergliederung</strong> (<em>string</em>) – Department or tier the activity is assciated with.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">successful</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – Contains all information about the updated activity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -171,7 +486,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modules.html" class="btn btn-neutral float-right" title="API reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="search_mitglieder.html" class="btn btn-neutral float-right" title="Search Mitglieder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="tables/levels.html" class="btn btn-neutral float-left" title="Levels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

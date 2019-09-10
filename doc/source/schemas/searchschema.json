@@ -1,0 +1,86 @@
+{
+  '$schema': 'http://json-schema.org/draft-07/schema#',
+  'properties': {
+    'alterBis': {'title': 'alterBis', 'type': 'string'},
+    'alterVon': {'title': 'alterVon', 'type': 'string'},
+    'bausteinIncludeId': {
+      'title': 'bausteinIncludeId',
+      'type': 'array',
+      'items': {
+        'title': 'bausteinIncludeId',
+        'type': 'number',
+        'format': 'integer'}},
+    'ebeneId': {
+      'title': 'ebeneId',
+      'type': 'number',
+      'format': 'integer',
+      'default': None},
+    'funktion': {'title': 'funktion', 'type': 'string'},
+  'grpName': {'title': 'grpName', 'type': 'string'},
+  'grpNummer': {'title': 'grpNummer', 'type': 'string'},
+  'gruppierung1Id': {
+    'title': 'gruppierung1Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'gruppierung2Id': {
+    'title': 'gruppierung2Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'gruppierung3Id': {
+    'title': 'gruppierung3Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'gruppierung4Id': {
+    'title': 'gruppierung4Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'gruppierung5Id': {
+    'title': 'gruppierung5Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'gruppierung6Id': {
+    'title': 'gruppierung6Id',
+    'type': 'number',
+    'format': 'integer',
+    'default': None},
+  'inGrp': {'title': 'inGrp', 'type': 'boolean', 'default': False},
+  'mglStatusId': {'title': 'mglStatusId', 'type': 'string', 'default': None},
+  'mglTypeId': {
+    'title': 'mglTypeId',
+    'type': 'array',
+    'items': {'title': 'mglTypeId', 'type': 'string'}},
+  'mglWohnort': {'title': 'mglWohnort', 'type': 'string'},
+  'mitAllenTaetigkeiten': {
+    'title': 'mitAllenTaetigkeiten',
+    'type': 'boolean',
+    'default': False},
+  'mitgliedsNummer': {'title': 'mitgliedsNummer', 'type': 'string'},
+  'nachname': {'title': 'nachname', 'type': 'string'},
+  'organisation': {'title': 'organisation', 'type': 'string'},
+  'privacy': {'title': 'privacy', 'type': 'string'},
+  'searchName': {'title': 'searchName', 'type': 'string'},
+  'searchType': {'title': 'searchType', 'type': 'string', 'default': 'MITGLIEDER'},
+  'spitzname': {'title': 'spitzname', 'type': 'string'},
+  'taetigkeitId': {
+    'title': 'taetigkeitId',
+    'type': 'array',
+    'items': {'title': 'taetigkeitId', 'type': 'number', 'format': 'integer'}},
+  'tagId': {
+    'title': 'tagId',
+    'type': 'array',
+    'items': {'title': 'tagId', 'type': 'number', 'format': 'integer'}},
+  'untergliederungId': {
+    'title': 'untergliederungId',
+    'type': 'array',
+    'items': {'title': 'untergliederungId', 'type': 'number', 'format': 'integer'}},
+  'unterhalbGrp': {'title': 'unterhalbGrp', 'type': 'boolean', 'default': False},
+  'vorname': {'title': 'vorname', 'type': 'string'},
+  'withEndedTaetigkeiten': {'title': 'withEndedTaetigkeiten', 'type': 'boolean', 'default': False},
+  'zeitschriftenversand': {'title': 'zeitschriftenversand', 'type': 'boolean'}}
+}
+  

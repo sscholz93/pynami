@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search_mitglieder.html">Search Mitglieder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
 </ul>
 
@@ -155,10 +156,14 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Some utility functions for convenience</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">webbrowser</span>
+<span class="kn">import</span> <span class="nn">tempfile</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">subprocess</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">html.parser</span> <span class="k">import</span> <span class="n">HTMLParser</span>
 
 
-<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.util.html#pynami.util.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">mitglieder</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.html#pynami.util.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">mitglieder</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Send emails to several members.</span>
 
@@ -187,6 +192,35 @@
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;mailto:&#39;</span> <span class="o">+</span> <span class="n">to</span> <span class="o">+</span> <span class="s1">&#39;?bcc=&#39;</span> <span class="o">+</span> <span class="n">bcc</span>
     <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="ExtractHrefParser"><a class="viewcode-back" href="../../pynami.html#pynami.util.ExtractHrefParser">[docs]</a><span class="k">class</span> <span class="nc">ExtractHrefParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    |HTML| parser for extracting a |URL|</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="viewcode-block" id="ExtractHrefParser.handle_starttag"><a class="viewcode-back" href="../../pynami.html#pynami.util.ExtractHrefParser.handle_starttag">[docs]</a>    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;href&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">value</span></div></div>
+
+
+<div class="viewcode-block" id="extract_url"><a class="viewcode-back" href="../../pynami.html#pynami.util.extract_url">[docs]</a><span class="k">def</span> <span class="nf">extract_url</span><span class="p">(</span><span class="n">htmlstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract a |URL| from a |HTML| string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ExtractHrefParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">htmlstr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">url</span></div>
+
+<div class="viewcode-block" id="open_download_pdf"><a class="viewcode-back" href="../../pynami.html#pynami.util.open_download_pdf">[docs]</a><span class="k">def</span> <span class="nf">open_download_pdf</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.pdf&#39;</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="nb">dir</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmpfile</span><span class="p">:</span>
+            <span class="n">tmpfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="n">tmpfile</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

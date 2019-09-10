@@ -4,18 +4,21 @@ NAMI library in python
 This module contains the main class :class:`NaMi` and a few simple exception
 definitions.
 """
-import json
 import requests
 from tabulate import tabulate
 import pytoml as toml
 
-from .schemas import (SearchMitgliedSchema, MitgliedSchema, BaseadminSchema,
-                      NotificationSchema, HistoryEntrySchema, StatsSchema,
-                      SearchActivitySchema, ActivitySchema,
-                      SearchAusbildungSchema, AusbildungSchema,
-                      MitgliedHistorySchema)
 from .constants import URLS
-from .search import SearchSchema
+from .schemas.activity import SearchActivitySchema, ActivitySchema
+from .schemas.cogc import SearchBescheinigungSchema, BescheinigungSchema
+from .schemas.dashboard import NotificationSchema, StatsSchema
+from .schemas.default import BaseadminSchema
+from .schemas.grpadmin import SearchInvoiceSchema, InvoiceSchema
+from .schemas.history import HistoryEntrySchema, MitgliedHistorySchema
+from .schemas.mgl import SearchMitgliedSchema, MitgliedSchema
+from .schemas.search import SearchSchema
+from .schemas.training import SearchAusbildungSchema, AusbildungSchema
+from .util import open_download_pdf
 
 
 class NamiResponseTypeError(Exception):
@@ -41,9 +44,10 @@ class NaMi(object):
 
     Example:
         .. code-block::
+            :caption: Connect to the |NAMI|, search for all active members
+                      and print them in a tabulated form.
 
-            with NaMi() as nami:
-                nami.auth(username='MITGLIEDSNUMMER', password='PASSWORD')
+            with NaMi(username='MITGLIEDSNUMMER', password='PASSWORD') as nami:
                 table = []
                 for mgl in nami.search():
                     table.append(mgl.tabulate())
@@ -52,10 +56,11 @@ class NaMi(object):
     Args:
         config (:obj:`dict`, optional): Authorization configuration
     """
-    def __init__(self, config={}):
+    def __init__(self, config={}, **kwargs):
         self.s = requests.Session()
         self.__config = config
         """dict: Contains authorization information and after that a few ids"""
+        self.__config.update(kwargs)
 
     def _check_response(self, response):
         """
@@ -69,7 +74,8 @@ class NaMi(object):
         if response.status_code != requests.codes.ok:
             raise NamiHTTPError(f'HTTP Error. Status Code: '
                                 f'{response.status_code}')
-
+        if response.headers['Content-Type'] == 'application/pdf':
+            return response.content
         rjson = response.json()
         if not rjson['success']:
             raise NamiResponseSuccessError(f"succes state from NAMI was "
@@ -115,7 +121,7 @@ class NaMi(object):
             raise ValueError('Authentication failed!')
 
         # Get the id of the user
-        myself = self.search(mitgliedsNummer = username)
+        myself = self.search(mitgliedsNummer=username)
         print(myself)
         if len(myself) == 1:
             self.__config['mitgliedsnummer'] = myself[0].id
@@ -259,6 +265,18 @@ class NaMi(object):
         return self._get_baseadmin('Ebene1')
 
     @property
+    def gruppierungen(self):
+        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Choose from a
+        list of groups that you are associated with for member admin"""
+        return self._get_baseadmin('Gruppierungen')
+
+    @property
+    def grpadmin_gruppierungen(self):
+        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Choose from a
+        list of groups that you are associated with for group admin"""
+        return self._get_baseadmin('grpadmin_grps')
+
+    @property
     def stats(self):
         """
         :class:`~pynami.schemas.Stats`: Contains counts from different tiers.
@@ -320,6 +338,56 @@ class NaMi(object):
             :obj:`list` of :class:`~pynami.schemas.Baseadmin`: List of possible
             Stämmen you are associated with"""
         return self._get_baseadmin('Ebene3', ebene2)
+
+    def invoices(self, groupId=None, **kwargs):
+        """
+        List of all invoices of a group
+
+        Args:
+            groupId (:obj:`int`, optional): Group id
+
+        Returns:
+            :obj:`list` of :class:`~.grpadmin.SearchInvoice`: All invoices of
+            the specified group
+        """
+        if not groupId:
+            groupId = self.__config['stammesnummer']
+        url = f"{URLS['SERVER']}{URLS['INVOICE']}{groupId}/flist"
+        params = {'page': 1,
+                  'start': 0,
+                  'limit': 10000}
+        params.update(kwargs)
+        r = self.s.get(url, params=params)
+        return SearchInvoiceSchema().load(self._check_response(r), many=True)
+
+    def invoice(self, groupId, invId):
+        """
+        Get an invoice by its id.
+
+        Args:
+            mgl (int): Member id (not |DPSG| Mitgliedsnummer)
+            invId (int): Id of the invoice. This will probably originate from
+                a search result, e.g. by calling :meth:`invoices`.
+
+        Returns:
+            :class:`~.grpadmin.Invoice`: The Invoice object containing all
+            details.
+        """
+        url = f"{URLS['SERVER']}{URLS['INVOICE']}{groupId}/{invId}"
+        r = self.s.get(url)
+        return InvoiceSchema().load(self._check_response(r))
+
+    def download_invoice(self, id_):
+        """
+        Downloads and opens an invoice as a pdf document.
+
+        Args:
+            id_ (int): Id of the invoice (not the regular invoice number)
+        """
+        url = f"{URLS['SERVER']}{URLS['INVOICE_PDF']}"
+        params = {'id': id_}
+        r = self.s.get(url, params=params)
+        open_download_pdf(self._check_response(r))
 
     def mgl_activities(self, mgl):
         """
@@ -479,6 +547,32 @@ class NaMi(object):
         r = self.s.get(url)
         return MitgliedHistorySchema().load(self._check_response(r))
 
+    def bescheinigungen(self, **kwargs):
+        url = f"{URLS['SERVER']}{URLS['FZ']}flist"
+        params = {'page': 1,
+                  'start': 0,
+                  'limit': 10000}
+        params.update(kwargs)
+        r = self.s.get(url, params=params)
+        data = self._check_response(r)
+        return SearchBescheinigungSchema().load(data, many=True)
+
+    def get_bescheinigung(self, id_):
+        url = f"{URLS['SERVER']}{URLS['FZ']}{id_}"
+        r = self.s.get(url)
+        return BescheinigungSchema().load(self._check_response(r))
+
+    def download_bescheinigung(self, id_):
+        url = f"{URLS['SERVER']}{URLS['FZ']}download-pdf-eigene-bescheinigung"
+        params = {'id': id_}
+        r = self.s.get(url, params=params)
+        open_download_pdf(self._check_response(r))
+
+    def download_beantragung(self):
+        url = f"{URLS['SERVER']}{URLS['BEANTRAGUNG']}"
+        r = self.s.get(url)
+        open_download_pdf(self._check_response(r))
+
     def search_all(self, filterString='', searchString='', sortproperty=None,
                    sortdirection='ASC'):
         """
@@ -531,7 +625,7 @@ class NaMi(object):
 
         Todo:
             * Check search terms and formatting. Also some search keys can only
-                be used mutually exclusive.
+              be used mutually exclusive.
 
         Args:
             **kwargs: Search keys and words. Be advised that some search words
@@ -541,6 +635,10 @@ class NaMi(object):
         Returns:
             :obj:`list` of :class:`~.schemas.SearchMitglied`: The search
             results
+
+        See also:
+            :class:`~pynami.search.SearchSchema` for a complete list of search
+            keys
         """
         # this is just a default search
         if not kwargs:
@@ -555,9 +653,7 @@ class NaMi(object):
             'start': 0,
             'limit': 10000
         }
-        print(params)
         r = self.s.get(f"{URLS['SERVER']}{URLS['SEARCH']}", params=params)
-        print(r.request.body)
         return SearchMitgliedSchema().load(self._check_response(r), many=True)
 
     def mitglied(self, mglid, method='GET', stammesnummer=None, **kwargs):
@@ -603,10 +699,10 @@ if __name__ == '__main__':
         'mglStatusId': 'AKTIV',
         'mglTypeId': 'MITGLIED',
         'untergliederungId': [1, 2],
-        'taetigkeitId': 1,
+        'taetigkeitId': 1
     }
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       'pynami.conf'), 'r') as cfg:
+                       '.pynami.conf'), 'r') as cfg:
         config = toml.load(cfg)
     with NaMi(config['nami']) as nami:
         table = []
@@ -629,49 +725,56 @@ if __name__ == '__main__':
         kv = {"id":"147855", "zahlungsKonditionId":1, "mitgliedsNummer":64697,
               "institut":"Spard-Bank West", "kontoinhaber":"Sebastian Scholz",
               "kontonummer":"5024161", "bankleitzahl":"33060592",
-              "iban":"DE15330605920005024161","bic":""}
+              "iban":"DE15330605920005024161","bic":"GENODED1SPW"}
         # user.data['kontoverbindung'] = kv
         # print(user.kontoverbindung)
         # user.update(nami)
         user = nami.mitglied('63868')
         print(user.id)
-#        print(nami.mgl_history(user.id))
-#        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
-#        print(nami.mgl_ausbildungen(user.id))
-#        print([nami.get_ausbildung(user.id, x.id)
-#               for x in nami.mgl_ausbildungen(user.id)])
-#        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
-#        print(act)
+#        nami.download_beantragung()
+        print(nami.bescheinigungen())
+        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
+#        nami.download_bescheinigung(nami.bescheinigungen()[0].id)
+        print(nami.invoices())
+        print(nami.invoice(100103, nami.invoices()[0].id))
+#        nami.download_invoice(nami.invoices()[0].id)
+        print(nami.mgl_history(user.id))
+        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
+        print(nami.mgl_ausbildungen(user.id))
+        print([nami.get_ausbildung(user.id, x.id)
+               for x in nami.mgl_ausbildungen(user.id)])
+        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
+        print(act)
 #        nami.update_activity(user.id, act)
 #        user.kontoverbindung.bic = "GENODED1SPW"
         # print(MitgliedSchema().dumps(user.data, separators=(',', ':')))
 #        user.update(nami)
 
-#        print(nami.countries)
-#        print(nami.regionen)
-#        print(nami.zahlungskonditionen)
-#        print(nami.beitragsarten)
-#        print(nami.geschlecht)
-#        print(len(nami.staaten))
-#        print(nami.konfessionen)
-#        print(nami.mgltypes)
-#        print(nami.search_all(filterstring='geburtsdatum',
-#                              searchstring='1993-01-02 00:00:00',
-#                              sortproperty='entries_vorname'))
-#        print(nami.history)
-#        print(nami.notifications)
-#        print(nami.stats.statscategories)
-#        print(nami.status_list)
-#        print(nami.tagList)
-#        print(nami.bausteine)
-#        print(nami.subdivision)
-#        print(nami.activities)
-#        print(nami.ebenen)
-#        print(nami.ebene1)
-#        print(nami.ebene2(nami.ebene1[0].id))
-#        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))
-#        mylist = [[x.descriptor, x.id] for x in nami.ebenen]
-#        print(mylist)
+        print(nami.countries)
+        print(nami.regionen)
+        print(nami.zahlungskonditionen)
+        print(nami.beitragsarten)
+        print(nami.geschlecht)
+        print(len(nami.staaten))
+        print(nami.konfessionen)
+        print(nami.mgltypes)
+        print(nami.search_all(filterString='geburtsdatum',
+                              searchString='1993-01-02 00:00:00',
+                              sortproperty='entries_vorname'))
+        print(nami.history)
+        print(nami.notifications)
+        print(nami.stats.statsCategories)
+        print(nami.status_list)
+        print(nami.tagList)
+        print(nami.bausteine)
+        print(nami.subdivision)
+        print(nami.activities)
+        print(nami.ebenen)
+        print(nami.ebene1)
+        print(nami.ebene2(nami.ebene1[0].id))
+        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))
+        mylist = [[x.descriptor, x.id] for x in nami.ebenen]
+        print(mylist)
 #        import csv
 #        import sys
 #        w = csv.writer(sys.stdout, quoting=csv.QUOTE_NONNUMERIC)

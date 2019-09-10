@@ -6,14 +6,37 @@ pynami package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Subpackages
+-----------
 
 .. toctree::
 
-   pynami.constants
-   pynami.nami
    pynami.schemas
-   pynami.util
-   pynami.search
-   pynami.base
+
+Submodules
+----------
+
+pynami.constants module
+-----------------------
+
+.. automodule:: pynami.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pynami.nami module
+------------------
+
+.. automodule:: pynami.nami
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pynami.util module
+------------------
+
+.. automodule:: pynami.util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
