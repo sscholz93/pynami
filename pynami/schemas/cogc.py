@@ -32,14 +32,23 @@ class SearchBescheinigungSchema(BaseSearchSchema):
     __model__ = SearchBescheinigung
 
     entries_erstelltAm = fields.DateTime()
+    """:class:`~datetime.datetime`: Entry creation date"""
     entries_fzNummer = fields.String()
+    """str: Number of the |CGC|"""
     entries_empfaenger = fields.String()
+    """str: Receiver"""
     entries_empfNachname = fields.String()
+    """str: Surname"""
     entries_empfVorname = fields.String()
+    """str: First name"""
     entries_empfGebDatum = fields.DateTime()
+    """:class:`~datetime.datetime`: Birth date"""
     entries_datumEinsicht = fields.DateTime(allow_none=True)
+    """:class:`~datetime.datetime`: Inspection date. May be empty."""
     entries_fzDatum = fields.DateTime()
+    """:class:`~datetime.datetime`: Date of the |CGC|"""
     entries_autor = fields.String()
+    """str: Person who did the inspection"""
 
 
 class Bescheinigung(BaseModel):
@@ -64,13 +73,21 @@ class BescheinigungSchema(BaseSchema):
     __model__ = Bescheinigung
 
     id = fields.Integer()
+    """int: Id of this certificate"""
     fzDatum = fields.DateTime()
+    """:class:`~datetime.datetime`: Date of the |CGC|"""
     fzNummer = fields.String()
+    """str: Number of the |CGC|"""
     empfaenger = fields.String()
+    """str: Receiver"""
     erstelltAm = fields.DateTime()
+    """:class:`~datetime.datetime`: Entry creation date"""
     autor = fields.String()
+    """str: Person who did the inspection"""
     download = fields.Url(relative=True)
+    """str: Relative download |URL|"""
     datumEinsicht = fields.DateTime(allow_none=True)
+    """:class:`~datetime.datetime`: Inspection date. May be empty."""
 
     @pre_load
     def get_download_url(self, data, **kwargs):

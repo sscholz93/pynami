@@ -30,7 +30,7 @@ Since there is currently no working test setup for the NAMI some things cannot b
 * Edit a *Ausbildung*
 
 ## Requirements
-You need to have at least [Python 3.5](https://www.python.org/downloads/release/python-350/) for this to work.
+You need to have at least [Python 3.6](https://www.python.org/downloads/release/python-360/) for this to work.
 
 ## Installation
 Just download or clone this repository and run the following command in the top directory (where [setup.py](setup.py) is located).

@@ -184,15 +184,25 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchActivity</span>
 
     <span class="n">entries_aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: End date&quot;&quot;&quot;</span>
     <span class="n">entries_beitragsArt</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Fee type&quot;&quot;&quot;</span>
     <span class="n">entries_caeaGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Access rights for the group&quot;&quot;&quot;</span>
     <span class="n">entries_aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start date&quot;&quot;&quot;</span>
     <span class="n">entries_anlagedatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Creation date&quot;&quot;&quot;</span>
     <span class="n">entries_caeaGroupForGf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Access rights for sub group&quot;&quot;&quot;</span>
     <span class="n">entries_untergliederung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Tier or group association&quot;&quot;&quot;</span>
     <span class="n">entries_taetigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Kind of activity&quot;&quot;&quot;</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
+    <span class="sd">&quot;&quot;&quot;str: Group associated wiht the activity&quot;&quot;&quot;</span>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Member&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Activity"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.activity.Activity">[docs]</a><span class="k">class</span> <span class="nc">Activity</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -217,19 +227,33 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Activity</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id&quot;&quot;&quot;</span>
     <span class="n">gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Group associated wiht the activity&quot;&quot;&quot;</span>
     <span class="n">gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Group id&quot;&quot;&quot;</span>
     <span class="n">taetigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Kind of activity&quot;&quot;&quot;</span>
     <span class="n">taetigkeitId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;int: Activity id&quot;&quot;&quot;</span>
     <span class="n">caeaGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Access rights for the group&quot;&quot;&quot;</span>
     <span class="n">caeaGroupId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Access right id&quot;&quot;&quot;</span>
     <span class="n">caeaGroupForGf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Access rights for sub group&quot;&quot;&quot;</span>
     <span class="n">caeaGroupForGfId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Access right id&quot;&quot;&quot;</span>
     <span class="n">untergliederung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Tier or group association&quot;&quot;&quot;</span>
     <span class="n">untergliederungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;int: tier or sub group id&quot;&quot;&quot;</span>
     <span class="n">aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start date&quot;&quot;&quot;</span>
     <span class="n">aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">beitragsArtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dump_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: End date&quot;&quot;&quot;</span>
+    <span class="n">beitragsArtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dump_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;int: Fee type&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

@@ -188,14 +188,23 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchBescheinigung</span>
 
     <span class="n">entries_erstelltAm</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Entry creation date&quot;&quot;&quot;</span>
     <span class="n">entries_fzNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Number of the |CGC|&quot;&quot;&quot;</span>
     <span class="n">entries_empfaenger</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Receiver&quot;&quot;&quot;</span>
     <span class="n">entries_empfNachname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Surname&quot;&quot;&quot;</span>
     <span class="n">entries_empfVorname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: First name&quot;&quot;&quot;</span>
     <span class="n">entries_empfGebDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Birth date&quot;&quot;&quot;</span>
     <span class="n">entries_datumEinsicht</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Inspection date. May be empty.&quot;&quot;&quot;</span>
     <span class="n">entries_fzDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="n">entries_autor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the |CGC|&quot;&quot;&quot;</span>
+    <span class="n">entries_autor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Person who did the inspection&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Bescheinigung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.cogc.Bescheinigung">[docs]</a><span class="k">class</span> <span class="nc">Bescheinigung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -220,13 +229,21 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Bescheinigung</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of this certificate&quot;&quot;&quot;</span>
     <span class="n">fzDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the |CGC|&quot;&quot;&quot;</span>
     <span class="n">fzNummer</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Number of the |CGC|&quot;&quot;&quot;</span>
     <span class="n">empfaenger</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Receiver&quot;&quot;&quot;</span>
     <span class="n">erstelltAm</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Entry creation date&quot;&quot;&quot;</span>
     <span class="n">autor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Person who did the inspection&quot;&quot;&quot;</span>
     <span class="n">download</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Relative download |URL|&quot;&quot;&quot;</span>
     <span class="n">datumEinsicht</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Inspection date. May be empty.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BescheinigungSchema.get_download_url"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.cogc.BescheinigungSchema.get_download_url">[docs]</a>    <span class="nd">@pre_load</span>
     <span class="k">def</span> <span class="nf">get_download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

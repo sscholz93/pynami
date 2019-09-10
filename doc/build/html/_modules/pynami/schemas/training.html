@@ -184,11 +184,17 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchAusbildung</span>
 
     <span class="n">entries_vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Day of the training event&quot;&quot;&quot;</span>
     <span class="n">entries_veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Who organized the event (e.g. a `Bezirk`)&quot;&quot;&quot;</span>
     <span class="n">entries_vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the event&quot;&quot;&quot;</span>
     <span class="n">entries_baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the training (e.g. ``&#39;Baustein 3a&#39;``)&quot;&quot;&quot;</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
+    <span class="sd">&quot;&quot;&quot;int: |NAMI| id of this training entry&quot;&quot;&quot;</span>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Who absolved the training&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Ausbildung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.training.Ausbildung">[docs]</a><span class="k">class</span> <span class="nc">Ausbildung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -212,13 +218,21 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Ausbildung</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
     <span class="n">baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the training (e.g. ``&#39;Baustein 3a&#39;``)&quot;&quot;&quot;</span>
     <span class="n">bausteinId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of the training&quot;&quot;&quot;</span>
     <span class="n">mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Who absolved the training&quot;&quot;&quot;</span>
     <span class="n">vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Day of the training event&quot;&quot;&quot;</span>
     <span class="n">vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the event&quot;&quot;&quot;</span>
     <span class="n">veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">lastModifiedFrom</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;str: Who organized the event (e.g. a `Bezirk`)&quot;&quot;&quot;</span>
+    <span class="n">lastModifiedFrom</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Who did the last change to this entry&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

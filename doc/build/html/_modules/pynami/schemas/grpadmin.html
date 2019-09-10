@@ -160,7 +160,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchSchema</span>
 <span class="kn">from</span> <span class="nn">..util</span> <span class="k">import</span> <span class="n">extract_url</span>
 
 
@@ -178,39 +178,60 @@
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_displayName}</span><span class="s1">&#39;</span></div>
 
 
-<div class="viewcode-block" id="SearchInvoiceSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.SearchInvoiceSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchInvoiceSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchInvoiceSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.SearchInvoiceSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchInvoiceSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Schema class for the :class:`SearchInvoice` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchInvoice</span>
 
     <span class="n">entries_rechnungsLauf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">descriptor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Internal invoice number&quot;&quot;&quot;</span>
     <span class="n">entries_reCreated</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="n">representedClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Creation date of the invoice&quot;&quot;&quot;</span>
     <span class="n">entries_kontoOwnerId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of the account owner&quot;&quot;&quot;</span>
     <span class="n">entries_debitorType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
     <span class="n">entries_reNr</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Official invoice number&quot;&quot;&quot;</span>
     <span class="n">entries_freigabeDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: &quot;&quot;&quot;</span>
     <span class="n">entries_rechnungsEmpfaenger</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Recipient&quot;&quot;&quot;</span>
     <span class="n">entries_fibuErloesKonto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: This my be empty&quot;&quot;&quot;</span>
     <span class="n">entries_status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: If the invoice has been released&quot;&quot;&quot;</span>
     <span class="n">entries_debitorName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Debitor, e.g. a group&quot;&quot;&quot;</span>
     <span class="n">entries_debitor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Id of the debitor&quot;&quot;&quot;</span>
     <span class="n">entries_kontoOwnerTyp</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
     <span class="n">entries_kontoverbindung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Account details&quot;&quot;&quot;</span>
     <span class="n">entries_debitorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: e.g. a group id&quot;&quot;&quot;</span>
     <span class="n">entries_zahlungsEmpfaenger</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Recipient of the payment&quot;&quot;&quot;</span>
     <span class="n">entries_reNetto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Netto amount including currency&quot;&quot;&quot;</span>
     <span class="n">entries_kreditor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: May be empty&quot;&quot;&quot;</span>
     <span class="n">entries_reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the invoice&quot;&quot;&quot;</span>
     <span class="n">entries_einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of money collection&quot;&quot;&quot;</span>
     <span class="n">entries_displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Human-readable string describing the invoice&quot;&quot;&quot;</span>
     <span class="n">entries_erloesKtoName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: This may be empty&quot;&quot;&quot;</span>
     <span class="n">entries_debitor_document_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Some other internal id&quot;&quot;&quot;</span>
     <span class="n">entries_reMwst</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">entries_fibuDebitorKonto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span></div>
+    <span class="sd">&quot;&quot;&quot;str: |VAT| amount including currency&quot;&quot;&quot;</span>
+    <span class="n">entries_fibuDebitorKonto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Some account id&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Invoice"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.Invoice">[docs]</a><span class="k">class</span> <span class="nc">Invoice</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -234,24 +255,43 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Invoice</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
     <span class="n">reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the invoice&quot;&quot;&quot;</span>
     <span class="n">reCreated</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Creation date of the invoice&quot;&quot;&quot;</span>
     <span class="n">reNr</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Official invoice number&quot;&quot;&quot;</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: If the invoice has been released&quot;&quot;&quot;</span>
     <span class="n">debitor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Id of the debitor&quot;&quot;&quot;</span>
     <span class="n">freigabeDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: When the invoice was released&quot;&quot;&quot;</span>
     <span class="n">debitor_document_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Some other internal id&quot;&quot;&quot;</span>
     <span class="n">rechnungsLauf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Internal invoice number&quot;&quot;&quot;</span>
     <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Human-readable string describing the invoice&quot;&quot;&quot;</span>
     <span class="n">debitorName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Debitor, e.g. a group&quot;&quot;&quot;</span>
     <span class="n">einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of money collection&quot;&quot;&quot;</span>
     <span class="n">zahlungsweise</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Way of payment (e.g. ``&#39;Lastschrift&#39;``)&quot;&quot;&quot;</span>
     <span class="n">zahlungsweiseId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Id of the way of payment (e.g. ``&#39;LASTSCHRIFT&#39;``)&quot;&quot;&quot;</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Relative download |URL|&quot;&quot;&quot;</span>
     <span class="n">debitorKonto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Some account id&quot;&quot;&quot;</span>
     <span class="n">erloesKtoName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: This may be empty&quot;&quot;&quot;</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Total amount&quot;&quot;&quot;</span>
     <span class="n">currency</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Currency (e.g. ``&#39;EUR&#39;``)&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="InvoiceSchema.get_download_url"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.InvoiceSchema.get_download_url">[docs]</a>    <span class="nd">@pre_load</span>
     <span class="k">def</span> <span class="nf">get_download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

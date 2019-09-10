@@ -41,6 +41,8 @@ rst_prolog = """
 .. |REST| replace:: :abbr:`REST (Representational State Transfer)`
 .. |URL| replace:: :abbr:`URL (Uniform Resource Locator)`
 .. |HTML| replace:: :abbr:`HTML (Hypertext Markup Language)`
+.. |CGC| replace:: certificate of good conduct
+.. |VAT| replace:: :abbr:`VAT (Value added tax)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -71,9 +73,25 @@ todo_include_todos = True
 autodoc_default_options = {
     'member-order': 'bysource',
     'undoc-members': True,
-    # 'inherited-members': True,
-    'exclude-members': 'opts'
+    # 'inherited-members': False,
+    'exclude-members': 'opts',
+    'special-members': '__model__'
 }
+
+inherit_members = ['id', 'descriptor', 'representedClass']
+
+
+# def maybe_skip_member(app, what, name, obj, skip, options):
+#     if name in inherit_members:
+#         print(what, name, obj)
+#         return False
+#     else:
+#         return skip
+
+
+# def setup(app):
+#     app.connect('autodoc-skip-member', maybe_skip_member)
+
 
 # Napoleon settings
 napoleon_google_docstring = True

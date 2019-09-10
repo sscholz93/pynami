@@ -1,6 +1,16 @@
 Constants
 =========
 
+Here is an overwiev about the default values and their ids the |NAMI| uses.
+
+.. warning::
+
+	These values my change over time (e.g. when a new AG for a annual campaign comes up)
+
+.. note:: 
+
+	Current state: 01.09.2019
+
 .. toctree::
 	:maxdepth: 2
 	:caption: Contents

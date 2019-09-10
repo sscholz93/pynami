@@ -36,3 +36,4 @@ class BaseadminSchema(BaseSearchSchema):
     __model__ = Baseadmin
 
     name = fields.String()
+    """str: Name of this value. This will be empty in many cases."""

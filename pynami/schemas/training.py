@@ -28,11 +28,17 @@ class SearchAusbildungSchema(BaseSearchSchema):
     __model__ = SearchAusbildung
 
     entries_vstgTag = fields.DateTime()
+    """:class:`~datetime.datetime`: Day of the training event"""
     entries_veranstalter = fields.String()
+    """str: Who organized the event (e.g. a `Bezirk`)"""
     entries_vstgName = fields.String()
+    """str: Name of the event"""
     entries_baustein = fields.String()
+    """str: Name of the training (e.g. ``'Baustein 3a'``)"""
     entries_id = fields.Integer()
+    """int: |NAMI| id of this training entry"""
     entries_mitglied = fields.String()
+    """str: Who absolved the training"""
 
 
 class Ausbildung(BaseModel):
@@ -56,10 +62,18 @@ class AusbildungSchema(BaseSchema):
     __model__ = Ausbildung
 
     id = fields.Integer()
+    """int: |NAMI| id"""
     baustein = fields.String()
+    """str: Name of the training (e.g. ``'Baustein 3a'``)"""
     bausteinId = fields.Integer()
+    """int: Id of the training"""
     mitglied = fields.String()
+    """str: Who absolved the training"""
     vstgTag = fields.DateTime()
+    """:class:`~datetime.datetime`: Day of the training event"""
     vstgName = fields.String()
+    """str: Name of the event"""
     veranstalter = fields.String()
+    """str: Who organized the event (e.g. a `Bezirk`)"""
     lastModifiedFrom = fields.String(load_only=True)
+    """str: Who did the last change to this entry"""

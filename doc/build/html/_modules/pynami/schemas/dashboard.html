@@ -187,16 +187,27 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Notification</span>
 
     <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Object id&quot;&quot;&quot;</span>
     <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
     <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the event&quot;&quot;&quot;</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of the event&quot;&quot;&quot;</span>
     <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: New object&quot;&quot;&quot;</span>
     <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of the person who started the event&quot;&quot;&quot;</span>
     <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: The person who started the event&quot;&quot;&quot;</span>
     <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Which fields have been changed. This may be empty.&quot;&quot;&quot;</span>
     <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: The nature of the change&quot;&quot;&quot;</span>
     <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;str: More details about the changes. This may be empty.&quot;&quot;&quot;</span>
+    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Old object. This may be empty&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Stats"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.dashboard.Stats">[docs]</a><span class="k">class</span> <span class="nc">Stats</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -237,8 +248,11 @@
 <span class="sd">    This only contains the name of the tier and its number of members.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">StatCategory</span>
+
     <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span></div>
+    <span class="sd">&quot;&quot;&quot;str: Name of the tier/group&quot;&quot;&quot;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Number of members in the group&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="StatsSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.dashboard.StatsSchema">[docs]</a><span class="k">class</span> <span class="nc">StatsSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
@@ -246,8 +260,12 @@
 <span class="sd">    Schema class for the :class:`Stats` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Stats</span>
+
     <span class="n">nrMitglieder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
-    <span class="n">statsCategories</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">StatCatSchema</span><span class="p">))</span></div>
+    <span class="sd">&quot;&quot;&quot;int: Total number of members in the group&quot;&quot;&quot;</span>
+    <span class="n">statsCategories</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">StatCatSchema</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`StatCategory`: Detailed information on the</span>
+<span class="sd">    partitions&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

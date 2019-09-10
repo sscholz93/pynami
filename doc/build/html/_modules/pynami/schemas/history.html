@@ -192,19 +192,34 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">HistoryEntry</span>
 
     <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Object id (not the |NAMI| id for addressing the entry)&quot;&quot;&quot;</span>
     <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
     <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the event&quot;&quot;&quot;</span>
     <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
     <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Updated object (&#39;e.g. a Mitglied)&quot;&quot;&quot;</span>
     <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of the person who created the change&quot;&quot;&quot;</span>
     <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the person who created the change including the id&quot;&quot;&quot;</span>
     <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Which fields have been changed. This may be empty.&quot;&quot;&quot;</span>
     <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: What kind of action has been done.&quot;&quot;&quot;</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Group name including its id&quot;&quot;&quot;</span>
     <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: More details about the changes. This may be empty.&quot;&quot;&quot;</span>
     <span class="n">entries_author</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Who did this&quot;&quot;&quot;</span>
     <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;str: The object before the change. This may be empty for a</span>
+<span class="sd">    ``GruppierungsHistoryEntry``.&quot;&quot;&quot;</span>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Almost the same as :attr:`entries_author`&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="MitgliedHistory"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.history.MitgliedHistory">[docs]</a><span class="k">class</span> <span class="nc">MitgliedHistory</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -229,11 +244,17 @@
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">MitgliedHistory</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
     <span class="n">entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the event&quot;&quot;&quot;</span>
     <span class="n">actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Name of the person who created the change including the id&quot;&quot;&quot;</span>
     <span class="n">gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Group name including its id&quot;&quot;&quot;</span>
     <span class="n">operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="n">changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;str: What kind of action has been done.&quot;&quot;&quot;</span>
+    <span class="n">changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Which fields have been changed. This may be empty.&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

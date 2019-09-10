@@ -31,16 +31,27 @@ class NotificationSchema(BaseSearchSchema):
     __model__ = Notification
 
     entries_objectId = fields.Integer()
+    """int: Object id"""
     entries_objectClass = fields.String()
+    """str: |NAMI| class"""
     entries_entryDate = fields.DateTime()
+    """:class:`~datetime.datetime`: Date of the event"""
     entries_id = fields.Integer()
+    """int: Id of the event"""
     entries_newObject = fields.String(allow_none=True)
+    """str: New object"""
     entries_actorId = fields.Integer()
+    """int: Id of the person who started the event"""
     entries_actor = fields.String()
+    """str: The person who started the event"""
     entries_changedFields = fields.String(allow_none=True)
+    """str: Which fields have been changed. This may be empty."""
     entries_operation = fields.String()
+    """str: The nature of the change"""
     entries_completeChanges = fields.String(allow_none=True)
+    """str: More details about the changes. This may be empty."""
     entries_originalObject = fields.String(allow_none=True)
+    """str: Old object. This may be empty"""
 
 
 class Stats(BaseModel):
@@ -81,8 +92,11 @@ class StatCatSchema(BaseSchema):
     This only contains the name of the tier and its number of members.
     """
     __model__ = StatCategory
+
     name = fields.String()
+    """str: Name of the tier/group"""
     count = fields.Integer()
+    """int: Number of members in the group"""
 
 
 class StatsSchema(BaseSchema):
@@ -90,5 +104,9 @@ class StatsSchema(BaseSchema):
     Schema class for the :class:`Stats` class
     """
     __model__ = Stats
+
     nrMitglieder = fields.Integer()
+    """int: Total number of members in the group"""
     statsCategories = fields.List(fields.Nested(StatCatSchema))
+    """:obj:`list` of :class:`StatCategory`: Detailed information on the
+    partitions"""

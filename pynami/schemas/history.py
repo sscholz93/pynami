@@ -36,19 +36,34 @@ class HistoryEntrySchema(BaseSearchSchema):
     __model__ = HistoryEntry
 
     entries_objectId = fields.Integer()
+    """int: Object id (not the |NAMI| id for addressing the entry)"""
     entries_objectClass = fields.String()
+    """str: |NAMI| class"""
     entries_entryDate = fields.DateTime()
+    """:class:`~datetime.datetime`: Date of the event"""
     entries_id = fields.Integer()
+    """int: |NAMI| id"""
     entries_newObject = fields.String(allow_none=True)
+    """str: Updated object ('e.g. a Mitglied)"""
     entries_actorId = fields.Integer()
+    """int: Id of the person who created the change"""
     entries_actor = fields.String()
+    """str: Name of the person who created the change including the id"""
     entries_changedFields = fields.String(allow_none=True)
+    """str: Which fields have been changed. This may be empty."""
     entries_operation = fields.String()
+    """str: What kind of action has been done."""
     entries_gruppierung = fields.String()
+    """str: Group name including its id"""
     entries_completeChanges = fields.String(allow_none=True)
+    """str: More details about the changes. This may be empty."""
     entries_author = fields.String()
+    """str: Who did this"""
     entries_originalObject = fields.String(allow_none=True)
+    """str: The object before the change. This may be empty for a
+    ``GruppierungsHistoryEntry``."""
     entries_mitglied = fields.String(allow_none=True)
+    """str: Almost the same as :attr:`entries_author`"""
 
 
 class MitgliedHistory(BaseModel):
@@ -73,8 +88,14 @@ class MitgliedHistorySchema(BaseSchema):
     __model__ = MitgliedHistory
 
     id = fields.Integer()
+    """int: |NAMI| id"""
     entryDate = fields.DateTime()
+    """:class:`~datetime.datetime`: Date of the event"""
     actor = fields.String()
+    """str: Name of the person who created the change including the id"""
     gruppierung = fields.String()
+    """str: Group name including its id"""
     operation = fields.String()
+    """str: What kind of action has been done."""
     changedFields = fields.String(allow_none=True)
+    """str: Which fields have been changed. This may be empty."""

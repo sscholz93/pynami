@@ -23,6 +23,7 @@ pynami.schemas.base module
 .. automodule:: pynami.schemas.base
    :members:
    :undoc-members:
+   :special-members: __model__
    :show-inheritance:
 
 pynami.schemas.cogc module
