@@ -22,6 +22,13 @@ Here is a list of the things are currently supported:
   * Download application form as pdf
   * View and download certificate of inspections
 
+## Todo
+Since there is currently no working test setup for the NAMI some things cannot be tested (without endangering the production system).
+* Creating a *Mitglied*/*Tätigkeit*
+* Deleting a *Mitglied*/*Tätigkeit*
+* *Stufenwechsel*
+* Edit a *Ausbildung*
+
 ## Requirements
 You need to have at least [Python 3.5](https://www.python.org/downloads/release/python-350/) for this to work.
 
