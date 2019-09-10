@@ -3,94 +3,45 @@
 This is a basic implementation that accesses the [DPSG NAMI API](https://nami.dpsg.de) and offers some primitives.
 Currently this is in **alpha** state. Anything may change at any time.
 
-## features
-currently only some very basic things are supported:
-* search
-* show (some) details for a *Mitglied*
-* update / change a *Mitglied*
+## Features
+Here is a list of the things are currently supported:
+* Search for a *Mitglied*
+* Show details for a *Mitglied*
+* Update / change a *Mitglied*
+* View *Ausbildungen* of a *Mitglied*
+* View history of a *Mitglied*
+* Search, view and update *Tätigkeiten*
+* Get all the default values and their ids (e.g. nationalities). This will become important when you want to create e.g. a *Mitglied*
+* Dashboard functionality:
+  * View notifications
+  * View group history entries
+  * View statistics about your group
+* Group admin stuff:
+  * View and download invoices as pdf
+* *Führungszeugnis*:
+  * Download application form as pdf
+  * View and download certificate of inspections
 
-this is not intended to be a ready solution, but a building block to build your own things
+## Requirements
+You need to have at least [Python 3.5](https://www.python.org/downloads/release/python-350/) for this to work.
 
-## structure
-`pynami.nami` is sort of the library
-`namitool.py` builds upon this for some samples.
+## Installation
+Just download or clone this repository and run the following command in the top directory (where [setup.py](setup.py) is located).
+```bash
+pip install [-e] .
+```
+Use the `-e` option if you want to edit the source files.
 
-## documentation
-Use this readme for pynami.
-General documenation for the NAMI api is very few and partially outdated at [DPSG Confluence](https://doku.dpsg.de/display/NAMI/API)
-You can also check the NAMI Forums at https://ncm.dpsg.de/
+## Documentation
+Documentation of this package is available at [ReadtheDocs](https://pynami.readthedocs.io/en/latest/). This also covers a lot of the NAMI API.
+General documenation for the NAMI API is very few and partially outdated at [DPSG Confluence](https://doku.dpsg.de/display/NAMI/API).
+You can also check the NAMI community forums at https://ncm.dpsg.de/.
 
-## similar projects
+## Similar projects
 There are other projects that can help you access the DPSG NAMI API:
 * java: https://github.com/fabianlipp/jnami
 * node: https://github.com/platdesign/node-nami-api-client
 * php: https://github.com/DaSchaef/NBAS
 
-
-## setup
-Use `python3`
-```bash
-git clone https://github.com/webratz/pynami.git
-cd pynami
-virtualenv venv
-pip install -r requirements.txt
-
-# create config file  ~/.pynami.conf
-# sample can be found in pynami/pynami.conf.sample
-
-cd pynami
-./namitool.py
-```
-
-
-## search
-
-### keywords
-this shows a sorted json with all allowed values and types for a search request
-```json
-{
-  "alterBis": "",
-  "alterVon": "",
-  "bausteinIncludedId": [
-  ],
-  "ebeneId": null,
-  "funktion": "",
-  "grpName": "",
-  "grpNummer": "",
-  "gruppierung1Id": null,
-  "gruppierung2Id": [
-  ],
-  "gruppierung3Id": [
-  ],
-  "gruppierung4Id": [
-  ],
-  "gruppierung5Id": [
-  ],
-  "gruppierung6Id": [
-  ],
-  "inGrp": false,
-  "mglStatusId": null,
-  "mglTypeId": [
-  ],
-  "mglWohnort": "",
-  "mitAllenTaetigkeiten": false,
-  "mitgliedsNummber": "",
-  "nachname": "",
-  "organisation": "",
-  "privacy": "",
-  "searchName": "",
-  "searchType": "MITGLIEDER",
-  "spitzname": "",
-  "taetigkeitId": [
-  ],
-  "tagId": [
-  ],
-  "untergliederungId": [
-    2
-  ],
-  "unterhalbGrp": false,
-  "vorname": "",
-  "withEndedTaetigkeiten": false,
-  "zeitschriftenversand": false
-}
-```
+## Credits
+The base of this package is taken from https://github.com/webratz/pynami.
