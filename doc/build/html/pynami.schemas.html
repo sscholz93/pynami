@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas package &mdash; pynami 0.1.0 documentation</title>
+  <title>pynami.schemas package &mdash; pynami 0.2.0 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -2023,6 +2023,117 @@ id.</p>
 <dd><p>alias of <a class="reference internal" href="#pynami.schemas.mgl.NamiKonto" title="pynami.schemas.mgl.NamiKonto"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamiKonto</span></code></a></p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.id">
+<code class="sig-name descname">id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> internal id of this payment details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.zahlungsKonditionId">
+<code class="sig-name descname">zahlungsKonditionId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.zahlungsKonditionId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id corresponding to the kind of payment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.mitgliedsNummer">
+<code class="sig-name descname">mitgliedsNummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.mitgliedsNummer" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.institut">
+<code class="sig-name descname">institut</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.institut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bank</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.kontoinhaber">
+<code class="sig-name descname">kontoinhaber</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.kontoinhaber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account holder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.kontonummer">
+<code class="sig-name descname">kontonummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.kontonummer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.bankleitzahl">
+<code class="sig-name descname">bankleitzahl</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.bankleitzahl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bank sort code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.iban">
+<code class="sig-name descname">iban</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.iban" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="International Bank Account Number">IBAN</abbr></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.bic">
+<code class="sig-name descname">bic</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.bic" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Bank Identifier Code">BIC</abbr></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.NamiKontoSchema.zahlungsKondition">
+<code class="sig-name descname">zahlungsKondition</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.zahlungsKondition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kind of payment (e.g. <code class="docutils literal notranslate"><span class="pre">'Std</span> <span class="pre">Lastschrift'</span></code>). This attribute is not
+dumped when updating a <cite>Mitglied</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="pynami.schemas.mgl.NamiKontoSchema.id_to_str">
 <code class="sig-name descname">id_to_str</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas/mgl.html#NamiKontoSchema.id_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.mgl.NamiKontoSchema.id_to_str" title="Permalink to this definition">¶</a></dt>
@@ -2141,6 +2252,425 @@ addressed directly by its id.</p>
 <dd><p>alias of <a class="reference internal" href="#pynami.schemas.mgl.SearchMitglied" title="pynami.schemas.mgl.SearchMitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code></a></p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_austrittsDatum">
+<code class="sig-name descname">entries_austrittsDatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_austrittsDatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date of the end of membership</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_beitragsarten">
+<code class="sig-name descname">entries_beitragsarten</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_beitragsarten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fee type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_eintrittsdatum">
+<code class="sig-name descname">entries_eintrittsdatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_eintrittsdatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start of membership</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_email">
+<code class="sig-name descname">entries_email</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Primary member email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_emailVertretungsberechtigter">
+<code class="sig-name descname">entries_emailVertretungsberechtigter</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_emailVertretungsberechtigter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email address of an authorized representative.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_ersteTaetigkeitId">
+<code class="sig-name descname">entries_ersteTaetigkeitId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_ersteTaetigkeitId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the first activity. Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_ersteUntergliederungId">
+<code class="sig-name descname">entries_ersteUntergliederungId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_ersteUntergliederungId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the first tier. This may be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_fixBeitrag">
+<code class="sig-name descname">entries_fixBeitrag</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_fixBeitrag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_geburtsDatum">
+<code class="sig-name descname">entries_geburtsDatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_geburtsDatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Birth date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_genericField1">
+<code class="sig-name descname">entries_genericField1</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_genericField1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not sure why these even exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_genericField2">
+<code class="sig-name descname">entries_genericField2</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_genericField2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not sure why these even exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_geschlecht">
+<code class="sig-name descname">entries_geschlecht</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_geschlecht" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gender</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_id">
+<code class="sig-name descname">entries_id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> internal id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member nummer).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_jungpfadfinder">
+<code class="sig-name descname">entries_jungpfadfinder</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_jungpfadfinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_konfession">
+<code class="sig-name descname">entries_konfession</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_konfession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Confession</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_kontoverbindung">
+<code class="sig-name descname">entries_kontoverbindung</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_kontoverbindung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account details. For some reason this is not always transmitted and
+may therefore be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_lastUpdated">
+<code class="sig-name descname">entries_lastUpdated</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_lastUpdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date of the last update</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_mglType">
+<code class="sig-name descname">entries_mglType</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_mglType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of membership (e.g. <code class="docutils literal notranslate"><span class="pre">'Mitglied'</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_mitgliedsNummer">
+<code class="sig-name descname">entries_mitgliedsNummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_mitgliedsNummer" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_nachname">
+<code class="sig-name descname">entries_nachname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_nachname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Surname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_pfadfinder">
+<code class="sig-name descname">entries_pfadfinder</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_pfadfinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_rover">
+<code class="sig-name descname">entries_rover</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_rover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_rowCssClass">
+<code class="sig-name descname">entries_rowCssClass</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_rowCssClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unused. The purpose could not be dount out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_spitzname">
+<code class="sig-name descname">entries_spitzname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_spitzname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nickname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_staatangehoerigkeitText">
+<code class="sig-name descname">entries_staatangehoerigkeitText</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_staatangehoerigkeitText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extra nationality info. Empty in most cases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_staatsangehoerigkeit">
+<code class="sig-name descname">entries_staatsangehoerigkeit</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_staatsangehoerigkeit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nationality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_status">
+<code class="sig-name descname">entries_status</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the member is active or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_stufe">
+<code class="sig-name descname">entries_stufe</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_stufe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current tier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_telefax">
+<code class="sig-name descname">entries_telefax</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_telefax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fax number. Who uses these anyway today?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon1">
+<code class="sig-name descname">entries_telefon1</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon1" title="Permalink to this definition">¶</a></dt>
+<dd><p>First phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon2">
+<code class="sig-name descname">entries_telefon2</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second  phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon3">
+<code class="sig-name descname">entries_telefon3</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_telefon3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Third phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_version">
+<code class="sig-name descname">entries_version</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>History version number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_vorname">
+<code class="sig-name descname">entries_vorname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_vorname" title="Permalink to this definition">¶</a></dt>
+<dd><p>First name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_wiederverwendenFlag">
+<code class="sig-name descname">entries_wiederverwendenFlag</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_wiederverwendenFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the member data may be used after the membership ends</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_woelfling">
+<code class="sig-name descname">entries_woelfling</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_woelfling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierung">
+<code class="sig-name descname">entries_gruppierung</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group name including its id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierungId">
+<code class="sig-name descname">entries_gruppierungId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierungId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group id as a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -2214,6 +2744,619 @@ with the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <dt id="pynami.schemas.mgl.MitgliedSchema.__model__">
 <code class="sig-name descname">__model__</code><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.__model__" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#pynami.schemas.mgl.Mitglied" title="pynami.schemas.mgl.Mitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.austrittsDatum">
+<code class="sig-name descname">austrittsDatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.austrittsDatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date of the end of membership</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.beitragsart">
+<code class="sig-name descname">beitragsart</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.beitragsart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fee type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.beitragsartId">
+<code class="sig-name descname">beitragsartId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.beitragsartId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the fee type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.eintrittsdatum">
+<code class="sig-name descname">eintrittsdatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.eintrittsdatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start of membership</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.email">
+<code class="sig-name descname">email</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Primary member email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.emailVertretungsberechtigter">
+<code class="sig-name descname">emailVertretungsberechtigter</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.emailVertretungsberechtigter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email address of an authorized representative.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.ersteTaetigkeit">
+<code class="sig-name descname">ersteTaetigkeit</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.ersteTaetigkeit" title="Permalink to this definition">¶</a></dt>
+<dd><p>First activity. May be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.ersteTaetigkeitId">
+<code class="sig-name descname">ersteTaetigkeitId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.ersteTaetigkeitId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the first activity. Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.ersteUntergliederung">
+<code class="sig-name descname">ersteUntergliederung</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.ersteUntergliederung" title="Permalink to this definition">¶</a></dt>
+<dd><p>First tier. May be empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.ersteUntergliederungId">
+<code class="sig-name descname">ersteUntergliederungId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.ersteUntergliederungId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the first tier. This may be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.fixBeitrag">
+<code class="sig-name descname">fixBeitrag</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.fixBeitrag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.geburtsDatum">
+<code class="sig-name descname">geburtsDatum</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.geburtsDatum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Birth date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.genericField1">
+<code class="sig-name descname">genericField1</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.genericField1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not sure why these even exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.genericField2">
+<code class="sig-name descname">genericField2</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.genericField2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not sure why these even exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.geschlecht">
+<code class="sig-name descname">geschlecht</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.geschlecht" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gender</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.geschlechtId">
+<code class="sig-name descname">geschlechtId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.geschlechtId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gender id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.gruppierung">
+<code class="sig-name descname">gruppierung</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.gruppierung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group name including its id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.gruppierungId">
+<code class="sig-name descname">gruppierungId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.gruppierungId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group id</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the search result (see <a class="reference internal" href="#pynami.schemas.mgl.SearchMitgliedSchema" title="pynami.schemas.mgl.SearchMitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitgliedSchema</span></code></a>) this comes as
+a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.id">
+<code class="sig-name descname">id</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> internal id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member nummer).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.jungpfadfinder">
+<code class="sig-name descname">jungpfadfinder</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.jungpfadfinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.konfession">
+<code class="sig-name descname">konfession</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.konfession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Confession</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.konfessionId">
+<code class="sig-name descname">konfessionId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.konfessionId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the confession</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.kontoverbindung">
+<code class="sig-name descname">kontoverbindung</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.kontoverbindung" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account details. In a search result this comes
+as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pynami.schemas.mgl.NamiKontoSchema" title="pynami.schemas.mgl.NamiKontoSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamiKontoSchema</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.land">
+<code class="sig-name descname">land</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.land" title="Permalink to this definition">¶</a></dt>
+<dd><p>Address country</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.landId">
+<code class="sig-name descname">landId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.landId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the address country</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.lastUpdated">
+<code class="sig-name descname">lastUpdated</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.lastUpdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date of the last update. This value is not
+dumped when updating a <a class="reference internal" href="#pynami.schemas.mgl.Mitglied" title="pynami.schemas.mgl.Mitglied"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.mglType">
+<code class="sig-name descname">mglType</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.mglType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of membership (e.g. <code class="docutils literal notranslate"><span class="pre">'Mitglied'</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.mglTypeId">
+<code class="sig-name descname">mglTypeId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.mglTypeId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the type of membership (typically just the value in
+uppercase).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.mitgliedsNummer">
+<code class="sig-name descname">mitgliedsNummer</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.mitgliedsNummer" title="Permalink to this definition">¶</a></dt>
+<dd><p><abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> member number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.nachname">
+<code class="sig-name descname">nachname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.nachname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Surname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.nameZusatz">
+<code class="sig-name descname">nameZusatz</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.nameZusatz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extra name info</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.ort">
+<code class="sig-name descname">ort</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.ort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Address city</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.pfadfinder">
+<code class="sig-name descname">pfadfinder</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.pfadfinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.plz">
+<code class="sig-name descname">plz</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.plz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Postal code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.region">
+<code class="sig-name descname">region</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.region" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <cite>Bundesland</cite> or foreign country</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.regionId">
+<code class="sig-name descname">regionId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.regionId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Region id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.rover">
+<code class="sig-name descname">rover</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.rover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.sonst01">
+<code class="sig-name descname">sonst01</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.sonst01" title="Permalink to this definition">¶</a></dt>
+<dd><p>Another generic field. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.sonst02">
+<code class="sig-name descname">sonst02</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.sonst02" title="Permalink to this definition">¶</a></dt>
+<dd><p>Another generic field. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.spitzname">
+<code class="sig-name descname">spitzname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.spitzname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nickname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeit">
+<code class="sig-name descname">staatsangehoerigkeit</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nationality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeitId">
+<code class="sig-name descname">staatsangehoerigkeitId</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeitId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the nationality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeitText">
+<code class="sig-name descname">staatsangehoerigkeitText</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.staatsangehoerigkeitText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extra nationality info. Empty in most cases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.status">
+<code class="sig-name descname">status</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the member is active or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.strasse">
+<code class="sig-name descname">strasse</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.strasse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Address information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.stufe">
+<code class="sig-name descname">stufe</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.stufe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current tier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.telefax">
+<code class="sig-name descname">telefax</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.telefax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fax number. Who uses these anyway today?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.telefon1">
+<code class="sig-name descname">telefon1</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.telefon1" title="Permalink to this definition">¶</a></dt>
+<dd><p>First phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.telefon2">
+<code class="sig-name descname">telefon2</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.telefon2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second  phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.telefon3">
+<code class="sig-name descname">telefon3</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.telefon3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Third phone number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.version">
+<code class="sig-name descname">version</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>History version number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.vorname">
+<code class="sig-name descname">vorname</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.vorname" title="Permalink to this definition">¶</a></dt>
+<dd><p>First name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.wiederverwendenFlag">
+<code class="sig-name descname">wiederverwendenFlag</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.wiederverwendenFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the member data may be used after the membership ends</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.woelfling">
+<code class="sig-name descname">woelfling</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.woelfling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tier field. Not sure what it is for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pynami.schemas.mgl.MitgliedSchema.zeitschriftenversand">
+<code class="sig-name descname">zeitschriftenversand</code><em class="property"> = None</em><a class="headerlink" href="#pynami.schemas.mgl.MitgliedSchema.zeitschriftenversand" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the member gets the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> newspaper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">

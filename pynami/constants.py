@@ -63,3 +63,4 @@ URLS = {'SERVER': 'https://nami.dpsg.de/ica/rest',
         'INVOICE_PDF': '/nami/rechin-for-grpadmin/pdf',
         'FZ': '/nami/fz/eigene-bescheinigungen/',
         'BEANTRAGUNG': '/fz-beantragen/download-beantragung'}
+"""dict: Holds all default |URL|s"""

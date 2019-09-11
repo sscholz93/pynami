@@ -24,7 +24,7 @@ author = 'Sebastian Scholz'
 
 version = '0.2'
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '0.2.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,6 +43,8 @@ rst_prolog = """
 .. |HTML| replace:: :abbr:`HTML (Hypertext Markup Language)`
 .. |CGC| replace:: certificate of good conduct
 .. |VAT| replace:: :abbr:`VAT (Value added tax)`
+.. |IBAN| replace:: :abbr:`IBAN (International Bank Account Number)`
+.. |BIC| replace:: :abbr:`BIC (Bank Identifier Code)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom

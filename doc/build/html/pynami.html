@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami package &mdash; pynami 0.1.0 documentation</title>
+  <title>pynami package &mdash; pynami 0.2.0 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -231,6 +231,17 @@
 
 </dd></dl>
 
+<dl class="data">
+<dt id="pynami.constants.URLS">
+<code class="sig-name descname">URLS</code><em class="property"> = {'ALLE_TAETIGKEITEN': '/nami/search-multi/all-visible-taetigkeiten', 'AUSBILDUNG': '/nami/mitglied-ausbildung/filtered-for-navigation/mitglied/mitglied/', 'AUTH': '/nami/auth/manual/sessionStartup', 'BAUSTEIN': '/module/baustein', 'BEANTRAGUNG': '/fz-beantragen/download-beantragung', 'BEITRAGSART': '/namiBeitrag/beitragsartmgl/gruppierung/', 'EBENE': '/orgadmin/ebene/', 'EBENE1': '/nami/search-multi/ebene/1', 'EBENE2': '/nami/search-multi/ebene/2/gruppierung1/', 'EBENE3': '/nami/search-multi/ebene/3/gruppierung2/', 'FZ': '/nami/fz/eigene-bescheinigungen/', 'GESCHLECHT': '/baseadmin/geschlecht/', 'GETMGL': '/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/', 'GRPADMIN_GRPS': '/nami/gruppierungen-for-grpadmin/parentgruppierung//node/root', 'GRUPPIERUNGEN': '/nami/gruppierungen/filtered-for-navigation/gruppierung/node/root', 'HISTORY': '/dashboard/history-entries/flist', 'INVOICE': '/nami/rechin-for-grpadmin/rechin/gruppierung/', 'INVOICE_PDF': '/nami/rechin-for-grpadmin/pdf', 'KONFESSION': '/baseadmin/konfession/', 'LAND': '/baseadmin/land/', 'LOGOUT': '/nami/auth/logout', 'MGLTYPE': '/nami/enum/mgltype', 'MGL_HISTORY': '/nami/mitglied-history/filtered-for-navigation/mitglied/mitglied/', 'MGL_HISTORY_EXT': '/nami/mitglied-history-with-values/filtered-for-navigation/mitglied/mitglied/', 'MGL_TAETIGKEITEN': '/nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/', 'NOTIFICATIONS': '/dashboard/notification-entries/flist', 'REGION': '/baseadmin/region/', 'SEARCH': '/nami/search-multi/result-list', 'SEARCH_ALL': '/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/', 'SERVER': 'https://nami.dpsg.de/ica/rest', 'STAAT': '/baseadmin/staatsangehoerigkeit/', 'STATS': '/dashboard/stats/stats', 'STATUS_LIST': '/nami/search-multi/status-list', 'TAGLIST': '//tagging/getTagList', 'UNTERGLIEDERUNG': '/orgadmin/untergliederung', 'ZAHLUNGSKONDITION': '/baseadmin/zahlungskondition/'}</em><a class="headerlink" href="#pynami.constants.URLS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds all default <a href="#id1"><span class="problematic" id="id2">|</span></a>URL|s</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pynami.nami">
 <span id="pynami-nami-module"></span><h2>pynami.nami module<a class="headerlink" href="#module-pynami.nami" title="Permalink to this headline">¶</a></h2>
@@ -267,9 +278,9 @@ definitions.</p>
 <p>Main class for communication with the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<div class="literal-block-wrapper docutils container" id="id2">
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Connect to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr>, search for all active members
-and print them in a tabulated form.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+and print them in a tabulated form.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
     <span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">():</span>
@@ -906,7 +917,7 @@ results</p>
 <dt id="pynami.nami.NaMi.search">
 <code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a search for members</p>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <ul class="simple">
 <li><p>Check search terms and formatting. Also some search keys can only
