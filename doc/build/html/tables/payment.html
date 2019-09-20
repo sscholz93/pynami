@@ -91,7 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="regionen.html">Bundesländer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="staaten.html">Countries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nationalities.html">Nationalities</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Payment details</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Payment details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#member-management">Member management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ids-for-searching">Ids for searching</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="genders.html">Genders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="confessions.html">Confessions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="membertypes.html">Member types and states</a></li>
@@ -172,6 +176,8 @@
             
   <div class="section" id="payment-details">
 <h1>Payment details<a class="headerlink" href="#payment-details" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="member-management">
+<h2>Member management<a class="headerlink" href="#member-management" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Payment method</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
@@ -227,8 +233,29 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="ids-for-searching">
+<h2>Ids for searching<a class="headerlink" href="#ids-for-searching" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get---tagging-getTagList">
+<code class="sig-name descname">GET </code><code class="sig-name descname">//tagging/getTagList</code><a class="headerlink" href="#get---tagging-getTagList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default values and their ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned entries</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned tag is a list entry in the form of a json array.</p>
 <table class="docutils align-default" id="id3">
-<caption><span class="caption-text">Tag list of fee types for searching</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Tag list of fee types</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -262,6 +289,25 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../pynami.schemas.html#pynami.schemas.default.BaseadminSchema" title="pynami.schemas.default.BaseadminSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseadminSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned data</p>
+</dd>
+</dl>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 
 

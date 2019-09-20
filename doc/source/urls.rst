@@ -36,6 +36,12 @@ Search members
 	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
 	:>json int totalEntries: Number of returned members
 	:>json list data: The search results. Each returned member is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.mgl.SearchMitgliedSchema`
+				|JSON| schema of the returned members
+				
 	:status 200: No error
 
 .. http:get:: /nami/search-multi/result-list
@@ -50,6 +56,12 @@ Search members
 	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
 	:>json int totalEntries: Number of returned members
 	:>json list data: The search results. Each returned member is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.mgl.SearchMitgliedSchema`
+				|JSON| schema of the returned members
+				
 	:status 200: No error
 
 .. http:get:: /nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/{groupId}/{mglId}
@@ -63,6 +75,12 @@ Search members
 	:>json string message: Should be ``null``.
 	:>json string title: Should be ``null``.
 	:>json json data: Contains all relevant information about the member
+
+		.. seealso::
+
+			:class:`~pynami.schemas.mgl.MitgliedSchema`
+				|JSON| schema of the returned member
+				
 	:status 200: No error
 
 Update members
@@ -127,6 +145,12 @@ Update members
 	:>json string message: Should be ``Update successful``.
 	:>json string title: Should be ``null``.
 	:>json json data: Contains all information about the updated member
+
+		.. seealso::
+
+			:class:`~pynami.schemas.mgl.MitgliedSchema`
+				|JSON| schema of the returned member
+				
 	:status 200: No error
 
 Activities
@@ -146,6 +170,12 @@ Activities
 	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
 	:>json int totalEntries: Number of returned members
 	:>json list data: The search results. Each returned activity is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.activity.SearchActivitySchema`
+				|JSON| schema of the returned activity
+
 	:>json json metaData: Additional information about the data fields but not on the activities themselves.
 	:status 200: No error
 
@@ -159,7 +189,13 @@ Activities
 	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
 	:>json string message: Should be ``null``.
 	:>json string title: Should be ``null``.
-	:>json json data: Contains all relevant information about the activity
+	:>json json data: Contains all relevant information about the activity.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.activity.ActivitySchema`
+				|JSON| schema of the returned activity
+
 	:status 200: No error
 
 .. http:put:: /nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}
@@ -184,4 +220,100 @@ Activities
 	:>json string message: Should be ``Update successful``.
 	:>json string title: Should be ``null``.
 	:>json json data: Contains all information about the updated activity.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.activity.ActivitySchema`
+				|JSON| schema of the returned activity
+
+	:status 200: No error
+
+Default values
+--------------
+
+.. http:get:: /baseadmin/{key}/
+	
+	Get default values and their ids from the baseadmin database.
+
+	:arg string key: Which type of values you want to get. Possible values are ``geschlecht``, ``staatsangehoerigkeit``, ``konfession``, ``region``, ``land`` and ``zahlungskondition``.
+	:query string gruppierung: Group id
+	:query string mitglied: Member id (not the |DPSG| Mitgliedsnummer)
+	:query int page: The page number of result display
+	:query int start: Show search results form this index
+	:query int limit: Show only up to this many entries
+	:>json boolean success: If everything was ok
+	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
+	:>json int totalEntries: Number of returned members
+	:>json list data: The search results. Each returned activity is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.default.BaseadminSchema`
+				|JSON| schema of the returned data
+
+	:>json json metaData: Additional information about the data fields but not on the data itself.
+	:status 200: No error
+
+Dashboard
+---------
+
+.. http:get:: /dashboard/notification-entries/flist
+
+	Retrieve all recent notifications.
+
+	:query int page: The page number of result display
+	:query int start: Show search results form this index
+	:query int limit: Show only up to this many entries
+	:query string filterString: The filter attribute (optional). So far only the value ``interval`` has been observed.
+	:query string searchString: Search value. If the filter attribute refers to a date the format is ``YYYY-mm-dd HH:MM:SS``. For the filterString ``interval`` use an integer to view the notifications of the specified number of weeks.
+	:>json boolean success: If everything was ok
+	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
+	:>json int totalEntries: Number of returned members
+	:>json list data: The search results. Each returned notification is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.dashboard.NotificationSchema`
+				|JSON| schema of the returned notification
+
+	:>json json metaData: Additional information about the data fields but not on the activities themselves.
+	:status 200: No error
+
+.. http:get:: /dashboard/history-entries/flist
+
+	Retrieve all recent history entries.
+
+	:query int page: The page number of result display
+	:query int start: Show search results form this index
+	:query int limit: Show only up to this many entries
+	:query string filterString: The filter attribute (optional). So far only the value ``interval`` has been observed.
+	:query string searchString: Search value. If the filter attribute refers to a date the format is ``YYYY-mm-dd HH:MM:SS``. For the filterString ``interval`` use an integer to view the history entries of the specified number of weeks.
+	:>json boolean success: If everything was ok
+	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
+	:>json int totalEntries: Number of returned members
+	:>json list data: The search results. Each returned history entry is a list entry in the form of a json array.
+
+		.. seealso::
+
+			:class:`~pynami.schemas.history.HistoryEntrySchema`
+				|JSON| schema of the returned history entry
+
+	:>json json metaData: Additional information about the data fields but not on the activities themselves.
+	:status 200: No error
+
+.. http:get:: /dashboard/stats/stats
+
+	Get basic statistics about your group
+
+	:>json boolean success: If everything was ok
+	:>json string responseType: |NAMI| response type: Can be ``OK``, ``INFO``, ``WARN``, ``ERROR``, ``EXCEPTION`` or ``null``
+	:>json string message: Should be ``null``.
+	:>json string title: Should be ``null``.
+	:>json json data: Contains the statistical data about your group
+
+		.. seealso::
+
+			:class:`~pynami.schemas.dashboard.StatsSchema`
+				|JSON| schema of the statistical data
+
 	:status 200: No error

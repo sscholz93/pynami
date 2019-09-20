@@ -45,6 +45,7 @@ rst_prolog = """
 .. |VAT| replace:: :abbr:`VAT (Value added tax)`
 .. |IBAN| replace:: :abbr:`IBAN (International Bank Account Number)`
 .. |BIC| replace:: :abbr:`BIC (Bank Identifier Code)`
+.. |JSON| replace:: :abbr:`JSON (JavaScript Object Notation)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom

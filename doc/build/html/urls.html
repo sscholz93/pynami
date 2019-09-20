@@ -93,6 +93,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#search-members">Search members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#update-members">Update members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#activities">Activities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-values">Default values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dashboard">Dashboard</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="search_mitglieder.html">Search Mitglieder</a></li>
@@ -214,7 +216,15 @@
 <li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
-<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned member is a list entry in the form of a json array.</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned member is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema" title="pynami.schemas.mgl.SearchMitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitgliedSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned members</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Status Codes</dt>
@@ -243,7 +253,15 @@
 <li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
-<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned member is a list entry in the form of a json array.</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned member is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema" title="pynami.schemas.mgl.SearchMitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitgliedSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned members</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Status Codes</dt>
@@ -271,7 +289,15 @@
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
 <li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
-<li><p><strong>data</strong> (<em>json</em>) – Contains all relevant information about the member</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – <p>Contains all relevant information about the member</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema" title="pynami.schemas.mgl.MitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned member</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Status Codes</dt>
@@ -354,7 +380,15 @@
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">successful</span></code>.</p></li>
 <li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
-<li><p><strong>data</strong> (<em>json</em>) – Contains all information about the updated member</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – <p>Contains all information about the updated member</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema" title="pynami.schemas.mgl.MitgliedSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">MitgliedSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned member</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Status Codes</dt>
@@ -392,7 +426,15 @@
 <li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
-<li><p><strong>data</strong> (<em>list</em>) – The search results. Each returned activity is a list entry in the form of a json array.</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned activity is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.activity.SearchActivitySchema" title="pynami.schemas.activity.SearchActivitySchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchActivitySchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned activity</p>
+</dd>
+</dl>
+</div>
+</p></li>
 <li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the activities themselves.</p></li>
 </ul>
 </dd>
@@ -421,7 +463,15 @@
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
 <li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
-<li><p><strong>data</strong> (<em>json</em>) – Contains all relevant information about the activity</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – <p>Contains all relevant information about the activity.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.activity.ActivitySchema" title="pynami.schemas.activity.ActivitySchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivitySchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned activity</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Status Codes</dt>
@@ -464,7 +514,173 @@
 <li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
 <li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">successful</span></code>.</p></li>
 <li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
-<li><p><strong>data</strong> (<em>json</em>) – Contains all information about the updated activity.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – <p>Contains all information about the updated activity.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.activity.ActivitySchema" title="pynami.schemas.activity.ActivitySchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivitySchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned activity</p>
+</dd>
+</dl>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="default-values">
+<h2>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--baseadmin-key-">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/baseadmin/{key}/</code><a class="headerlink" href="#get--baseadmin-key-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default values and their ids from the baseadmin database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>string</em>) – Which type of values you want to get. Possible values are <code class="docutils literal notranslate"><span class="pre">geschlecht</span></code>, <code class="docutils literal notranslate"><span class="pre">staatsangehoerigkeit</span></code>, <code class="docutils literal notranslate"><span class="pre">konfession</span></code>, <code class="docutils literal notranslate"><span class="pre">region</span></code>, <code class="docutils literal notranslate"><span class="pre">land</span></code> and <code class="docutils literal notranslate"><span class="pre">zahlungskondition</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Query Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>gruppierung</strong> (<em>string</em>) – Group id</p></li>
+<li><p><strong>mitglied</strong> (<em>string</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned activity is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.default.BaseadminSchema" title="pynami.schemas.default.BaseadminSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseadminSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned data</p>
+</dd>
+</dl>
+</div>
+</p></li>
+<li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the data itself.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="dashboard">
+<h2>Dashboard<a class="headerlink" href="#dashboard" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--dashboard-notification-entries-flist">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/dashboard/notification-entries/flist</code><a class="headerlink" href="#get--dashboard-notification-entries-flist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all recent notifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+<li><p><strong>filterString</strong> (<em>string</em>) – The filter attribute (optional). So far only the value <code class="docutils literal notranslate"><span class="pre">interval</span></code> has been observed.</p></li>
+<li><p><strong>searchString</strong> (<em>string</em>) – Search value. If the filter attribute refers to a date the format is <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>. For the filterString <code class="docutils literal notranslate"><span class="pre">interval</span></code> use an integer to view the notifications of the specified number of weeks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned notification is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.dashboard.NotificationSchema" title="pynami.schemas.dashboard.NotificationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotificationSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned notification</p>
+</dd>
+</dl>
+</div>
+</p></li>
+<li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the activities themselves.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--dashboard-history-entries-flist">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/dashboard/history-entries/flist</code><a class="headerlink" href="#get--dashboard-history-entries-flist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all recent history entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+<li><p><strong>filterString</strong> (<em>string</em>) – The filter attribute (optional). So far only the value <code class="docutils literal notranslate"><span class="pre">interval</span></code> has been observed.</p></li>
+<li><p><strong>searchString</strong> (<em>string</em>) – Search value. If the filter attribute refers to a date the format is <code class="docutils literal notranslate"><span class="pre">YYYY-mm-dd</span> <span class="pre">HH:MM:SS</span></code>. For the filterString <code class="docutils literal notranslate"><span class="pre">interval</span></code> use an integer to view the history entries of the specified number of weeks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned members</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned history entry is a list entry in the form of a json array.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.history.HistoryEntrySchema" title="pynami.schemas.history.HistoryEntrySchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryEntrySchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned history entry</p>
+</dd>
+</dl>
+</div>
+</p></li>
+<li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the activities themselves.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--dashboard-stats-stats">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/dashboard/stats/stats</code><a class="headerlink" href="#get--dashboard-stats-stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get basic statistics about your group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>message</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>string</em>) – Should be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – <p>Contains the statistical data about your group</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pynami.schemas.html#pynami.schemas.dashboard.StatsSchema" title="pynami.schemas.dashboard.StatsSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the statistical data</p>
+</dd>
+</dl>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Status Codes</dt>

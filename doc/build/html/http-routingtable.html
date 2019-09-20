@@ -160,10 +160,49 @@
    <h1>HTTP Routing Table</h1>
 
    <div class="modindex-jumpbox">
-   <a href="#cap-/nami"><strong>/nami</strong></a>
+   <a href="#cap-/baseadmin"><strong>/baseadmin</strong></a> | 
+   <a href="#cap-/dashboard"><strong>/dashboard</strong></a> | 
+   <a href="#cap-/module"><strong>/module</strong></a> | 
+   <a href="#cap-/nami"><strong>/nami</strong></a> | 
+   <a href="#cap-/orgadmin"><strong>/orgadmin</strong></a> | 
+   <a href="#cap-/tagging"><strong>/tagging</strong></a>
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/baseadmin"><td></td><td>
+       <strong>/baseadmin</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--baseadmin-key-"><code class="xref">GET /baseadmin/{key}/</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/dashboard"><td></td><td>
+       <strong>/dashboard</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--dashboard-history-entries-flist"><code class="xref">GET /dashboard/history-entries/flist</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--dashboard-notification-entries-flist"><code class="xref">GET /dashboard/notification-entries/flist</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="urls.html#get--dashboard-stats-stats"><code class="xref">GET /dashboard/stats/stats</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/module"><td></td><td>
+       <strong>/module</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="tables/bausteine.html#get--module-baustein"><code class="xref">GET /module/baustein</code></a></td><td>
+       <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-/nami"><td></td><td>
        <strong>/nami</strong></td><td></td></tr>
@@ -171,6 +210,11 @@
        <td></td>
        <td>
        <a href="urls.html#get--nami-auth-logout"><code class="xref">GET /nami/auth/logout</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="tables/membertypes.html#get--nami-enum-mgltype"><code class="xref">GET /nami/enum/mgltype</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -185,7 +229,17 @@
      <tr>
        <td></td>
        <td>
+       <a href="tables/activitytypes.html#get--nami-search-multi-all-visible-taetigkeiten"><code class="xref">GET /nami/search-multi/all-visible-taetigkeiten</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="urls.html#get--nami-search-multi-result-list"><code class="xref">GET /nami/search-multi/result-list</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="tables/membertypes.html#get--nami-search-multi-status-list"><code class="xref">GET /nami/search-multi/status-list</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -211,6 +265,22 @@
        <td></td>
        <td>
        <a href="urls.html#put--nami-zugeordnete-taetigkeiten-filtered-for-navigation-gruppierung-mitglied-mitglied-mglId-actId"><code class="xref">PUT /nami/zugeordnete-taetigkeiten/filtered-for-navigation/gruppierung-mitglied/mitglied/{mglId}/{actId}</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/orgadmin"><td></td><td>
+       <strong>/orgadmin</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="tables/subdivision.html#get--orgadmin-untergliederung"><code class="xref">GET /orgadmin/untergliederung</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/tagging"><td></td><td>
+       <strong>/tagging</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="tables/payment.html#get---tagging-getTagList"><code class="xref">GET //tagging/getTagList</code></a></td><td>
        <em></em></td></tr>
    </table>
 

@@ -172,8 +172,28 @@
             
   <div class="section" id="activities">
 <h1>Activities<a class="headerlink" href="#activities" title="Permalink to this headline">¶</a></h1>
+<dl class="get">
+<dt id="get--nami-search-multi-all-visible-taetigkeiten">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/nami/search-multi/all-visible-taetigkeiten</code><a class="headerlink" href="#get--nami-search-multi-all-visible-taetigkeiten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default values and their ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gruppierung</strong> (<em>int</em>) – A chosen group id (usually your Stammesnummer)</p></li>
+<li><p><strong>mitglied</strong> (<em>int</em>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>page</strong> (<em>int</em>) – The page number of result display</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Show search results form this index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – Show only up to this many entries</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>success</strong> (<em>boolean</em>) – If everything was ok</p></li>
+<li><p><strong>responseType</strong> (<em>string</em>) – <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> response type: Can be <code class="docutils literal notranslate"><span class="pre">OK</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>totalEntries</strong> (<em>int</em>) – Number of returned entries</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – <p>The search results. Each returned activity is a list entry in the form of a json array.</p>
 <table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Activity types for searching</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">All activity types for searching</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -309,6 +329,25 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../pynami.schemas.html#pynami.schemas.default.BaseadminSchema" title="pynami.schemas.default.BaseadminSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseadminSchema</span></code></a></dt><dd><p><abbr title="JavaScript Object Notation">JSON</abbr> schema of the returned data</p>
+</dd>
+</dl>
+</div>
+</p></li>
+<li><p><strong>metaData</strong> (<em>json</em>) – Additional information about the data fields but not on the activities themselves.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – No error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
