@@ -18,7 +18,7 @@ class SearchSchema(BaseSchema):
     so that the user of this |API| can use the correct spelling.
 
     Example:
-        .. code-block::
+        .. code-block:: python
             :caption: Generate the search string
 
             from pynami.search import SearchSchema
@@ -29,17 +29,16 @@ class SearchSchema(BaseSchema):
                                                   separators=(',', ':'))
             print(searchedValues)
 
-        .. code-block::
+        .. code-block:: python
             :caption: Make direct use of the search keys by searching for all
                       Wölflinge and Jungpfadfinder
 
-            from tabulate import tabulate
+            from pynami.tools import tabulate2x
             from pynami.nami import NaMi
 
             with NaMi(username='MITGLIEDSNUMMER', password='PASSWORD') as nami:
                 searchResults = nami.search(untergliederungId=[1,2])
-                table = [mgl.tabulate() for mgl in searchResults:
-                print(tabulate(table, headers='keys'))
+                print(tabulate2x(searchResults))
 
     """
     vorname = fields.String()

@@ -179,7 +179,11 @@
 
 
 <div class="viewcode-block" id="NamiResponseTypeError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiResponseTypeError">[docs]</a><span class="k">class</span> <span class="nc">NamiResponseTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;.. deprecated:: 0.1&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is raised when the response type from the |NAMI| is not in list of</span>
+<span class="sd">    allowed values or more specifically when the |NAMI| returns an error, a</span>
+<span class="sd">    warning or an exception.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
@@ -200,12 +204,12 @@
 <span class="sd">    Main class for communication with the |DPSG| |NAMI|</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        .. code-block::</span>
+<span class="sd">        .. code-block:: python</span>
 <span class="sd">            :caption: Connect to the |NAMI|, search for all active members</span>
 <span class="sd">                      and print them in a tabulated form.</span>
 
 <span class="sd">            from pynami.nami import NaMi</span>
-<span class="sd">            from pynami.util import tabulate2x</span>
+<span class="sd">            from pynami.tools import tabulate2x</span>
 
 <span class="sd">            with NaMi(username=&#39;MITGLIEDSNUMMER&#39;, password=&#39;PASSWORD&#39;) as nami:</span>
 <span class="sd">                print(tabulate2x(nami.search()))</span>
@@ -240,8 +244,8 @@
 
         <span class="c1"># allowed response types are: OK, INFO, WARN, ERROR, EXCEPTION</span>
         <span class="k">if</span> <span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;responseType&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;OK&#39;</span><span class="p">,</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;responseType from NAMI was </span><span class="si">{rjson[&#39;responseType&#39;]}</span><span class="s2">&quot;</span><span class="p">)</span>
-
+            <span class="k">raise</span> <span class="n">NamiResponseTypeError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{rjson[&#39;responseType&#39;]}</span><span class="s2">: &quot;</span>
+                                        <span class="n">f</span><span class="s2">&quot;</span><span class="si">{rjson[&#39;message&#39;]}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span></div>
 
 

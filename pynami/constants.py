@@ -55,7 +55,7 @@ class URLS(metaclass=URLMetaClass):
     This is not just a dict so that each |URL| can be documented.
 
     Note:
-        Some URLs have to formatted with some variables.
+        Some |URL| strings have to formatted with some variables.
     """
 
     SERVER = ''

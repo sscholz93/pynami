@@ -23,7 +23,11 @@ from .tools import tabulate2x
 
 
 class NamiResponseTypeError(Exception):
-    """.. deprecated:: 0.1"""
+    """
+    This is raised when the response type from the |NAMI| is not in list of
+    allowed values or more specifically when the |NAMI| returns an error, a
+    warning or an exception.
+    """
     pass
 
 
@@ -44,7 +48,7 @@ class NaMi(object):
     Main class for communication with the |DPSG| |NAMI|
 
     Example:
-        .. code-block::
+        .. code-block:: python
             :caption: Connect to the |NAMI|, search for all active members
                       and print them in a tabulated form.
 
@@ -84,8 +88,8 @@ class NaMi(object):
 
         # allowed response types are: OK, INFO, WARN, ERROR, EXCEPTION
         if rjson['responseType'] not in ['OK', 'INFO', None]:
-            print(f"responseType from NAMI was {rjson['responseType']}")
-
+            raise NamiResponseTypeError(f"{rjson['responseType']}: "
+                                        f"{rjson['message']}")
         return rjson['data']
 
 

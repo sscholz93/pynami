@@ -176,7 +176,7 @@
 <span class="sd">    so that the user of this |API| can use the correct spelling.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        .. code-block::</span>
+<span class="sd">        .. code-block:: python</span>
 <span class="sd">            :caption: Generate the search string</span>
 
 <span class="sd">            from pynami.search import SearchSchema</span>
@@ -187,17 +187,16 @@
 <span class="sd">                                                  separators=(&#39;,&#39;, &#39;:&#39;))</span>
 <span class="sd">            print(searchedValues)</span>
 
-<span class="sd">        .. code-block::</span>
+<span class="sd">        .. code-block:: python</span>
 <span class="sd">            :caption: Make direct use of the search keys by searching for all</span>
 <span class="sd">                      Wölflinge and Jungpfadfinder</span>
 
-<span class="sd">            from tabulate import tabulate</span>
+<span class="sd">            from pynami.tools import tabulate2x</span>
 <span class="sd">            from pynami.nami import NaMi</span>
 
 <span class="sd">            with NaMi(username=&#39;MITGLIEDSNUMMER&#39;, password=&#39;PASSWORD&#39;) as nami:</span>
 <span class="sd">                searchResults = nami.search(untergliederungId=[1,2])</span>
-<span class="sd">                table = [mgl.tabulate() for mgl in searchResults:</span>
-<span class="sd">                print(tabulate(table, headers=&#39;keys&#39;))</span>
+<span class="sd">                print(tabulate2x(searchResults))</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">vorname</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>

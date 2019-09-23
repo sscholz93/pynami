@@ -169,7 +169,7 @@
 <h2>Authentification<a class="headerlink" href="#authentification" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Make use of <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#with" title="(in Python v3.7)"><span class="xref std std-ref">the with statement</span></a> for automatic login and logout</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="k">import</span> <span class="n">NaMi</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="kn">import</span> <span class="n">NaMi</span>
 
 <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
     <span class="k">pass</span>
@@ -178,7 +178,7 @@
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Authentificate manually</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="k">import</span> <span class="n">NaMi</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="kn">import</span> <span class="n">NaMi</span>
 
 <span class="n">nami</span> <span class="o">=</span> <span class="n">NaMi</span><span class="p">()</span>
 <span class="n">nami</span><span class="o">.</span><span class="n">auth</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span>
@@ -192,9 +192,9 @@
 <h2>Access default values<a class="headerlink" href="#access-default-values" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Get gender names and their internal ids</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.util</span> <span class="k">import</span> <span class="n">tabulate2x</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.tools</span> <span class="kn">import</span> <span class="n">tabulate2x</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">geschlechter</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">geschlechter</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -203,9 +203,9 @@
 <h2>Get a specific mitglied<a class="headerlink" href="#get-a-specific-mitglied" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Get a mitglied and view its Mitgliedsnummer</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">id_</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">vorname</span><span class="o">=</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="n">nachname</span><span class="o">=</span><span class="s1">&#39;Mustermann&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">id_</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">vorname</span><span class="o">=</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="n">nachname</span><span class="o">=</span><span class="s1">&#39;Mustermann&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
 <span class="n">mgl</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mgl</span><span class="o">.</span><span class="n">mitgliedsNummer</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mgl</span><span class="o">.</span><span class="n">mitgliedsNummer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

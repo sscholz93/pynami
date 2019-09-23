@@ -183,26 +183,25 @@ so that the user of this <abbr title="Application Programming Interface">API</ab
 <p class="admonition-title">Example</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Generate the search string</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.search</span> <span class="k">import</span> <span class="n">SearchSchema</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.search</span> <span class="kn">import</span> <span class="n">SearchSchema</span>
 
 <span class="n">searchKeys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;vorname&#39;</span><span class="p">:</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span>
               <span class="s1">&#39;nachname&#39;</span><span class="p">:</span> <span class="s1">&#39;Mustermann&#39;</span><span class="p">}</span>
 <span class="n">searchedValues</span> <span class="o">=</span> <span class="n">SearchSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">searchKeys</span><span class="p">,</span>
                                       <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">searchedValues</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">searchedValues</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Make direct use of the search keys by searching for all
 Wölflinge and Jungpfadfinder</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
-<span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="k">import</span> <span class="n">NaMi</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.tools</span> <span class="kn">import</span> <span class="n">tabulate2x</span>
+<span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="kn">import</span> <span class="n">NaMi</span>
 
 <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
     <span class="n">searchResults</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">untergliederungId</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">mgl</span><span class="o">.</span><span class="n">tabulate</span><span class="p">()</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">searchResults</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;keys&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">searchResults</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

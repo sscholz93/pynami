@@ -168,11 +168,11 @@
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Connect to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr>, search for all active members
 and print them in a tabulated form.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="k">import</span> <span class="n">NaMi</span>
-<span class="kn">from</span> <span class="nn">pynami.util</span> <span class="k">import</span> <span class="n">tabulate2x</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.nami</span> <span class="kn">import</span> <span class="n">NaMi</span>
+<span class="kn">from</span> <span class="nn">pynami.tools</span> <span class="kn">import</span> <span class="n">tabulate2x</span>
 
 <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;MITGLIEDSNUMMER&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">()))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
