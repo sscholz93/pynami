@@ -3,7 +3,6 @@
 Schemas for operations on members
 """
 import json
-from collections import OrderedDict
 from marshmallow import fields, pre_load, post_dump
 
 from .base import BaseSchema, BaseSearchSchema, BaseModel
@@ -97,44 +96,17 @@ class SearchMitglied(BaseModel):
     there cannot be just one Mitglied class because the search results lack
     crucal imformation (e.g. payment details).
     """
+    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum']
+    _field_blacklist = ['representedClass', 'mglType', 'staatsangehoerigkeit',
+                        'status', 'geschlecht', 'eintrittsdatum', 'id',
+                        'wiederverwendenFlag',  'descriptor', 'version',
+                        'lastUpdated', 'id_id']
+
     def __repr__(self):
         return f'<SearchMitglied({self.descriptor})>'
 
     def __str__(self):
         return f'{self.descriptor}'
-
-    def table_view(self):
-        """
-        Prepare nicely formatted output
-
-        Returns:
-            dict: All data entries which are not in the blacklist
-        """
-        field_blacklist = ['representedClass', 'mglType',
-                           'staatsangehoerigkeit', 'status', 'geschlecht',
-                           'eintrittsdatum', 'id', 'wiederverwendenFlag',
-                           'descriptor', 'version', 'lastUpdated', 'id_id']
-        return {k: v for k, v in self.data.items() if v is not None
-                and v != '' and k not in field_blacklist}
-
-    def tabulate(self, elements=None):
-        """
-        Prepare ordered tabulated output
-
-        Args:
-            elements (:obj:`list` of :obj:`str`, optional): List of keys which
-                shall be included in the table
-
-        Returns:
-            :class:`~collections.OrderedDict`: Specified data entries
-        """
-        d = OrderedDict()
-        if not elements:
-            elements = ['mitgliedsNummer', 'vorname', 'nachname',
-                        'geburtsDatum']
-        for k in elements :
-            d[k] = self.data[k]
-        return d
 
     def get_mitglied(self, nami):
         """
@@ -245,7 +217,8 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """str: Tier field. Not sure what it is for."""
     entries_gruppierung = fields.String(allow_none=True)
     """str: Group name including its id"""
-    entries_gruppierungId = fields.String(allow_none=True)
+    entries_gruppierungId = fields.String(allow_none=True,
+                                          attribute='gruppierungId')
     """str: Group id as a string"""
 
 
@@ -259,6 +232,10 @@ class Mitglied:
     the :meth:`~marshmallow.Schema.load` method on a corresponding data
     dictionary.
     """
+    _tabitems = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum',
+                 'strasse', 'stufe']
+    _field_blacklist = ['genericField1']
+
     def __init__(self, **kwargs):
         self.data = kwargs
 
@@ -279,36 +256,6 @@ class Mitglied:
             super().__setattr__(name, value)
         except AttributeError:
             self.data[name] = value
-
-    def table_view(self):
-        """
-        Prepare nicely formatted output
-
-        Returns:
-            dict: All data entries which are not in the blacklist
-        """
-        field_blacklist = ['genericField1']
-        return {k: v for k, v in self.data.items() if v is not None
-                and v != '' and k not in field_blacklist}
-
-    def tabulate(self, elements=None):
-        """
-        Prepare ordered tabulated output
-
-        Args:
-            elements (:obj:`list` of :obj:`str`, optional): List of keys which
-                shall be included in the table
-
-        Returns:
-            :class:`~collections.OrderedDict`: Specified data entries
-        """
-        d = OrderedDict()
-        if not elements:
-            elements = ['mitgliedsNummer', 'vorname', 'nachname',
-                        'geburtsDatum', 'strasse', 'stufe']
-        for k in elements :
-            d[k] = self.data[k]
-        return d
 
     def update(self, nami):
         """

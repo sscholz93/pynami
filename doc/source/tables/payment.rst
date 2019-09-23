@@ -21,6 +21,11 @@ Member management
 	"DPSG Bundesverband 000000 (Voller Beitrag - Stiftungseuro - VERBANDSBEITRAG)",4
 	"DPSG Bundesverband 000000 (Voller Beitrag - VERBANDSBEITRAG)",1
 
+.. seealso::
+
+	:ref:`urls:Default values`
+		How to get these values
+
 Ids for searching
 -----------------
 

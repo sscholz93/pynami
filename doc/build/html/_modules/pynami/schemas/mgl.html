@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.mgl &mdash; pynami 0.2.1 documentation</title>
+  <title>pynami.schemas.mgl &mdash; pynami 0.2.2 documentation</title>
   
 
   
@@ -84,6 +84,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../urls.html">REST URLs</a></li>
@@ -159,7 +161,6 @@
 <span class="sd">Schemas for operations on members</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
@@ -253,44 +254,17 @@
 <span class="sd">    there cannot be just one Mitglied class because the search results lack</span>
 <span class="sd">    crucal imformation (e.g. payment details).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span> <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">]</span>
+    <span class="n">_field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;representedClass&#39;</span><span class="p">,</span> <span class="s1">&#39;mglType&#39;</span><span class="p">,</span> <span class="s1">&#39;staatsangehoerigkeit&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;geschlecht&#39;</span><span class="p">,</span> <span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;wiederverwendenFlag&#39;</span><span class="p">,</span>  <span class="s1">&#39;descriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;lastUpdated&#39;</span><span class="p">,</span> <span class="s1">&#39;id_id&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchMitglied(</span><span class="si">{self.descriptor}</span><span class="s1">)&gt;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span>
-
-<div class="viewcode-block" id="SearchMitglied.table_view"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.table_view">[docs]</a>    <span class="k">def</span> <span class="nf">table_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prepare nicely formatted output</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: All data entries which are not in the blacklist</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;representedClass&#39;</span><span class="p">,</span> <span class="s1">&#39;mglType&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;staatsangehoerigkeit&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;geschlecht&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;wiederverwendenFlag&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;descriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;lastUpdated&#39;</span><span class="p">,</span> <span class="s1">&#39;id_id&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_blacklist</span><span class="p">}</span></div>
-
-<div class="viewcode-block" id="SearchMitglied.tabulate"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prepare ordered tabulated output</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
-<span class="sd">                shall be included in the table</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            :class:`~collections.OrderedDict`: Specified data entries</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">elements</span><span class="p">:</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">elements</span> <span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="SearchMitglied.get_mitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.get_mitglied">[docs]</a>    <span class="k">def</span> <span class="nf">get_mitglied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -401,7 +375,8 @@
     <span class="sd">&quot;&quot;&quot;str: Tier field. Not sure what it is for.&quot;&quot;&quot;</span>
     <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Group name including its id&quot;&quot;&quot;</span>
-    <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;gruppierungId&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Group id as a string&quot;&quot;&quot;</span></div>
 
 
@@ -415,6 +390,10 @@
 <span class="sd">    the :meth:`~marshmallow.Schema.load` method on a corresponding data</span>
 <span class="sd">    dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_tabitems</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span> <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;strasse&#39;</span><span class="p">,</span> <span class="s1">&#39;stufe&#39;</span><span class="p">]</span>
+    <span class="n">_field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;genericField1&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
 
@@ -435,36 +414,6 @@
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-<div class="viewcode-block" id="Mitglied.table_view"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.table_view">[docs]</a>    <span class="k">def</span> <span class="nf">table_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prepare nicely formatted output</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: All data entries which are not in the blacklist</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">field_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;genericField1&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_blacklist</span><span class="p">}</span></div>
-
-<div class="viewcode-block" id="Mitglied.tabulate"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.tabulate">[docs]</a>    <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prepare ordered tabulated output</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
-<span class="sd">                shall be included in the table</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            :class:`~collections.OrderedDict`: Specified data entries</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">elements</span><span class="p">:</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mitgliedsNummer&#39;</span><span class="p">,</span> <span class="s1">&#39;vorname&#39;</span><span class="p">,</span> <span class="s1">&#39;nachname&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;geburtsDatum&#39;</span><span class="p">,</span> <span class="s1">&#39;strasse&#39;</span><span class="p">,</span> <span class="s1">&#39;stufe&#39;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">elements</span> <span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="Mitglied.update"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.util &mdash; pynami 0.2.1 documentation</title>
+  <title>pynami.util &mdash; pynami 0.2.2 documentation</title>
   
 
   
@@ -84,6 +84,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
@@ -160,6 +162,7 @@
 <span class="kn">import</span> <span class="nn">webbrowser</span>
 <span class="kn">import</span> <span class="nn">tempfile</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">subprocess</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
 <span class="kn">from</span> <span class="nn">html.parser</span> <span class="k">import</span> <span class="n">HTMLParser</span>
 
 
@@ -199,7 +202,16 @@
 <span class="sd">    |HTML| parser for extracting a |URL|</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;str: |URL| embedded in |HTML| tags&quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="ExtractHrefParser.handle_starttag"><a class="viewcode-back" href="../../pynami.html#pynami.util.ExtractHrefParser.handle_starttag">[docs]</a>    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles a |HTML| tag</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tag (str): The |HTML| tag</span>
+<span class="sd">            attrs (list): Attributes inside the tag as name and value tuples</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;href&#39;</span><span class="p">:</span>
@@ -208,19 +220,56 @@
 
 <div class="viewcode-block" id="extract_url"><a class="viewcode-back" href="../../pynami.html#pynami.util.extract_url">[docs]</a><span class="k">def</span> <span class="nf">extract_url</span><span class="p">(</span><span class="n">htmlstr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Extract a |URL| from a |HTML| string</span>
+<span class="sd">    Extract a |URL| from a |HTML| string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        htmlstr (str): The |HTML| string which will be parsed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The |URL|</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ExtractHrefParser</span><span class="p">()</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">htmlstr</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">url</span></div>
 
-<div class="viewcode-block" id="open_download_pdf"><a class="viewcode-back" href="../../pynami.html#pynami.util.open_download_pdf">[docs]</a><span class="k">def</span> <span class="nf">open_download_pdf</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+
+<div class="viewcode-block" id="open_download_pdf"><a class="viewcode-back" href="../../pynami.html#pynami.util.open_download_pdf">[docs]</a><span class="k">def</span> <span class="nf">open_download_pdf</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Open a downloaded |PDF| file.</span>
+
+<span class="sd">    To avoid having to deal with graphical save-the-file dialogues this creates</span>
+<span class="sd">    a temporary file inside a temporary directory which is deleted after a</span>
+<span class="sd">    timeout which is used to open the file. During this timeout the program is</span>
+<span class="sd">    blocked.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        content (bytes): Content of the downloaded file</span>
+<span class="sd">        timeout (:obj:`float`, optional): Time the system has for opening the</span>
+<span class="sd">            file. Defaults to 10 seconds.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.pdf&#39;</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="nb">dir</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmpfile</span><span class="p">:</span>
             <span class="n">tmpfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="n">tmpfile</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></div>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="tabulate2x"><a class="viewcode-back" href="../../pynami.html#pynami.util.tabulate2x">[docs]</a><span class="k">def</span> <span class="nf">tabulate2x</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tabulate a list of objects by tabulating each object first</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj (list): The list of objects to tabulate. If they are not from the</span>
+<span class="sd">        same class this may not work.</span>
+<span class="sd">        elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
+<span class="sd">            should be displayed</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Nicely formatted tabulated output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">tabulate</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+                    <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;keys&#39;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

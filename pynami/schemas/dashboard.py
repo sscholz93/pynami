@@ -16,12 +16,14 @@ class Notification(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['entryDate', 'operation']
+
     def __repr__(self):
-        return f'<Notification({self.entries_entryDate}: ' + \
-               f'{self.entries_operation})>'
+        return f'<Notification({self.entryDate}: ' + \
+               f'{self.operation})>'
 
     def __str__(self):
-        return f'{self.entries_operation}'
+        return f'{self.operation}'
 
 
 class NotificationSchema(BaseSearchSchema):
@@ -30,27 +32,30 @@ class NotificationSchema(BaseSearchSchema):
     """
     __model__ = Notification
 
-    entries_objectId = fields.Integer()
+    entries_objectId = fields.Integer(attribute='objectId')
     """int: Object id"""
-    entries_objectClass = fields.String()
+    entries_objectClass = fields.String(attribute='objectClass')
     """str: |NAMI| class"""
-    entries_entryDate = fields.DateTime()
+    entries_entryDate = fields.DateTime(attribute='entryDate')
     """:class:`~datetime.datetime`: Date of the event"""
-    entries_id = fields.Integer()
+    entries_id = fields.Integer(attribute='id_')
     """int: Id of the event"""
-    entries_newObject = fields.String(allow_none=True)
+    entries_newObject = fields.String(allow_none=True, attribute='newObject')
     """str: New object"""
-    entries_actorId = fields.Integer()
+    entries_actorId = fields.Integer(attribute='actorId')
     """int: Id of the person who started the event"""
-    entries_actor = fields.String()
+    entries_actor = fields.String(attribute='actor')
     """str: The person who started the event"""
-    entries_changedFields = fields.String(allow_none=True)
+    entries_changedFields = fields.String(allow_none=True,
+                                          attribute='changedFields')
     """str: Which fields have been changed. This may be empty."""
-    entries_operation = fields.String()
+    entries_operation = fields.String(attribute='operation')
     """str: The nature of the change"""
-    entries_completeChanges = fields.String(allow_none=True)
+    entries_completeChanges = fields.String(allow_none=True,
+                                            attribute='completeChanges')
     """str: More details about the changes. This may be empty."""
-    entries_originalObject = fields.String(allow_none=True)
+    entries_originalObject = fields.String(allow_none=True,
+                                           attribute='originalObject')
     """str: Old object. This may be empty"""
 
 

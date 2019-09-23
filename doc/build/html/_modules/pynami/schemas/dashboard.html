@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.dashboard &mdash; pynami 0.2.1 documentation</title>
+  <title>pynami.schemas.dashboard &mdash; pynami 0.2.2 documentation</title>
   
 
   
@@ -84,6 +84,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../namiclass.html">Main class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../urls.html">REST URLs</a></li>
@@ -172,12 +174,14 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;entryDate&#39;</span><span class="p">,</span> <span class="s1">&#39;operation&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Notification(</span><span class="si">{self.entries_entryDate}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
-               <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_operation}</span><span class="s1">)&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Notification(</span><span class="si">{self.entryDate}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
+               <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.operation}</span><span class="s1">)&gt;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_operation}</span><span class="s1">&#39;</span></div>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.operation}</span><span class="s1">&#39;</span></div>
 
 
 <div class="viewcode-block" id="NotificationSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.dashboard.NotificationSchema">[docs]</a><span class="k">class</span> <span class="nc">NotificationSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
@@ -186,27 +190,30 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Notification</span>
 
-    <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;objectId&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Object id&quot;&quot;&quot;</span>
-    <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;objectClass&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
-    <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;entryDate&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the event&quot;&quot;&quot;</span>
-    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;id_&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Id of the event&quot;&quot;&quot;</span>
-    <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;newObject&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: New object&quot;&quot;&quot;</span>
-    <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;actorId&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Id of the person who started the event&quot;&quot;&quot;</span>
-    <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;actor&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: The person who started the event&quot;&quot;&quot;</span>
-    <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;changedFields&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Which fields have been changed. This may be empty.&quot;&quot;&quot;</span>
-    <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;operation&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: The nature of the change&quot;&quot;&quot;</span>
-    <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;completeChanges&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: More details about the changes. This may be empty.&quot;&quot;&quot;</span>
-    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                           <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;originalObject&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Old object. This may be empty&quot;&quot;&quot;</span></div>
 
 

@@ -1,6 +1,11 @@
 Countries
 =========
 
+.. seealso::
+
+	:ref:`urls:Default values`
+		How to get these values
+
 .. csv-table:: Countries for address information
 	:header: "Beschreibung", "ID"
 

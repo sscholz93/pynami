@@ -4,11 +4,11 @@ NAMI library in python
 This module contains the main class :class:`NaMi` and a few simple exception
 definitions.
 """
+import json
 import requests
-from tabulate import tabulate
 import pytoml as toml
 
-from .constants import URLS
+from .constants import URLS, DEFAULT_PARAMS
 from .schemas.activity import SearchActivitySchema, ActivitySchema
 from .schemas.cogc import SearchBescheinigungSchema, BescheinigungSchema
 from .schemas.dashboard import NotificationSchema, StatsSchema
@@ -18,7 +18,7 @@ from .schemas.history import HistoryEntrySchema, MitgliedHistorySchema
 from .schemas.mgl import SearchMitgliedSchema, MitgliedSchema
 from .schemas.search import SearchSchema
 from .schemas.training import SearchAusbildungSchema, AusbildungSchema
-from .util import open_download_pdf
+from .util import open_download_pdf, tabulate2x
 
 
 class NamiResponseTypeError(Exception):
@@ -47,11 +47,11 @@ class NaMi(object):
             :caption: Connect to the |NAMI|, search for all active members
                       and print them in a tabulated form.
 
+            from pynami.nami import NaMi
+            from pynami.util import tabulate2x
+
             with NaMi(username='MITGLIEDSNUMMER', password='PASSWORD') as nami:
-                table = []
-                for mgl in nami.search():
-                    table.append(mgl.tabulate())
-                print(tabulate(table, headers="keys"))
+                print(tabulate2x(nami.search()))
 
     Args:
         config (:obj:`dict`, optional): Authorization configuration
@@ -115,16 +115,16 @@ class NaMi(object):
             'password': password
         }
 
-        url = f"{URLS['SERVER']}{URLS['AUTH']}"
+        url = URLS['AUTH']
         r = self.s.post(url, data=payload)
         if r.status_code != 200:
             raise ValueError('Authentication failed!')
 
         # Get the id of the user
         myself = self.search(mitgliedsNummer=username)
-        print(myself)
         if len(myself) == 1:
             self.__config['mitgliedsnummer'] = myself[0].id
+            self.__config['stammesnummer'] = myself[0].gruppierungId
         else:
             raise ValueError(f'Received {len(myself)} search results while '
                              f'searching for myself!')
@@ -139,7 +139,7 @@ class NaMi(object):
         """This should be called at the end of the communication. It is called
         when exiting through the :meth:`~contextmnager.__exit__` method.
         """
-        url = f"{URLS['SERVER']}{URLS['LOGOUT']}"
+        url = URLS['LOGOUT']
         r = self.s.get(url)
         if r.status_code != 204:
             self._check_response(r)
@@ -152,166 +152,264 @@ class NaMi(object):
         if exception_type is None:
             return True
 
-    def _get_baseadmin(self, key, gruppierung=None):
+    def _get_baseadmin(self, key, grpId=None, mglId=None, **kwargs):
         """Base function for retrieving all core lists from the |NAMI|
 
         Args:
             key (:obj:`str`): Name of the wanted items
-            gruppierung (:obj:`int`): In some cases the URL is a bit different
-                and an additional Gruppierungsnummer is nesseccary.
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Keyword Args:
+            gruppierung (:obj:`int` or :obj:`str`, optional): Group id, in case
+                this differs from the group id in the |URL| (given by
+                ``grpId``)
+            mitglied (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer). This overwrites ``mglId``.
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: The returned
+            default values
         """
-        url = f"{URLS['SERVER']}{URLS[key.upper()]}"
-        if gruppierung:
-            url += f'{gruppierung}/'
-        if key.lower() == 'Beitragsart'.lower():
-            url += f"{self.__config['stammesnummer']}/"
-        params = {'gruppierung': self.__config['stammesnummer'],
-                  'mitglied': self.__config['mitgliedsnummer'],
+        url = URLS[key.upper()].format(grpId=grpId)
+        params = {'gruppierung': str(grpId) if grpId else
+                      self.__config['stammesnummer'],
+                  'mitglied': str(mglId) if mglId else
+                      self.__config['mitgliedsnummer'],
                   'page': 1,
                   'start': 0,
                   'limit': 1000}
+        params.update(kwargs)
         r = self.s.get(url, params=params)
         return BaseadminSchema().load(self._check_response(r), many=True)
 
-    @property
-    def countries(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: List of all
-        possible countries with their names and ids"""
-        return self._get_baseadmin('Land')
-
-    @property
-    def regionen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: All Possible
-        Bundeslaender"""
-        return self._get_baseadmin('Region')
-
-    @property
-    def zahlungskonditionen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Every paying
-        method (either bank transfer or debit)"""
-        return self._get_baseadmin('Zahlungskondition')
-
-    @property
-    def beitragsarten(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Each possible
-        fee"""
-        return self._get_baseadmin('Beitragsart')
-
-    @property
-    def geschlecht(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: You can choose
-        between three genders: male, female and diverse."""
-        return self._get_baseadmin('Geschlecht')
-
-    @property
-    def staaten(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: A quite long list
-        of different nationalities"""
-        return self._get_baseadmin('Staat')
-
-    @property
-    def konfessionen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: All denominations
+    def countries(self, grpId=None, mglId=None):
         """
-        return self._get_baseadmin('Konfession')
+        Get default values
 
-    @property
-    def mgltypes(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: You can have one
-        of three different member types"""
-        return self._get_baseadmin('MglType')
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of all
+            possible countries with their names and ids
+        """
+        return self._get_baseadmin('Land', grpId, mglId)
+
+    def regionen(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: All possible
+            Bundeslaender"""
+        return self._get_baseadmin('Region', grpId, mglId)
+
+    def zahlungskonditionen(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: Every paying
+            method (either bank transfer or debit)"""
+        return self._get_baseadmin('Zahlungskondition', grpId, mglId)
+
+    def beitragsarten_mgl(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: Each possible
+            fee for a member"""
+        return self._get_baseadmin('Beitragsart_mgl', grpId, mglId)
+
+    def beitragsarten(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: Each possible
+            fee type"""
+        return self._get_baseadmin('Beitragsart', grpId, mglId)
+
+    def geschlechter(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: You can choose
+            between three genders: male, female and diverse."""
+        return self._get_baseadmin('Geschlecht', grpId, mglId)
+
+    def staaten(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: A quite long
+            list of different nationalities"""
+        return self._get_baseadmin('Staat', grpId, mglId)
+
+    def konfessionen(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: All
+            denominations
+        """
+        return self._get_baseadmin('Konfession', grpId, mglId)
+
+    def mgltypes(self, grpId=None, mglId=None):
+        """
+        Get default values
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`, optional): Group id
+            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
+                  |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: You can have one
+            of three different member types"""
+        return self._get_baseadmin('MglType', grpId, mglId)
 
     @property
     def status_list(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: If you are
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: If you are
         active, inactiv or already deleted"""
         return self._get_baseadmin('Status_List')
 
     @property
     def tagList(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: A different list
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different list
         of fee types but with basically the same content. This one is used for
         searching members."""
         return self._get_baseadmin('TagList')
 
     @property
     def bausteine(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Choose |DPSG|
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose |DPSG|
         training parts"""
         return self._get_baseadmin('Baustein')
 
     @property
     def subdivision(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Which division
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Which division
         you are associated with. This one is only used for searching."""
         return self._get_baseadmin('Untergliederung')
 
     @property
     def activities(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Functional
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Functional
         activities"""
         return self._get_baseadmin('Alle_Taetigkeiten')
 
     @property
     def ebenen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Structural layers
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural layers
         in the |DPSG|"""
         return self._get_baseadmin('Ebene')
 
     @property
     def ebene1(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: You can choose
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: You can choose
         a Diözese which you belong to."""
         return self._get_baseadmin('Ebene1')
 
     @property
     def gruppierungen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Choose from a
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a
         list of groups that you are associated with for member admin"""
         return self._get_baseadmin('Gruppierungen')
 
     @property
-    def grpadmin_gruppierungen(self):
-        """:obj:`list` of :class:`~pynami.schemas.Baseadmin`: Choose from a
+    def grpadmin_grps(self):
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a
         list of groups that you are associated with for group admin"""
         return self._get_baseadmin('grpadmin_grps')
 
     @property
     def stats(self):
         """
-        :class:`~pynami.schemas.Stats`: Contains counts from different tiers.
-        The actual list of :class:`pynami.schemas.StatCategory` is in the
-        'statsCategories' attribute.
+        :class:`~.schemas.dashboard.Stats`: Contains counts from different
+        tiers. The actual list of :class:`~.schemas.dashboard.StatCategory` is
+        in the :attr:`~.schemas.dashboard.StatsSchema.statsCategories`
+        attribute.
         """
-        url = f"{URLS['SERVER']}{URLS['STATS']}"
+        url = URLS['STATS']
         r = self.s.get(url)
         return StatsSchema().load(self._check_response(r))
 
-    @property
-    def notifications(self):
+    def notifications(self, sortproperty=None, sortdirection='ASC', **kwargs):
         """
-        :obj:`list` of :class:`~.schemas.Notification`: All current
-        notifications (like tier changes of members). In the |NAMI| these are
-        displayed in the dashboard.
+        Dashboard function
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.dashboard.Notification`: All
+            current notifications (like tier changes of members). In the |NAMI|
+            these are displayed in the dashboard.
         """
-        url = f"{URLS['SERVER']}{URLS['NOTIFICATIONS']}"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = URLS['NOTIFICATIONS']
+        params = DEFAULT_PARAMS
+        if sortproperty:
+            params['sort'] = json.dumps([{'property': sortproperty,
+                                          'direction': sortdirection}],
+                                        separators=(',', ':'))
+        params.update(kwargs)
         r = self.s.get(url, params=params)
         return NotificationSchema().load(self._check_response(r), many=True)
 
-    @property
-    def history(self):
+    def history(self, **kwargs):
         """
-        :obj:`list` of :class:`~.schemas.HistoryEntry`: Last editing events
-        like updating and creating members.In the |NAMI| these are displayed in
-        the dashboard.
+        Dashboard function
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.history.HistoryEntry`: Last
+            editing events like updating and creating members.In the |NAMI|
+            these are displayed in the dashboard.
         """
-        url = f"{URLS['SERVER']}{URLS['HISTORY']}"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = URLS['HISTORY']
+        params = DEFAULT_PARAMS
+        params.update(kwargs)
         r = self.s.get(url, params=params)
         return HistoryEntrySchema().load(self._check_response(r), many=True)
 
@@ -323,21 +421,23 @@ class NaMi(object):
             ebene1 (int): Group id of a Diözese
 
         Returns:
-            :obj:`list` of :class:`~pynami.schemas.Baseadmin`: List of possible
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
             Bezirken you are associated with"""
-        return self._get_baseadmin('Ebene2', ebene1)
+        return self._get_baseadmin('Ebene2', ebene1,
+                                   gruppierung=self.__config['stammesnummer'])
 
     def ebene3(self, ebene2):
         """
         You can choose a Stamm which you belong to.
 
         Args:
-            ebene1 (int): Group id of a Bezirk
+            ebene2 (int): Group id of a Bezirk
 
         Returns:
-            :obj:`list` of :class:`~pynami.schemas.Baseadmin`: List of possible
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
             Stämmen you are associated with"""
-        return self._get_baseadmin('Ebene3', ebene2)
+        return self._get_baseadmin('Ebene3', ebene2,
+                                   gruppierung=self.__config['stammesnummer'])
 
     def invoices(self, groupId=None, **kwargs):
         """
@@ -352,10 +452,8 @@ class NaMi(object):
         """
         if not groupId:
             groupId = self.__config['stammesnummer']
-        url = f"{URLS['SERVER']}{URLS['INVOICE']}{groupId}/flist"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = f"{URLS['INVOICE']}{groupId}/flist"
+        params = DEFAULT_PARAMS
         params.update(kwargs)
         r = self.s.get(url, params=params)
         return SearchInvoiceSchema().load(self._check_response(r), many=True)
@@ -373,7 +471,7 @@ class NaMi(object):
             :class:`~.grpadmin.Invoice`: The Invoice object containing all
             details.
         """
-        url = f"{URLS['SERVER']}{URLS['INVOICE']}{groupId}/{invId}"
+        url = f"{URLS['INVOICE']}{groupId}/{invId}"
         r = self.s.get(url)
         return InvoiceSchema().load(self._check_response(r))
 
@@ -384,10 +482,25 @@ class NaMi(object):
         Args:
             id_ (int): Id of the invoice (not the regular invoice number)
         """
-        url = f"{URLS['SERVER']}{URLS['INVOICE_PDF']}"
+        url = URLS['INVOICE_PDF']
         params = {'id': id_}
         r = self.s.get(url, params=params)
         open_download_pdf(self._check_response(r))
+
+    def tk_auf_grp(self, grpId, mglId, **kwargs):
+        """
+        Get all possible activities for a certain group
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`): Group id
+            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|
+                    Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
+            activities
+        """
+        return self._get_baseadmin('TK_AUF_GRP', grpId, mglId, **kwargs)
 
     def mgl_activities(self, mgl):
         """
@@ -397,13 +510,11 @@ class NaMi(object):
             mgl (int): Member id (not |DPSG| Mitgliedsnummer)
 
         Returns:
-            :obj:`list` of :class:`~pynami.schemas.Activity`: All activities of
+            :obj:`list` of :class:`~.activity.Activity`: All activities of
             the member (even those which have already ended)
         """
-        url = f"{URLS['SERVER']}{URLS['MGL_TAETIGKEITEN']}{mgl}/flist"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = f"{URLS['MGL_TAETIGKEITEN']}{mgl}/flist"
+        params = DEFAULT_PARAMS
         r = self.s.get(url, params=params)
         return SearchActivitySchema().load(self._check_response(r), many=True)
 
@@ -417,10 +528,10 @@ class NaMi(object):
                 activity search result, e.g. by calling :meth:`mgl_activities`.
 
         Returns:
-            :class:`~.schemas.Activity`: The Activity object containing all
+            :class:`~.activity.Activity`: The Activity object containing all
             details.
         """
-        url = f"{URLS['SERVER']}{URLS['MGL_TAETIGKEITEN']}{mgl}/{id_}"
+        url = f"{URLS['MGL_TAETIGKEITEN']}{mgl}/{id_}"
         r = self.s.get(url)
         return ActivitySchema().load(self._check_response(r))
 
@@ -430,16 +541,16 @@ class NaMi(object):
 
         Args:
             mgl (int): Member id (not |DPSG| Mitgliedsnummer)
-            act (:class:`~.schemas.Activity`): Updated data set. The activity
+            act (:class:`~.activity.Activity`): Updated data set. The activity
                 id is taken form this data set.
 
         Returns:
-            :class:`~.schemas.Activity`: A new updated object
+            :class:`~.activity.Activity`: A new updated object
 
         Warning:
             This has not been tested yet!
         """
-        url = f"{URLS['SERVER']}{URLS['MGL_TAETIGKEITEN']}{mgl}/{act.id}"
+        url = f"{URLS['MGL_TAETIGKEITEN']}{mgl}/{act.id}"
         userjson = ActivitySchema().dumps(act.data)
         print(userjson)
         req = requests.Request('PUT', url,
@@ -458,13 +569,11 @@ class NaMi(object):
             mglId (int): Member id (not |DPSG| Mitgliedsnummer)
 
         Returns:
-            :obj:`list` of :class:`~.schemas.SearchAusbildung`: All trainings
+            :obj:`list` of :class:`~.training.SearchAusbildung`: All trainings
             of the member
         """
-        url = f"{URLS['SERVER']}{URLS['AUSBILDUNG']}{mglId}/flist"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = f"{URLS['AUSBILDUNG']}{mglId}/flist"
+        params = DEFAULT_PARAMS
         r = self.s.get(url, params=params)
         data = self._check_response(r)
         return SearchAusbildungSchema().load(data, many=True)
@@ -480,29 +589,29 @@ class NaMi(object):
                 :meth:`mgl_ausbildungen`.
 
         Returns:
-            :class:`~.schemas.Ausbildung`: The Ausbildung object containing all
-            details about the training.
+            :class:`~.training.Ausbildung`: The Ausbildung object containing
+            all details about the training.
         """
-        url = f"{URLS['SERVER']}{URLS['AUSBILDUNG']}{mglId}/{id_}"
+        url = f"{URLS['AUSBILDUNG']}{mglId}/{id_}"
         r = self.s.get(url)
         return AusbildungSchema().load(self._check_response(r))
 
     def update_ausbildung(self, mglId, ausbildung):
         """
-        Update an activity
+        Update a training
 
         Args:
             mgl (int): Member id (not |DPSG| Mitgliedsnummer)
-            ausbildung (:class:`~.schemas.Ausbildung`): Updated data set. The
+            ausbildung (:class:`~.training.Ausbildung`): Updated data set. The
                 training id is taken form this data set.
 
         Returns:
-            :class:`~.schemas.Ausbildung`: A new updated object
+            :class:`~.training.Ausbildung`: A new updated object
 
         Warning:
             This has not been tested yet!
         """
-        url = f"{URLS['SERVER']}{URLS['AUSBILDUNG']}{mglId}/{ausbildung.id}"
+        url = f"{URLS['AUSBILDUNG']}{mglId}/{ausbildung.id}"
         r = self.s.put(url, json=AusbildungSchema().dumps(ausbildung.data))
         return AusbildungSchema().load(self._check_response(r))
 
@@ -516,14 +625,12 @@ class NaMi(object):
                 be used. Defaults to :data:`True`.
 
         Returns:
-            :obj:`list` of :class:`~.schemas.HistoryEntry`: All history entries
+            :obj:`list` of :class:`~.history.HistoryEntry`: All history entries
             of the member
         """
         key = 'MGL_HISTORY_EXT' if ext else 'MGL_HISTORY'
-        url = f"{URLS['SERVER']}{URLS[key]}{mglId}/flist"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        url = f"{URLS[key]}{mglId}/flist"
+        params = DEFAULT_PARAMS
         r = self.s.get(url, params=params)
         return HistoryEntrySchema().load(self._check_response(r), many=True)
 
@@ -539,42 +646,67 @@ class NaMi(object):
                 be used. Defaults to :data:`True`.
 
         Returns:
-            :class:`~.schemas.MitgliedHistory`: The object containing all vital
+            :class:`~.history.MitgliedHistory`: The object containing all vital
             information about this history entry.
         """
         key = 'MGL_HISTORY_EXT' if ext else 'MGL_HISTORY'
-        url = f"{URLS['SERVER']}{URLS[key]}{mglId}/{id_}"
+        url = f"{URLS[key]}{mglId}/{id_}"
         r = self.s.get(url)
         return MitgliedHistorySchema().load(self._check_response(r))
 
     def bescheinigungen(self, **kwargs):
-        url = f"{URLS['SERVER']}{URLS['FZ']}flist"
-        params = {'page': 1,
-                  'start': 0,
-                  'limit': 10000}
+        """
+        Get all certificates of inspection
+
+        Returns:
+            :obj:`list` of :class:`~.schemas.cogc.SearchBescheinigung`: A list
+            of all your certificates of inspection
+        """
+        url = f"{URLS['FZ']}flist"
+        params = DEFAULT_PARAMS
         params.update(kwargs)
         r = self.s.get(url, params=params)
         data = self._check_response(r)
         return SearchBescheinigungSchema().load(data, many=True)
 
     def get_bescheinigung(self, id_):
-        url = f"{URLS['SERVER']}{URLS['FZ']}{id_}"
+        """
+        View a certificate of inspection by its id
+
+        Args:
+            id_ (int): The internal id of the certificate
+
+        Returns:
+            :class:`~.schemas.cogc.Bescheinigung`: An object holding all
+            important details about the inspection
+        """
+        url = f"{URLS['FZ']}{id_}"
         r = self.s.get(url)
         return BescheinigungSchema().load(self._check_response(r))
 
     def download_bescheinigung(self, id_):
-        url = f"{URLS['SERVER']}{URLS['FZ']}download-pdf-eigene-bescheinigung"
+        """
+        Open a certificate as a |PDF| file
+
+        Args:
+            id_ (int): Internal id of the certificate
+        """
+        url = f"{URLS['FZ']}download-pdf-eigene-bescheinigung"
         params = {'id': id_}
         r = self.s.get(url, params=params)
         open_download_pdf(self._check_response(r))
 
     def download_beantragung(self):
-        url = f"{URLS['SERVER']}{URLS['BEANTRAGUNG']}"
+        """
+        Open the application form for a certificate of good conduct as a |PDF|
+        file.
+        """
+        url = URLS['BEANTRAGUNG']
         r = self.s.get(url)
         open_download_pdf(self._check_response(r))
 
-    def search_all(self, filterString='', searchString='', sortproperty=None,
-                   sortdirection='ASC'):
+    def search_all(self, grpId=None, filterString=None, searchString='',
+                   sortproperty=None, sortdirection='ASC', **kwargs):
         """
         Search function for filtering the whole member list with limited
         filter options.
@@ -592,30 +724,24 @@ class NaMi(object):
                 take the values ``ASC`` (wich is the default) and ``DESC``.
 
         Returns:
-            :obj:`list` of :class:`~pynami.schemas.SearchMitglied`: The search
+            :obj:`list` of :class:`~.mgl.SearchMitglied`: The search
             results
         """
-        sdirvalid = {'ASC', 'DESC'}
-        if sortdirection not in sdirvalid:
-            raise ValueError(f"search_all: 'sortdirection' must be one of "
-                             f"{sdirvalid} but is {sortdirection}.")
-        sort = None
+        assert sortdirection in ['ASC', 'DESC']
+        params = DEFAULT_PARAMS
         if sortproperty:
             keys = SearchMitgliedSchema.__dict__['_declared_fields'].keys()
-            if sortproperty not in keys:
-                raise ValueError(f"search_all: value of 'sortproperty' is not "
-                                 f"in the list of allowed values!")
-            sort = '[{"property":' + f'"{sortproperty}"' + \
-                   f',"direction":"{sortdirection}"' + '}]'
-
-        url = f"{URLS['SERVER']}{URLS['SEARCH_ALL']}" + \
-              f"{self.__config['stammesnummer']}/flist"
-        params = {'filterString': filterString,
-                  'searchString': searchString,
-                  'page': 1,
-                  'start': 0,
-                  'limit': 10000,
-                  'sort': sort}
+            assert sortproperty in keys
+            params.update({'sort': json.dumps([{'property': sortproperty,
+                                                'direction': sortdirection}],
+                                              separators=(',', ':'))})
+        if grpId is None:
+            grpId = self.__config['stammesnummer']
+        url = URLS['SEARCH_ALL'].format(gruppierung=grpId)
+        if filterString:
+            params.update({'filterString': filterString,
+                           'searchString': searchString})
+        params.update(kwargs)
         r = self.s.get(url, params=params)
         return SearchMitgliedSchema().load(self._check_response(r), many=True)
 
@@ -633,67 +759,61 @@ class NaMi(object):
                 amount of values.
 
         Returns:
-            :obj:`list` of :class:`~.schemas.SearchMitglied`: The search
+            :obj:`list` of :class:`~.mgl.SearchMitglied`: The search
             results
 
         See also:
-            :class:`~pynami.search.SearchSchema` for a complete list of search
+            :class:`~.search.SearchSchema` for a complete list of search
             keys
         """
         # this is just a default search
         if not kwargs:
             kwargs.update({'mglStatusId': 'AKTIV',
                            'mglTypeId': 'MITGLIED'})
-
-        # this defaults should avoid pagination
-        params = {
-            'searchedValues': SearchSchema().dumps(kwargs,
-                                                   separators=(',', ':')),
-            'page': 1,
-            'start': 0,
-            'limit': 10000
-        }
-        r = self.s.get(f"{URLS['SERVER']}{URLS['SEARCH']}", params=params)
+        params = DEFAULT_PARAMS
+        params['searchedValues'] = SearchSchema().dumps(kwargs,
+                                                        separators=(',', ':'))
+        r = self.s.get(URLS['SEARCH'], params=params)
         return SearchMitgliedSchema().load(self._check_response(r), many=True)
 
-    def mitglied(self, mglid, method='GET', stammesnummer=None, **kwargs):
+    def mitglied(self, mglId, method='GET', grpId=None, **kwargs):
         """
         Gets or updates a Mitglied.
 
         The keyword arguments are passed on to the |HTTP| communication
 
         Args:
-            mglid (int): ID of the Mitglied. This is not the |NAMI|
+            mglId (int): ID of the Mitglied. This is not the |DPSG|
                 Mitgliedsnummer
             method (:obj:`str`): |HTTP| Method. Should be ``GET`` or ``PUT``,
                 defaults to ``GET``.
-            stammesnummer (:obj:`int`, optional): The |DPSG| Stammesnummer,
+            grpId (:obj:`int`, optional): The |DPSG| Stammesnummer,
                 e.g. ``131913``. The default (:data:`None`) takes the value
                 from the internal attribute :attr:`~NaMi.__config`.
 
         Returns:
-            :class:`~pynami.schemas.Mitglied`: The retrieved or respectively
-            updated Mitglied. Note that the
-            :attr:`~pynami.schemas.MitliedSchema.austrittsdatum` attribute is
-            not part of the returned data set.
+            :class:`~.mgl.Mitglied`: The retrieved or respectively updated
+            Mitglied. Note that the
+            :attr:`~.mgl.MitgliedSchema.austrittsDatum` attribute is not part
+            of the returned data set.
         """
-        if not stammesnummer:
-            stammesnummer = self.__config['stammesnummer']
-        url = f"{URLS['SERVER']}{URLS['GETMGL']}{stammesnummer}/{mglid}"
+        if not grpId:
+            grpId = self.__config['stammesnummer']
+        url = URLS['GETMGL'].format(gruppierung=grpId, mitglied=mglId)
         r = self.s.request(method, url, **kwargs)
         return MitgliedSchema().load(self._check_response(r))
 
 
 if __name__ == '__main__':
     import os
-    """import logging
-    import http.client
-
-    http.client.HTTPConnection.debuglevel = 1
-    logging.basicConfig(level=logging.DEBUG)
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True"""
+#    import logging
+#    import http.client
+#
+#    http.client.HTTPConnection.debuglevel = 1
+#    logging.basicConfig(level=logging.DEBUG)
+#    requests_log = logging.getLogger("requests.packages.urllib3")
+#    requests_log.setLevel(logging.DEBUG)
+#    requests_log.propagate = True
 
     search = {
         'mglStatusId': 'AKTIV',
@@ -705,19 +825,8 @@ if __name__ == '__main__':
                        '.pynami.conf'), 'r') as cfg:
         config = toml.load(cfg)
     with NaMi(config['nami']) as nami:
-        table = []
-#       print(nami.search())
-        for mgl in nami.search(**search):
-            # print(mgl.data['email'])
-            # by default you should only show what the search returns
-            table.append(mgl.tabulate())
 
-            # but you can also fetch the actual user object with more data
-            # beware to not kill the API with numerous requests
-            # details = mgl.get_mitglied(nami)
-            # table.append(details.tabulate())
-
-        print(tabulate(table, headers="keys"))
+        print(tabulate2x(nami.search(**search)))
 
         # print(user.data['kontoverbindung'])
         # user.data['spitzname'] = 'Proff'
@@ -731,50 +840,55 @@ if __name__ == '__main__':
         # user.update(nami)
         user = nami.mitglied('63868')
         print(user.id)
+        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))
 #        nami.download_beantragung()
-        print(nami.bescheinigungen())
-        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
+#        print(nami.bescheinigungen())
+#        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
 #        nami.download_bescheinigung(nami.bescheinigungen()[0].id)
-        print(nami.invoices())
-        print(nami.invoice(100103, nami.invoices()[0].id))
+#        print(tabulate2x(nami.gruppierungen))
+#        print(tabulate2x(nami.grpadmin_grps))
+#        print(nami.invoices())
+#        print(nami.invoice(100103, nami.invoices()[0].id))
 #        nami.download_invoice(nami.invoices()[0].id)
-        print(nami.mgl_history(user.id))
-        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
-        print(nami.mgl_ausbildungen(user.id))
-        print([nami.get_ausbildung(user.id, x.id)
-               for x in nami.mgl_ausbildungen(user.id)])
-        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
-        print(act)
+#        print(nami.mgl_history(user.id))
+#        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
+#        print(nami.mgl_ausbildungen(user.id))
+#        print([nami.get_ausbildung(user.id, x.id)
+#               for x in nami.mgl_ausbildungen(user.id)])
+#        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
+#        print(act)
 #        nami.update_activity(user.id, act)
 #        user.kontoverbindung.bic = "GENODED1SPW"
         # print(MitgliedSchema().dumps(user.data, separators=(',', ':')))
 #        user.update(nami)
 
-        print(nami.countries)
-        print(nami.regionen)
-        print(nami.zahlungskonditionen)
-        print(nami.beitragsarten)
-        print(nami.geschlecht)
-        print(len(nami.staaten))
-        print(nami.konfessionen)
-        print(nami.mgltypes)
-        print(nami.search_all(filterString='geburtsdatum',
-                              searchString='1993-01-02 00:00:00',
-                              sortproperty='entries_vorname'))
-        print(nami.history)
-        print(nami.notifications)
-        print(nami.stats.statsCategories)
-        print(nami.status_list)
-        print(nami.tagList)
-        print(nami.bausteine)
-        print(nami.subdivision)
-        print(nami.activities)
-        print(nami.ebenen)
-        print(nami.ebene1)
-        print(nami.ebene2(nami.ebene1[0].id))
-        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))
-        mylist = [[x.descriptor, x.id] for x in nami.ebenen]
-        print(mylist)
+#        print(tabulate2x(nami.countries()))
+#        print(tabulate2x(nami.regionen()))
+#        print(tabulate2x(nami.zahlungskonditionen()))
+#        print(tabulate2x(nami.beitragsarten()))
+#        print(tabulate2x(nami.beitragsarten_mgl()))
+#        print(tabulate2x(nami.geschlechter()))
+#        print(tabulate2x(nami.staaten()))
+#        print(tabulate2x(nami.konfessionen()))
+#        print(tabulate2x(nami.mgltypes()))
+#        print(tabulate2x(nami.search_all(filterString='vorname',
+#                                         searchString='Sebastian',
+#                                         sortproperty='entries_nachname')))
+#        print(nami.history(filterString='interval', searchString='4'))
+#        print(tabulate2x(nami.notifications(filterString='interval',
+#                                            searchString='4')))
+#        print(nami.stats.statsCategories)
+#        print(nami.status_list)
+#        print(nami.tagList)
+#        print(nami.bausteine)
+#        print(nami.subdivision)
+#        print(nami.activities)
+#        print(tabulate2x(nami.ebenen))
+#        print(nami.ebene1)
+#        print(nami.ebene2(nami.ebene1[0].id))
+#        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))
+#        mylist = [[x.descriptor, x.id] for x in nami.ebenen]
+#        print(mylist)
 #        import csv
 #        import sys
 #        w = csv.writer(sys.stdout, quoting=csv.QUOTE_NONNUMERIC)

@@ -14,11 +14,13 @@ class Baseadmin(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['type', 'descriptor', 'id']
+
     def __repr__(self):
         return f'<{self.type}({self.descriptor}, Id: {self.id})>'
 
     def __str__(self):
-        return f'{self.descriptor}'
+        return f'{self.type}: {self.descriptor} ({self.id})'
 
     @property
     def type(self):

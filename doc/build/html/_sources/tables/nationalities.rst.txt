@@ -1,6 +1,11 @@
 Nationalities
 =============
 
+.. seealso::
+
+	:ref:`urls:Default values`
+		How to get these values
+
 .. csv-table::
 	:header: "Beschreibung", "ID"
 

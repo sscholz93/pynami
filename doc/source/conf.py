@@ -24,7 +24,7 @@ author = 'Sebastian Scholz'
 
 version = '0.2'
 # The full version, including alpha/beta/rc tags
-release = '0.2.1'
+release = '0.2.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,6 +46,7 @@ rst_prolog = """
 .. |IBAN| replace:: :abbr:`IBAN (International Bank Account Number)`
 .. |BIC| replace:: :abbr:`BIC (Bank Identifier Code)`
 .. |JSON| replace:: :abbr:`JSON (JavaScript Object Notation)`
+.. |PDF| replace:: :abbr:`PDF (Portable Document Format)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -58,10 +59,14 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.httpdomain',
-    'sphinx-jsonschema'
+    'sphinx-jsonschema',
+    'sphinx.ext.autosectionlabel'
     # 'sphinx_autodoc_typehints',
     # 'sphinxcontrib.tikz'
 ]
+
+# autosection settings
+autosectionlabel_prefix_document = True
 
 # tikz settings
 tikz_tikzlibraries = 'shapes,arrows'

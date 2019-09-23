@@ -1,5 +1,5 @@
-Activities
-==========
+Activity types
+==============
 
 .. http:get:: /nami/search-multi/all-visible-taetigkeiten
 	

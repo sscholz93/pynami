@@ -2,6 +2,7 @@
 """
 This module contains some base classes
 """
+from collections import OrderedDict
 from marshmallow import Schema, pre_load, fields, post_load
 
 
@@ -11,10 +12,44 @@ class BaseModel:
 
     It stores all data entries as instance attributes.
     """
+    _tabkeys = []
+    _field_blacklist = []
+
     def __init__(self, **kwargs):
         self.data = kwargs
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    def table_view(self, field_blacklist=None):
+        """
+        Prepare nicely formatted output
+
+        Args:
+            field_blacklist (:obj:`list` of :obj:`str`, optional): List of
+                attributes to be skipped
+
+        Returns:
+            dict: All data entries which are not in the blacklist
+        """
+        return {k: v for k, v in self.data.items() if v is not None
+                and v != '' and k not in (self._field_blacklist if not
+                field_blacklist else field_blacklist)}
+
+    def tabulate(self, elements=None):
+        """
+        Prepare ordered tabulated output
+
+        Args:
+            elements (:obj:`list` of :obj:`str`, optional): List of keys which
+                shall be included in the table
+
+        Returns:
+            :class:`~collections.OrderedDict`: Specified data entries
+        """
+        d = OrderedDict()
+        for k in self._tabkeys if not elements else elements:
+            d[k] = getattr(self, k)
+        return d
 
 
 class BaseSchema(Schema):
