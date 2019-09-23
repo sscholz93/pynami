@@ -6,7 +6,7 @@ The package should be quite comfortable to use without loosing flexibility.
 Authentification
 ----------------
 
-.. code-block::
+.. code-block:: python
     :caption: Make use of :std:ref:`the with statement <with>` for automatic login and logout
 
     from pynami.nami import NaMi
@@ -14,7 +14,7 @@ Authentification
     with NaMi(username='MITGLIEDSNUMMER', password='PASSWORD') as nami:
         pass
     
-.. code-block::
+.. code-block:: python
     :caption: Authentificate manually
 
     from pynami.nami import NaMi
@@ -27,7 +27,7 @@ Authentification
 Access default values
 ---------------------
 
-.. code-block::
+.. code-block:: python
     :caption: Get gender names and their internal ids
 
     from pynami.tools import tabulate2x
@@ -37,7 +37,7 @@ Access default values
 Get a specific mitglied
 -----------------------
 
-.. code-block::
+.. code-block:: python
     :caption: Get a mitglied and view its Mitgliedsnummer
 
     id_ = nami.search(vorname='Max', nachname='Mustermann')[0].id
