@@ -13,7 +13,10 @@ class BaseModel:
     It stores all data entries as instance attributes.
     """
     _tabkeys = []
+    """list: Attribute names for tabulating"""
     _field_blacklist = []
+    """list: Attribute names which to be skipped while preparing tabulated
+    output"""
 
     def __init__(self, **kwargs):
         self.data = kwargs
@@ -52,6 +55,24 @@ class BaseModel:
         return d
 
 
+class BaseSearchModel(BaseModel):
+    """
+    Base class for all classes that are loaded from a :class:`BaseSearchSchema`
+    """
+    _tabkeys = ['id', 'descriptor']
+
+    def __repr__(self):
+        return f'<{self.type}({self.descriptor}, Id: {self.id})>'
+
+    def __str__(self):
+        return f'{self.descriptor}'
+
+    @property
+    def type(self):
+        """str: |NAMI| class without the hierarchy"""
+        return self.representedClass.split(".")[-1]
+
+
 class BaseSchema(Schema):
     """
     Base class for all Schemas in this module
@@ -62,7 +83,7 @@ class BaseSchema(Schema):
     Note:
         This class can not be used on its own but only as a derived class.
     """
-    __model__ = None
+    __model__ = BaseModel
     """:std:term:`class`: Main class which this Schema is modelling. Each
     derived class must define this attribute."""
 
@@ -125,6 +146,7 @@ class BaseSearchSchema(BaseSchema):
 
     All search results share the same three attributes.
     """
+    __model__ = BaseSearchModel
 
     id = fields.Raw()
     """:obj:`int` ore :obj:`str`: Internal id of the object This is an integer

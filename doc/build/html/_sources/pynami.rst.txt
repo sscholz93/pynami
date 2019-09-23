@@ -17,7 +17,7 @@ Submodules
 ----------
 
 pynami.constants module
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.constants
    :members:
@@ -25,7 +25,7 @@ pynami.constants module
    :show-inheritance:
 
 pynami.nami module
-------------------
+^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.nami
    :members:
@@ -33,10 +33,17 @@ pynami.nami module
    :show-inheritance:
 
 pynami.util module
-------------------
+^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.util
    :members:
    :undoc-members:
    :show-inheritance:
 
+pynami.tools module
+^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: pynami.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:

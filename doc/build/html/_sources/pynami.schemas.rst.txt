@@ -10,7 +10,7 @@ Submodules
 ----------
 
 pynami.schemas.activity module
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.activity
    :members:
@@ -18,7 +18,7 @@ pynami.schemas.activity module
    :show-inheritance:
 
 pynami.schemas.base module
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.base
    :members:
@@ -27,7 +27,7 @@ pynami.schemas.base module
    :show-inheritance:
 
 pynami.schemas.cogc module
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.cogc
    :members:
@@ -35,7 +35,7 @@ pynami.schemas.cogc module
    :show-inheritance:
 
 pynami.schemas.dashboard module
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.dashboard
    :members:
@@ -43,7 +43,7 @@ pynami.schemas.dashboard module
    :show-inheritance:
 
 pynami.schemas.default module
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.default
    :members:
@@ -51,7 +51,7 @@ pynami.schemas.default module
    :show-inheritance:
 
 pynami.schemas.grpadmin module
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.grpadmin
    :members:
@@ -59,7 +59,7 @@ pynami.schemas.grpadmin module
    :show-inheritance:
 
 pynami.schemas.history module
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.history
    :members:
@@ -67,7 +67,7 @@ pynami.schemas.history module
    :show-inheritance:
 
 pynami.schemas.mgl module
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.mgl
    :members:
@@ -75,7 +75,7 @@ pynami.schemas.mgl module
    :show-inheritance:
 
 pynami.schemas.search module
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.search
    :members:
@@ -83,9 +83,17 @@ pynami.schemas.search module
    :show-inheritance:
 
 pynami.schemas.training module
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: pynami.schemas.training
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pynami.schemas.tags module
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: pynami.schemas.tags
    :members:
    :undoc-members:
    :show-inheritance:

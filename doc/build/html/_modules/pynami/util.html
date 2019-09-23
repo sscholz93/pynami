@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.util &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.util &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -156,45 +156,13 @@
   <h1>Source code for pynami.util</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Some utility functions for convenience</span>
+<span class="sd">Some utility functions that are used by other classes and methods from this #</span>
+<span class="sd">package but not directly connected to the |NAMI|.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">webbrowser</span>
 <span class="kn">import</span> <span class="nn">tempfile</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">subprocess</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
 <span class="kn">from</span> <span class="nn">html.parser</span> <span class="k">import</span> <span class="n">HTMLParser</span>
-
-
-<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.html#pynami.util.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">mitglieder</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Send emails to several members.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        to (str): Must be a valid email address for the primary recipient</span>
-<span class="sd">        mitglieder (list): The List contents can be either</span>
-<span class="sd">            :class:`~pynami.schemas.SearchMitglied` or</span>
-<span class="sd">            :class:`~pynami.schemas.Mitglied`</span>
-<span class="sd">        method (:obj:`str`, optional): If you want to send your mails as bcc</span>
-<span class="sd">            or something else. Currently only bcc is supported.</span>
-<span class="sd">        email1 (:obj:`bool`, optional): If emails should be send to the</span>
-<span class="sd">            primary address of the members.</span>
-<span class="sd">        email2 (:obj:`bool`, optional): If emails should be send to the email</span>
-<span class="sd">            account of the member&#39;s parent.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        str: The mailto link</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">recipients</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">email1</span><span class="p">:</span>
-        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">email2</span><span class="p">:</span>
-        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">emailVertretungsberechtigter</span>
-                           <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
-    <span class="n">bcc</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">recipients</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;mailto:&#39;</span> <span class="o">+</span> <span class="n">to</span> <span class="o">+</span> <span class="s1">&#39;?bcc=&#39;</span> <span class="o">+</span> <span class="n">bcc</span>
-    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">url</span></div>
 
 
 <div class="viewcode-block" id="ExtractHrefParser"><a class="viewcode-back" href="../../pynami.html#pynami.util.ExtractHrefParser">[docs]</a><span class="k">class</span> <span class="nc">ExtractHrefParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
@@ -253,23 +221,6 @@
             <span class="n">tmpfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="n">tmpfile</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="tabulate2x"><a class="viewcode-back" href="../../pynami.html#pynami.util.tabulate2x">[docs]</a><span class="k">def</span> <span class="nf">tabulate2x</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Tabulate a list of objects by tabulating each object first</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        obj (list): The list of objects to tabulate. If they are not from the</span>
-<span class="sd">        same class this may not work.</span>
-<span class="sd">        elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
-<span class="sd">            should be displayed</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        str: Nicely formatted tabulated output</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">tabulate</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
-                    <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;keys&#39;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

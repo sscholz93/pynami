@@ -6,7 +6,6 @@ definitions.
 """
 import json
 import requests
-import pytoml as toml
 
 from .constants import URLS, DEFAULT_PARAMS
 from .schemas.activity import SearchActivitySchema, ActivitySchema
@@ -18,7 +17,9 @@ from .schemas.history import HistoryEntrySchema, MitgliedHistorySchema
 from .schemas.mgl import SearchMitgliedSchema, MitgliedSchema
 from .schemas.search import SearchSchema
 from .schemas.training import SearchAusbildungSchema, AusbildungSchema
-from .util import open_download_pdf, tabulate2x
+from .schemas.tags import TagSchema, SearchTagSchema
+from .util import open_download_pdf
+from .tools import tabulate2x
 
 
 class NamiResponseTypeError(Exception):
@@ -48,7 +49,7 @@ class NaMi(object):
                       and print them in a tabulated form.
 
             from pynami.nami import NaMi
-            from pynami.util import tabulate2x
+            from pynami.tools import tabulate2x
 
             with NaMi(username='MITGLIEDSNUMMER', password='PASSWORD') as nami:
                 print(tabulate2x(nami.search()))
@@ -152,7 +153,8 @@ class NaMi(object):
         if exception_type is None:
             return True
 
-    def _get_baseadmin(self, key, grpId=None, mglId=None, **kwargs):
+    def _get_baseadmin(self, key, grpId=None, mglId=None, taetigkeitId=None,
+                       **kwargs):
         """Base function for retrieving all core lists from the |NAMI|
 
         Args:
@@ -160,6 +162,11 @@ class NaMi(object):
             grpId (:obj:`int` or :obj:`str`, optional): Group id
             mglId (:obj:`int` or :obj:`str`, optional): Member id (not the
                   |DPSG| Mitgliedsnummer)
+            taetigkeitId (:obj:`int`, optional): Id of an activity. A list of
+                all possible ids can be found in the section
+                :ref:`tables/activitytypes:Activity types`. This is only
+                required for the URLs which needs to be formatted with this
+                value.
 
         Keyword Args:
             gruppierung (:obj:`int` or :obj:`str`, optional): Group id, in case
@@ -172,7 +179,7 @@ class NaMi(object):
             :obj:`list` of :class:`~.schemas.default.Baseadmin`: The returned
             default values
         """
-        url = URLS[key.upper()].format(grpId=grpId)
+        url = URLS[key.upper()].format(grpId=grpId, taetigkeitId=taetigkeitId)
         params = {'gruppierung': str(grpId) if grpId else
                       self.__config['stammesnummer'],
                   'mitglied': str(mglId) if mglId else
@@ -497,10 +504,63 @@ class NaMi(object):
                     Mitgliedsnummer)
 
         Returns:
-            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
+            :obj:`list` of :class:`~.default.Baseadmin`: List of possible
             activities
         """
         return self._get_baseadmin('TK_AUF_GRP', grpId, mglId, **kwargs)
+
+    def tk_grp(self, grpId, mglId, **kwargs):
+        """
+        Get all possible groups for an activity
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`): Group id
+            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|
+                    Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.default.Baseadmin`: List of possible
+            groups
+        """
+        return self._get_baseadmin('TK_GRP', grpId, mglId, **kwargs)
+
+    def tk_ug(self, grpId, mglId, taetigkeitId, **kwargs):
+        """
+        Get all possible subdivision for an activity
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`): Group id
+            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|
+                    Mitgliedsnummer)
+            taetigkeitId (int): Id of the activity. A list of all possible ids
+                can be found in the section
+                :ref:`tables/activitytypes:Activity types`.
+
+        Returns:
+            :obj:`list` of :class:`~.default.Baseadmin`: List of possible
+            subdivision
+        """
+        return self._get_baseadmin('TK_UG', grpId, mglId, taetigkeitId,
+                                   **kwargs)
+
+    def tk_caea_grp(self, grpId, mglId, taetigkeitId, **kwargs):
+        """
+        Get all possible access rights for an activity
+
+        Args:
+            grpId (:obj:`int` or :obj:`str`): Group id
+            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|
+                    Mitgliedsnummer)
+            taetigkeitId (int): Id of the activity. A list of all possible ids
+                can be found in the section
+                :ref:`tables/activitytypes:Activity types`.
+
+        Returns:
+            :obj:`list` of :class:`~.default.Baseadmin`: List of possible
+            access rights
+        """
+        return self._get_baseadmin('TK_CAEA_GRP', grpId, mglId, taetigkeitId,
+                                   **kwargs)
 
     def mgl_activities(self, mgl):
         """
@@ -654,6 +714,37 @@ class NaMi(object):
         r = self.s.get(url)
         return MitgliedHistorySchema().load(self._check_response(r))
 
+    def tags(self, mglId, **kwargs):
+        """
+        Get all tags of a member
+
+        Args:
+            mglId (int): Member id (not |DPSG| Mitgliedsnummer)
+
+        Returns:
+            :obj:`list` of :class:`~.tags.SearchTag`: List of the search
+            results
+        """
+        url = URLS['TAGS'].format(mglId=mglId)
+        params = DEFAULT_PARAMS
+        params.update(kwargs)
+        r = self.s.get(url, params=params)
+        return SearchTagSchema().load(self._check_response(r), many=True)
+
+    def get_tag(self, mglId, tagId):
+        """
+        Get a tag by its id
+
+        Args:
+            mglId (int): Member id (not |DPSG| Mitgliedsnummer)
+            tagId(int): Tag id
+
+        Returns:
+            :class:`~.tags.Tag`: The tag object with all important details
+        """
+        url = URLS['GET_TAG'].format(mglId=mglId, tagId=tagId)
+        return TagSchema().load(self._check_response(self.s.get(url)))
+
     def bescheinigungen(self, **kwargs):
         """
         Get all certificates of inspection
@@ -776,20 +867,20 @@ class NaMi(object):
         r = self.s.get(URLS['SEARCH'], params=params)
         return SearchMitgliedSchema().load(self._check_response(r), many=True)
 
-    def mitglied(self, mglId, method='GET', grpId=None, **kwargs):
+    def mitglied(self, mglId=None, method='GET', grpId=None, **kwargs):
         """
         Gets or updates a Mitglied.
 
         The keyword arguments are passed on to the |HTTP| communication
 
         Args:
-            mglId (int): ID of the Mitglied. This is not the |DPSG|
-                Mitgliedsnummer
-            method (:obj:`str`): |HTTP| Method. Should be ``GET`` or ``PUT``,
-                defaults to ``GET``.
+            mglId (:obj:`int`, optional): ID of the Mitglied. This is not the
+                |DPSG| Mitgliedsnummer. Defaults to the user.
+            method (:obj:`str`): |HTTP| Method. Should be ``'GET'`` or
+                ``'PUT'``, defaults to ``'GET'``.
             grpId (:obj:`int`, optional): The |DPSG| Stammesnummer,
                 e.g. ``131913``. The default (:data:`None`) takes the value
-                from the internal attribute :attr:`~NaMi.__config`.
+                from the internal attribute :attr:`__config`.
 
         Returns:
             :class:`~.mgl.Mitglied`: The retrieved or respectively updated
@@ -797,6 +888,8 @@ class NaMi(object):
             :attr:`~.mgl.MitgliedSchema.austrittsDatum` attribute is not part
             of the returned data set.
         """
+        if not mglId:
+            mglId = self.__config['mitgliedsnummer']
         if not grpId:
             grpId = self.__config['stammesnummer']
         url = URLS['GETMGL'].format(gruppierung=grpId, mitglied=mglId)
@@ -806,6 +899,8 @@ class NaMi(object):
 
 if __name__ == '__main__':
     import os
+    from configparser import ConfigParser
+    from .tools import make_csv
 #    import logging
 #    import http.client
 #
@@ -821,26 +916,26 @@ if __name__ == '__main__':
         'untergliederungId': [1, 2],
         'taetigkeitId': 1
     }
-    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       '.pynami.conf'), 'r') as cfg:
-        config = toml.load(cfg)
-    with NaMi(config['nami']) as nami:
+    config = ConfigParser()
+    config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             '.pynami.conf'))
+    with NaMi(dict(config['nami'])) as nami:
 
         print(tabulate2x(nami.search(**search)))
 
-        # print(user.data['kontoverbindung'])
-        # user.data['spitzname'] = 'Proff'
-
-        kv = {"id":"147855", "zahlungsKonditionId":1, "mitgliedsNummer":64697,
-              "institut":"Spard-Bank West", "kontoinhaber":"Sebastian Scholz",
-              "kontonummer":"5024161", "bankleitzahl":"33060592",
-              "iban":"DE15330605920005024161","bic":"GENODED1SPW"}
-        # user.data['kontoverbindung'] = kv
-        # print(user.kontoverbindung)
-        # user.update(nami)
-        user = nami.mitglied('63868')
+        user = nami.mitglied()
         print(user.id)
-        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))
+
+#        print(user.data['kontoverbindung'])
+#        user.data['spitzname'] = 'Chuck Norris'
+#        user.update(nami)
+
+#        print(tabulate2x(nami.tags(user.id)))
+#        print(nami.get_tag(user.id, nami.tags(user.id)[0].id))
+#        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))
+#        print(tabulate2x(nami.tk_grp(100103, user.id)))
+#        print(tabulate2x(nami.tk_ug(100103, user.id, 6)))
+#        print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))
 #        nami.download_beantragung()
 #        print(nami.bescheinigungen())
 #        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
@@ -852,13 +947,13 @@ if __name__ == '__main__':
 #        nami.download_invoice(nami.invoices()[0].id)
 #        print(nami.mgl_history(user.id))
 #        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
-#        print(nami.mgl_ausbildungen(user.id))
+#        print(tabulate2x(nami.mgl_ausbildungen(user.id)))
 #        print([nami.get_ausbildung(user.id, x.id)
 #               for x in nami.mgl_ausbildungen(user.id)])
+#        print(tabulate2x(nami.mgl_activities(user.id)))
 #        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
 #        print(act)
 #        nami.update_activity(user.id, act)
-#        user.kontoverbindung.bic = "GENODED1SPW"
         # print(MitgliedSchema().dumps(user.data, separators=(',', ':')))
 #        user.update(nami)
 
@@ -882,14 +977,9 @@ if __name__ == '__main__':
 #        print(nami.tagList)
 #        print(nami.bausteine)
 #        print(nami.subdivision)
-#        print(nami.activities)
+#        print(tabulate2x(nami.activities))
 #        print(tabulate2x(nami.ebenen))
-#        print(nami.ebene1)
-#        print(nami.ebene2(nami.ebene1[0].id))
-#        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))
-#        mylist = [[x.descriptor, x.id] for x in nami.ebenen]
-#        print(mylist)
-#        import csv
-#        import sys
-#        w = csv.writer(sys.stdout, quoting=csv.QUOTE_NONNUMERIC)
-#        print(w.writerows(mylist))
+#        print(tabulate2x(nami.ebene1))
+#        print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))
+#        print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))
+#        print(make_csv(nami.ebenen))

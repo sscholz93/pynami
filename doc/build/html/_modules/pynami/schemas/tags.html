@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.default &mdash; pynami 0.2.3 documentation</title>
+  <title>pynami.schemas.tags &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -140,7 +140,7 @@
         
           <li><a href="../schemas.html">pynami.schemas</a> &raquo;</li>
         
-      <li>pynami.schemas.default</li>
+      <li>pynami.schemas.tags</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,39 +155,68 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for pynami.schemas.default</h1><div class="highlight"><pre>
+  <h1>Source code for pynami.schemas.tags</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Schema for default values</span>
+<span class="sd">Schemas for tags</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 
 
-<div class="viewcode-block" id="Baseadmin"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.default.Baseadmin">[docs]</a><span class="k">class</span> <span class="nc">Baseadmin</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
+<div class="viewcode-block" id="Tag"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.tags.Tag">[docs]</a><span class="k">class</span> <span class="nc">Tag</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base data class for all default values and their id mapping.</span>
+<span class="sd">    Base data class for a tag</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;descriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Tag(</span><span class="si">{self.tag}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.type}</span><span class="s1">: </span><span class="si">{self.descriptor}</span><span class="s1"> (</span><span class="si">{self.id}</span><span class="s1">)&#39;</span></div>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.tag}</span><span class="s1">&#39;</span></div>
 
 
-<div class="viewcode-block" id="BaseadminSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.default.BaseadminSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseadminSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="TagSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.tags.TagSchema">[docs]</a><span class="k">class</span> <span class="nc">TagSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Schema class for the :class:`Baseadmin` class</span>
-
-<span class="sd">    All the default values only consist of the same four attributes</span>
+<span class="sd">    Schema class for the :class:`Tag` class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Baseadmin</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Tag</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;str: Name of this value. This will be empty in many cases.&quot;&quot;&quot;</span></div>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Id of this tag&quot;&quot;&quot;</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Actual value of the tag&quot;&quot;&quot;</span>
+    <span class="n">tagId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Same as :attr:`id`&quot;&quot;&quot;</span>
+    <span class="n">mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;str: Surname and first name of the member this tag belongs to&quot;&quot;&quot;</span>
+    <span class="n">mitgliedId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;int: Member id (not |DPSG| Mitgliedsnummer)&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="SearchTag"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.tags.SearchTag">[docs]</a><span class="k">class</span> <span class="nc">SearchTag</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base data class for a tag that came up as a search result.</span>
+
+<span class="sd">    This class is intended to be instantiated by calling the</span>
+<span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="SearchTagSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.tags.SearchTagSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchTagSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Schema class for the :class:`SearchBescheinigung` class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchTag</span>
+
+    <span class="n">entries_tag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;tag&#39;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Actual value of the tag&quot;&quot;&quot;</span>
+    <span class="n">entries_identitaet</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;identitaet&#39;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;str: Identity of the member with the |DPSG| Mitgliedsnummer&quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

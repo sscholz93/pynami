@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.training &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.schemas.training &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -162,21 +162,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 
 
-<div class="viewcode-block" id="SearchAusbildung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.training.SearchAusbildung">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchAusbildung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.training.SearchAusbildung">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildung</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a training obtained as a search result.</span>
 
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchAusbildung(</span><span class="si">{self.entries_baustein}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;vstgTag&#39;</span><span class="p">,</span> <span class="s1">&#39;baustein&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span></div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;SearchAusbildung(</span><span class="si">{self.baustein}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span></div>
 
 
 <div class="viewcode-block" id="SearchAusbildungSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.training.SearchAusbildungSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchAusbildungSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
@@ -185,17 +184,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchAusbildung</span>
 
-    <span class="n">entries_vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">entries_vstgTag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;vstgTag&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Day of the training event&quot;&quot;&quot;</span>
-    <span class="n">entries_veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_veranstalter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;veranstalter&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Who organized the event (e.g. a `Bezirk`)&quot;&quot;&quot;</span>
-    <span class="n">entries_vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_vstgName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;vstgName&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Name of the event&quot;&quot;&quot;</span>
-    <span class="n">entries_baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_baustein</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;baustein&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Name of the training (e.g. ``&#39;Baustein 3a&#39;``)&quot;&quot;&quot;</span>
-    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;id_&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: |NAMI| id of this training entry&quot;&quot;&quot;</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;mitglied&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Who absolved the training&quot;&quot;&quot;</span></div>
 
 

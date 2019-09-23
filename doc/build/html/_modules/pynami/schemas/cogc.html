@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.cogc &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.schemas.cogc &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -163,11 +163,11 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 <span class="kn">from</span> <span class="nn">..util</span> <span class="k">import</span> <span class="n">extract_url</span>
 
 
-<div class="viewcode-block" id="SearchBescheinigung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.cogc.SearchBescheinigung">[docs]</a><span class="k">class</span> <span class="nc">SearchBescheinigung</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchBescheinigung"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.cogc.SearchBescheinigung">[docs]</a><span class="k">class</span> <span class="nc">SearchBescheinigung</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base data class for a certificate about the inspection of a certificate of</span>
 <span class="sd">    goos conduct that came up as a search result.</span>
@@ -175,12 +175,7 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;{self.representedClass.split(&quot;.&quot;)[-1]}&#39;</span> <span class="o">+</span> \
-               <span class="n">f</span><span class="s1">&#39;(</span><span class="si">{self.descriptor}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span></div>
+    <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="SearchBescheinigungSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.cogc.SearchBescheinigungSchema">[docs]</a><span class="k">class</span> <span class="nc">SearchBescheinigungSchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>

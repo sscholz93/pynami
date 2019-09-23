@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.constants &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.constants &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -195,6 +195,25 @@
 
 
 <div class="viewcode-block" id="URLS"><a class="viewcode-back" href="../../pynami.html#pynami.constants.URLS">[docs]</a><span class="k">class</span> <span class="nc">URLS</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">URLMetaClass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contains all relative |REST| URLs.</span>
+
+<span class="sd">    The class attributes can be accessed like a dict in order to get the full</span>
+<span class="sd">    |URL| (prepeding the :data:`base URL &lt;BASE_URL&gt;`). The relative |URL|</span>
+<span class="sd">    strings can be retrieved like normal class attributes.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; URLS.AUTH</span>
+<span class="sd">        &#39;/nami/auth/manual/sessionStartup&#39;</span>
+<span class="sd">        &gt;&gt;&gt; URLS[&#39;AUTH&#39;]</span>
+<span class="sd">        &#39;https://nami.dpsg.de/ica/rest/nami/auth/manual/sessionStartup&#39;</span>
+
+<span class="sd">    This is not just a dict so that each |URL| can be documented.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Some URLs have to formatted with some variables.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">SERVER</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">AUTH</span> <span class="o">=</span> <span class="s1">&#39;/nami/auth/manual/sessionStartup&#39;</span>
     <span class="n">SEARCH</span> <span class="o">=</span> <span class="s1">&#39;/nami/search-multi/result-list&#39;</span>
@@ -241,7 +260,16 @@
     <span class="n">FZ</span> <span class="o">=</span> <span class="s1">&#39;/nami/fz/eigene-bescheinigungen/&#39;</span>
     <span class="n">BEANTRAGUNG</span> <span class="o">=</span> <span class="s1">&#39;/fz-beantragen/download-beantragung&#39;</span>
     <span class="n">TK_AUF_GRP</span> <span class="o">=</span> <span class="s1">&#39;//nami/taetigkeitaufgruppierung/filtered/gruppierung/&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;gruppierung/</span><span class="si">{grpId}</span><span class="s1">/&#39;</span></div>
+        <span class="s1">&#39;gruppierung/</span><span class="si">{grpId}</span><span class="s1">/&#39;</span>
+    <span class="n">TK_GRP</span> <span class="o">=</span> <span class="s1">&#39;//nami/gf/gruppierung&#39;</span>
+    <span class="n">TK_UG</span> <span class="o">=</span> <span class="s1">&#39;//nami/untergliederungauftaetigkeit/filtered/untergliederung/&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;taetigkeit/</span><span class="si">{taetigkeitId}</span><span class="s1">/&#39;</span>
+    <span class="n">TK_CAEA_GRP</span> <span class="o">=</span> <span class="s1">&#39;//nami/caea-group/filtered-for-navigation/taetigkeit/&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;taetigkeit/</span><span class="si">{taetigkeitId}</span><span class="s1">/&#39;</span>
+    <span class="n">TAGS</span> <span class="o">=</span> <span class="s1">&#39;/nami/mitglied-tagged-item/filtered-for-navigation/identitaet/&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;identitaet/</span><span class="si">{mglId}</span><span class="s1">/flist&#39;</span>
+    <span class="n">GET_TAG</span> <span class="o">=</span> <span class="s1">&#39;/nami/mitglied-tagged-item/filtered-for-navigation/&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;identitaet/identitaet/</span><span class="si">{mglId}</span><span class="s1">/</span><span class="si">{tagId}</span><span class="s1">&#39;</span></div>
 </pre></div>
 
            </div>

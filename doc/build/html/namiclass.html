@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Main class &mdash; pynami 0.2.2 documentation</title>
+  <title>Main class &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -231,7 +231,7 @@ when exiting through the <code class="xref py py-meth docutils literal notransla
 
 <dl class="method">
 <dt id="pynami.nami.NaMi._get_baseadmin">
-<code class="sig-name descname">_get_baseadmin</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">grpId=None</em>, <em class="sig-param">mglId=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi._get_baseadmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi._get_baseadmin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_baseadmin</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">grpId=None</em>, <em class="sig-param">mglId=None</em>, <em class="sig-param">taetigkeitId=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi._get_baseadmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi._get_baseadmin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base function for retrieving all core lists from the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,6 +240,11 @@ when exiting through the <code class="xref py py-meth docutils literal notransla
 <li><p><strong>grpId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Group id</p></li>
 <li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Member id (not the
 <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>taetigkeitId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Id of an activity. A list of
+all possible ids can be found in the section
+<a class="reference internal" href="tables/activitytypes.html#activity-types"><span class="std std-ref">Activity types</span></a>. This is only
+required for the URLs which needs to be formatted with this
+value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -724,6 +729,78 @@ activities</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pynami.nami.NaMi.tk_grp">
+<code class="sig-name descname">tk_grp</code><span class="sig-paren">(</span><em class="sig-param">grpId</em>, <em class="sig-param">mglId</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.tk_grp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.tk_grp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all possible groups for an activity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grpId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Group id</p></li>
+<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr>
+Mitgliedsnummer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of possible
+groups</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.default.Baseadmin" title="pynami.schemas.default.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.tk_ug">
+<code class="sig-name descname">tk_ug</code><span class="sig-paren">(</span><em class="sig-param">grpId</em>, <em class="sig-param">mglId</em>, <em class="sig-param">taetigkeitId</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.tk_ug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.tk_ug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all possible subdivision for an activity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grpId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Group id</p></li>
+<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr>
+Mitgliedsnummer)</p></li>
+<li><p><strong>taetigkeitId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the activity. A list of all possible ids
+can be found in the section
+<a class="reference internal" href="tables/activitytypes.html#activity-types"><span class="std std-ref">Activity types</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of possible
+subdivision</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.default.Baseadmin" title="pynami.schemas.default.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.tk_caea_grp">
+<code class="sig-name descname">tk_caea_grp</code><span class="sig-paren">(</span><em class="sig-param">grpId</em>, <em class="sig-param">mglId</em>, <em class="sig-param">taetigkeitId</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.tk_caea_grp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.tk_caea_grp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all possible access rights for an activity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grpId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Group id</p></li>
+<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Member id (not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr>
+Mitgliedsnummer)</p></li>
+<li><p><strong>taetigkeitId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Id of the activity. A list of all possible ids
+can be found in the section
+<a class="reference internal" href="tables/activitytypes.html#activity-types"><span class="std std-ref">Activity types</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of possible
+access rights</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.default.Baseadmin" title="pynami.schemas.default.Baseadmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Baseadmin</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pynami.nami.NaMi.mgl_activities">
 <code class="sig-name descname">mgl_activities</code><span class="sig-paren">(</span><em class="sig-param">mgl</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.mgl_activities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.mgl_activities" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of all activities of a member</p>
@@ -901,6 +978,44 @@ information about this history entry.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pynami.nami.NaMi.tags">
+<code class="sig-name descname">tags</code><span class="sig-paren">(</span><em class="sig-param">mglId</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all tags of a member</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of the search
+results</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="pynami.schemas.html#pynami.schemas.tags.SearchTag" title="pynami.schemas.tags.SearchTag"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchTag</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pynami.nami.NaMi.get_tag">
+<code class="sig-name descname">get_tag</code><span class="sig-paren">(</span><em class="sig-param">mglId</em>, <em class="sig-param">tagId</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.get_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tag by its id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Member id (not <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer)</p></li>
+<li><p><strong>tagId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Tag id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The tag object with all important details</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.tags.Tag" title="pynami.schemas.tags.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pynami.nami.NaMi.bescheinigungen">
 <code class="sig-name descname">bescheinigungen</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.bescheinigungen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.bescheinigungen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all certificates of inspection</p>
@@ -1007,23 +1122,23 @@ results</p>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.search.SearchSchema" title="pynami.schemas.search.SearchSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchSchema</span></code></a> for a complete list of search
+<p><a class="reference internal" href="search_mitglieder.html#pynami.schemas.search.SearchSchema" title="pynami.schemas.search.SearchSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchSchema</span></code></a> for a complete list of search
 keys</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynami.nami.NaMi.mitglied">
-<code class="sig-name descname">mitglied</code><span class="sig-paren">(</span><em class="sig-param">mglId</em>, <em class="sig-param">method='GET'</em>, <em class="sig-param">grpId=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.mitglied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.mitglied" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mitglied</code><span class="sig-paren">(</span><em class="sig-param">mglId=None</em>, <em class="sig-param">method='GET'</em>, <em class="sig-param">grpId=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/nami.html#NaMi.mitglied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.nami.NaMi.mitglied" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets or updates a Mitglied.</p>
 <p>The keyword arguments are passed on to the <abbr title="Hypertext Transfer Protocol">HTTP</abbr> communication</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – ID of the Mitglied. This is not the <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr>
-Mitgliedsnummer</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – <abbr title="Hypertext Transfer Protocol">HTTP</abbr> Method. Should be <code class="docutils literal notranslate"><span class="pre">GET</span></code> or <code class="docutils literal notranslate"><span class="pre">PUT</span></code>,
-defaults to <code class="docutils literal notranslate"><span class="pre">GET</span></code>.</p></li>
+<li><p><strong>mglId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – ID of the Mitglied. This is not the
+<abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Mitgliedsnummer. Defaults to the user.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – <abbr title="Hypertext Transfer Protocol">HTTP</abbr> Method. Should be <code class="docutils literal notranslate"><span class="pre">'GET'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'PUT'</span></code>, defaults to <code class="docutils literal notranslate"><span class="pre">'GET'</span></code>.</p></li>
 <li><p><strong>grpId</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – The <abbr title="Deutsche Pfadfinderschaft Sankt Georg">DPSG</abbr> Stammesnummer,
 e.g. <code class="docutils literal notranslate"><span class="pre">131913</span></code>. The default (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>) takes the value
 from the internal attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">__config</span></code>.</p></li>

@@ -13,6 +13,8 @@
 import os
 import sys
 
+from pynami import __version__
+
 sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -22,9 +24,9 @@ project = 'pynami'
 copyright = '2019, Sebastian Scholz'
 author = 'Sebastian Scholz'
 
-version = '0.2'
+version = __version__
 # The full version, including alpha/beta/rc tags
-release = '0.2.2'
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -47,6 +49,8 @@ rst_prolog = """
 .. |BIC| replace:: :abbr:`BIC (Bank Identifier Code)`
 .. |JSON| replace:: :abbr:`JSON (JavaScript Object Notation)`
 .. |PDF| replace:: :abbr:`PDF (Portable Document Format)`
+.. |CSV| replace:: :abbr:`CSV (Comma-separated values)`
+.. |AG| replace:: :abbr:`AG (Arbeitsgruppe)`
 """
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom

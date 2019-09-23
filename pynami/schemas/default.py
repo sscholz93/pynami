@@ -4,10 +4,10 @@ Schema for default values
 """
 from marshmallow import fields
 
-from .base import BaseSearchSchema, BaseModel
+from .base import BaseSearchSchema, BaseSearchModel
 
 
-class Baseadmin(BaseModel):
+class Baseadmin(BaseSearchModel):
     """
     Base data class for all default values and their id mapping.
 
@@ -16,17 +16,8 @@ class Baseadmin(BaseModel):
     """
     _tabkeys = ['type', 'descriptor', 'id']
 
-    def __repr__(self):
-        return f'<{self.type}({self.descriptor}, Id: {self.id})>'
-
     def __str__(self):
         return f'{self.type}: {self.descriptor} ({self.id})'
-
-    @property
-    def type(self):
-        """str: Last part of the |NAMI| class structure which is stored in the
-        ``representedClass`` attribute for all the default values."""
-        return self.representedClass.split(".")[-1]
 
 
 class BaseadminSchema(BaseSearchSchema):

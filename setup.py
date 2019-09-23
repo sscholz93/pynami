@@ -1,10 +1,12 @@
 from setuptools import setup, find_packages
 
+from .pynami import __version__
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='pynami',
-      version='0.1.0',
+      version=__version__,
       description='Python wrapper forthe NaMi API',
       long_description=long_description,
       long_description_content_type="text/markdown",
@@ -16,7 +18,6 @@ setup(name='pynami',
       author='Sebastian Scholz',
       author_email='sebastian.scholz@pfadfinder-weeg.de',
       packages=find_packages(),
-      install_requires=['requests', 'marshmallow', 'tabulate', 'pytoml',
-                        'sphinxcontrib-httpdomain', 'sphinx-rtd-theme',
-                        'sphinx-jsonschema'],
+      install_requires=['marshmallow', 'tabulate', 'sphinxcontrib-httpdomain',
+                        'sphinx-rtd-theme', 'sphinx-jsonschema'],
       include_package_data=True)

@@ -39,6 +39,25 @@ class URLMetaClass(type):
 
 
 class URLS(metaclass=URLMetaClass):
+    """
+    Contains all relative |REST| URLs.
+
+    The class attributes can be accessed like a dict in order to get the full
+    |URL| (prepeding the :data:`base URL <BASE_URL>`). The relative |URL|
+    strings can be retrieved like normal class attributes.
+
+    Example:
+        >>> URLS.AUTH
+        '/nami/auth/manual/sessionStartup'
+        >>> URLS['AUTH']
+        'https://nami.dpsg.de/ica/rest/nami/auth/manual/sessionStartup'
+
+    This is not just a dict so that each |URL| can be documented.
+
+    Note:
+        Some URLs have to formatted with some variables.
+    """
+
     SERVER = ''
     AUTH = '/nami/auth/manual/sessionStartup'
     SEARCH = '/nami/search-multi/result-list'
@@ -86,3 +105,12 @@ class URLS(metaclass=URLMetaClass):
     BEANTRAGUNG = '/fz-beantragen/download-beantragung'
     TK_AUF_GRP = '//nami/taetigkeitaufgruppierung/filtered/gruppierung/' + \
         'gruppierung/{grpId}/'
+    TK_GRP = '//nami/gf/gruppierung'
+    TK_UG = '//nami/untergliederungauftaetigkeit/filtered/untergliederung/' + \
+        'taetigkeit/{taetigkeitId}/'
+    TK_CAEA_GRP = '//nami/caea-group/filtered-for-navigation/taetigkeit/' + \
+        'taetigkeit/{taetigkeitId}/'
+    TAGS = '/nami/mitglied-tagged-item/filtered-for-navigation/identitaet/' + \
+        'identitaet/{mglId}/flist'
+    GET_TAG = '/nami/mitglied-tagged-item/filtered-for-navigation/' + \
+        'identitaet/identitaet/{mglId}/{tagId}'

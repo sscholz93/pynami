@@ -5,7 +5,7 @@ Schemas for operations on members
 import json
 from marshmallow import fields, pre_load, post_dump
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 
 
 class NamiKonto(BaseModel):
@@ -90,7 +90,7 @@ class NamiKontoSchema(BaseSchema):
         return json.dumps(data, separators=(',', ':'))
 
 
-class SearchMitglied(BaseModel):
+class SearchMitglied(BaseSearchModel):
     """
     Main class for a Mitglied which came up as a search result. Unfortunately
     there cannot be just one Mitglied class because the search results lack
@@ -215,7 +215,8 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """bool: If the member data may be used after the membership ends"""
     entries_woelfling = fields.String(attribute='woelfling')
     """str: Tier field. Not sure what it is for."""
-    entries_gruppierung = fields.String(allow_none=True)
+    entries_gruppierung = fields.String(allow_none=True,
+                                        attribute='gruppierung')
     """str: Group name including its id"""
     entries_gruppierungId = fields.String(allow_none=True,
                                           attribute='gruppierungId')

@@ -4,21 +4,24 @@ Schemas for activities
 """
 from marshmallow import fields
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 
 
-class SearchActivity(BaseModel):
+class SearchActivity(BaseSearchModel):
     """
     Main class for activities wich come up as a search result.
 
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'taetigkeit', 'untergliederung', 'aktivVon', 'aktivBis']
+
     def __repr__(self):
-        return f'<SearchActivity({self.entries_taetigkeit}, Id: {self.id})>'
+        return f'<SearchActivity({self.taetigkeit} ' + \
+            '({self.untergliederung}), Id: {self.id})>'
 
     def __str__(self):
-        return f'{self.entries_taetigkeit}'
+        return f'{self.taetigkeit} ({self.untergliederung})'
 
 
 class SearchActivitySchema(BaseSearchSchema):
@@ -27,25 +30,26 @@ class SearchActivitySchema(BaseSearchSchema):
     """
     __model__ = SearchActivity
 
-    entries_aktivBis = fields.DateTime(allow_none=True)
+    entries_aktivBis = fields.DateTime(allow_none=True, attribute='aktivBis')
     """:class:`~datetime.datetime`: End date"""
-    entries_beitragsArt = fields.String()
+    entries_beitragsArt = fields.String(attribute='beitragsArt')
     """str: Fee type"""
-    entries_caeaGroup = fields.String()
+    entries_caeaGroup = fields.String(attribute='caeaGroup')
     """str: Access rights for the group"""
-    entries_aktivVon = fields.DateTime(allow_none=True)
+    entries_aktivVon = fields.DateTime(allow_none=True, attribute='aktivVon')
     """:class:`~datetime.datetime`: Start date"""
-    entries_anlagedatum = fields.DateTime(allow_none=True)
+    entries_anlagedatum = fields.DateTime(allow_none=True,
+                                          attribute='anlageDatum')
     """:class:`~datetime.datetime`: Creation date"""
-    entries_caeaGroupForGf = fields.String()
+    entries_caeaGroupForGf = fields.String(attribute='caeaGroupForGf')
     """str: Access rights for sub group"""
-    entries_untergliederung = fields.String()
+    entries_untergliederung = fields.String(attribute='untergliederung')
     """str: Tier or group association"""
-    entries_taetigkeit = fields.String()
+    entries_taetigkeit = fields.String(attribute='taetigkeit')
     """str: Kind of activity"""
-    entries_gruppierung = fields.String()
+    entries_gruppierung = fields.String(attribute='gruppierung')
     """str: Group associated wiht the activity"""
-    entries_mitglied = fields.String()
+    entries_mitglied = fields.String(attribute='mitglied')
     """str: Member"""
 
 

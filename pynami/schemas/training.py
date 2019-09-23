@@ -4,21 +4,20 @@ Schemas for trainings
 """
 from marshmallow import fields
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 
 
-class SearchAusbildung(BaseModel):
+class SearchAusbildung(BaseSearchModel):
     """
     Main class for a training obtained as a search result.
 
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
-    def __repr__(self):
-        return f'<SearchAusbildung({self.entries_baustein}, Id: {self.id})>'
+    _tabkeys = ['id', 'vstgTag', 'baustein']
 
-    def __str__(self):
-        return f'{self.descriptor}'
+    def __repr__(self):
+        return f'<SearchAusbildung({self.baustein}, Id: {self.id})>'
 
 
 class SearchAusbildungSchema(BaseSearchSchema):
@@ -27,17 +26,17 @@ class SearchAusbildungSchema(BaseSearchSchema):
     """
     __model__ = SearchAusbildung
 
-    entries_vstgTag = fields.DateTime()
+    entries_vstgTag = fields.DateTime(attribute='vstgTag')
     """:class:`~datetime.datetime`: Day of the training event"""
-    entries_veranstalter = fields.String()
+    entries_veranstalter = fields.String(attribute='veranstalter')
     """str: Who organized the event (e.g. a `Bezirk`)"""
-    entries_vstgName = fields.String()
+    entries_vstgName = fields.String(attribute='vstgName')
     """str: Name of the event"""
-    entries_baustein = fields.String()
+    entries_baustein = fields.String(attribute='baustein')
     """str: Name of the training (e.g. ``'Baustein 3a'``)"""
-    entries_id = fields.Integer()
+    entries_id = fields.Integer(attribute='id_')
     """int: |NAMI| id of this training entry"""
-    entries_mitglied = fields.String()
+    entries_mitglied = fields.String(attribute='mitglied')
     """str: Who absolved the training"""
 
 

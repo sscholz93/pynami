@@ -5,11 +5,11 @@ conduct.
 """
 from marshmallow import fields, pre_load
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 from ..util import extract_url
 
 
-class SearchBescheinigung(BaseModel):
+class SearchBescheinigung(BaseSearchModel):
     """
     Base data class for a certificate about the inspection of a certificate of
     goos conduct that came up as a search result.
@@ -17,12 +17,7 @@ class SearchBescheinigung(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
-    def __repr__(self):
-        return f'<{self.representedClass.split(".")[-1]}' + \
-               f'({self.descriptor}, Id: {self.id})>'
-
-    def __str__(self):
-        return f'{self.descriptor}'
+    pass
 
 
 class SearchBescheinigungSchema(BaseSearchSchema):

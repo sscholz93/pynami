@@ -4,10 +4,10 @@ Schemas for history entries
 """
 from marshmallow import fields
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 
 
-class HistoryEntry(BaseModel):
+class HistoryEntry(BaseSearchModel):
     """
     Main class for history entries
 
@@ -23,10 +23,6 @@ class HistoryEntry(BaseModel):
 
     def __str__(self):
         return f'{self.entries_operation}'
-
-    @property
-    def type(self):
-        return self.representedClass.split('.')[-1]
 
 
 class HistoryEntrySchema(BaseSearchSchema):

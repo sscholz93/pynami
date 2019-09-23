@@ -4,10 +4,10 @@ Schemas for dashboard functionalities
 """
 from marshmallow import fields
 
-from .base import BaseSchema, BaseSearchSchema, BaseModel
+from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
 
 
-class Notification(BaseModel):
+class Notification(BaseSearchModel):
     """
     Main class for notification like tier changes of a mitglied.
 

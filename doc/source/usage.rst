@@ -30,7 +30,7 @@ Access default values
 .. code-block::
     :caption: Get gender names and their internal ids
 
-    from pynami.util import tabulate2x
+    from pynami.tools import tabulate2x
 
     print(tabulate2x(nami.geschlechter()))
 

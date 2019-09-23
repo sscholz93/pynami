@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.base &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.schemas.base &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -171,7 +171,10 @@
 <span class="sd">    It stores all data entries as instance attributes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;list: Attribute names for tabulating&quot;&quot;&quot;</span>
     <span class="n">_field_blacklist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;list: Attribute names which to be skipped while preparing tabulated</span>
+<span class="sd">    output&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
@@ -210,6 +213,24 @@
         <span class="k">return</span> <span class="n">d</span></div></div>
 
 
+<div class="viewcode-block" id="BaseSearchModel"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseSearchModel">[docs]</a><span class="k">class</span> <span class="nc">BaseSearchModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all classes that are loaded from a :class:`BaseSearchSchema`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;descriptor&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;</span><span class="si">{self.type}</span><span class="s1">(</span><span class="si">{self.descriptor}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.descriptor}</span><span class="s1">&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;str: |NAMI| class without the hierarchy&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">representedClass</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
 <div class="viewcode-block" id="BaseSchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseSchema">[docs]</a><span class="k">class</span> <span class="nc">BaseSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for all Schemas in this module</span>
@@ -220,7 +241,7 @@
 <span class="sd">    Note:</span>
 <span class="sd">        This class can not be used on its own but only as a derived class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__model__</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">BaseModel</span>
     <span class="sd">&quot;&quot;&quot;:std:term:`class`: Main class which this Schema is modelling. Each</span>
 <span class="sd">    derived class must define this attribute.&quot;&quot;&quot;</span>
 
@@ -283,6 +304,7 @@
 
 <span class="sd">    All search results share the same three attributes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__model__</span> <span class="o">=</span> <span class="n">BaseSearchModel</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Raw</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;:obj:`int` ore :obj:`str`: Internal id of the object This is an integer</span>

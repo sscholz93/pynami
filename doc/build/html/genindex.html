@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pynami 0.2.2 documentation</title>
+  <title>Index &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -196,6 +196,8 @@
 </li>
         <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSchema.__model__">(BaseSchema attribute)</a>
 </li>
+        <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSearchSchema.__model__">(BaseSearchSchema attribute)</a>
+</li>
         <li><a href="pynami.schemas.html#pynami.schemas.cogc.BescheinigungSchema.__model__">(BescheinigungSchema attribute)</a>
 </li>
         <li><a href="pynami.schemas.html#pynami.schemas.history.HistoryEntrySchema.__model__">(HistoryEntrySchema attribute)</a>
@@ -222,9 +224,13 @@
 </li>
         <li><a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.__model__">(SearchSchema attribute)</a>
 </li>
+        <li><a href="pynami.schemas.html#pynami.schemas.tags.SearchTagSchema.__model__">(SearchTagSchema attribute)</a>
+</li>
         <li><a href="pynami.schemas.html#pynami.schemas.dashboard.StatCatSchema.__model__">(StatCatSchema attribute)</a>
 </li>
         <li><a href="pynami.schemas.html#pynami.schemas.dashboard.StatsSchema.__model__">(StatsSchema attribute)</a>
+</li>
+        <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.__model__">(TagSchema attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -292,6 +298,8 @@
       <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSchema">BaseSchema (class in pynami.schemas.base)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSchema.Meta">BaseSchema.Meta (class in pynami.schemas.base)</a>
+</li>
+      <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSearchModel">BaseSearchModel (class in pynami.schemas.base)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSearchSchema">BaseSearchSchema (class in pynami.schemas.base)</a>
 </li>
@@ -549,10 +557,10 @@
         <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierung">(SearchMitgliedSchema attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_gruppierungId">entries_gruppierungId (SearchMitgliedSchema attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pynami.schemas.html#pynami.schemas.history.HistoryEntrySchema.entries_id">entries_id (HistoryEntrySchema attribute)</a>
 
       <ul>
@@ -563,6 +571,8 @@
         <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_id">(SearchMitgliedSchema attribute)</a>
 </li>
       </ul></li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.SearchTagSchema.entries_identitaet">entries_identitaet (SearchTagSchema attribute)</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_jungpfadfinder">entries_jungpfadfinder (SearchMitgliedSchema attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_konfession">entries_konfession (SearchMitgliedSchema attribute)</a>
@@ -660,6 +670,8 @@
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_stufe">entries_stufe (SearchMitgliedSchema attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.activity.SearchActivitySchema.entries_taetigkeit">entries_taetigkeit (SearchActivitySchema attribute)</a>
+</li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.SearchTagSchema.entries_tag">entries_tag (SearchTagSchema attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitgliedSchema.entries_telefax">entries_telefax (SearchMitgliedSchema attribute)</a>
 </li>
@@ -761,12 +773,16 @@
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.SearchMitglied.get_mitglied">get_mitglied() (SearchMitglied method)</a>
 </li>
-      <li><a href="pynami.html#pynami.constants.URLS.GETMGL">GETMGL (URLS attribute)</a>
+      <li><a href="pynami.html#pynami.constants.URLS.GET_TAG">GET_TAG (URLS attribute)</a>
 </li>
-      <li><a href="pynami.html#pynami.constants.URLS.GRPADMIN_GRPS">GRPADMIN_GRPS (URLS attribute)</a>
+      <li><a href="namiclass.html#pynami.nami.NaMi.get_tag">get_tag() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.get_tag">[1]</a>
+</li>
+      <li><a href="pynami.html#pynami.constants.URLS.GETMGL">GETMGL (URLS attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pynami.html#pynami.constants.URLS.GRPADMIN_GRPS">GRPADMIN_GRPS (URLS attribute)</a>
+</li>
       <li><a href="namiclass.html#pynami.nami.NaMi.grpadmin_grps">grpadmin_grps() (NaMi property)</a>, <a href="pynami.html#pynami.nami.NaMi.grpadmin_grps">[1]</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.grpName">grpName (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.grpName">[1]</a>
@@ -845,6 +861,8 @@
         <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.id">(MitgliedSchema attribute)</a>
 </li>
         <li><a href="pynami.schemas.html#pynami.schemas.mgl.NamiKontoSchema.id">(NamiKontoSchema attribute)</a>
+</li>
+        <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.id">(TagSchema attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -929,6 +947,8 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pynami.html#pynami.tools.make_csv">make_csv() (in module pynami.tools)</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSchema.make_object">make_object() (BaseSchema method)</a>
 </li>
       <li><a href="namiclass.html#pynami.nami.NaMi.mgl_activities">mgl_activities() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.mgl_activities">[1]</a>
@@ -955,10 +975,10 @@
         <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.mglTypeId">(SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.mglTypeId">[1]</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="namiclass.html#pynami.nami.NaMi.mgltypes">mgltypes() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.mgltypes">[1]</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.mglWohnort">mglWohnort (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.mglWohnort">[1]</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.mitAllenTaetigkeiten">mitAllenTaetigkeiten (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.mitAllenTaetigkeiten">[1]</a>
@@ -967,11 +987,15 @@
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.Mitglied">Mitglied (class in pynami.schemas.mgl)</a>
 </li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.mitglied">mitglied (TagSchema attribute)</a>
+</li>
       <li><a href="namiclass.html#pynami.nami.NaMi.mitglied">mitglied() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.mitglied">[1]</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.history.MitgliedHistory">MitgliedHistory (class in pynami.schemas.history)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.history.MitgliedHistorySchema">MitgliedHistorySchema (class in pynami.schemas.history)</a>
+</li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.mitgliedId">mitgliedId (TagSchema attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema">MitgliedSchema (class in pynami.schemas.mgl)</a>
 </li>
@@ -1077,10 +1101,10 @@
 </li>
       <li><a href="pynami.schemas.html#module-pynami.schemas.activity">pynami.schemas.activity (module)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pynami.schemas.html#module-pynami.schemas.base">pynami.schemas.base (module)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pynami.schemas.html#module-pynami.schemas.cogc">pynami.schemas.cogc (module)</a>
 </li>
       <li><a href="pynami.schemas.html#module-pynami.schemas.dashboard">pynami.schemas.dashboard (module)</a>
@@ -1095,7 +1119,11 @@
 </li>
       <li><a href="pynami.schemas.html#module-pynami.schemas.search">pynami.schemas.search (module)</a>
 </li>
+      <li><a href="pynami.schemas.html#module-pynami.schemas.tags">pynami.schemas.tags (module)</a>
+</li>
       <li><a href="pynami.schemas.html#module-pynami.schemas.training">pynami.schemas.training (module)</a>
+</li>
+      <li><a href="pynami.html#module-pynami.tools">pynami.tools (module)</a>
 </li>
       <li><a href="pynami.html#module-pynami.util">pynami.util (module)</a>
 </li>
@@ -1169,18 +1197,22 @@
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.Meta">SearchSchema.Meta (class in pynami.schemas.search)</a>
 </li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.SearchTag">SearchTag (class in pynami.schemas.tags)</a>
+</li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.SearchTagSchema">SearchTagSchema (class in pynami.schemas.tags)</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.searchType">searchType (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.searchType">[1]</a>
 </li>
-      <li><a href="pynami.html#pynami.util.send_emails">send_emails() (in module pynami.util)</a>
+      <li><a href="pynami.html#pynami.tools.send_emails">send_emails() (in module pynami.tools)</a>
 </li>
       <li><a href="pynami.html#pynami.constants.URLS.SERVER">SERVER (URLS attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.sonst01">sonst01 (MitgliedSchema attribute)</a>
 </li>
-      <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.sonst02">sonst02 (MitgliedSchema attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.sonst02">sonst02 (MitgliedSchema attribute)</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.spitzname">spitzname (MitgliedSchema attribute)</a>
 
       <ul>
@@ -1239,7 +1271,7 @@
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.base.BaseModel.tabulate">tabulate() (BaseModel method)</a>
 </li>
-      <li><a href="pynami.html#pynami.util.tabulate2x">tabulate2x() (in module pynami.util)</a>
+      <li><a href="pynami.html#pynami.tools.tabulate2x">tabulate2x() (in module pynami.tools)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.activity.ActivitySchema.taetigkeit">taetigkeit (ActivitySchema attribute)</a>
 </li>
@@ -1249,14 +1281,28 @@
         <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.taetigkeitId">(SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.taetigkeitId">[1]</a>
 </li>
       </ul></li>
-      <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.tagId">tagId (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.tagId">[1]</a>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.Tag">Tag (class in pynami.schemas.tags)</a>
 </li>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.tag">tag (TagSchema attribute)</a>
+</li>
+      <li><a href="pynami.schemas.html#pynami.schemas.search.SearchSchema.tagId">tagId (SearchSchema attribute)</a>, <a href="search_mitglieder.html#pynami.schemas.search.SearchSchema.tagId">[1]</a>
+
+      <ul>
+        <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema.tagId">(TagSchema attribute)</a>
+</li>
+      </ul></li>
       <li><a href="pynami.html#pynami.constants.URLS.TAGLIST">TAGLIST (URLS attribute)</a>
 </li>
       <li><a href="namiclass.html#pynami.nami.NaMi.tagList">tagList() (NaMi property)</a>, <a href="pynami.html#pynami.nami.NaMi.tagList">[1]</a>
 </li>
+      <li><a href="pynami.html#pynami.constants.URLS.TAGS">TAGS (URLS attribute)</a>
+</li>
+      <li><a href="namiclass.html#pynami.nami.NaMi.tags">tags() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.tags">[1]</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pynami.schemas.html#pynami.schemas.tags.TagSchema">TagSchema (class in pynami.schemas.tags)</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.telefax">telefax (MitgliedSchema attribute)</a>
 </li>
       <li><a href="pynami.schemas.html#pynami.schemas.mgl.MitgliedSchema.telefon1">telefon1 (MitgliedSchema attribute)</a>
@@ -1269,14 +1315,22 @@
 </li>
       <li><a href="namiclass.html#pynami.nami.NaMi.tk_auf_grp">tk_auf_grp() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.tk_auf_grp">[1]</a>
 </li>
+      <li><a href="pynami.html#pynami.constants.URLS.TK_CAEA_GRP">TK_CAEA_GRP (URLS attribute)</a>
+</li>
+      <li><a href="namiclass.html#pynami.nami.NaMi.tk_caea_grp">tk_caea_grp() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.tk_caea_grp">[1]</a>
+</li>
+      <li><a href="pynami.html#pynami.constants.URLS.TK_GRP">TK_GRP (URLS attribute)</a>
+</li>
+      <li><a href="namiclass.html#pynami.nami.NaMi.tk_grp">tk_grp() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.tk_grp">[1]</a>
+</li>
+      <li><a href="pynami.html#pynami.constants.URLS.TK_UG">TK_UG (URLS attribute)</a>
+</li>
+      <li><a href="namiclass.html#pynami.nami.NaMi.tk_ug">tk_ug() (NaMi method)</a>, <a href="pynami.html#pynami.nami.NaMi.tk_ug">[1]</a>
+</li>
       <li><a href="pynami.schemas.html#pynami.schemas.grpadmin.InvoiceSchema.total">total (InvoiceSchema attribute)</a>
 </li>
-      <li><a href="pynami.schemas.html#pynami.schemas.default.Baseadmin.type">type() (Baseadmin property)</a>
-
-      <ul>
-        <li><a href="pynami.schemas.html#pynami.schemas.history.HistoryEntry.type">(HistoryEntry property)</a>
+      <li><a href="pynami.schemas.html#pynami.schemas.base.BaseSearchModel.type">type() (BaseSearchModel property)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 

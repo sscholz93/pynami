@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.grpadmin &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.schemas.grpadmin &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -162,11 +162,11 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchSchema</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 <span class="kn">from</span> <span class="nn">..util</span> <span class="k">import</span> <span class="n">extract_url</span>
 
 
-<div class="viewcode-block" id="SearchInvoice"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.SearchInvoice">[docs]</a><span class="k">class</span> <span class="nc">SearchInvoice</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchInvoice"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.grpadmin.SearchInvoice">[docs]</a><span class="k">class</span> <span class="nc">SearchInvoice</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Repesents an invoice that came up as a search result</span>
 

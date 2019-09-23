@@ -4,11 +4,11 @@ This module contains classes for group admin (`Gruppierungsverwaltung`) stuff
 """
 from marshmallow import fields, pre_load
 
-from .base import BaseSchema, BaseModel, BaseSearchSchema
+from .base import BaseSchema, BaseModel, BaseSearchSchema, BaseSearchModel
 from ..util import extract_url
 
 
-class SearchInvoice(BaseModel):
+class SearchInvoice(BaseSearchModel):
     """
     Repesents an invoice that came up as a search result
 

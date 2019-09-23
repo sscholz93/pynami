@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.schemas.mgl &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.schemas.mgl &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -163,7 +163,7 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 
 
 <div class="viewcode-block" id="NamiKonto"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKonto">[docs]</a><span class="k">class</span> <span class="nc">NamiKonto</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -248,7 +248,7 @@
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="SearchMitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied">[docs]</a><span class="k">class</span> <span class="nc">SearchMitglied</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchMitglied"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.SearchMitglied">[docs]</a><span class="k">class</span> <span class="nc">SearchMitglied</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for a Mitglied which came up as a search result. Unfortunately</span>
 <span class="sd">    there cannot be just one Mitglied class because the search results lack</span>
@@ -373,7 +373,8 @@
     <span class="sd">&quot;&quot;&quot;bool: If the member data may be used after the membership ends&quot;&quot;&quot;</span>
     <span class="n">entries_woelfling</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;woelfling&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Tier field. Not sure what it is for.&quot;&quot;&quot;</span>
-    <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Group name including its id&quot;&quot;&quot;</span>
     <span class="n">entries_gruppierungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;gruppierungId&#39;</span><span class="p">)</span>

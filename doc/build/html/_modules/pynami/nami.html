@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pynami.nami &mdash; pynami 0.2.2 documentation</title>
+  <title>pynami.nami &mdash; pynami 0.2.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2
+                0.2.3
               </div>
             
           
@@ -162,7 +162,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">pytoml</span> <span class="k">as</span> <span class="nn">toml</span>
 
 <span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">URLS</span><span class="p">,</span> <span class="n">DEFAULT_PARAMS</span>
 <span class="kn">from</span> <span class="nn">.schemas.activity</span> <span class="k">import</span> <span class="n">SearchActivitySchema</span><span class="p">,</span> <span class="n">ActivitySchema</span>
@@ -174,7 +173,9 @@
 <span class="kn">from</span> <span class="nn">.schemas.mgl</span> <span class="k">import</span> <span class="n">SearchMitgliedSchema</span><span class="p">,</span> <span class="n">MitgliedSchema</span>
 <span class="kn">from</span> <span class="nn">.schemas.search</span> <span class="k">import</span> <span class="n">SearchSchema</span>
 <span class="kn">from</span> <span class="nn">.schemas.training</span> <span class="k">import</span> <span class="n">SearchAusbildungSchema</span><span class="p">,</span> <span class="n">AusbildungSchema</span>
-<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">open_download_pdf</span><span class="p">,</span> <span class="n">tabulate2x</span>
+<span class="kn">from</span> <span class="nn">.schemas.tags</span> <span class="k">import</span> <span class="n">TagSchema</span><span class="p">,</span> <span class="n">SearchTagSchema</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">open_download_pdf</span>
+<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">tabulate2x</span>
 
 
 <div class="viewcode-block" id="NamiResponseTypeError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiResponseTypeError">[docs]</a><span class="k">class</span> <span class="nc">NamiResponseTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -308,7 +309,8 @@
         <span class="k">if</span> <span class="n">exception_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-<div class="viewcode-block" id="NaMi._get_baseadmin"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi._get_baseadmin">[docs]</a>    <span class="k">def</span> <span class="nf">_get_baseadmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="NaMi._get_baseadmin"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi._get_baseadmin">[docs]</a>    <span class="k">def</span> <span class="nf">_get_baseadmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Base function for retrieving all core lists from the |NAMI|</span>
 
 <span class="sd">        Args:</span>
@@ -316,6 +318,11 @@
 <span class="sd">            grpId (:obj:`int` or :obj:`str`, optional): Group id</span>
 <span class="sd">            mglId (:obj:`int` or :obj:`str`, optional): Member id (not the</span>
 <span class="sd">                  |DPSG| Mitgliedsnummer)</span>
+<span class="sd">            taetigkeitId (:obj:`int`, optional): Id of an activity. A list of</span>
+<span class="sd">                all possible ids can be found in the section</span>
+<span class="sd">                :ref:`tables/activitytypes:Activity types`. This is only</span>
+<span class="sd">                required for the URLs which needs to be formatted with this</span>
+<span class="sd">                value.</span>
 
 <span class="sd">        Keyword Args:</span>
 <span class="sd">            gruppierung (:obj:`int` or :obj:`str`, optional): Group id, in case</span>
@@ -328,7 +335,7 @@
 <span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: The returned</span>
 <span class="sd">            default values</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpId</span><span class="o">=</span><span class="n">grpId</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpId</span><span class="o">=</span><span class="n">grpId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="o">=</span><span class="n">taetigkeitId</span><span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">grpId</span><span class="p">)</span> <span class="k">if</span> <span class="n">grpId</span> <span class="k">else</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">],</span>
                   <span class="s1">&#39;mitglied&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mglId</span><span class="p">)</span> <span class="k">if</span> <span class="n">mglId</span> <span class="k">else</span>
@@ -653,10 +660,63 @@
 <span class="sd">                    Mitgliedsnummer)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible</span>
+<span class="sd">            :obj:`list` of :class:`~.default.Baseadmin`: List of possible</span>
 <span class="sd">            activities</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_AUF_GRP&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NaMi.tk_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all possible groups for an activity</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grpId (:obj:`int` or :obj:`str`): Group id</span>
+<span class="sd">            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|</span>
+<span class="sd">                    Mitgliedsnummer)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`list` of :class:`~.default.Baseadmin`: List of possible</span>
+<span class="sd">            groups</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_GRP&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NaMi.tk_ug"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_ug">[docs]</a>    <span class="k">def</span> <span class="nf">tk_ug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all possible subdivision for an activity</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grpId (:obj:`int` or :obj:`str`): Group id</span>
+<span class="sd">            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|</span>
+<span class="sd">                    Mitgliedsnummer)</span>
+<span class="sd">            taetigkeitId (int): Id of the activity. A list of all possible ids</span>
+<span class="sd">                can be found in the section</span>
+<span class="sd">                :ref:`tables/activitytypes:Activity types`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`list` of :class:`~.default.Baseadmin`: List of possible</span>
+<span class="sd">            subdivision</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_UG&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NaMi.tk_caea_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_caea_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_caea_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all possible access rights for an activity</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grpId (:obj:`int` or :obj:`str`): Group id</span>
+<span class="sd">            mglId (:obj:`int` or :obj:`str`): Member id (not the |DPSG|</span>
+<span class="sd">                    Mitgliedsnummer)</span>
+<span class="sd">            taetigkeitId (int): Id of the activity. A list of all possible ids</span>
+<span class="sd">                can be found in the section</span>
+<span class="sd">                :ref:`tables/activitytypes:Activity types`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`list` of :class:`~.default.Baseadmin`: List of possible</span>
+<span class="sd">            access rights</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_CAEA_GRP&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_activities"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_activities">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_activities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mgl</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -810,6 +870,37 @@
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MitgliedHistorySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
+<div class="viewcode-block" id="NaMi.tags"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tags">[docs]</a>    <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all tags of a member</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mglId (int): Member id (not |DPSG| Mitgliedsnummer)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`list` of :class:`~.tags.SearchTag`: List of the search</span>
+<span class="sd">            results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;TAGS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mglId</span><span class="o">=</span><span class="n">mglId</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SearchTagSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NaMi.get_tag"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_tag">[docs]</a>    <span class="k">def</span> <span class="nf">get_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">tagId</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a tag by its id</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mglId (int): Member id (not |DPSG| Mitgliedsnummer)</span>
+<span class="sd">            tagId(int): Tag id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`~.tags.Tag`: The tag object with all important details</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;GET_TAG&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mglId</span><span class="o">=</span><span class="n">mglId</span><span class="p">,</span> <span class="n">tagId</span><span class="o">=</span><span class="n">tagId</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TagSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)))</span></div>
+
 <div class="viewcode-block" id="NaMi.bescheinigungen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.bescheinigungen">[docs]</a>    <span class="k">def</span> <span class="nf">bescheinigungen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all certificates of inspection</span>
@@ -932,20 +1023,20 @@
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;SEARCH&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">SearchMitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NaMi.mitglied"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mitglied">[docs]</a>    <span class="k">def</span> <span class="nf">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="NaMi.mitglied"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mitglied">[docs]</a>    <span class="k">def</span> <span class="nf">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets or updates a Mitglied.</span>
 
 <span class="sd">        The keyword arguments are passed on to the |HTTP| communication</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mglId (int): ID of the Mitglied. This is not the |DPSG|</span>
-<span class="sd">                Mitgliedsnummer</span>
-<span class="sd">            method (:obj:`str`): |HTTP| Method. Should be ``GET`` or ``PUT``,</span>
-<span class="sd">                defaults to ``GET``.</span>
+<span class="sd">            mglId (:obj:`int`, optional): ID of the Mitglied. This is not the</span>
+<span class="sd">                |DPSG| Mitgliedsnummer. Defaults to the user.</span>
+<span class="sd">            method (:obj:`str`): |HTTP| Method. Should be ``&#39;GET&#39;`` or</span>
+<span class="sd">                ``&#39;PUT&#39;``, defaults to ``&#39;GET&#39;``.</span>
 <span class="sd">            grpId (:obj:`int`, optional): The |DPSG| Stammesnummer,</span>
 <span class="sd">                e.g. ``131913``. The default (:data:`None`) takes the value</span>
-<span class="sd">                from the internal attribute :attr:`~NaMi.__config`.</span>
+<span class="sd">                from the internal attribute :attr:`__config`.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            :class:`~.mgl.Mitglied`: The retrieved or respectively updated</span>
@@ -953,6 +1044,8 @@
 <span class="sd">            :attr:`~.mgl.MitgliedSchema.austrittsDatum` attribute is not part</span>
 <span class="sd">            of the returned data set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mglId</span><span class="p">:</span>
+            <span class="n">mglId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;mitgliedsnummer&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">grpId</span><span class="p">:</span>
             <span class="n">grpId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">]</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;GETMGL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gruppierung</span><span class="o">=</span><span class="n">grpId</span><span class="p">,</span> <span class="n">mitglied</span><span class="o">=</span><span class="n">mglId</span><span class="p">)</span>
@@ -962,6 +1055,8 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">from</span> <span class="nn">configparser</span> <span class="k">import</span> <span class="n">ConfigParser</span>
+    <span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">make_csv</span>
 <span class="c1">#    import logging</span>
 <span class="c1">#    import http.client</span>
 <span class="c1">#</span>
@@ -977,26 +1072,26 @@
         <span class="s1">&#39;untergliederungId&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
         <span class="s1">&#39;taetigkeitId&#39;</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">}</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span>
-                       <span class="s1">&#39;.pynami.conf&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cfg</span><span class="p">:</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">toml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;nami&#39;</span><span class="p">])</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span>
+                             <span class="s1">&#39;.pynami.conf&#39;</span><span class="p">))</span>
+    <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;nami&#39;</span><span class="p">]))</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="o">**</span><span class="n">search</span><span class="p">)))</span>
 
-        <span class="c1"># print(user.data[&#39;kontoverbindung&#39;])</span>
-        <span class="c1"># user.data[&#39;spitzname&#39;] = &#39;Proff&#39;</span>
-
-        <span class="n">kv</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;147855&quot;</span><span class="p">,</span> <span class="s2">&quot;zahlungsKonditionId&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;mitgliedsNummer&quot;</span><span class="p">:</span><span class="mi">64697</span><span class="p">,</span>
-              <span class="s2">&quot;institut&quot;</span><span class="p">:</span><span class="s2">&quot;Spard-Bank West&quot;</span><span class="p">,</span> <span class="s2">&quot;kontoinhaber&quot;</span><span class="p">:</span><span class="s2">&quot;Sebastian Scholz&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;kontonummer&quot;</span><span class="p">:</span><span class="s2">&quot;5024161&quot;</span><span class="p">,</span> <span class="s2">&quot;bankleitzahl&quot;</span><span class="p">:</span><span class="s2">&quot;33060592&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;iban&quot;</span><span class="p">:</span><span class="s2">&quot;DE15330605920005024161&quot;</span><span class="p">,</span><span class="s2">&quot;bic&quot;</span><span class="p">:</span><span class="s2">&quot;GENODED1SPW&quot;</span><span class="p">}</span>
-        <span class="c1"># user.data[&#39;kontoverbindung&#39;] = kv</span>
-        <span class="c1"># print(user.kontoverbindung)</span>
-        <span class="c1"># user.update(nami)</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="s1">&#39;63868&#39;</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">tk_auf_grp</span><span class="p">(</span><span class="mi">100103</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)))</span>
+
+<span class="c1">#        print(user.data[&#39;kontoverbindung&#39;])</span>
+<span class="c1">#        user.data[&#39;spitzname&#39;] = &#39;Chuck Norris&#39;</span>
+<span class="c1">#        user.update(nami)</span>
+
+<span class="c1">#        print(tabulate2x(nami.tags(user.id)))</span>
+<span class="c1">#        print(nami.get_tag(user.id, nami.tags(user.id)[0].id))</span>
+<span class="c1">#        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))</span>
+<span class="c1">#        print(tabulate2x(nami.tk_grp(100103, user.id)))</span>
+<span class="c1">#        print(tabulate2x(nami.tk_ug(100103, user.id, 6)))</span>
+<span class="c1">#        print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))</span>
 <span class="c1">#        nami.download_beantragung()</span>
 <span class="c1">#        print(nami.bescheinigungen())</span>
 <span class="c1">#        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))</span>
@@ -1008,13 +1103,13 @@
 <span class="c1">#        nami.download_invoice(nami.invoices()[0].id)</span>
 <span class="c1">#        print(nami.mgl_history(user.id))</span>
 <span class="c1">#        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))</span>
-<span class="c1">#        print(nami.mgl_ausbildungen(user.id))</span>
+<span class="c1">#        print(tabulate2x(nami.mgl_ausbildungen(user.id)))</span>
 <span class="c1">#        print([nami.get_ausbildung(user.id, x.id)</span>
 <span class="c1">#               for x in nami.mgl_ausbildungen(user.id)])</span>
+<span class="c1">#        print(tabulate2x(nami.mgl_activities(user.id)))</span>
 <span class="c1">#        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)</span>
 <span class="c1">#        print(act)</span>
 <span class="c1">#        nami.update_activity(user.id, act)</span>
-<span class="c1">#        user.kontoverbindung.bic = &quot;GENODED1SPW&quot;</span>
         <span class="c1"># print(MitgliedSchema().dumps(user.data, separators=(&#39;,&#39;, &#39;:&#39;)))</span>
 <span class="c1">#        user.update(nami)</span>
 
@@ -1038,17 +1133,12 @@
 <span class="c1">#        print(nami.tagList)</span>
 <span class="c1">#        print(nami.bausteine)</span>
 <span class="c1">#        print(nami.subdivision)</span>
-<span class="c1">#        print(nami.activities)</span>
+<span class="c1">#        print(tabulate2x(nami.activities))</span>
 <span class="c1">#        print(tabulate2x(nami.ebenen))</span>
-<span class="c1">#        print(nami.ebene1)</span>
-<span class="c1">#        print(nami.ebene2(nami.ebene1[0].id))</span>
-<span class="c1">#        print(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id))</span>
-<span class="c1">#        mylist = [[x.descriptor, x.id] for x in nami.ebenen]</span>
-<span class="c1">#        print(mylist)</span>
-<span class="c1">#        import csv</span>
-<span class="c1">#        import sys</span>
-<span class="c1">#        w = csv.writer(sys.stdout, quoting=csv.QUOTE_NONNUMERIC)</span>
-<span class="c1">#        print(w.writerows(mylist))</span>
+<span class="c1">#        print(tabulate2x(nami.ebene1))</span>
+<span class="c1">#        print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))</span>
+<span class="c1">#        print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))</span>
+<span class="c1">#        print(make_csv(nami.ebenen))</span>
 </pre></div>
 
            </div>

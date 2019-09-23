@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pynami.tools &mdash; pynami 0.2.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pynami
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../namiclass.html">Main class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../urls.html">REST URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search_mitglieder.html">Search Mitglieder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pynami</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pynami.tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pynami.tools</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Some utility functions for user convenience</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Standard library imports</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+
+<span class="c1"># Third party imports</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
+
+
+<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.html#pynami.tools.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">mitglieder</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Send emails to several members.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        to (str): Must be a valid email address for the primary recipient</span>
+<span class="sd">        mitglieder (list): The List contents can be either</span>
+<span class="sd">            :class:`~pynami.schemas.SearchMitglied` or</span>
+<span class="sd">            :class:`~pynami.schemas.Mitglied`</span>
+<span class="sd">        method (:obj:`str`, optional): If you want to send your mails as bcc</span>
+<span class="sd">            or something else. Currently only bcc is supported.</span>
+<span class="sd">        email1 (:obj:`bool`, optional): If emails should be send to the</span>
+<span class="sd">            primary address of the members.</span>
+<span class="sd">        email2 (:obj:`bool`, optional): If emails should be send to the email</span>
+<span class="sd">            account of the member&#39;s parent.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The mailto link</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">recipients</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">email1</span><span class="p">:</span>
+        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">email2</span><span class="p">:</span>
+        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">emailVertretungsberechtigter</span>
+                           <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
+    <span class="n">bcc</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">recipients</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;mailto:&#39;</span> <span class="o">+</span> <span class="n">to</span> <span class="o">+</span> <span class="s1">&#39;?bcc=&#39;</span> <span class="o">+</span> <span class="n">bcc</span>
+    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="tabulate2x"><a class="viewcode-back" href="../../pynami.html#pynami.tools.tabulate2x">[docs]</a><span class="k">def</span> <span class="nf">tabulate2x</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tabulate a list of objects by tabulating each object first</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj (list): The list of objects to tabulate. If they are not from the</span>
+<span class="sd">        same class this may not work.</span>
+<span class="sd">        elements (:obj:`list` of :obj:`str`, optional): List of keys which</span>
+<span class="sd">            should be displayed</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Nicely formatted tabulated output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">tabulate</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+                    <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;keys&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_csv"><a class="viewcode-back" href="../../pynami.html#pynami.tools.make_csv">[docs]</a><span class="k">def</span> <span class="nf">make_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">includeheader</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Makes a |CSV| formatted string from a data set</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (list): Data objects. They should all belong to the same class.</span>
+<span class="sd">        attrs (:obj:`list`, optional): Attribute names for the |CSV| table. If</span>
+<span class="sd">            left empty (:data:`None`) the value of the first</span>
+<span class="sd">            :attr:`.base.BaseModel._tabkeys` attribute in the list is taken.</span>
+<span class="sd">        includeheader (:obj:`bool`, optional): Whether to include headers in</span>
+<span class="sd">            the output. Defaults to :data:`True`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: |CSV| formatted data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">attrs</span><span class="p">:</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_tabkeys</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONNUMERIC</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">includeheader</span><span class="p">:</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sebastian Scholz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
