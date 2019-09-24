@@ -43,3 +43,28 @@ Get a specific mitglied
     id_ = nami.search(vorname='Max', nachname='Mustermann')[0].id
     mgl = nami.mitglied(id_)
     print(mgl.mitgliedsNummer)
+
+Search for a group of members
+-----------------------------
+
+.. code-block:: python
+    :caption: Search for all Jungpfadfinder and Pfadfinder
+
+    search = {
+        'mglStatusId': 'AKTIV',
+        'mglTypeId': 'MITGLIED',
+        'untergliederungId': [2, 3],
+        'taetigkeitId': 1
+    }
+    result = nami.search(**search)
+    print(tabulate2x(result))
+
+Send emails
+-----------
+
+.. code-block:: python
+    :caption: Send emails to the members of the search result
+
+    from pynami.tools import send_emails
+
+    send_emails(result)

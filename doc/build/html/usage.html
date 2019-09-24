@@ -91,6 +91,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#authentification">Authentification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#access-default-values">Access default values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-a-specific-mitglied">Get a specific mitglied</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-for-a-group-of-members">Search for a group of members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#send-emails">Send emails</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="namiclass.html">Main class</a></li>
@@ -206,6 +208,33 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">id_</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">vorname</span><span class="o">=</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="n">nachname</span><span class="o">=</span><span class="s1">&#39;Mustermann&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
 <span class="n">mgl</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mgl</span><span class="o">.</span><span class="n">mitgliedsNummer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="search-for-a-group-of-members">
+<h2>Search for a group of members<a class="headerlink" href="#search-for-a-group-of-members" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Search for all Jungpfadfinder and Pfadfinder</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">search</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mglStatusId&#39;</span><span class="p">:</span> <span class="s1">&#39;AKTIV&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mglTypeId&#39;</span><span class="p">:</span> <span class="s1">&#39;MITGLIED&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;untergliederungId&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;taetigkeitId&#39;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="o">**</span><span class="n">search</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="send-emails">
+<h2>Send emails<a class="headerlink" href="#send-emails" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Send emails to the members of the search result</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynami.tools</span> <span class="kn">import</span> <span class="n">send_emails</span>
+
+<span class="n">send_emails</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

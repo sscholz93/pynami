@@ -1060,7 +1060,7 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">from</span> <span class="nn">configparser</span> <span class="k">import</span> <span class="n">ConfigParser</span>
-    <span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">make_csv</span>
+    <span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">make_csv</span><span class="p">,</span> <span class="n">send_emails</span>
 <span class="c1">#    import logging</span>
 <span class="c1">#    import http.client</span>
 <span class="c1">#</span>
@@ -1073,8 +1073,8 @@
     <span class="n">search</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;mglStatusId&#39;</span><span class="p">:</span> <span class="s1">&#39;AKTIV&#39;</span><span class="p">,</span>
         <span class="s1">&#39;mglTypeId&#39;</span><span class="p">:</span> <span class="s1">&#39;MITGLIED&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;untergliederungId&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-        <span class="s1">&#39;taetigkeitId&#39;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="s1">&#39;untergliederungId&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="s1">&#39;taetigkeitId&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
     <span class="p">}</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
     <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span>
@@ -1082,7 +1082,7 @@
     <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;nami&#39;</span><span class="p">]))</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="o">**</span><span class="n">search</span><span class="p">)))</span>
-
+<span class="c1">#        print(send_emails(nami.search(**search), open_browser=False))</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 

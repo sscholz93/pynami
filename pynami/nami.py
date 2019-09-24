@@ -904,7 +904,7 @@ class NaMi(object):
 if __name__ == '__main__':
     import os
     from configparser import ConfigParser
-    from .tools import make_csv
+    from .tools import make_csv, send_emails
 #    import logging
 #    import http.client
 #
@@ -917,8 +917,8 @@ if __name__ == '__main__':
     search = {
         'mglStatusId': 'AKTIV',
         'mglTypeId': 'MITGLIED',
-        'untergliederungId': [1, 2],
-        'taetigkeitId': 1
+        'untergliederungId': [2, 3],
+        'taetigkeitId': [1, 6]
     }
     config = ConfigParser()
     config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -926,7 +926,7 @@ if __name__ == '__main__':
     with NaMi(dict(config['nami'])) as nami:
 
         print(tabulate2x(nami.search(**search)))
-
+#        print(send_emails(nami.search(**search), open_browser=False))
         user = nami.mitglied()
         print(user.id)
 

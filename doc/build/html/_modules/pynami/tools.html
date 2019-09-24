@@ -167,34 +167,38 @@
 <span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
 
 
-<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.html#pynami.tools.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">mitglieder</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="send_emails"><a class="viewcode-back" href="../../pynami.html#pynami.tools.send_emails">[docs]</a><span class="k">def</span> <span class="nf">send_emails</span><span class="p">(</span><span class="n">mitglieder</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bcc&#39;</span><span class="p">,</span> <span class="n">email1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">email2</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">open_browser</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Send emails to several members.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        to (str): Must be a valid email address for the primary recipient</span>
 <span class="sd">        mitglieder (list): The List contents can be either</span>
 <span class="sd">            :class:`~pynami.schemas.SearchMitglied` or</span>
 <span class="sd">            :class:`~pynami.schemas.Mitglied`</span>
+<span class="sd">        to (:obj:`str`, optional): Primary recipient</span>
 <span class="sd">        method (:obj:`str`, optional): If you want to send your mails as bcc</span>
 <span class="sd">            or something else. Currently only bcc is supported.</span>
 <span class="sd">        email1 (:obj:`bool`, optional): If emails should be send to the</span>
 <span class="sd">            primary address of the members.</span>
 <span class="sd">        email2 (:obj:`bool`, optional): If emails should be send to the email</span>
 <span class="sd">            account of the member&#39;s parent.</span>
+<span class="sd">        open_browser (:obj:`bool`, optional): If :data:`True` the link is</span>
+<span class="sd">            opened directly by the system. On a computer this may open your</span>
+<span class="sd">            default mail program.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The mailto link</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">recipients</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">email1</span><span class="p">:</span>
-        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
+        <span class="n">recipients</span> <span class="o">+=</span> <span class="p">[</span><span class="n">mgl</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span> <span class="k">if</span> <span class="n">mgl</span><span class="o">.</span><span class="n">email</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">email2</span><span class="p">:</span>
-        <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mgl</span><span class="o">.</span><span class="n">emailVertretungsberechtigter</span>
-                           <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span><span class="p">])</span>
-    <span class="n">bcc</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">recipients</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;mailto:&#39;</span> <span class="o">+</span> <span class="n">to</span> <span class="o">+</span> <span class="s1">&#39;?bcc=&#39;</span> <span class="o">+</span> <span class="n">bcc</span>
-    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">recipients</span> <span class="o">+=</span> <span class="p">[</span><span class="n">mgl</span><span class="o">.</span><span class="n">emailVertretungsberechtigter</span> <span class="k">for</span> <span class="n">mgl</span> <span class="ow">in</span> <span class="n">mitglieder</span>
+                       <span class="k">if</span> <span class="n">mgl</span><span class="o">.</span><span class="n">emailVertretungsberechtigter</span><span class="p">]</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;mailto:</span><span class="si">{to}</span><span class="s2">?</span><span class="si">{method}</span><span class="s2">={&#39;,&#39;.join(set(recipients))}&quot;</span>
+    <span class="k">if</span> <span class="n">open_browser</span><span class="p">:</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">url</span></div>
 
 

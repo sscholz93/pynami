@@ -1618,21 +1618,24 @@ file. Defaults to 10 seconds.</p></li>
 <p>Some utility functions for user convenience</p>
 <dl class="function">
 <dt id="pynami.tools.send_emails">
-<code class="sig-name descname">send_emails</code><span class="sig-paren">(</span><em class="sig-param">to</em>, <em class="sig-param">mitglieder</em>, <em class="sig-param">method='bcc'</em>, <em class="sig-param">email1=True</em>, <em class="sig-param">email2=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/tools.html#send_emails"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.tools.send_emails" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">send_emails</code><span class="sig-paren">(</span><em class="sig-param">mitglieder</em>, <em class="sig-param">to=''</em>, <em class="sig-param">method='bcc'</em>, <em class="sig-param">email1=True</em>, <em class="sig-param">email2=True</em>, <em class="sig-param">open_browser=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/tools.html#send_emails"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.tools.send_emails" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send emails to several members.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Must be a valid email address for the primary recipient</p></li>
 <li><p><strong>mitglieder</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – The List contents can be either
 <code class="xref py py-class docutils literal notranslate"><span class="pre">SearchMitglied</span></code> or
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Mitglied</span></code></p></li>
+<li><p><strong>to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Primary recipient</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – If you want to send your mails as bcc
 or something else. Currently only bcc is supported.</p></li>
 <li><p><strong>email1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If emails should be send to the
 primary address of the members.</p></li>
 <li><p><strong>email2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If emails should be send to the email
 account of the member’s parent.</p></li>
+<li><p><strong>open_browser</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> the link is
+opened directly by the system. On a computer this may open your
+default mail program.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
