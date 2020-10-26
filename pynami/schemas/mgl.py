@@ -257,6 +257,12 @@ class Mitglied:
             super().__setattr__(name, value)
         except AttributeError:
             self.data[name] = value
+            
+    def __getstate__(self):
+        return vars(self)
+
+    def __setstate__(self, state):
+        vars(self).update(state)
 
     def update(self, nami):
         """
