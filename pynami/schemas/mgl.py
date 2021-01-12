@@ -33,7 +33,7 @@ class NamiKontoSchema(BaseSchema):
 
     id = fields.String()
     """int: |NAMI| internal id of this payment details"""
-    zahlungsKonditionId = fields.Integer()
+    zahlungsKonditionId = fields.Integer(allow_none=True)
     """int: Id corresponding to the kind of payment"""
     mitgliedsNummer = fields.Integer()
     """int: |DPSG| member id"""
@@ -49,7 +49,7 @@ class NamiKontoSchema(BaseSchema):
     """str: |IBAN|"""
     bic = fields.String()
     """str: |BIC|"""
-    zahlungsKondition = fields.String(load_only=True)
+    zahlungsKondition = fields.String(load_only=True, allow_none=True)
     """str: Kind of payment (e.g. ``'Std Lastschrift'``). This attribute is not
     dumped when updating a `Mitglied`."""
 

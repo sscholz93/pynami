@@ -863,8 +863,7 @@ class NaMi(object):
         """
         # this is just a default search
         if not kwargs:
-            kwargs.update({'mglStatusId': 'AKTIV',
-                           'mglTypeId': 'MITGLIED'})
+            kwargs.update({})
         params = DEFAULT_PARAMS
         params['searchedValues'] = SearchSchema().dumps(kwargs,
                                                         separators=(',', ':'))
@@ -904,7 +903,9 @@ class NaMi(object):
 if __name__ == '__main__':
     import os
     from configparser import ConfigParser
-    from .tools import make_csv, send_emails
+    import cProfile, pstats, io
+    pr = cProfile.Profile(builtins=False, subcalls=False)
+#    from .tools import make_csv, send_emails
 #    import logging
 #    import http.client
 #
@@ -924,8 +925,11 @@ if __name__ == '__main__':
     config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              '.pynami.conf'))
     with NaMi(dict(config['nami'])) as nami:
-
-        print(tabulate2x(nami.search(**search)))
+        pr.enable()
+#        print(tabulate2x(nami.search(**search)))
+#        print(tabulate2x(nami.search()))
+        for mitglied in nami.search():
+            print(nami.mitglied(mitglied.id))
 #        print(send_emails(nami.search(**search), open_browser=False))
         user = nami.mitglied()
         print(user.id)
@@ -987,3 +991,5 @@ if __name__ == '__main__':
 #        print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))
 #        print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))
 #        print(make_csv(nami.ebenen))
+        pr.disable()
+        pr.print_stats('cumulative')

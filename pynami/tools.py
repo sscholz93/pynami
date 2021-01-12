@@ -52,7 +52,7 @@ def tabulate2x(objs, elements=None):
 
     Args:
         obj (list): The list of objects to tabulate. If they are not from the
-        same class this may not work.
+            same class this may not work.
         elements (:obj:`list` of :obj:`str`, optional): List of keys which
             should be displayed
 
