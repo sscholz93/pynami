@@ -15,6 +15,8 @@ class NamiKonto(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'zahlungsKondition', 'kontoinhaber', 'iban']
+
     def __repr__(self):
         return f'<Kontodaten(Id: {self.id})>'
 
@@ -163,7 +165,7 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """str: Not sure why these even exist."""
     entries_geschlecht = fields.String(attribute='geschlecht')
     """str: Gender"""
-    entries_id = fields.Integer(attribute='id_id')
+    entries_id = fields.Integer(attribute='id_')
     """int: |NAMI| internal id (not |DPSG| member nummer)."""
     entries_jungpfadfinder = fields.String(attribute='jungpfadfinder')
     """str: Tier field. Not sure what it is for."""
@@ -223,7 +225,7 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """str: Group id as a string"""
 
 
-class Mitglied:
+class Mitglied(BaseModel):
     """
     Main class representing a |NAMI| Mitglied
 
@@ -233,12 +235,9 @@ class Mitglied:
     the :meth:`~marshmallow.Schema.load` method on a corresponding data
     dictionary.
     """
-    _tabitems = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum',
+    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum',
                  'strasse', 'stufe']
     _field_blacklist = ['genericField1']
-
-    def __init__(self, **kwargs):
-        self.data = kwargs
 
     def __repr__(self):
         return f'<Mitglied({self.nachname}, {self.vorname})>'

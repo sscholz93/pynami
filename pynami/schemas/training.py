@@ -19,6 +19,24 @@ class SearchAusbildung(BaseSearchModel):
     def __repr__(self):
         return f'<SearchAusbildung({self.baustein}, Id: {self.id})>'
 
+    def __str__(self):
+        return f'{self.baustein} ({self.id}): {self.vstgTag}'
+
+    def get_ausbildung(self, nami, mglId):
+        """
+        Create a real :class:`Ausbildung` form the search result by getting the
+        corresponding data set through the training id.
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+            mglId (int): Member id (not |DPSG| Mitgliedsnummer)
+
+        Returns:
+            Ausbildung: The activity object corresponding to this search
+            result.
+        """
+        return nami.get_ausbildung(mglId, self.id)
+
 
 class SearchAusbildungSchema(BaseSearchSchema):
     """
@@ -47,6 +65,8 @@ class Ausbildung(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'baustein', 'vstgTag']
+
     def __repr__(self):
         return f'<Ausbildung({self.baustein}, Id: {self.id})>'
 

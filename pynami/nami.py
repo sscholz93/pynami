@@ -83,7 +83,7 @@ class NaMi(object):
             return response.content
         rjson = response.json()
         if not rjson['success']:
-            raise NamiResponseSuccessError(f"succes state from NAMI was "
+            raise NamiResponseSuccessError(f"success state from NAMI was "
                                            f"{rjson['message']} {rjson}")
 
         # allowed response types are: OK, INFO, WARN, ERROR, EXCEPTION
@@ -128,7 +128,7 @@ class NaMi(object):
         # Get the id of the user
         myself = self.search(mitgliedsNummer=username)
         if len(myself) == 1:
-            self.__config['mitgliedsnummer'] = myself[0].id
+            self.__config['id'] = myself[0].id
             self.__config['stammesnummer'] = myself[0].gruppierungId
         else:
             raise ValueError(f'Received {len(myself)} search results while '
@@ -187,13 +187,35 @@ class NaMi(object):
         params = {'gruppierung': str(grpId) if grpId else
                       self.__config['stammesnummer'],
                   'mitglied': str(mglId) if mglId else
-                      self.__config['mitgliedsnummer'],
+                      self.__config['id'],
                   'page': 1,
                   'start': 0,
                   'limit': 1000}
         params.update(kwargs)
         r = self.s.get(url, params=params)
         return BaseadminSchema().load(self._check_response(r), many=True)
+
+    @property
+    def grpId(self):
+        """
+        Group id of the user
+
+        Returns:
+            int
+
+        """
+        return self.__config['stammesnummer']
+
+    @property
+    def myId(self):
+        """
+        |NAMI| internal id of the user
+
+        Returns:
+            int
+
+        """
+        return self.__config['id']
 
     def countries(self, grpId=None, mglId=None):
         """
@@ -331,9 +353,9 @@ class NaMi(object):
 
     @property
     def tagList(self):
-        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different list
-        of fee types but with basically the same content. This one is used for
-        searching members."""
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different
+        list of fee types but with basically the same content. This one is
+        used for searching members."""
         return self._get_baseadmin('TagList')
 
     @property
@@ -356,8 +378,8 @@ class NaMi(object):
 
     @property
     def ebenen(self):
-        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural layers
-        in the |DPSG|"""
+        """:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural
+        layersin the |DPSG|"""
         return self._get_baseadmin('Ebene')
 
     @property
@@ -432,8 +454,8 @@ class NaMi(object):
             ebene1 (int): Group id of a Diözese
 
         Returns:
-            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
-            Bezirken you are associated with"""
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of
+            possible Bezirken you are associated with"""
         return self._get_baseadmin('Ebene2', ebene1,
                                    gruppierung=self.__config['stammesnummer'])
 
@@ -445,8 +467,8 @@ class NaMi(object):
             ebene2 (int): Group id of a Bezirk
 
         Returns:
-            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible
-            Stämmen you are associated with"""
+            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of
+            possible Stämmen you are associated with"""
         return self._get_baseadmin('Ebene3', ebene2,
                                    gruppierung=self.__config['stammesnummer'])
 
@@ -474,7 +496,7 @@ class NaMi(object):
         Get an invoice by its id.
 
         Args:
-            mgl (int): Member id (not |DPSG| Mitgliedsnummer)
+            groupId (int): Group id
             invId (int): Id of the invoice. This will probably originate from
                 a search result, e.g. by calling :meth:`invoices`.
 
@@ -486,17 +508,18 @@ class NaMi(object):
         r = self.s.get(url)
         return InvoiceSchema().load(self._check_response(r))
 
-    def download_invoice(self, id_):
+    def download_invoice(self, id_, **kwargs):
         """
         Downloads and opens an invoice as a pdf document.
 
         Args:
             id_ (int): Id of the invoice (not the regular invoice number)
+            **kwargs: See :meth:`~pynami.util.open_download_pdf`.
         """
         url = URLS['INVOICE_PDF']
         params = {'id': id_}
         r = self.s.get(url, params=params)
-        open_download_pdf(self._check_response(r))
+        open_download_pdf(self._check_response(r), **kwargs)
 
     def tk_auf_grp(self, grpId, mglId, **kwargs):
         """
@@ -621,8 +644,8 @@ class NaMi(object):
                                json=userjson)
         prereq = self.s.prepare_request(req)
         print(prereq.body)
-#        r = self.s.put(url, json=ActivitySchema().dumps(act.data))
-#        return ActivitySchema().load(self._check_response(r))
+        # r = self.s.put(url, json=ActivitySchema().dumps(act.data))
+        # return ActivitySchema().load(self._check_response(r))
         return True
 
     def mgl_ausbildungen(self, mglId):
@@ -779,26 +802,30 @@ class NaMi(object):
         r = self.s.get(url)
         return BescheinigungSchema().load(self._check_response(r))
 
-    def download_bescheinigung(self, id_):
+    def download_bescheinigung(self, id_, **kwargs):
         """
         Open a certificate as a |PDF| file
 
         Args:
             id_ (int): Internal id of the certificate
+            **kwargs: See :meth:`~pynami.util.open_download_pdf`.
         """
         url = f"{URLS['FZ']}download-pdf-eigene-bescheinigung"
         params = {'id': id_}
         r = self.s.get(url, params=params)
-        open_download_pdf(self._check_response(r))
+        open_download_pdf(self._check_response(r), **kwargs)
 
-    def download_beantragung(self):
+    def download_beantragung(self, **kwargs):
         """
         Open the application form for a certificate of good conduct as a |PDF|
         file.
+
+        Args:
+            **kwargs: See :meth:`~pynami.util.open_download_pdf`.
         """
         url = URLS['BEANTRAGUNG']
         r = self.s.get(url)
-        open_download_pdf(self._check_response(r))
+        open_download_pdf(self._check_response(r), **kwargs)
 
     def search_all(self, grpId=None, filterString=None, searchString='',
                    sortproperty=None, sortdirection='ASC', **kwargs):
@@ -892,7 +919,7 @@ class NaMi(object):
             of the returned data set.
         """
         if not mglId:
-            mglId = self.__config['mitgliedsnummer']
+            mglId = self.__config['id']
         if not grpId:
             grpId = self.__config['stammesnummer']
         url = URLS['GETMGL'].format(gruppierung=grpId, mitglied=mglId)
@@ -903,17 +930,17 @@ class NaMi(object):
 if __name__ == '__main__':
     import os
     from configparser import ConfigParser
-    import cProfile, pstats, io
-    pr = cProfile.Profile(builtins=False, subcalls=False)
-#    from .tools import make_csv, send_emails
-#    import logging
-#    import http.client
-#
-#    http.client.HTTPConnection.debuglevel = 1
-#    logging.basicConfig(level=logging.DEBUG)
-#    requests_log = logging.getLogger("requests.packages.urllib3")
-#    requests_log.setLevel(logging.DEBUG)
-#    requests_log.propagate = True
+    # import cProfile, pstats, io
+    # pr = cProfile.Profile(builtins=False, subcalls=False)
+    # from .tools import make_csv, send_emails
+    # import logging
+    # import http.client
+
+    # http.client.HTTPConnection.debuglevel = 1
+    # logging.basicConfig(level=logging.DEBUG)
+    # requests_log = logging.getLogger("requests.packages.urllib3")
+    # requests_log.setLevel(logging.DEBUG)
+    # requests_log.propagate = True
 
     search = {
         'mglStatusId': 'AKTIV',
@@ -925,71 +952,73 @@ if __name__ == '__main__':
     config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              '.pynami.conf'))
     with NaMi(dict(config['nami'])) as nami:
-        pr.enable()
-#        print(tabulate2x(nami.search(**search)))
-#        print(tabulate2x(nami.search()))
-        for mitglied in nami.search():
-            print(nami.mitglied(mitglied.id))
-#        print(send_emails(nami.search(**search), open_browser=False))
-        user = nami.mitglied()
-        print(user.id)
+        import code
+        code.interact(local=locals())
+        # pr.enable()
+        # print(tabulate2x(nami.search(**search)))
+        # print(tabulate2x(nami.search()))
+        # for mitglied in nami.search():
+        #     print(nami.mitglied(mitglied.id))
+        # print(send_emails(nami.search(**search), open_browser=False))
+        # user = nami.mitglied()
+        # print(user.id)
 
-#        print(user.data['kontoverbindung'])
-#        user.data['spitzname'] = 'Chuck Norris'
-#        user.update(nami)
+        # print(user.data['kontoverbindung'])
+        # user.data['spitzname'] = 'Chuck Norris'
+        # user.update(nami)
 
-#        print(tabulate2x(nami.tags(user.id)))
-#        print(nami.get_tag(user.id, nami.tags(user.id)[0].id))
-#        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))
-#        print(tabulate2x(nami.tk_grp(100103, user.id)))
-#        print(tabulate2x(nami.tk_ug(100103, user.id, 6)))
-#        print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))
-#        nami.download_beantragung()
-#        print(nami.bescheinigungen())
-#        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
-#        nami.download_bescheinigung(nami.bescheinigungen()[0].id)
-#        print(tabulate2x(nami.gruppierungen))
-#        print(tabulate2x(nami.grpadmin_grps))
-#        print(nami.invoices())
-#        print(nami.invoice(100103, nami.invoices()[0].id))
-#        nami.download_invoice(nami.invoices()[0].id)
-#        print(nami.mgl_history(user.id))
-#        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
-#        print(tabulate2x(nami.mgl_ausbildungen(user.id)))
-#        print([nami.get_ausbildung(user.id, x.id)
-#               for x in nami.mgl_ausbildungen(user.id)])
-#        print(tabulate2x(nami.mgl_activities(user.id)))
-#        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
-#        print(act)
-#        nami.update_activity(user.id, act)
+        # print(tabulate2x(nami.tags(user.id)))
+        # print(nami.get_tag(user.id, nami.tags(user.id)[0].id))
+        # print(tabulate2x(nami.tk_auf_grp(100103, user.id)))
+        # print(tabulate2x(nami.tk_grp(100103, user.id)))
+        # print(tabulate2x(nami.tk_ug(100103, user.id, 6)))
+        # print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))
+        # nami.download_beantragung()
+        # print(nami.bescheinigungen())
+        # print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))
+        # nami.download_bescheinigung(nami.bescheinigungen()[0].id)
+        # print(tabulate2x(nami.gruppierungen))
+        # print(tabulate2x(nami.grpadmin_grps))
+        # print(nami.invoices())
+        # print(nami.invoice(100103, nami.invoices()[0].id))
+        # nami.download_invoice(nami.invoices()[0].id)
+        # print(nami.mgl_history(user.id))
+        # print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))
+        # print(tabulate2x(nami.mgl_ausbildungen(user.id)))
+        # print([nami.get_ausbildung(user.id, x.id)
+        #       for x in nami.mgl_ausbildungen(user.id)])
+        # print(tabulate2x(nami.mgl_activities(user.id)))
+        # act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)
+        # print(act)
+        # nami.update_activity(user.id, act)
         # print(MitgliedSchema().dumps(user.data, separators=(',', ':')))
-#        user.update(nami)
+        # user.update(nami)
 
-#        print(tabulate2x(nami.countries()))
-#        print(tabulate2x(nami.regionen()))
-#        print(tabulate2x(nami.zahlungskonditionen()))
-#        print(tabulate2x(nami.beitragsarten()))
-#        print(tabulate2x(nami.beitragsarten_mgl()))
-#        print(tabulate2x(nami.geschlechter()))
-#        print(tabulate2x(nami.staaten()))
-#        print(tabulate2x(nami.konfessionen()))
-#        print(tabulate2x(nami.mgltypes()))
-#        print(tabulate2x(nami.search_all(filterString='vorname',
-#                                         searchString='Sebastian',
-#                                         sortproperty='entries_nachname')))
-#        print(nami.history(filterString='interval', searchString='4'))
-#        print(tabulate2x(nami.notifications(filterString='interval',
-#                                            searchString='4')))
-#        print(nami.stats.statsCategories)
-#        print(nami.status_list)
-#        print(nami.tagList)
-#        print(nami.bausteine)
-#        print(nami.subdivision)
-#        print(tabulate2x(nami.activities))
-#        print(tabulate2x(nami.ebenen))
-#        print(tabulate2x(nami.ebene1))
-#        print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))
-#        print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))
-#        print(make_csv(nami.ebenen))
-        pr.disable()
-        pr.print_stats('cumulative')
+        # print(tabulate2x(nami.countries()))
+        # print(tabulate2x(nami.regionen()))
+        # print(tabulate2x(nami.zahlungskonditionen()))
+        # print(tabulate2x(nami.beitragsarten()))
+        # print(tabulate2x(nami.beitragsarten_mgl()))
+        # print(tabulate2x(nami.geschlechter()))
+        # print(tabulate2x(nami.staaten()))
+        # print(tabulate2x(nami.konfessionen()))
+        # print(tabulate2x(nami.mgltypes()))
+        # print(tabulate2x(nami.search_all(filterString='vorname',
+        #                                 searchString='Sebastian',
+        #                                 sortproperty='entries_nachname')))
+        # print(nami.history(filterString='interval', searchString='4'))
+        # print(tabulate2x(nami.notifications(filterString='interval',
+        #                                     searchString='4')))
+        # print(nami.stats.statsCategories)
+        # print(nami.status_list)
+        # print(nami.tagList)
+        # print(nami.bausteine)
+        # print(nami.subdivision)
+        # print(tabulate2x(nami.activities))
+        # print(tabulate2x(nami.ebenen))
+        # print(tabulate2x(nami.ebene1))
+        # print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))
+        # print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))
+        # print(make_csv(nami.ebenen))
+        # pr.disable()
+        # pr.print_stats('cumulative')

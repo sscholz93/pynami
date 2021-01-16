@@ -14,6 +14,8 @@ class Tag(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'tag']
+
     def __repr__(self):
         return f'<Tag({self.tag}, Id: {self.id})>'
 

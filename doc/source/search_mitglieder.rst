@@ -9,41 +9,41 @@ For validation of the search parameters the following class is used:
 Search Keys
 -----------
 
-.. autoinstanceattribute:: SearchSchema.vorname
+.. autoattribute:: SearchSchema.vorname
     :annotation:
-.. autoinstanceattribute:: SearchSchema.funktion
+.. autoattribute:: SearchSchema.funktion
     :annotation:
-.. autoinstanceattribute:: SearchSchema.organisation
+.. autoattribute:: SearchSchema.organisation
     :annotation:
-.. autoinstanceattribute:: SearchSchema.nachname
+.. autoattribute:: SearchSchema.nachname
     :annotation:
-.. autoinstanceattribute:: SearchSchema.alterVon
+.. autoattribute:: SearchSchema.alterVon
     :annotation:
-.. autoinstanceattribute:: SearchSchema.alterBis
+.. autoattribute:: SearchSchema.alterBis
     :annotation:
-.. autoinstanceattribute:: SearchSchema.mglWohnort
+.. autoattribute:: SearchSchema.mglWohnort
     :annotation:
-.. autoinstanceattribute:: SearchSchema.mitgliedsNummer
+.. autoattribute:: SearchSchema.mitgliedsNummer
     :annotation:
-.. autoinstanceattribute:: SearchSchema.mglStatusId
+.. autoattribute:: SearchSchema.mglStatusId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.mglTypeId
+.. autoattribute:: SearchSchema.mglTypeId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.tagId
+.. autoattribute:: SearchSchema.tagId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.bausteinIncludeId
+.. autoattribute:: SearchSchema.bausteinIncludeId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.spitzname
+.. autoattribute:: SearchSchema.spitzname
     :annotation:
-.. autoinstanceattribute:: SearchSchema.zeitschriftenversand
+.. autoattribute:: SearchSchema.zeitschriftenversand
     :annotation:
-.. autoinstanceattribute:: SearchSchema.untergliederungId
+.. autoattribute:: SearchSchema.untergliederungId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.taetigkeitId
+.. autoattribute:: SearchSchema.taetigkeitId
     :annotation:
-.. autoinstanceattribute:: SearchSchema.mitAllenTaetigkeiten
+.. autoattribute:: SearchSchema.mitAllenTaetigkeiten
     :annotation:
-.. autoinstanceattribute:: SearchSchema.withEndedTaetigkeiten
+.. autoattribute:: SearchSchema.withEndedTaetigkeiten
     :annotation:
 
 Restrict search to some group or level
@@ -53,38 +53,38 @@ There are two way to search only in a specified group or level which are mutuall
 1. Choose the level and specify the group id and/or the group name
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-   .. autoinstanceattribute:: SearchSchema.ebeneId
+   .. autoattribute:: SearchSchema.ebeneId
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.grpNummer
+   .. autoattribute:: SearchSchema.grpNummer
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.grpName
+   .. autoattribute:: SearchSchema.grpName
        :annotation:
 
 2. Choose group ids from different levels from a automated list
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-   .. autoinstanceattribute:: SearchSchema.gruppierung1Id
+   .. autoattribute:: SearchSchema.gruppierung1Id
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.gruppierung2Id
+   .. autoattribute:: SearchSchema.gruppierung2Id
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.gruppierung3Id
+   .. autoattribute:: SearchSchema.gruppierung3Id
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.inGrp
+   .. autoattribute:: SearchSchema.inGrp
        :annotation:
-   .. autoinstanceattribute:: SearchSchema.unterhalbGrp
+   .. autoattribute:: SearchSchema.unterhalbGrp
        :annotation:
 
 Unused search keys
 ^^^^^^^^^^^^^^^^^^
-.. autoinstanceattribute:: SearchSchema.gruppierung4Id
+.. autoattribute:: SearchSchema.gruppierung4Id
     :annotation:
-.. autoinstanceattribute:: SearchSchema.gruppierung5Id
+.. autoattribute:: SearchSchema.gruppierung5Id
     :annotation:
-.. autoinstanceattribute:: SearchSchema.gruppierung6Id
+.. autoattribute:: SearchSchema.gruppierung6Id
     :annotation:
-.. autoinstanceattribute:: SearchSchema.privacy
+.. autoattribute:: SearchSchema.privacy
     :annotation:
-.. autoinstanceattribute:: SearchSchema.searchName
+.. autoattribute:: SearchSchema.searchName
     :annotation:
-.. autoinstanceattribute:: SearchSchema.searchType
+.. autoattribute:: SearchSchema.searchType
     :annotation: = 'MITGLIEDER'

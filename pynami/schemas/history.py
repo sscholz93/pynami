@@ -17,12 +17,31 @@ class HistoryEntry(BaseSearchModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'entryDate', 'actor', 'operation', 'changedFields']
+
     def __repr__(self):
-        return f'<{self.type}({self.entries_entryDate}: ' + \
-               f'{self.entries_actor}: {self.entries_completeChanges})>'
+        return f'<{self.type}({self.entryDate}: ' + \
+               f'{self.actor}: {self.completeChanges})>'
 
     def __str__(self):
-        return f'{self.entries_operation}'
+        return f'{self.operation}'
+
+    def get_history(self, nami, mglId, ext=True):
+        """
+        Create a real :class:`MitgliedHistory` form the search result by
+        getting the corresponding data set through the history entry id.
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+            mglId (int): Member id (not |DPSG| Mitgliedsnummer)
+            ext (:obj:`bool`, optional): If the extended history format should
+                be used. Defaults to :data:`True`.
+
+        Returns:
+            MitgliedHistory: The activity object corresponding to this search
+            result.
+        """
+        return nami.get_mgl_history(mglId, self.id, ext)
 
 
 class HistoryEntrySchema(BaseSearchSchema):
@@ -31,34 +50,37 @@ class HistoryEntrySchema(BaseSearchSchema):
     """
     __model__ = HistoryEntry
 
-    entries_objectId = fields.Integer()
+    entries_objectId = fields.Integer(attribute='objectId')
     """int: Object id (not the |NAMI| id for addressing the entry)"""
-    entries_objectClass = fields.String()
+    entries_objectClass = fields.String(attribute='objectClass')
     """str: |NAMI| class"""
-    entries_entryDate = fields.DateTime()
+    entries_entryDate = fields.DateTime(attribute='entryDate')
     """:class:`~datetime.datetime`: Date of the event"""
-    entries_id = fields.Integer()
+    entries_id = fields.Integer(attribute='id_')
     """int: |NAMI| id"""
-    entries_newObject = fields.String(allow_none=True)
+    entries_newObject = fields.String(allow_none=True, attribute='newObject')
     """str: Updated object ('e.g. a Mitglied)"""
-    entries_actorId = fields.Integer()
+    entries_actorId = fields.Integer(attribute='actorId')
     """int: Id of the person who created the change"""
-    entries_actor = fields.String()
+    entries_actor = fields.String(attribute='actor')
     """str: Name of the person who created the change including the id"""
-    entries_changedFields = fields.String(allow_none=True)
+    entries_changedFields = fields.String(allow_none=True,
+                                          attribute='changedFields')
     """str: Which fields have been changed. This may be empty."""
-    entries_operation = fields.String()
+    entries_operation = fields.String(attribute='operation')
     """str: What kind of action has been done."""
-    entries_gruppierung = fields.String()
+    entries_gruppierung = fields.String(attribute='gruppierung')
     """str: Group name including its id"""
-    entries_completeChanges = fields.String(allow_none=True)
+    entries_completeChanges = fields.String(allow_none=True,
+                                            attribute='completeChanges')
     """str: More details about the changes. This may be empty."""
-    entries_author = fields.String()
+    entries_author = fields.String(attribute='author')
     """str: Who did this"""
-    entries_originalObject = fields.String(allow_none=True)
+    entries_originalObject = fields.String(allow_none=True,
+                                           attribute='originalObject')
     """str: The object before the change. This may be empty for a
     ``GruppierungsHistoryEntry``."""
-    entries_mitglied = fields.String(allow_none=True)
+    entries_mitglied = fields.String(allow_none=True, attribute='mitglied')
     """str: Almost the same as :attr:`entries_author`"""
 
 
@@ -70,6 +92,8 @@ class MitgliedHistory(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'entryDate', 'actor', 'operation', 'changedFields']
+
     def __repr__(self):
         return f'<MitgliedJistory({self.actor}, Id: {self.id})>'
 

@@ -1,38 +1,41 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.nami &mdash; pynami 0.2.3 documentation</title>
+  <title>pynami.nami &mdash; pynami 0.3.0 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -58,7 +61,7 @@
             
             
               <div class="version">
-                0.2.3
+                0.3.0
               </div>
             
           
@@ -75,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -96,6 +100,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -130,11 +135,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -163,19 +170,19 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">URLS</span><span class="p">,</span> <span class="n">DEFAULT_PARAMS</span>
-<span class="kn">from</span> <span class="nn">.schemas.activity</span> <span class="k">import</span> <span class="n">SearchActivitySchema</span><span class="p">,</span> <span class="n">ActivitySchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.cogc</span> <span class="k">import</span> <span class="n">SearchBescheinigungSchema</span><span class="p">,</span> <span class="n">BescheinigungSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.dashboard</span> <span class="k">import</span> <span class="n">NotificationSchema</span><span class="p">,</span> <span class="n">StatsSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.default</span> <span class="k">import</span> <span class="n">BaseadminSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.grpadmin</span> <span class="k">import</span> <span class="n">SearchInvoiceSchema</span><span class="p">,</span> <span class="n">InvoiceSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.history</span> <span class="k">import</span> <span class="n">HistoryEntrySchema</span><span class="p">,</span> <span class="n">MitgliedHistorySchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.mgl</span> <span class="k">import</span> <span class="n">SearchMitgliedSchema</span><span class="p">,</span> <span class="n">MitgliedSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.search</span> <span class="k">import</span> <span class="n">SearchSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.training</span> <span class="k">import</span> <span class="n">SearchAusbildungSchema</span><span class="p">,</span> <span class="n">AusbildungSchema</span>
-<span class="kn">from</span> <span class="nn">.schemas.tags</span> <span class="k">import</span> <span class="n">TagSchema</span><span class="p">,</span> <span class="n">SearchTagSchema</span>
-<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">open_download_pdf</span>
-<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">tabulate2x</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">URLS</span><span class="p">,</span> <span class="n">DEFAULT_PARAMS</span>
+<span class="kn">from</span> <span class="nn">.schemas.activity</span> <span class="kn">import</span> <span class="n">SearchActivitySchema</span><span class="p">,</span> <span class="n">ActivitySchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.cogc</span> <span class="kn">import</span> <span class="n">SearchBescheinigungSchema</span><span class="p">,</span> <span class="n">BescheinigungSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.dashboard</span> <span class="kn">import</span> <span class="n">NotificationSchema</span><span class="p">,</span> <span class="n">StatsSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.default</span> <span class="kn">import</span> <span class="n">BaseadminSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.grpadmin</span> <span class="kn">import</span> <span class="n">SearchInvoiceSchema</span><span class="p">,</span> <span class="n">InvoiceSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.history</span> <span class="kn">import</span> <span class="n">HistoryEntrySchema</span><span class="p">,</span> <span class="n">MitgliedHistorySchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.mgl</span> <span class="kn">import</span> <span class="n">SearchMitgliedSchema</span><span class="p">,</span> <span class="n">MitgliedSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.search</span> <span class="kn">import</span> <span class="n">SearchSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.training</span> <span class="kn">import</span> <span class="n">SearchAusbildungSchema</span><span class="p">,</span> <span class="n">AusbildungSchema</span>
+<span class="kn">from</span> <span class="nn">.schemas.tags</span> <span class="kn">import</span> <span class="n">TagSchema</span><span class="p">,</span> <span class="n">SearchTagSchema</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">open_download_pdf</span>
+<span class="kn">from</span> <span class="nn">.tools</span> <span class="kn">import</span> <span class="n">tabulate2x</span>
 
 
 <div class="viewcode-block" id="NamiResponseTypeError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiResponseTypeError">[docs]</a><span class="k">class</span> <span class="nc">NamiResponseTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -217,7 +224,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        config (:obj:`dict`, optional): Authorization configuration</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__config</span> <span class="o">=</span> <span class="n">config</span>
         <span class="sd">&quot;&quot;&quot;dict: Contains authorization information and after that a few ids&quot;&quot;&quot;</span>
@@ -233,19 +240,19 @@
 <span class="sd">            NamiResponseSuccessError: When the |NAMI| returns an error</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NamiHTTPError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;HTTP Error. Status Code: &#39;</span>
-                                <span class="n">f</span><span class="s1">&#39;</span><span class="si">{response.status_code}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NamiHTTPError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP Error. Status Code: &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;application/pdf&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
         <span class="n">rjson</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="n">NamiResponseSuccessError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;succes state from NAMI was &quot;</span>
-                                           <span class="n">f</span><span class="s2">&quot;</span><span class="si">{rjson[&#39;message&#39;]}</span><span class="s2"> </span><span class="si">{rjson}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NamiResponseSuccessError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;success state from NAMI was &quot;</span>
+                                           <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rjson</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># allowed response types are: OK, INFO, WARN, ERROR, EXCEPTION</span>
         <span class="k">if</span> <span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;responseType&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;OK&#39;</span><span class="p">,</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="n">NamiResponseTypeError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{rjson[&#39;responseType&#39;]}</span><span class="s2">: &quot;</span>
-                                        <span class="n">f</span><span class="s2">&quot;</span><span class="si">{rjson[&#39;message&#39;]}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NamiResponseTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;responseType&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: &quot;</span>
+                                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rjson</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span></div>
 
 
@@ -284,15 +291,15 @@
         <span class="c1"># Get the id of the user</span>
         <span class="n">myself</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mitgliedsNummer</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">myself</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;mitgliedsnummer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">myself</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">myself</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">myself</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gruppierungId</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Received {len(myself)} search results while &#39;</span>
-                             <span class="n">f</span><span class="s1">&#39;searching for myself!&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Received </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">myself</span><span class="p">)</span><span class="si">}</span><span class="s1"> search results while &#39;</span>
+                             <span class="sa">f</span><span class="s1">&#39;searching for myself!&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span></div>
 
-    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -305,11 +312,11 @@
         <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">204</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">NamiHTTPError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;NamiHTTPError during logout: </span><span class="si">{ex}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NamiHTTPError during logout: </span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">exception_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
 
@@ -343,13 +350,35 @@
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">grpId</span><span class="p">)</span> <span class="k">if</span> <span class="n">grpId</span> <span class="k">else</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">],</span>
                   <span class="s1">&#39;mitglied&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mglId</span><span class="p">)</span> <span class="k">if</span> <span class="n">mglId</span> <span class="k">else</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;mitgliedsnummer&#39;</span><span class="p">],</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
                   <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                   <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                   <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
         <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">BaseadminSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grpId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Group id of the user</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">myId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        |NAMI| internal id of the user</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="NaMi.countries"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.countries">[docs]</a>    <span class="k">def</span> <span class="nf">countries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -487,9 +516,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tagList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different list</span>
-<span class="sd">        of fee types but with basically the same content. This one is used for</span>
-<span class="sd">        searching members.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different</span>
+<span class="sd">        list of fee types but with basically the same content. This one is</span>
+<span class="sd">        used for searching members.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TagList&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -512,8 +541,8 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ebenen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural layers</span>
-<span class="sd">        in the |DPSG|&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural</span>
+<span class="sd">        layersin the |DPSG|&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Ebene&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -588,8 +617,8 @@
 <span class="sd">            ebene1 (int): Group id of a Diözese</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible</span>
-<span class="sd">            Bezirken you are associated with&quot;&quot;&quot;</span>
+<span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of</span>
+<span class="sd">            possible Bezirken you are associated with&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Ebene2&#39;</span><span class="p">,</span> <span class="n">ebene1</span><span class="p">,</span>
                                    <span class="n">gruppierung</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">])</span></div>
 
@@ -601,8 +630,8 @@
 <span class="sd">            ebene2 (int): Group id of a Bezirk</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of possible</span>
-<span class="sd">            Stämmen you are associated with&quot;&quot;&quot;</span>
+<span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: List of</span>
+<span class="sd">            possible Stämmen you are associated with&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Ebene3&#39;</span><span class="p">,</span> <span class="n">ebene2</span><span class="p">,</span>
                                    <span class="n">gruppierung</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">])</span></div>
 
@@ -619,7 +648,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">groupId</span><span class="p">:</span>
             <span class="n">groupId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">]</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;INVOICE&#39;]}{groupId}</span><span class="s2">/flist&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;INVOICE&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">groupId</span><span class="si">}</span><span class="s2">/flist&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
@@ -630,7 +659,7 @@
 <span class="sd">        Get an invoice by its id.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mgl (int): Member id (not |DPSG| Mitgliedsnummer)</span>
+<span class="sd">            groupId (int): Group id</span>
 <span class="sd">            invId (int): Id of the invoice. This will probably originate from</span>
 <span class="sd">                a search result, e.g. by calling :meth:`invoices`.</span>
 
@@ -638,21 +667,22 @@
 <span class="sd">            :class:`~.grpadmin.Invoice`: The Invoice object containing all</span>
 <span class="sd">            details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;INVOICE&#39;]}{groupId}</span><span class="s2">/</span><span class="si">{invId}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;INVOICE&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">groupId</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">invId</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">InvoiceSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="NaMi.download_invoice"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">download_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
+<div class="viewcode-block" id="NaMi.download_invoice"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">download_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Downloads and opens an invoice as a pdf document.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            id_ (int): Id of the invoice (not the regular invoice number)</span>
+<span class="sd">            **kwargs: See :meth:`~pynami.util.open_download_pdf`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;INVOICE_PDF&#39;</span><span class="p">]</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">id_</span><span class="p">}</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.tk_auf_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_auf_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_auf_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -733,7 +763,7 @@
 <span class="sd">            :obj:`list` of :class:`~.activity.Activity`: All activities of</span>
 <span class="sd">            the member (even those which have already ended)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;MGL_TAETIGKEITEN&#39;]}{mgl}</span><span class="s2">/flist&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;MGL_TAETIGKEITEN&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mgl</span><span class="si">}</span><span class="s2">/flist&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">SearchActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
@@ -751,7 +781,7 @@
 <span class="sd">            :class:`~.activity.Activity`: The Activity object containing all</span>
 <span class="sd">            details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;MGL_TAETIGKEITEN&#39;]}{mgl}</span><span class="s2">/</span><span class="si">{id_}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;MGL_TAETIGKEITEN&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mgl</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
@@ -770,15 +800,15 @@
 <span class="sd">        Warning:</span>
 <span class="sd">            This has not been tested yet!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;MGL_TAETIGKEITEN&#39;]}{mgl}</span><span class="s2">/</span><span class="si">{act.id}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;MGL_TAETIGKEITEN&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mgl</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">act</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">userjson</span> <span class="o">=</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">act</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">userjson</span><span class="p">)</span>
         <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
                                <span class="n">json</span><span class="o">=</span><span class="n">userjson</span><span class="p">)</span>
         <span class="n">prereq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">prepare_request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">prereq</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-<span class="c1">#        r = self.s.put(url, json=ActivitySchema().dumps(act.data))</span>
-<span class="c1">#        return ActivitySchema().load(self._check_response(r))</span>
+        <span class="c1"># r = self.s.put(url, json=ActivitySchema().dumps(act.data))</span>
+        <span class="c1"># return ActivitySchema().load(self._check_response(r))</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_ausbildungen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_ausbildungen">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_ausbildungen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">):</span>
@@ -792,7 +822,7 @@
 <span class="sd">            :obj:`list` of :class:`~.training.SearchAusbildung`: All trainings</span>
 <span class="sd">            of the member</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;AUSBILDUNG&#39;]}{mglId}</span><span class="s2">/flist&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;AUSBILDUNG&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/flist&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -812,7 +842,7 @@
 <span class="sd">            :class:`~.training.Ausbildung`: The Ausbildung object containing</span>
 <span class="sd">            all details about the training.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;AUSBILDUNG&#39;]}{mglId}</span><span class="s2">/</span><span class="si">{id_}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;AUSBILDUNG&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
@@ -831,7 +861,7 @@
 <span class="sd">        Warning:</span>
 <span class="sd">            This has not been tested yet!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;AUSBILDUNG&#39;]}{mglId}</span><span class="s2">/</span><span class="si">{ausbildung.id}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;AUSBILDUNG&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">ausbildung</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ausbildung</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
@@ -849,7 +879,7 @@
 <span class="sd">            of the member</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;MGL_HISTORY_EXT&#39;</span> <span class="k">if</span> <span class="n">ext</span> <span class="k">else</span> <span class="s1">&#39;MGL_HISTORY&#39;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[key]}{mglId}</span><span class="s2">/flist&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/flist&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">HistoryEntrySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
@@ -870,7 +900,7 @@
 <span class="sd">            information about this history entry.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;MGL_HISTORY_EXT&#39;</span> <span class="k">if</span> <span class="n">ext</span> <span class="k">else</span> <span class="s1">&#39;MGL_HISTORY&#39;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[key]}{mglId}</span><span class="s2">/</span><span class="si">{id_}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MitgliedHistorySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
@@ -913,7 +943,7 @@
 <span class="sd">            :obj:`list` of :class:`~.schemas.cogc.SearchBescheinigung`: A list</span>
 <span class="sd">            of all your certificates of inspection</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;FZ&#39;]}</span><span class="s2">flist&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;FZ&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">flist&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
@@ -931,30 +961,34 @@
 <span class="sd">            :class:`~.schemas.cogc.Bescheinigung`: An object holding all</span>
 <span class="sd">            important details about the inspection</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;FZ&#39;]}{id_}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;FZ&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">id_</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">BescheinigungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="NaMi.download_bescheinigung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_bescheinigung">[docs]</a>    <span class="k">def</span> <span class="nf">download_bescheinigung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
+<div class="viewcode-block" id="NaMi.download_bescheinigung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_bescheinigung">[docs]</a>    <span class="k">def</span> <span class="nf">download_bescheinigung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Open a certificate as a |PDF| file</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            id_ (int): Internal id of the certificate</span>
+<span class="sd">            **kwargs: See :meth:`~pynami.util.open_download_pdf`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{URLS[&#39;FZ&#39;]}</span><span class="s2">download-pdf-eigene-bescheinigung&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;FZ&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">download-pdf-eigene-bescheinigung&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">id_</span><span class="p">}</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NaMi.download_beantragung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_beantragung">[docs]</a>    <span class="k">def</span> <span class="nf">download_beantragung</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="NaMi.download_beantragung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_beantragung">[docs]</a>    <span class="k">def</span> <span class="nf">download_beantragung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Open the application form for a certificate of good conduct as a |PDF|</span>
 <span class="sd">        file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: See :meth:`~pynami.util.open_download_pdf`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;BEANTRAGUNG&#39;</span><span class="p">]</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+        <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.search_all"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.search_all">[docs]</a>    <span class="k">def</span> <span class="nf">search_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filterString</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">searchString</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                    <span class="n">sortproperty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sortdirection</span><span class="o">=</span><span class="s1">&#39;ASC&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1019,8 +1053,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># this is just a default search</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mglStatusId&#39;</span><span class="p">:</span> <span class="s1">&#39;AKTIV&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;mglTypeId&#39;</span><span class="p">:</span> <span class="s1">&#39;MITGLIED&#39;</span><span class="p">})</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({})</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">DEFAULT_PARAMS</span>
         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;searchedValues&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SearchSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
                                                         <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span>
@@ -1049,7 +1082,7 @@
 <span class="sd">            of the returned data set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">mglId</span><span class="p">:</span>
-            <span class="n">mglId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;mitgliedsnummer&#39;</span><span class="p">]</span>
+            <span class="n">mglId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">grpId</span><span class="p">:</span>
             <span class="n">grpId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">]</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;GETMGL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gruppierung</span><span class="o">=</span><span class="n">grpId</span><span class="p">,</span> <span class="n">mitglied</span><span class="o">=</span><span class="n">mglId</span><span class="p">)</span>
@@ -1059,16 +1092,18 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">from</span> <span class="nn">configparser</span> <span class="k">import</span> <span class="n">ConfigParser</span>
-    <span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">make_csv</span><span class="p">,</span> <span class="n">send_emails</span>
-<span class="c1">#    import logging</span>
-<span class="c1">#    import http.client</span>
-<span class="c1">#</span>
-<span class="c1">#    http.client.HTTPConnection.debuglevel = 1</span>
-<span class="c1">#    logging.basicConfig(level=logging.DEBUG)</span>
-<span class="c1">#    requests_log = logging.getLogger(&quot;requests.packages.urllib3&quot;)</span>
-<span class="c1">#    requests_log.setLevel(logging.DEBUG)</span>
-<span class="c1">#    requests_log.propagate = True</span>
+    <span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+    <span class="c1"># import cProfile, pstats, io</span>
+    <span class="c1"># pr = cProfile.Profile(builtins=False, subcalls=False)</span>
+    <span class="c1"># from .tools import make_csv, send_emails</span>
+    <span class="c1"># import logging</span>
+    <span class="c1"># import http.client</span>
+
+    <span class="c1"># http.client.HTTPConnection.debuglevel = 1</span>
+    <span class="c1"># logging.basicConfig(level=logging.DEBUG)</span>
+    <span class="c1"># requests_log = logging.getLogger(&quot;requests.packages.urllib3&quot;)</span>
+    <span class="c1"># requests_log.setLevel(logging.DEBUG)</span>
+    <span class="c1"># requests_log.propagate = True</span>
 
     <span class="n">search</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;mglStatusId&#39;</span><span class="p">:</span> <span class="s1">&#39;AKTIV&#39;</span><span class="p">,</span>
@@ -1080,89 +1115,101 @@
     <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span>
                              <span class="s1">&#39;.pynami.conf&#39;</span><span class="p">))</span>
     <span class="k">with</span> <span class="n">NaMi</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;nami&#39;</span><span class="p">]))</span> <span class="k">as</span> <span class="n">nami</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">code</span>
+        <span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span>
+        <span class="c1"># pr.enable()</span>
+        <span class="c1"># print(tabulate2x(nami.search(**search)))</span>
+        <span class="c1"># print(tabulate2x(nami.search()))</span>
+        <span class="c1"># for mitglied in nami.search():</span>
+        <span class="c1">#     print(nami.mitglied(mitglied.id))</span>
+        <span class="c1"># print(send_emails(nami.search(**search), open_browser=False))</span>
+        <span class="c1"># user = nami.mitglied()</span>
+        <span class="c1"># print(user.id)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="n">tabulate2x</span><span class="p">(</span><span class="n">nami</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="o">**</span><span class="n">search</span><span class="p">)))</span>
-<span class="c1">#        print(send_emails(nami.search(**search), open_browser=False))</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="c1"># print(user.data[&#39;kontoverbindung&#39;])</span>
+        <span class="c1"># user.data[&#39;spitzname&#39;] = &#39;Chuck Norris&#39;</span>
+        <span class="c1"># user.update(nami)</span>
 
-<span class="c1">#        print(user.data[&#39;kontoverbindung&#39;])</span>
-<span class="c1">#        user.data[&#39;spitzname&#39;] = &#39;Chuck Norris&#39;</span>
-<span class="c1">#        user.update(nami)</span>
-
-<span class="c1">#        print(tabulate2x(nami.tags(user.id)))</span>
-<span class="c1">#        print(nami.get_tag(user.id, nami.tags(user.id)[0].id))</span>
-<span class="c1">#        print(tabulate2x(nami.tk_auf_grp(100103, user.id)))</span>
-<span class="c1">#        print(tabulate2x(nami.tk_grp(100103, user.id)))</span>
-<span class="c1">#        print(tabulate2x(nami.tk_ug(100103, user.id, 6)))</span>
-<span class="c1">#        print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))</span>
-<span class="c1">#        nami.download_beantragung()</span>
-<span class="c1">#        print(nami.bescheinigungen())</span>
-<span class="c1">#        print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))</span>
-<span class="c1">#        nami.download_bescheinigung(nami.bescheinigungen()[0].id)</span>
-<span class="c1">#        print(tabulate2x(nami.gruppierungen))</span>
-<span class="c1">#        print(tabulate2x(nami.grpadmin_grps))</span>
-<span class="c1">#        print(nami.invoices())</span>
-<span class="c1">#        print(nami.invoice(100103, nami.invoices()[0].id))</span>
-<span class="c1">#        nami.download_invoice(nami.invoices()[0].id)</span>
-<span class="c1">#        print(nami.mgl_history(user.id))</span>
-<span class="c1">#        print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))</span>
-<span class="c1">#        print(tabulate2x(nami.mgl_ausbildungen(user.id)))</span>
-<span class="c1">#        print([nami.get_ausbildung(user.id, x.id)</span>
-<span class="c1">#               for x in nami.mgl_ausbildungen(user.id)])</span>
-<span class="c1">#        print(tabulate2x(nami.mgl_activities(user.id)))</span>
-<span class="c1">#        act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)</span>
-<span class="c1">#        print(act)</span>
-<span class="c1">#        nami.update_activity(user.id, act)</span>
+        <span class="c1"># print(tabulate2x(nami.tags(user.id)))</span>
+        <span class="c1"># print(nami.get_tag(user.id, nami.tags(user.id)[0].id))</span>
+        <span class="c1"># print(tabulate2x(nami.tk_auf_grp(100103, user.id)))</span>
+        <span class="c1"># print(tabulate2x(nami.tk_grp(100103, user.id)))</span>
+        <span class="c1"># print(tabulate2x(nami.tk_ug(100103, user.id, 6)))</span>
+        <span class="c1"># print(tabulate2x(nami.tk_caea_grp(100103, user.id, 6)))</span>
+        <span class="c1"># nami.download_beantragung()</span>
+        <span class="c1"># print(nami.bescheinigungen())</span>
+        <span class="c1"># print(nami.get_bescheinigung(nami.bescheinigungen()[0].id))</span>
+        <span class="c1"># nami.download_bescheinigung(nami.bescheinigungen()[0].id)</span>
+        <span class="c1"># print(tabulate2x(nami.gruppierungen))</span>
+        <span class="c1"># print(tabulate2x(nami.grpadmin_grps))</span>
+        <span class="c1"># print(nami.invoices())</span>
+        <span class="c1"># print(nami.invoice(100103, nami.invoices()[0].id))</span>
+        <span class="c1"># nami.download_invoice(nami.invoices()[0].id)</span>
+        <span class="c1"># print(nami.mgl_history(user.id))</span>
+        <span class="c1"># print(nami.get_mgl_history(user.id, nami.mgl_history(user.id)[0].id))</span>
+        <span class="c1"># print(tabulate2x(nami.mgl_ausbildungen(user.id)))</span>
+        <span class="c1"># print([nami.get_ausbildung(user.id, x.id)</span>
+        <span class="c1">#       for x in nami.mgl_ausbildungen(user.id)])</span>
+        <span class="c1"># print(tabulate2x(nami.mgl_activities(user.id)))</span>
+        <span class="c1"># act = nami.get_activity(user.id, nami.mgl_activities(user.id)[0].id)</span>
+        <span class="c1"># print(act)</span>
+        <span class="c1"># nami.update_activity(user.id, act)</span>
         <span class="c1"># print(MitgliedSchema().dumps(user.data, separators=(&#39;,&#39;, &#39;:&#39;)))</span>
-<span class="c1">#        user.update(nami)</span>
+        <span class="c1"># user.update(nami)</span>
 
-<span class="c1">#        print(tabulate2x(nami.countries()))</span>
-<span class="c1">#        print(tabulate2x(nami.regionen()))</span>
-<span class="c1">#        print(tabulate2x(nami.zahlungskonditionen()))</span>
-<span class="c1">#        print(tabulate2x(nami.beitragsarten()))</span>
-<span class="c1">#        print(tabulate2x(nami.beitragsarten_mgl()))</span>
-<span class="c1">#        print(tabulate2x(nami.geschlechter()))</span>
-<span class="c1">#        print(tabulate2x(nami.staaten()))</span>
-<span class="c1">#        print(tabulate2x(nami.konfessionen()))</span>
-<span class="c1">#        print(tabulate2x(nami.mgltypes()))</span>
-<span class="c1">#        print(tabulate2x(nami.search_all(filterString=&#39;vorname&#39;,</span>
-<span class="c1">#                                         searchString=&#39;Sebastian&#39;,</span>
-<span class="c1">#                                         sortproperty=&#39;entries_nachname&#39;)))</span>
-<span class="c1">#        print(nami.history(filterString=&#39;interval&#39;, searchString=&#39;4&#39;))</span>
-<span class="c1">#        print(tabulate2x(nami.notifications(filterString=&#39;interval&#39;,</span>
-<span class="c1">#                                            searchString=&#39;4&#39;)))</span>
-<span class="c1">#        print(nami.stats.statsCategories)</span>
-<span class="c1">#        print(nami.status_list)</span>
-<span class="c1">#        print(nami.tagList)</span>
-<span class="c1">#        print(nami.bausteine)</span>
-<span class="c1">#        print(nami.subdivision)</span>
-<span class="c1">#        print(tabulate2x(nami.activities))</span>
-<span class="c1">#        print(tabulate2x(nami.ebenen))</span>
-<span class="c1">#        print(tabulate2x(nami.ebene1))</span>
-<span class="c1">#        print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))</span>
-<span class="c1">#        print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))</span>
-<span class="c1">#        print(make_csv(nami.ebenen))</span>
+        <span class="c1"># print(tabulate2x(nami.countries()))</span>
+        <span class="c1"># print(tabulate2x(nami.regionen()))</span>
+        <span class="c1"># print(tabulate2x(nami.zahlungskonditionen()))</span>
+        <span class="c1"># print(tabulate2x(nami.beitragsarten()))</span>
+        <span class="c1"># print(tabulate2x(nami.beitragsarten_mgl()))</span>
+        <span class="c1"># print(tabulate2x(nami.geschlechter()))</span>
+        <span class="c1"># print(tabulate2x(nami.staaten()))</span>
+        <span class="c1"># print(tabulate2x(nami.konfessionen()))</span>
+        <span class="c1"># print(tabulate2x(nami.mgltypes()))</span>
+        <span class="c1"># print(tabulate2x(nami.search_all(filterString=&#39;vorname&#39;,</span>
+        <span class="c1">#                                 searchString=&#39;Sebastian&#39;,</span>
+        <span class="c1">#                                 sortproperty=&#39;entries_nachname&#39;)))</span>
+        <span class="c1"># print(nami.history(filterString=&#39;interval&#39;, searchString=&#39;4&#39;))</span>
+        <span class="c1"># print(tabulate2x(nami.notifications(filterString=&#39;interval&#39;,</span>
+        <span class="c1">#                                     searchString=&#39;4&#39;)))</span>
+        <span class="c1"># print(nami.stats.statsCategories)</span>
+        <span class="c1"># print(nami.status_list)</span>
+        <span class="c1"># print(nami.tagList)</span>
+        <span class="c1"># print(nami.bausteine)</span>
+        <span class="c1"># print(nami.subdivision)</span>
+        <span class="c1"># print(tabulate2x(nami.activities))</span>
+        <span class="c1"># print(tabulate2x(nami.ebenen))</span>
+        <span class="c1"># print(tabulate2x(nami.ebene1))</span>
+        <span class="c1"># print(tabulate2x(nami.ebene2(nami.ebene1[0].id)))</span>
+        <span class="c1"># print(tabulate2x(nami.ebene3(nami.ebene2(nami.ebene1[0].id)[0].id)))</span>
+        <span class="c1"># print(make_csv(nami.ebenen))</span>
+        <span class="c1"># pr.disable()</span>
+        <span class="c1"># pr.print_stats(&#39;cumulative&#39;)</span>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Sebastian Scholz
+        &#169; Copyright 2019, Sebastian Scholz.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -1170,7 +1217,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

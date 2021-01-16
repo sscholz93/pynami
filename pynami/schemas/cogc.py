@@ -17,7 +17,42 @@ class SearchBescheinigung(BaseSearchModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
-    pass
+    _tabkeys = ['id', 'fzDatum', 'fzNummer']
+
+    def __repr__(self):
+        return f'<Searchbescheinigung {self.id} ' + \
+            f'({self.fzNummer}, {self.fzDatum})>'
+
+    def __str__(self):
+        return f'Führungszeugnis {self.fzNummer} ({self.fzDatum})>'
+
+    def get_bescheinigung(self, nami):
+        """
+        Create a real :class:`Bescheinigung` form the search result by getting
+        the corresponding data set through the certificate id.
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+
+        Returns:
+            Bescheinigung: The certificate object corresponding to this search
+            result.
+        """
+        return nami.get_bescheinigung(self.id)
+
+    def download_fz(self, nami, **kwargs):
+        """
+        Open the certificate as a |PDF| file
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+            **kwargs: See :meth:`~pynami.util.open_download_pdf`.
+
+        Returns:
+            :data:`None`
+
+        """
+        nami.download_bescheinigung(self.id, **kwargs)
 
 
 class SearchBescheinigungSchema(BaseSearchSchema):
@@ -26,23 +61,24 @@ class SearchBescheinigungSchema(BaseSearchSchema):
     """
     __model__ = SearchBescheinigung
 
-    entries_erstelltAm = fields.DateTime()
+    entries_erstelltAm = fields.DateTime(attribute='erstelltAm')
     """:class:`~datetime.datetime`: Entry creation date"""
-    entries_fzNummer = fields.String()
+    entries_fzNummer = fields.String(attribute='fzNummer')
     """str: Number of the |CGC|"""
-    entries_empfaenger = fields.String()
+    entries_empfaenger = fields.String(attribute='empfaenger')
     """str: Receiver"""
-    entries_empfNachname = fields.String()
+    entries_empfNachname = fields.String(attribute='empfNachname')
     """str: Surname"""
-    entries_empfVorname = fields.String()
+    entries_empfVorname = fields.String(attribute='empfVorname')
     """str: First name"""
-    entries_empfGebDatum = fields.DateTime()
+    entries_empfGebDatum = fields.DateTime(attribute='empfGebDatum')
     """:class:`~datetime.datetime`: Birth date"""
-    entries_datumEinsicht = fields.DateTime(allow_none=True)
+    entries_datumEinsicht = fields.DateTime(allow_none=True,
+                                            attribute='datumEinsicht')
     """:class:`~datetime.datetime`: Inspection date. May be empty."""
-    entries_fzDatum = fields.DateTime()
+    entries_fzDatum = fields.DateTime(attribute='fzDatum')
     """:class:`~datetime.datetime`: Date of the |CGC|"""
-    entries_autor = fields.String()
+    entries_autor = fields.String(attribute='autor')
     """str: Person who did the inspection"""
 
 
@@ -54,11 +90,27 @@ class Bescheinigung(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'fzDatum', 'fzNummer']
+
     def __repr__(self):
         return f'<Bescheinigung(FZ-Nr.: {self.fzNummer}, Id: {self.id})>'
 
     def __str__(self):
-        return f'{self.fzNummer}'
+        return f'Führungszeugnis {self.fzNummer}'
+
+    def download_fz(self, nami, **kwargs):
+        """
+        Open the certificate as a |PDF| file
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+            **kwargs: See :meth:`~pynami.util.open_download_pdf`.
+
+        Returns:
+            :data:`None`
+
+        """
+        nami.download_bescheinigung(self.id, **kwargs)
 
 
 class BescheinigungSchema(BaseSchema):
@@ -97,4 +149,3 @@ class BescheinigungSchema(BaseSchema):
         """
         data['download'] = extract_url(data['download'])
         return data
-

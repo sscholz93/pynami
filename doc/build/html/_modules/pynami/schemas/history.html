@@ -1,38 +1,41 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas.history &mdash; pynami 0.2.3 documentation</title>
+  <title>pynami.schemas.history &mdash; pynami 0.3.0 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -58,7 +61,7 @@
             
             
               <div class="version">
-                0.2.3
+                0.3.0
               </div>
             
           
@@ -75,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -96,6 +100,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -130,15 +135,15 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-          <li><a href="../schemas.html">pynami.schemas</a> &raquo;</li>
         
       <li>pynami.schemas.history</li>
     
@@ -160,9 +165,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Schemas for history entries</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">fields</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
 
 
 <div class="viewcode-block" id="HistoryEntry"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.history.HistoryEntry">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntry</span><span class="p">(</span><span class="n">BaseSearchModel</span><span class="p">):</span>
@@ -175,12 +180,31 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;</span><span class="si">{self.type}</span><span class="s1">(</span><span class="si">{self.entries_entryDate}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
-               <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_actor}</span><span class="s1">: </span><span class="si">{self.entries_completeChanges}</span><span class="s1">)&gt;&#39;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;entryDate&#39;</span><span class="p">,</span> <span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="s1">&#39;operation&#39;</span><span class="p">,</span> <span class="s1">&#39;changedFields&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.entries_operation}</span><span class="s1">&#39;</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">entryDate</span><span class="si">}</span><span class="s1">: &#39;</span> <span class="o">+</span> \
+               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">completeChanges</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="HistoryEntry.get_history"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.history.HistoryEntry.get_history">[docs]</a>    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a real :class:`MitgliedHistory` form the search result by</span>
+<span class="sd">        getting the corresponding data set through the history entry id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class</span>
+<span class="sd">            mglId (int): Member id (not |DPSG| Mitgliedsnummer)</span>
+<span class="sd">            ext (:obj:`bool`, optional): If the extended history format should</span>
+<span class="sd">                be used. Defaults to :data:`True`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            MitgliedHistory: The activity object corresponding to this search</span>
+<span class="sd">            result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">get_mgl_history</span><span class="p">(</span><span class="n">mglId</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="HistoryEntrySchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.history.HistoryEntrySchema">[docs]</a><span class="k">class</span> <span class="nc">HistoryEntrySchema</span><span class="p">(</span><span class="n">BaseSearchSchema</span><span class="p">):</span>
@@ -189,34 +213,37 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">HistoryEntry</span>
 
-    <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_objectId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;objectId&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Object id (not the |NAMI| id for addressing the entry)&quot;&quot;&quot;</span>
-    <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_objectClass</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;objectClass&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: |NAMI| class&quot;&quot;&quot;</span>
-    <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">entries_entryDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;entryDate&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the event&quot;&quot;&quot;</span>
-    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;id_&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
-    <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_newObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;newObject&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Updated object (&#39;e.g. a Mitglied)&quot;&quot;&quot;</span>
-    <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+    <span class="n">entries_actorId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;actorId&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Id of the person who created the change&quot;&quot;&quot;</span>
-    <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_actor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;actor&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Name of the person who created the change including the id&quot;&quot;&quot;</span>
-    <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_changedFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;changedFields&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Which fields have been changed. This may be empty.&quot;&quot;&quot;</span>
-    <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_operation</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;operation&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: What kind of action has been done.&quot;&quot;&quot;</span>
-    <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_gruppierung</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Group name including its id&quot;&quot;&quot;</span>
-    <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_completeChanges</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;completeChanges&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: More details about the changes. This may be empty.&quot;&quot;&quot;</span>
-    <span class="n">entries_author</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">entries_author</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Who did this&quot;&quot;&quot;</span>
-    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_originalObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                           <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;originalObject&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: The object before the change. This may be empty for a</span>
 <span class="sd">    ``GruppierungsHistoryEntry``.&quot;&quot;&quot;</span>
-    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">entries_mitglied</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;mitglied&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Almost the same as :attr:`entries_author`&quot;&quot;&quot;</span></div>
 
 
@@ -228,11 +255,13 @@
 <span class="sd">    This class is intended to be instantiated by calling the</span>
 <span class="sd">    :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;MitgliedJistory(</span><span class="si">{self.actor}</span><span class="s1">, Id: </span><span class="si">{self.id}</span><span class="s1">)&gt;&#39;</span>
+    <span class="n">_tabkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;entryDate&#39;</span><span class="p">,</span> <span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="s1">&#39;operation&#39;</span><span class="p">,</span> <span class="s1">&#39;changedFields&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.actor}</span><span class="s1">: </span><span class="si">{self.operation}</span><span class="s1">&#39;</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;MitgliedJistory(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="si">}</span><span class="s1">, Id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="si">}</span><span class="s1">&#39;</span></div>
 
 
 <div class="viewcode-block" id="MitgliedHistorySchema"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.history.MitgliedHistorySchema">[docs]</a><span class="k">class</span> <span class="nc">MitgliedHistorySchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
@@ -259,20 +288,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Sebastian Scholz
+        &#169; Copyright 2019, Sebastian Scholz.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -280,7 +314,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

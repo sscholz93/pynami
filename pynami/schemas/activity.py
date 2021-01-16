@@ -23,6 +23,20 @@ class SearchActivity(BaseSearchModel):
     def __str__(self):
         return f'{self.taetigkeit} ({self.untergliederung})'
 
+    def get_activity(self, nami, mglId):
+        """
+        Create a real :class:`Activity` form the search result by getting the
+        corresponding data set through the activity id.
+
+        Args:
+            nami (:class:`~pynami.nami.NaMi`): Main |NAMI| class
+            mglId (int): Member id (not |DPSG| Mitgliedsnummer)
+
+        Returns:
+            Activity: The activity object corresponding to this search result.
+        """
+        return nami.get_activity(mglId, self.id)
+
 
 class SearchActivitySchema(BaseSearchSchema):
     """
@@ -60,6 +74,8 @@ class Activity(BaseModel):
     This class is intended to be instantiated by calling the
     :meth:`~marshmallow.Schema.load` method on a corresponding data dictionary.
     """
+    _tabkeys = ['id', 'taetigkeit', 'aktivVon', 'aktivBis']
+
     def __repr__(self):
         return f'<Activity({self.taetigkeit} ({self.untergliederung}), ' + \
                f'Id: {self.id})>'

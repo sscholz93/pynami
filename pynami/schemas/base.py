@@ -23,6 +23,29 @@ class BaseModel:
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    def __getstate__(self):
+        """
+        Enable saving data through pickling
+
+        Returns:
+            dict: Returns the :obj:`~object.__dict__` attribute of the class.
+
+        """
+        return vars(self)
+
+    def __setstate__(self, state):
+        """
+        Enable loading data with the :mod:`pickle` module
+
+        Args:
+            state (dict): Loaded data.
+
+        Returns:
+            :data:`None`
+
+        """
+        vars(self).update(state)
+
     def table_view(self, field_blacklist=None):
         """
         Prepare nicely formatted output
