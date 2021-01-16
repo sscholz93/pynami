@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas.base &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.schemas.base &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -168,6 +168,12 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">post_load</span>
 
+<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">validate_iban</span>
+
+
+<div class="viewcode-block" id="AccessError"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.AccessError">[docs]</a><span class="k">class</span> <span class="nc">AccessError</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
 
 <div class="viewcode-block" id="BaseModel"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseModel">[docs]</a><span class="k">class</span> <span class="nc">BaseModel</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -182,7 +188,6 @@
 <span class="sd">    output&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">kwargs</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
@@ -209,6 +214,28 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="BaseModel.__setattr__"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseModel.__setattr__">[docs]</a>    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set certain fields to read-only</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): Attribute name.</span>
+<span class="sd">            value: New value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AccessError: In case of invalid write access.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :data:`None`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id_&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AccessError</span><span class="p">(</span><span class="s1">&#39;Id cannot be modified!&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;iban&#39;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">validate_iban</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BaseModel.table_view"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseModel.table_view">[docs]</a>    <span class="k">def</span> <span class="nf">table_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_blacklist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prepare nicely formatted output</span>
@@ -220,7 +247,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: All data entries which are not in the blacklist</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
                 <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_blacklist</span> <span class="k">if</span> <span class="ow">not</span>
                 <span class="n">field_blacklist</span> <span class="k">else</span> <span class="n">field_blacklist</span><span class="p">)}</span></div>
 
@@ -279,13 +306,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">datetimeformat</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span>
         <span class="sd">&quot;&quot;&quot;str: Default |NAMI| datetime format&quot;&quot;&quot;</span>
-        <span class="n">dateformat</span> <span class="o">=</span> <span class="n">datetimeformat</span>
+        <span class="n">dateformat</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> 00:00:00&#39;</span>
         <span class="sd">&quot;&quot;&quot;str: Default |NAMI| datetime format&quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="BaseSchema.correctEmptyDates"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseSchema.correctEmptyDates">[docs]</a>    <span class="nd">@pre_load</span>
-    <span class="k">def</span> <span class="nf">correctEmptyDates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSchema.correctEmptySTrings"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.base.BaseSchema.correctEmptySTrings">[docs]</a>    <span class="nd">@pre_load</span>
+    <span class="k">def</span> <span class="nf">correctEmptySTrings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Replace empty datetime strings with :data:`None`</span>
+<span class="sd">        Replace empty strings with :data:`None`</span>
 
 <span class="sd">        This method loops over all fields of the derived Schema class and</span>
 <span class="sd">        where it finds a :class:`~marshmallow.fields.DateTime` field and an</span>
@@ -303,7 +330,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;_declared_fields&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">],</span>
-                          <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">):</span>
+                          <span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">,</span> <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span></div>

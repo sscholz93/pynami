@@ -44,13 +44,13 @@ class SearchActivitySchema(BaseSearchSchema):
     """
     __model__ = SearchActivity
 
-    entries_aktivBis = fields.DateTime(allow_none=True, attribute='aktivBis')
+    entries_aktivBis = fields.Date(allow_none=True, attribute='aktivBis')
     """:class:`~datetime.datetime`: End date"""
     entries_beitragsArt = fields.String(attribute='beitragsArt')
     """str: Fee type"""
     entries_caeaGroup = fields.String(attribute='caeaGroup')
     """str: Access rights for the group"""
-    entries_aktivVon = fields.DateTime(allow_none=True, attribute='aktivVon')
+    entries_aktivVon = fields.Date(allow_none=True, attribute='aktivVon')
     """:class:`~datetime.datetime`: Start date"""
     entries_anlagedatum = fields.DateTime(allow_none=True,
                                           attribute='anlageDatum')
@@ -112,9 +112,9 @@ class ActivitySchema(BaseSchema):
     """str: Tier or group association"""
     untergliederungId = fields.Integer(load_only=True)
     """int: tier or sub group id"""
-    aktivVon = fields.DateTime()
+    aktivVon = fields.Date()
     """:class:`~datetime.datetime`: Start date"""
-    aktivBis = fields.DateTime(allow_none=True)
+    aktivBis = fields.Date(allow_none=True)
     """:class:`~datetime.datetime`: End date"""
     beitragsArtId = fields.Integer(allow_none=True, dump_only=True)
     """int: Fee type"""

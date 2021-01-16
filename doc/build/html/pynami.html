@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami package &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami package &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -1536,7 +1536,7 @@ results</p>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="pynami.schemas.html#pynami.schemas.search.SearchSchema" title="pynami.schemas.search.SearchSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchSchema</span></code></a> for a complete list of search
+<p><a class="reference internal" href="search_mitglieder.html#pynami.schemas.search.SearchSchema" title="pynami.schemas.search.SearchSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchSchema</span></code></a> for a complete list of search
 keys</p>
 </div>
 </dd></dl>
@@ -1577,6 +1577,26 @@ of the returned data set.</p>
 <span id="pynami-util-module"></span><h3>pynami.util module<a class="headerlink" href="#module-pynami.util" title="Permalink to this headline">¶</a></h3>
 <p>Some utility functions that are used by other classes and methods from this #
 package but not directly connected to the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr>.</p>
+<dl class="py function">
+<dt id="pynami.util.validate_iban">
+<code class="sig-name descname">validate_iban</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/util.html#validate_iban"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.util.validate_iban" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate an <abbr title="International Bank Account Number">IBAN</abbr></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Value to check. Spaces are allowed.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValidationError</strong> – In case of invalid <abbr title="International Bank Account Number">IBAN</abbr>.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The <abbr title="International Bank Account Number">IBAN</abbr> in compact form.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class">
 <dt id="pynami.util.ExtractHrefParser">
 <em class="property">class </em><code class="sig-name descname">ExtractHrefParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">convert_charrefs</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/util.html#ExtractHrefParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.util.ExtractHrefParser" title="Permalink to this definition">¶</a></dt>

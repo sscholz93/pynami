@@ -638,15 +638,14 @@ class NaMi(object):
             This has not been tested yet!
         """
         url = f"{URLS['MGL_TAETIGKEITEN']}{mgl}/{act.id}"
-        userjson = ActivitySchema().dumps(act.data)
-        print(userjson)
-        req = requests.Request('PUT', url,
-                               json=userjson)
-        prereq = self.s.prepare_request(req)
-        print(prereq.body)
-        # r = self.s.put(url, json=ActivitySchema().dumps(act.data))
-        # return ActivitySchema().load(self._check_response(r))
-        return True
+        userjson = ActivitySchema().dumps(act)
+        # print(userjson)
+        # req = requests.Request('PUT', url,
+        #                        json=userjson)
+        # prereq = self.s.prepare_request(req)
+        # print(prereq.body)
+        r = self.s.put(url, json=userjson)
+        return ActivitySchema().load(self._check_response(r))
 
     def mgl_ausbildungen(self, mglId):
         """
@@ -699,7 +698,7 @@ class NaMi(object):
             This has not been tested yet!
         """
         url = f"{URLS['AUSBILDUNG']}{mglId}/{ausbildung.id}"
-        r = self.s.put(url, json=AusbildungSchema().dumps(ausbildung.data))
+        r = self.s.put(url, json=AusbildungSchema().dumps(ausbildung))
         return AusbildungSchema().load(self._check_response(r))
 
     def mgl_history(self, mglId, ext=True):

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.util &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.util &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -173,6 +173,30 @@
 <span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 <span class="kn">from</span> <span class="nn">tkinter.filedialog</span> <span class="kn">import</span> <span class="n">asksaveasfilename</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Tk</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">schwifty</span> <span class="kn">import</span> <span class="n">IBAN</span>
+
+
+<div class="viewcode-block" id="validate_iban"><a class="viewcode-back" href="../../pynami.html#pynami.util.validate_iban">[docs]</a><span class="k">def</span> <span class="nf">validate_iban</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate an |IBAN|</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (str): Value to check. Spaces are allowed.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValidationError: In case of invalid |IBAN|.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The |IBAN| in compact form.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">IBAN</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">compact</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ExtractHrefParser"><a class="viewcode-back" href="../../pynami.html#pynami.util.ExtractHrefParser">[docs]</a><span class="k">class</span> <span class="nc">ExtractHrefParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>

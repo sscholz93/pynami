@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.nami &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.nami &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -801,15 +801,14 @@
 <span class="sd">            This has not been tested yet!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;MGL_TAETIGKEITEN&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mgl</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">act</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">userjson</span> <span class="o">=</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">act</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">userjson</span><span class="p">)</span>
-        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
-                               <span class="n">json</span><span class="o">=</span><span class="n">userjson</span><span class="p">)</span>
-        <span class="n">prereq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">prepare_request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">prereq</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-        <span class="c1"># r = self.s.put(url, json=ActivitySchema().dumps(act.data))</span>
-        <span class="c1"># return ActivitySchema().load(self._check_response(r))</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+        <span class="n">userjson</span> <span class="o">=</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+        <span class="c1"># print(userjson)</span>
+        <span class="c1"># req = requests.Request(&#39;PUT&#39;, url,</span>
+        <span class="c1">#                        json=userjson)</span>
+        <span class="c1"># prereq = self.s.prepare_request(req)</span>
+        <span class="c1"># print(prereq.body)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">userjson</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_ausbildungen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_ausbildungen">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_ausbildungen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -862,7 +861,7 @@
 <span class="sd">            This has not been tested yet!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;AUSBILDUNG&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">mglId</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">ausbildung</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ausbildung</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ausbildung</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_history"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_history">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>

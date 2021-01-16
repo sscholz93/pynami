@@ -10,6 +10,30 @@ import subprocess as sp
 from html.parser import HTMLParser
 from tkinter.filedialog import asksaveasfilename
 from tkinter import Tk
+from marshmallow import ValidationError
+from schwifty import IBAN
+
+
+def validate_iban(value):
+    """
+    Validate an |IBAN|
+
+    Args:
+        value (str): Value to check. Spaces are allowed.
+
+    Raises:
+        ValidationError: In case of invalid |IBAN|.
+
+    Returns:
+        str: The |IBAN| in compact form.
+
+    """
+    try:
+        if value != '':
+            return IBAN(value).compact
+        return value
+    except ValueError as e:
+        raise ValidationError(str(e))
 
 
 class ExtractHrefParser(HTMLParser):

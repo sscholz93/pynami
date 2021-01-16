@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas package &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.schemas package &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -533,6 +533,12 @@ corresponding data set through the activity id.</p>
 <div class="section" id="module-pynami.schemas.base">
 <span id="pynami-schemas-base-module"></span><h3>pynami.schemas.base module<a class="headerlink" href="#module-pynami.schemas.base" title="Permalink to this headline">¶</a></h3>
 <p>This module contains some base classes</p>
+<dl class="py exception">
+<dt id="pynami.schemas.base.AccessError">
+<em class="property">exception </em><code class="sig-name descname">AccessError</code><a class="reference internal" href="_modules/pynami/schemas/base.html#AccessError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.base.AccessError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeError</span></code></a></p>
+</dd></dl>
+
 <dl class="py class">
 <dt id="pynami.schemas.base.BaseModel">
 <em class="property">class </em><code class="sig-name descname">BaseModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas/base.html#BaseModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.base.BaseModel" title="Permalink to this definition">¶</a></dt>
@@ -563,6 +569,26 @@ corresponding data set through the activity id.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pynami.schemas.base.BaseModel.__setattr__">
+<code class="sig-name descname">__setattr__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas/base.html#BaseModel.__setattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.base.BaseModel.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set certain fields to read-only</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Attribute name.</p></li>
+<li><p><strong>value</strong> – New value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#pynami.schemas.base.AccessError" title="pynami.schemas.base.AccessError"><strong>AccessError</strong></a> – In case of invalid write access.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -660,7 +686,7 @@ derived class must define this attribute.</p>
 
 <dl class="py attribute">
 <dt id="pynami.schemas.base.BaseSchema.Meta.dateformat">
-<code class="sig-name descname">dateformat</code><em class="property"> = '%Y-%m-%d %H:%M:%S'</em><a class="headerlink" href="#pynami.schemas.base.BaseSchema.Meta.dateformat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dateformat</code><em class="property"> = '%Y-%m-%d 00:00:00'</em><a class="headerlink" href="#pynami.schemas.base.BaseSchema.Meta.dateformat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> datetime format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -672,9 +698,9 @@ derived class must define this attribute.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pynami.schemas.base.BaseSchema.correctEmptyDates">
-<code class="sig-name descname">correctEmptyDates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas/base.html#BaseSchema.correctEmptyDates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.base.BaseSchema.correctEmptyDates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replace empty datetime strings with <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dt id="pynami.schemas.base.BaseSchema.correctEmptySTrings">
+<code class="sig-name descname">correctEmptySTrings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pynami/schemas/base.html#BaseSchema.correctEmptySTrings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pynami.schemas.base.BaseSchema.correctEmptySTrings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace empty strings with <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a></p>
 <p>This method loops over all fields of the derived Schema class and
 where it finds a <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.DateTime" title="(in marshmallow v3.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a> field and an
 empty string in the data <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> it replaces this value with
@@ -2549,7 +2575,7 @@ addressed directly by its id.</p>
 <dd><p>Date of the end of membership</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2571,7 +2597,7 @@ addressed directly by its id.</p>
 <dd><p>Start of membership</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2637,7 +2663,7 @@ addressed directly by its id.</p>
 <dd><p>Birth date</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2987,7 +3013,7 @@ may therefore be empty.</p>
 <p>Main class representing a <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr> Mitglied</p>
 <p>This class overwrites the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__getattr__" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code></a> and
 <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__setattr__" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code></a> methods so that attributes of this class can be
-handled in a convinient way. It is intended to be instantiated by calling
+handled in a convenient way. It is intended to be instantiated by calling
 the <a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema.load" title="(in marshmallow v3.10.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> method on a corresponding data
 dictionary.</p>
 <dl class="py method">
@@ -3027,7 +3053,7 @@ with the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <dd><p>Date of the end of membership</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3060,7 +3086,7 @@ with the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <dd><p>Start of membership</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3148,7 +3174,7 @@ with the <abbr title="Namentliche Mitgliederverwaltung">NaMi</abbr></p>
 <dd><p>Birth date</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4144,7 +4170,7 @@ result.</p>
 <dd><p>Day of the training event</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4292,7 +4318,7 @@ result.</p>
 <dd><p>Day of the training event</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas.mgl &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.schemas.mgl &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -169,6 +169,7 @@
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">fields</span><span class="p">,</span> <span class="n">pre_load</span><span class="p">,</span> <span class="n">post_dump</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">BaseSearchSchema</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSearchModel</span>
+<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">validate_iban</span>
 
 
 <div class="viewcode-block" id="NamiKonto"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.NamiKonto">[docs]</a><span class="k">class</span> <span class="nc">NamiKonto</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -210,7 +211,7 @@
     <span class="sd">&quot;&quot;&quot;str: Account number&quot;&quot;&quot;</span>
     <span class="n">bankleitzahl</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;str: Bank sort code&quot;&quot;&quot;</span>
-    <span class="n">iban</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">iban</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">validate_iban</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: |IBAN|&quot;&quot;&quot;</span>
     <span class="n">bic</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;str: |BIC|&quot;&quot;&quot;</span>
@@ -297,17 +298,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchMitglied</span>
 
-    <span class="n">entries_austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;austrittsDatum&#39;</span><span class="p">,</span>
-                                             <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the end of membership&quot;&quot;&quot;</span>
+    <span class="n">entries_austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;austrittsDatum&#39;</span><span class="p">,</span>
+                                         <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Date of the end of membership&quot;&quot;&quot;</span>
     <span class="n">entries_beitragsarten</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;beitragsarten&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Fee type&quot;&quot;&quot;</span>
-    <span class="n">entries_eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start of membership&quot;&quot;&quot;</span>
-    <span class="n">entries_email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
+    <span class="n">entries_eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;eintrittsdatum&#39;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Start of membership&quot;&quot;&quot;</span>
+    <span class="n">entries_email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Primary member email&quot;&quot;&quot;</span>
     <span class="n">entries_emailVertretungsberechtigter</span> <span class="o">=</span> \
-        <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;emailVertretungsberechtigter&quot;</span><span class="p">,</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;emailVertretungsberechtigter&quot;</span><span class="p">,</span>
                       <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Email address of an authorized representative.&quot;&quot;&quot;</span>
     <span class="n">entries_ersteTaetigkeitId</span> <span class="o">=</span> \
@@ -318,8 +319,8 @@
     <span class="sd">&quot;&quot;&quot;int: Id of the first tier. This may be empty.&quot;&quot;&quot;</span>
     <span class="n">entries_fixBeitrag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;fixBeitrag&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Defaults to ``null``.&quot;&quot;&quot;</span>
-    <span class="n">entries_geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;geburtsDatum&#39;</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Birth date&quot;&quot;&quot;</span>
+    <span class="n">entries_geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;geburtsDatum&#39;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Birth date&quot;&quot;&quot;</span>
     <span class="n">entries_genericField1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;genericField1&quot;</span><span class="p">,</span>
                                           <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Not sure why these even exist.&quot;&quot;&quot;</span>
@@ -394,7 +395,7 @@
 
 <span class="sd">    This class overwrites the :meth:`~object.__getattr__` and</span>
 <span class="sd">    :meth:`~object.__setattr__` methods so that attributes of this class can be</span>
-<span class="sd">    handled in a convinient way. It is intended to be instantiated by calling</span>
+<span class="sd">    handled in a convenient way. It is intended to be instantiated by calling</span>
 <span class="sd">    the :meth:`~marshmallow.Schema.load` method on a corresponding data</span>
 <span class="sd">    dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -408,18 +409,6 @@
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">vorname</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nachname</span><span class="si">}</span><span class="s1">&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
 <div class="viewcode-block" id="Mitglied.update"><a class="viewcode-back" href="../../../pynami.schemas.html#pynami.schemas.mgl.Mitglied.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nami</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes the possibly changed values to the |NAMI|</span>
@@ -431,7 +420,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Mitglied: The new Mitglied as it is returned by the |NAMI|</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">userjson</span> <span class="o">=</span> <span class="n">MitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">userjson</span> <span class="o">=</span> <span class="n">MitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">nami</span><span class="o">.</span><span class="n">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">userjson</span><span class="p">)</span></div></div>
 
 
@@ -441,17 +430,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">Mitglied</span>
 
-    <span class="n">austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the end of membership&quot;&quot;&quot;</span>
+    <span class="n">austrittsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Date of the end of membership&quot;&quot;&quot;</span>
     <span class="n">beitragsart</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Fee type&quot;&quot;&quot;</span>
     <span class="n">beitragsartId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Id of the fee type&quot;&quot;&quot;</span>
-    <span class="n">eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start of membership&quot;&quot;&quot;</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">eintrittsdatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Start of membership&quot;&quot;&quot;</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Primary member email&quot;&quot;&quot;</span>
-    <span class="n">emailVertretungsberechtigter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">emailVertretungsberechtigter</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Email address of an authorized representative.&quot;&quot;&quot;</span>
     <span class="n">ersteTaetigkeit</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: First activity. May be empty.&quot;&quot;&quot;</span>
@@ -463,8 +452,8 @@
     <span class="sd">&quot;&quot;&quot;int: Id of the first tier. This may be empty.&quot;&quot;&quot;</span>
     <span class="n">fixBeitrag</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Defaults to ``null``.&quot;&quot;&quot;</span>
-    <span class="n">geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Birth date&quot;&quot;&quot;</span>
+    <span class="n">geburtsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;:class:`~datetime.date`: Birth date&quot;&quot;&quot;</span>
     <span class="n">genericField1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Not sure why these even exist.&quot;&quot;&quot;</span>
     <span class="n">genericField2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -570,7 +559,6 @@
         <span class="n">ordered</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="sd">&quot;&quot;&quot;bool: This is nesseccary for the payment deatils to be dumped in the</span>
 <span class="sd">        corrent order.&quot;&quot;&quot;</span></div></div>
-
 </pre></div>
 
            </div>

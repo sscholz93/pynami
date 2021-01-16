@@ -6,6 +6,7 @@ import json
 from marshmallow import fields, pre_load, post_dump
 
 from .base import BaseSchema, BaseSearchSchema, BaseModel, BaseSearchModel
+from ..util import validate_iban
 
 
 class NamiKonto(BaseModel):
@@ -47,7 +48,7 @@ class NamiKontoSchema(BaseSchema):
     """str: Account number"""
     bankleitzahl = fields.String()
     """str: Bank sort code"""
-    iban = fields.String()
+    iban = fields.String(validate=validate_iban)
     """str: |IBAN|"""
     bic = fields.String()
     """str: |BIC|"""
@@ -134,17 +135,17 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """
     __model__ = SearchMitglied
 
-    entries_austrittsDatum = fields.DateTime(attribute='austrittsDatum',
-                                             allow_none=True)
-    """:class:`~datetime.datetime`: Date of the end of membership"""
+    entries_austrittsDatum = fields.Date(attribute='austrittsDatum',
+                                         allow_none=True)
+    """:class:`~datetime.date`: Date of the end of membership"""
     entries_beitragsarten = fields.String(attribute='beitragsarten')
     """str: Fee type"""
-    entries_eintrittsdatum = fields.DateTime(attribute='eintrittsdatum')
-    """:class:`~datetime.datetime`: Start of membership"""
-    entries_email = fields.String(attribute="email")
+    entries_eintrittsdatum = fields.Date(attribute='eintrittsdatum')
+    """:class:`~datetime.date`: Start of membership"""
+    entries_email = fields.Email(attribute="email", allow_none=True)
     """str: Primary member email"""
     entries_emailVertretungsberechtigter = \
-        fields.String(attribute="emailVertretungsberechtigter",
+        fields.Email(attribute="emailVertretungsberechtigter",
                       allow_none=True)
     """str: Email address of an authorized representative."""
     entries_ersteTaetigkeitId = \
@@ -155,8 +156,8 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """int: Id of the first tier. This may be empty."""
     entries_fixBeitrag = fields.String(attribute="fixBeitrag", allow_none=True)
     """str: Defaults to ``null``."""
-    entries_geburtsDatum = fields.DateTime(attribute='geburtsDatum')
-    """:class:`~datetime.datetime`: Birth date"""
+    entries_geburtsDatum = fields.Date(attribute='geburtsDatum')
+    """:class:`~datetime.date`: Birth date"""
     entries_genericField1 = fields.String(attribute="genericField1",
                                           allow_none=True)
     """str: Not sure why these even exist."""
@@ -231,7 +232,7 @@ class Mitglied(BaseModel):
 
     This class overwrites the :meth:`~object.__getattr__` and
     :meth:`~object.__setattr__` methods so that attributes of this class can be
-    handled in a convinient way. It is intended to be instantiated by calling
+    handled in a convenient way. It is intended to be instantiated by calling
     the :meth:`~marshmallow.Schema.load` method on a corresponding data
     dictionary.
     """
@@ -245,18 +246,6 @@ class Mitglied(BaseModel):
     def __str__(self):
         return f'{self.vorname} {self.nachname}'
 
-    def __getattr__(self, name):
-        try:
-            return super().__getattr__(name)
-        except AttributeError:
-            return self.data[name]
-
-    def __setattr__(self, name, value):
-        try:
-            super().__setattr__(name, value)
-        except AttributeError:
-            self.data[name] = value
-
     def update(self, nami):
         """
         Writes the possibly changed values to the |NAMI|
@@ -268,7 +257,7 @@ class Mitglied(BaseModel):
         Returns:
             Mitglied: The new Mitglied as it is returned by the |NAMI|
         """
-        userjson = MitgliedSchema().dump(self.data)
+        userjson = MitgliedSchema().dump(self)
         return nami.mitglied(self.id, 'PUT', json=userjson)
 
 
@@ -278,17 +267,17 @@ class MitgliedSchema(BaseSchema):
     """
     __model__ = Mitglied
 
-    austrittsDatum = fields.DateTime(allow_none=True, load_only=True)
-    """:class:`~datetime.datetime`: Date of the end of membership"""
+    austrittsDatum = fields.Date(allow_none=True, load_only=True)
+    """:class:`~datetime.date`: Date of the end of membership"""
     beitragsart = fields.String(allow_none=True)
     """str: Fee type"""
     beitragsartId = fields.Integer(allow_none=True)
     """int: Id of the fee type"""
-    eintrittsdatum = fields.DateTime()
-    """:class:`~datetime.datetime`: Start of membership"""
-    email = fields.String()
+    eintrittsdatum = fields.Date()
+    """:class:`~datetime.date`: Start of membership"""
+    email = fields.Email(allow_none=True)
     """str: Primary member email"""
-    emailVertretungsberechtigter = fields.String()
+    emailVertretungsberechtigter = fields.Email(allow_none=True)
     """str: Email address of an authorized representative."""
     ersteTaetigkeit = fields.String(allow_none=True)
     """str: First activity. May be empty."""
@@ -300,8 +289,8 @@ class MitgliedSchema(BaseSchema):
     """int: Id of the first tier. This may be empty."""
     fixBeitrag = fields.String(allow_none=True)
     """str: Defaults to ``null``."""
-    geburtsDatum = fields.DateTime()
-    """:class:`~datetime.datetime`: Birth date"""
+    geburtsDatum = fields.Date()
+    """:class:`~datetime.date`: Birth date"""
     genericField1 = fields.String(allow_none=True)
     """str: Not sure why these even exist."""
     genericField2 = fields.String(allow_none=True)
@@ -407,4 +396,3 @@ class MitgliedSchema(BaseSchema):
         ordered = True
         """bool: This is nesseccary for the payment deatils to be dumped in the
         corrent order."""
-

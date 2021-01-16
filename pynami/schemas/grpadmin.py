@@ -97,10 +97,10 @@ class SearchInvoiceSchema(BaseSearchSchema):
     """str: Netto amount including currency"""
     entries_kreditor = fields.String(attribute='kreditor')
     """str: May be empty"""
-    entries_reDatum = fields.DateTime(attribute='reDatum')
+    entries_reDatum = fields.Date(attribute='reDatum')
     """:class:`~datetime.datetime`: Date of the invoice"""
-    entries_einzugsDatum = fields.DateTime(allow_none=True,
-                                           attribute='einzugsDatum')
+    entries_einzugsDatum = fields.Date(allow_none=True,
+                                       attribute='einzugsDatum')
     """:class:`~datetime.datetime`: Date of money collection"""
     entries_displayName = fields.String(attribute='displayName')
     """str: Human-readable string describing the invoice"""
@@ -153,7 +153,7 @@ class InvoiceSchema(BaseSchema):
 
     id = fields.Integer()
     """int: |NAMI| id"""
-    reDatum = fields.DateTime()
+    reDatum = fields.Date()
     """:class:`~datetime.datetime`: Date of the invoice"""
     reCreated = fields.DateTime()
     """:class:`~datetime.datetime`: Creation date of the invoice"""
@@ -173,7 +173,7 @@ class InvoiceSchema(BaseSchema):
     """str: Human-readable string describing the invoice"""
     debitorName = fields.String()
     """str: Debitor, e.g. a group"""
-    einzugsDatum = fields.DateTime()
+    einzugsDatum = fields.Date()
     """:class:`~datetime.datetime`: Date of money collection"""
     zahlungsweise = fields.String()
     """str: Way of payment (e.g. ``'Lastschrift'``)"""

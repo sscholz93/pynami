@@ -44,8 +44,8 @@ class SearchAusbildungSchema(BaseSearchSchema):
     """
     __model__ = SearchAusbildung
 
-    entries_vstgTag = fields.DateTime(attribute='vstgTag')
-    """:class:`~datetime.datetime`: Day of the training event"""
+    entries_vstgTag = fields.Date(attribute='vstgTag')
+    """:class:`~datetime.date`: Day of the training event"""
     entries_veranstalter = fields.String(attribute='veranstalter')
     """str: Who organized the event (e.g. a `Bezirk`)"""
     entries_vstgName = fields.String(attribute='vstgName')
@@ -88,8 +88,8 @@ class AusbildungSchema(BaseSchema):
     """int: Id of the training"""
     mitglied = fields.String()
     """str: Who absolved the training"""
-    vstgTag = fields.DateTime()
-    """:class:`~datetime.datetime`: Day of the training event"""
+    vstgTag = fields.Date()
+    """:class:`~datetime.date`: Day of the training event"""
     vstgName = fields.String()
     """str: Name of the event"""
     veranstalter = fields.String()

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas.activity &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.schemas.activity &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -207,13 +207,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__model__</span> <span class="o">=</span> <span class="n">SearchActivity</span>
 
-    <span class="n">entries_aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;aktivBis&#39;</span><span class="p">)</span>
+    <span class="n">entries_aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;aktivBis&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: End date&quot;&quot;&quot;</span>
     <span class="n">entries_beitragsArt</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;beitragsArt&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Fee type&quot;&quot;&quot;</span>
     <span class="n">entries_caeaGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;caeaGroup&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Access rights for the group&quot;&quot;&quot;</span>
-    <span class="n">entries_aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;aktivVon&#39;</span><span class="p">)</span>
+    <span class="n">entries_aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;aktivVon&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start date&quot;&quot;&quot;</span>
     <span class="n">entries_anlagedatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;anlageDatum&#39;</span><span class="p">)</span>
@@ -275,9 +275,9 @@
     <span class="sd">&quot;&quot;&quot;str: Tier or group association&quot;&quot;&quot;</span>
     <span class="n">untergliederungId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">load_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: tier or sub group id&quot;&quot;&quot;</span>
-    <span class="n">aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">aktivVon</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Start date&quot;&quot;&quot;</span>
-    <span class="n">aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">aktivBis</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: End date&quot;&quot;&quot;</span>
     <span class="n">beitragsArtId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dump_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;int: Fee type&quot;&quot;&quot;</span></div>

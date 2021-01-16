@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pynami.schemas.grpadmin &mdash; pynami 0.3.0 documentation</title>
+  <title>pynami.schemas.grpadmin &mdash; pynami 0.3.1 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -260,10 +260,10 @@
     <span class="sd">&quot;&quot;&quot;str: Netto amount including currency&quot;&quot;&quot;</span>
     <span class="n">entries_kreditor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;kreditor&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: May be empty&quot;&quot;&quot;</span>
-    <span class="n">entries_reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;reDatum&#39;</span><span class="p">)</span>
+    <span class="n">entries_reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;reDatum&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the invoice&quot;&quot;&quot;</span>
-    <span class="n">entries_einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                           <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;einzugsDatum&#39;</span><span class="p">)</span>
+    <span class="n">entries_einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                       <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;einzugsDatum&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of money collection&quot;&quot;&quot;</span>
     <span class="n">entries_displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;displayName&#39;</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;str: Human-readable string describing the invoice&quot;&quot;&quot;</span>
@@ -316,7 +316,7 @@
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;int: |NAMI| id&quot;&quot;&quot;</span>
-    <span class="n">reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">reDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of the invoice&quot;&quot;&quot;</span>
     <span class="n">reCreated</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Creation date of the invoice&quot;&quot;&quot;</span>
@@ -336,7 +336,7 @@
     <span class="sd">&quot;&quot;&quot;str: Human-readable string describing the invoice&quot;&quot;&quot;</span>
     <span class="n">debitorName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;str: Debitor, e.g. a group&quot;&quot;&quot;</span>
-    <span class="n">einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">DateTime</span><span class="p">()</span>
+    <span class="n">einzugsDatum</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;:class:`~datetime.datetime`: Date of money collection&quot;&quot;&quot;</span>
     <span class="n">zahlungsweise</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;str: Way of payment (e.g. ``&#39;Lastschrift&#39;``)&quot;&quot;&quot;</span>

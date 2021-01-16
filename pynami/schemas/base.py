@@ -5,6 +5,12 @@ This module contains some base classes
 from collections import OrderedDict
 from marshmallow import Schema, pre_load, fields, post_load
 
+from ..util import validate_iban
+
+
+class AccessError(AttributeError):
+    pass
+
 
 class BaseModel:
     """
@@ -19,7 +25,6 @@ class BaseModel:
     output"""
 
     def __init__(self, **kwargs):
-        self.data = kwargs
         for key, value in kwargs.items():
             setattr(self, key, value)
 
@@ -46,6 +51,28 @@ class BaseModel:
         """
         vars(self).update(state)
 
+    def __setattr__(self, name, value):
+        """
+        Set certain fields to read-only
+
+        Args:
+            name (str): Attribute name.
+            value: New value.
+
+        Raises:
+            AccessError: In case of invalid write access.
+
+        Returns:
+            :data:`None`
+
+        """
+        if name in ['id', 'id_'] and hasattr(self, name) \
+            and getattr(self, name) is not None:
+            raise AccessError('Id cannot be modified!')
+        elif name == 'iban':
+            value = validate_iban(value)
+        super().__setattr__(name, value)
+
     def table_view(self, field_blacklist=None):
         """
         Prepare nicely formatted output
@@ -57,7 +84,7 @@ class BaseModel:
         Returns:
             dict: All data entries which are not in the blacklist
         """
-        return {k: v for k, v in self.data.items() if v is not None
+        return {k: v for k, v in vars(self).items() if v is not None
                 and v != '' and k not in (self._field_blacklist if not
                 field_blacklist else field_blacklist)}
 
@@ -116,13 +143,13 @@ class BaseSchema(Schema):
         """
         datetimeformat = '%Y-%m-%d %H:%M:%S'
         """str: Default |NAMI| datetime format"""
-        dateformat = datetimeformat
+        dateformat = '%Y-%m-%d 00:00:00'
         """str: Default |NAMI| datetime format"""
 
     @pre_load
-    def correctEmptyDates(self, data, **kwargs):
+    def correctEmptySTrings(self, data, **kwargs):
         """
-        Replace empty datetime strings with :data:`None`
+        Replace empty strings with :data:`None`
 
         This method loops over all fields of the derived Schema class and
         where it finds a :class:`~marshmallow.fields.DateTime` field and an
@@ -140,7 +167,7 @@ class BaseSchema(Schema):
         """
         for key in data.keys():
             if isinstance(self.__class__.__dict__['_declared_fields'][key],
-                          fields.DateTime):
+                          (fields.DateTime, fields.Date, fields.Email)):
                 if data[key] == '':
                     data[key] = None
         return data
