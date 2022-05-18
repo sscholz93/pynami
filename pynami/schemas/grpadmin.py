@@ -173,7 +173,7 @@ class InvoiceSchema(BaseSchema):
     """str: Human-readable string describing the invoice"""
     debitorName = fields.String()
     """str: Debitor, e.g. a group"""
-    einzugsDatum = fields.Date()
+    einzugsDatum = fields.Date(allow_none=True)
     """:class:`~datetime.datetime`: Date of money collection"""
     zahlungsweise = fields.String()
     """str: Way of payment (e.g. ``'Lastschrift'``)"""
