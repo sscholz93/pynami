@@ -99,7 +99,7 @@ class SearchMitglied(BaseSearchModel):
     there cannot be just one Mitglied class because the search results lack
     crucal imformation (e.g. payment details).
     """
-    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum']
+    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum', 'email']
     _field_blacklist = ['representedClass', 'mglType', 'staatsangehoerigkeit',
                         'status', 'geschlecht', 'eintrittsdatum', 'id',
                         'wiederverwendenFlag',  'descriptor', 'version',
