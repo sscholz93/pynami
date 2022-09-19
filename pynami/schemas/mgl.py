@@ -140,7 +140,7 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """:class:`~datetime.date`: Date of the end of membership"""
     entries_beitragsarten = fields.String(attribute='beitragsarten')
     """str: Fee type"""
-    entries_eintrittsdatum = fields.Date(attribute='eintrittsdatum')
+    entries_eintrittsdatum = fields.Date(attribute='eintrittsdatum', allow_none=True)
     """:class:`~datetime.date`: Start of membership"""
     entries_email = fields.Email(attribute="email", allow_none=True)
     """str: Primary member email"""
