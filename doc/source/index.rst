@@ -18,8 +18,7 @@ Python package for the |DPSG| |NAMI| |API|
    urls
    search_mitglieder
    modules
-
-
+   changelog-link
 
 Indices and tables
 ==================

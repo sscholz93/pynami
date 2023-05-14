@@ -29,7 +29,7 @@ class NamiKontoSchema(BaseSchema):
     """
     Schema class for bank account and payment method information.
 
-    This Schema will is :std:doc:`nested <nesting>` inside a
+    This Schema will be :std:doc:`nested <nesting>` inside a
     :class:`MitgliedSchema` and there should be no other use for it.
     """
     __model__ = NamiKonto
@@ -140,7 +140,8 @@ class SearchMitgliedSchema(BaseSearchSchema):
     """:class:`~datetime.date`: Date of the end of membership"""
     entries_beitragsarten = fields.String(attribute='beitragsarten')
     """str: Fee type"""
-    entries_eintrittsdatum = fields.Date(attribute='eintrittsdatum', allow_none=True)
+    entries_eintrittsdatum = fields.Date(attribute='eintrittsdatum',
+                                         allow_none=True)
     """:class:`~datetime.date`: Start of membership"""
     entries_email = fields.Email(attribute="email", allow_none=True)
     """str: Primary member email"""
@@ -236,8 +237,8 @@ class Mitglied(BaseModel):
     the :meth:`~marshmallow.Schema.load` method on a corresponding data
     dictionary.
     """
-    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geburtsDatum',
-                 'strasse', 'stufe']
+    _tabkeys = ['mitgliedsNummer', 'vorname', 'nachname', 'geschlecht', 'stufe',
+                'geburtsDatum', 'strasse', 'plz', 'ort']
     _field_blacklist = ['genericField1']
 
     def __repr__(self):

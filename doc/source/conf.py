@@ -121,7 +121,9 @@ napoleon_use_rtype = True
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
     'marshmallow': ('https://marshmallow.readthedocs.io/en/stable/', None),
-    'requests': ('https://2.python-requests.org/en/master/', None)
+    # 'requests': ('https://2.python-requests.org/en/master/', None),
+    'requests': ('https://requests.readthedocs.io/en/latest/', None),
+    'openpyxl': ('https://openpyxl.readthedocs.io/en/stable/', None)
 }
 # Keep cached intersphinx inventories indefinitely
 intersphinx_cache_limit = -1

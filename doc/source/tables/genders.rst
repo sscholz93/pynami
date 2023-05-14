@@ -1,14 +1,9 @@
 Genders
 =======
 
-.. seealso::
-
-	:ref:`urls:Default values`
-		How to get these values
-
 .. csv-table::
-	:header: "Beschreibung", "ID"
+	:file: geschlechter.csv
+	:header-rows: 1
 
-	"keine Angabe",23
-	"männlich",19
-	"weiblich",20
+.. seealso::
+	:meth:`~pynami.nami.NaMi.geschlechter`

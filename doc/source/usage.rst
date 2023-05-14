@@ -68,3 +68,26 @@ Send emails
     from pynami.tools import send_emails
 
     send_emails(result)
+
+Export data
+-----------
+
+There are two functions for exporting data. The first is to export the data as a |CSV| formatted string and save that as a file using the method :meth:`~pynami.tools.make_csv`.
+
+.. code-block:: python
+    :caption: Export basic member data to a csv file
+
+    from pynami.tools import make_csv
+
+    keys = ['mitgliedsNummer', 'vorname', 'nachname', 'geschlecht', 'geburtsDatum']
+    with open('data.csv', 'w', newline='', encoding='utf-8-sig') as f:
+        f.writelines(make_csv(result, keys, delimiter=';'))
+
+Another option is to export the data as an Excel file using the function :meth:`~pynami.tools.export_xlsx` which comes already with a possible write to file functionality.
+
+.. code-block:: python
+    :caption: Export basic member data to an Excel file
+
+    from pynami.tools import export_xlsx
+
+    export_xlsx(result, keys, write_to_file=True, filepath='data.xlsx')

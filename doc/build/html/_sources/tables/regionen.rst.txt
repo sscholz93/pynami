@@ -1,28 +1,9 @@
 Bundesländer
 ============
 
+.. csv-table:: Bundesländer and their ids
+	:file: regionen.csv
+	:header-rows: 1
+
 .. seealso::
-
-	:ref:`urls:Default values`
-		How to get these values
-
-.. csv-table::
-	:header: "Beschreibung", "ID"
-
-	"Baden-Württemberg (Deutschland)",1
-	"Bayern (Deutschland)",2
-	"Berlin (Deutschland)",3
-	"Brandenburg (Deutschland)",4
-	"Bremen (Deutschland)",5
-	"Hamburg (Deutschland)",6
-	"Hessen (Deutschland)",7
-	"Mecklenburg-Vorpommern (Deutschland)",8
-	"Niedersachsen (Deutschland)",9
-	"Nordrhein-Westfalen (Deutschland)",10
-	"Rheinland-Pfalz (Deutschland)",11
-	"Saarland (Deutschland)",12
-	"Sachsen (Deutschland)",13
-	"Sachsen Anhalt (Deutschland)",14
-	"Schleswig-Holstein (Deutschland)",15
-	"Thüringen (Deutschland)",16
-	"Nicht-DE (Ausland)",23
+	:meth:`~pynami.nami.NaMi.regionen`

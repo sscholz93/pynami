@@ -19,14 +19,12 @@ Member types
 	:>json list data: The search results. Each returned member type is a list entry in the form of a json array.
 
 		.. csv-table:: Latest search results
-			:header: "Beschreibung", "ID"
-
-			"Nicht-Mitglied","NICHT_MITGLIED"
-			"Schnuppermitglied","SCHNUPPER_MITGLIED"
-			"Mitglied","MITGLIED"
+			:file: mgltypes.csv
+			:header-rows: 1
 
 		.. seealso::
-
+			:meth:`~pynami.nami.NaMi.mgltypes`
+		.. seealso::
 			:class:`~pynami.schemas.default.BaseadminSchema`
 				|JSON| schema of the returned data
 
@@ -49,14 +47,12 @@ Member states
 	:>json list data: The search results. Each returned member state is a list entry in the form of a json array.
 
 		.. csv-table:: Latest search results
-			:header: "Beschreibung", "ID"
-
-			"Aktiv","AKTIV"
-			"Inaktiv","INAKTIV"
-			"archiviert","GELOESCHT_ALT"
+			:file: status_list.csv
+			:header-rows: 1
 
 		.. seealso::
-
+			:attr:`~pynami.nami.NaMi.status_list`
+		.. seealso::
 			:class:`~pynami.schemas.default.BaseadminSchema`
 				|JSON| schema of the returned data
 

@@ -1,21 +1,9 @@
 Confessions
 ===========
 
-.. seealso::
-
-	:ref:`urls:Default values`
-		How to get these values
-
 .. csv-table::
-	:header: "Beschreibung", "ID"
+	:file: konfessionen.csv
+	:header-rows: 1
 
-	"römisch-katholisch",1
-	"evangelisch / protestantisch",2
-	"orthodox",3
-	"freikirchlich",4
-	"andere christliche",5
-	"jüdisch",6
-	"muslimisch",7
-	"sonstige",8
-	"ohne Konfession",9
-	"neuapostolisch",11
+.. seealso::
+	:meth:`~pynami.nami.NaMi.konfessionen`

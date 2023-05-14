@@ -19,9 +19,11 @@ class BaseModel:
     It stores all data entries as instance attributes.
     """
     _tabkeys = []
-    """list: Attribute names for tabulating"""
+    """:obj:`list` of :obj:`str`: Default attributes names for tabulating and
+    data export. This attribute is inherited and adapted to all Schema
+    classes from :class:`~pynami.schemas.base.BaseModel`."""
     _field_blacklist = []
-    """list: Attribute names which to be skipped while preparing tabulated
+    """list: Attribute names which are to be skipped while preparing tabulated
     output"""
 
     def __init__(self, **kwargs):
@@ -143,8 +145,10 @@ class BaseSchema(Schema):
         """
         datetimeformat = '%Y-%m-%d %H:%M:%S'
         """str: Default |NAMI| datetime format"""
-        dateformat = '%Y-%m-%d 00:00:00'
-        """str: Default |NAMI| datetime format"""
+        dateformat = '%Y-%m-%d %H:%M:%S'
+        """str: Default |NAMI| date format. Note that in most cases the time
+        part is only zeroes. However it can happen that the incoming value has
+        time information as well."""
 
     @pre_load
     def correctEmptySTrings(self, data, **kwargs):

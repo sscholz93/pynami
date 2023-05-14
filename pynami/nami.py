@@ -183,11 +183,12 @@ class NaMi(object):
             :obj:`list` of :class:`~.schemas.default.Baseadmin`: The returned
             default values
         """
-        url = URLS[key.upper()].format(grpId=grpId, taetigkeitId=taetigkeitId)
-        params = {'gruppierung': str(grpId) if grpId else
-                      self.__config['stammesnummer'],
-                  'mitglied': str(mglId) if mglId else
-                      self.__config['id'],
+        if not grpId:
+            grpId = self.grpId
+        url = URLS[key.upper()].format(grpId=str(grpId),
+                                       taetigkeitId=taetigkeitId)
+        params = {'gruppierung': str(grpId),
+                  'mitglied': str(mglId) if mglId else self.myId,
                   'page': 1,
                   'start': 0,
                   'limit': 1000}
@@ -355,7 +356,10 @@ class NaMi(object):
     def tagList(self):
         """:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different
         list of fee types but with basically the same content. This one is
-        used for searching members."""
+        used for searching members.
+
+        .. deprecated:: 0.3.3
+            Only returns an empty list and has therefore become useless."""
         return self._get_baseadmin('TagList')
 
     @property

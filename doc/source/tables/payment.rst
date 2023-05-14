@@ -4,30 +4,39 @@ Payment details
 Member management
 -----------------
 
-.. csv-table:: Payment method
-	:header: "Beschreibung", "ID"
+.. csv-table:: Payment methods
+	:file: zahlungskonditionen.csv
+	:header-rows: 1
 
-	"Std Lastschrift",1
-	"Std Überweisung",2
+.. seealso:: Here
+	:meth:`~pynami.nami.NaMi.zahlungskonditionen`
 
-.. csv-table:: Fee type
-	:header: "Beschreibung", "ID"
-
-	"DPSG Bundesverband 000000 (Familienermäßigt - Stiftungseuro - VERBANDSBEITRAG)",5
-	"DPSG Bundesverband 000000 (Familienermäßigt - VERBANDSBEITRAG)",2
-	"DPSG Bundesverband 000000 (Sozialermäßigt - Stiftungseuro - VERBANDSBEITRAG)",6
-	"DPSG Bundesverband 000000 (Sozialermäßigt - VERBANDSBEITRAG)",3
-	"DPSG Bundesverband 000000 (Übernahme - VERBANDSBEITRAG)",7
-	"DPSG Bundesverband 000000 (Voller Beitrag - Stiftungseuro - VERBANDSBEITRAG)",4
-	"DPSG Bundesverband 000000 (Voller Beitrag - VERBANDSBEITRAG)",1
+.. csv-table:: Fee types
+	:file: beitragsarten_mgl.csv
+	:header-rows: 1
 
 .. seealso::
+	:meth:`~pynami.nami.NaMi.beitragsarten_mgl`
 
+The following table can be obtained with a different function and is given here for the sake of completeness.
+
+.. csv-table:: Fee types (Yes, the same ones)
+	:file: beitragsarten.csv
+	:header-rows: 1
+
+.. seealso::
+	:meth:`~pynami.nami.NaMi.beitragsarten`
+
+.. seealso::
 	:ref:`urls:Default values`
 		How to get these values
 
 Ids for searching
 -----------------
+
+.. deprecated:: 0.3.3
+
+	No longer in use. You will just get an empty list.
 
 .. http:get:: //tagging/getTagList
 	
@@ -41,17 +50,6 @@ Ids for searching
 	:>json int totalEntries: Number of returned entries
 	:>json list data: The search results. Each returned tag is a list entry in the form of a json array.
 
-		.. csv-table:: Tag list of fee types
-			:header: "Beschreibung", "ID"
-
-			"Familienbeitrag - 30",1158
-			"Förderbeitrag - 20",1159
-			"Halbjahr - 30",1161
-			"Jahresbeitrag - 60",1157
-			"Rechnung - 30",1223
-			"Rechnung - 60",1162
-			"Sonderbeitrag",1160
-
 		.. seealso::
 
 			:class:`~pynami.schemas.default.BaseadminSchema`
@@ -59,3 +57,5 @@ Ids for searching
 
 	:status 200: No error
 
+.. seealso::
+	:meth:`~pynami.nami.NaMi.tagList`

@@ -5,7 +5,7 @@ This module defines some constants needed for communication with the |NAMI|.
 
 from enum import Enum
 
-BASE_URL = 'https://nami.dpsg.de/ica/rest'
+BASE_URL = 'https://nami.dpsg.de/ica/'
 """str: Base |URL| of the server"""
 DEFAULT_PARAMS = {'page': 1,
                   'start': 0,
@@ -35,7 +35,9 @@ class URLMetaClass(type):
     attributes.
     """
     def __getitem__(cls, key):
-        return BASE_URL + super().__getattribute__(key)
+        if key == 'STUFENWECHSEL':
+            return BASE_URL + super().__getattribute__(key)
+        return BASE_URL + 'rest' + super().__getattribute__(key)
 
 
 class URLS(metaclass=URLMetaClass):
@@ -114,3 +116,4 @@ class URLS(metaclass=URLMetaClass):
         'identitaet/{mglId}/flist'
     GET_TAG = '/nami/mitglied-tagged-item/filtered-for-navigation/' + \
         'identitaet/identitaet/{mglId}/{tagId}'
+    STUFENWECHSEL = '/mgl-verwaltungS/stufenwechsel'

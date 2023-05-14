@@ -1,92 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>pynami.nami &mdash; pynami 0.3.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>pynami.nami &mdash; pynami 0.3.2 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> pynami
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            pynami
           </a>
-
-          
-            
-            
               <div class="version">
-                0.3.1
+                0.3.2
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
@@ -97,69 +53,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">API reference</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">pynami</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>pynami.nami</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pynami.nami</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for pynami.nami</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">NAMI library in python</span>
@@ -186,7 +103,7 @@
 
 
 <div class="viewcode-block" id="NamiResponseTypeError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiResponseTypeError">[docs]</a><span class="k">class</span> <span class="nc">NamiResponseTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is raised when the response type from the |NAMI| is not in list of</span>
 <span class="sd">    allowed values or more specifically when the |NAMI| returns an error, a</span>
 <span class="sd">    warning or an exception.</span>
@@ -195,19 +112,19 @@
 
 
 <div class="viewcode-block" id="NamiResponseSuccessError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiResponseSuccessError">[docs]</a><span class="k">class</span> <span class="nc">NamiResponseSuccessError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is being raised when the response &#39;success&#39; field is not :data:`True`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="NamiHTTPError"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NamiHTTPError">[docs]</a><span class="k">class</span> <span class="nc">NamiHTTPError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Raised when the HTTP status code was not as expected!&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the HTTP status code was not as expected!&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="NaMi"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi">[docs]</a><span class="k">class</span> <span class="nc">NaMi</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for communication with the |DPSG| |NAMI|</span>
 
 <span class="sd">    Example:</span>
@@ -227,11 +144,11 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__config</span> <span class="o">=</span> <span class="n">config</span>
-        <span class="sd">&quot;&quot;&quot;dict: Contains authorization information and after that a few ids&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: Contains authorization information and after that a few ids&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="NaMi._check_response"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi._check_response">[docs]</a>    <span class="k">def</span> <span class="nf">_check_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check a requests response object if the |NAMI| response looks ok.</span>
 <span class="sd">        This currently checks some very basic things.</span>
 
@@ -257,7 +174,7 @@
 
 
 <div class="viewcode-block" id="NaMi.auth"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.auth">[docs]</a>    <span class="k">def</span> <span class="nf">auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Authenticate against the |NAMI| |API|. This stores the jsessionId</span>
 <span class="sd">        cookie in the requests session. Therefore this needs to be called only</span>
 <span class="sd">        once.</span>
@@ -304,7 +221,7 @@
         <span class="k">return</span> <span class="bp">self</span>
 
 <div class="viewcode-block" id="NaMi.logout"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.logout">[docs]</a>    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This should be called at the end of the communication. It is called</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This should be called at the end of the communication. It is called</span>
 <span class="sd">        when exiting through the :meth:`~contextmnager.__exit__` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="s1">&#39;LOGOUT&#39;</span><span class="p">]</span>
@@ -322,7 +239,7 @@
 
 <div class="viewcode-block" id="NaMi._get_baseadmin"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi._get_baseadmin">[docs]</a>    <span class="k">def</span> <span class="nf">_get_baseadmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Base function for retrieving all core lists from the |NAMI|</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Base function for retrieving all core lists from the |NAMI|</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (:obj:`str`): Name of the wanted items</span>
@@ -346,11 +263,12 @@
 <span class="sd">            :obj:`list` of :class:`~.schemas.default.Baseadmin`: The returned</span>
 <span class="sd">            default values</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpId</span><span class="o">=</span><span class="n">grpId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="o">=</span><span class="n">taetigkeitId</span><span class="p">)</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">grpId</span><span class="p">)</span> <span class="k">if</span> <span class="n">grpId</span> <span class="k">else</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">],</span>
-                  <span class="s1">&#39;mitglied&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mglId</span><span class="p">)</span> <span class="k">if</span> <span class="n">mglId</span> <span class="k">else</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">grpId</span><span class="p">:</span>
+            <span class="n">grpId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grpId</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URLS</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpId</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">grpId</span><span class="p">),</span>
+                                       <span class="n">taetigkeitId</span><span class="o">=</span><span class="n">taetigkeitId</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gruppierung&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">grpId</span><span class="p">),</span>
+                  <span class="s1">&#39;mitglied&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mglId</span><span class="p">)</span> <span class="k">if</span> <span class="n">mglId</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">myId</span><span class="p">,</span>
                   <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                   <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                   <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
@@ -360,7 +278,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">grpId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Group id of the user</span>
 
 <span class="sd">        Returns:</span>
@@ -371,7 +289,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">myId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        |NAMI| internal id of the user</span>
 
 <span class="sd">        Returns:</span>
@@ -381,7 +299,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="NaMi.countries"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.countries">[docs]</a>    <span class="k">def</span> <span class="nf">countries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -396,7 +314,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Land&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.regionen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.regionen">[docs]</a>    <span class="k">def</span> <span class="nf">regionen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -410,7 +328,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.zahlungskonditionen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.zahlungskonditionen">[docs]</a>    <span class="k">def</span> <span class="nf">zahlungskonditionen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -424,7 +342,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Zahlungskondition&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.beitragsarten_mgl"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.beitragsarten_mgl">[docs]</a>    <span class="k">def</span> <span class="nf">beitragsarten_mgl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -438,7 +356,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Beitragsart_mgl&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.beitragsarten"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.beitragsarten">[docs]</a>    <span class="k">def</span> <span class="nf">beitragsarten</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -452,7 +370,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Beitragsart&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.geschlechter"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.geschlechter">[docs]</a>    <span class="k">def</span> <span class="nf">geschlechter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -466,7 +384,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Geschlecht&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.staaten"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.staaten">[docs]</a>    <span class="k">def</span> <span class="nf">staaten</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -480,7 +398,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Staat&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.konfessionen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.konfessionen">[docs]</a>    <span class="k">def</span> <span class="nf">konfessionen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -495,7 +413,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Konfession&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.mgltypes"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgltypes">[docs]</a>    <span class="k">def</span> <span class="nf">mgltypes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default values</span>
 
 <span class="sd">        Args:</span>
@@ -510,62 +428,65 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">status_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: If you are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: If you are</span>
 <span class="sd">        active, inactiv or already deleted&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Status_List&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tagList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: A different</span>
 <span class="sd">        list of fee types but with basically the same content. This one is</span>
-<span class="sd">        used for searching members.&quot;&quot;&quot;</span>
+<span class="sd">        used for searching members.</span>
+
+<span class="sd">        .. deprecated:: 0.3.3</span>
+<span class="sd">            Only returns an empty list and has therefore become useless.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TagList&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bausteine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose |DPSG|</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose |DPSG|</span>
 <span class="sd">        training parts&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Baustein&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subdivision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Which division</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Which division</span>
 <span class="sd">        you are associated with. This one is only used for searching.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Untergliederung&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">activities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Functional</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Functional</span>
 <span class="sd">        activities&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Alle_Taetigkeiten&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ebenen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Structural</span>
 <span class="sd">        layersin the |DPSG|&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Ebene&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ebene1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: You can choose</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: You can choose</span>
 <span class="sd">        a Diözese which you belong to.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Ebene1&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">gruppierungen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a</span>
 <span class="sd">        list of groups that you are associated with for member admin&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;Gruppierungen&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">grpadmin_grps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:obj:`list` of :class:`~.schemas.default.Baseadmin`: Choose from a</span>
 <span class="sd">        list of groups that you are associated with for group admin&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;grpadmin_grps&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :class:`~.schemas.dashboard.Stats`: Contains counts from different</span>
 <span class="sd">        tiers. The actual list of :class:`~.schemas.dashboard.StatCategory` is</span>
 <span class="sd">        in the :attr:`~.schemas.dashboard.StatsSchema.statsCategories`</span>
@@ -576,7 +497,7 @@
         <span class="k">return</span> <span class="n">StatsSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
 
 <div class="viewcode-block" id="NaMi.notifications"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.notifications">[docs]</a>    <span class="k">def</span> <span class="nf">notifications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortproperty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sortdirection</span><span class="o">=</span><span class="s1">&#39;ASC&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dashboard function</span>
 
 <span class="sd">        Returns:</span>
@@ -595,7 +516,7 @@
         <span class="k">return</span> <span class="n">NotificationSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.history"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.history">[docs]</a>    <span class="k">def</span> <span class="nf">history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dashboard function</span>
 
 <span class="sd">        Returns:</span>
@@ -610,7 +531,7 @@
         <span class="k">return</span> <span class="n">HistoryEntrySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.ebene2"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.ebene2">[docs]</a>    <span class="k">def</span> <span class="nf">ebene2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ebene1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        You can choose a Bezirk which you belong to.</span>
 
 <span class="sd">        Args:</span>
@@ -623,7 +544,7 @@
                                    <span class="n">gruppierung</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="NaMi.ebene3"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.ebene3">[docs]</a>    <span class="k">def</span> <span class="nf">ebene3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ebene2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        You can choose a Stamm which you belong to.</span>
 
 <span class="sd">        Args:</span>
@@ -636,7 +557,7 @@
                                    <span class="n">gruppierung</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__config</span><span class="p">[</span><span class="s1">&#39;stammesnummer&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="NaMi.invoices"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.invoices">[docs]</a>    <span class="k">def</span> <span class="nf">invoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groupId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all invoices of a group</span>
 
 <span class="sd">        Args:</span>
@@ -655,7 +576,7 @@
         <span class="k">return</span> <span class="n">SearchInvoiceSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.invoice"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.invoice">[docs]</a>    <span class="k">def</span> <span class="nf">invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groupId</span><span class="p">,</span> <span class="n">invId</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an invoice by its id.</span>
 
 <span class="sd">        Args:</span>
@@ -672,7 +593,7 @@
         <span class="k">return</span> <span class="n">InvoiceSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.download_invoice"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">download_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Downloads and opens an invoice as a pdf document.</span>
 
 <span class="sd">        Args:</span>
@@ -685,7 +606,7 @@
         <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.tk_auf_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_auf_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_auf_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all possible activities for a certain group</span>
 
 <span class="sd">        Args:</span>
@@ -700,7 +621,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_AUF_GRP&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.tk_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all possible groups for an activity</span>
 
 <span class="sd">        Args:</span>
@@ -715,7 +636,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_baseadmin</span><span class="p">(</span><span class="s1">&#39;TK_GRP&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.tk_ug"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_ug">[docs]</a>    <span class="k">def</span> <span class="nf">tk_ug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all possible subdivision for an activity</span>
 
 <span class="sd">        Args:</span>
@@ -734,7 +655,7 @@
                                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.tk_caea_grp"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tk_caea_grp">[docs]</a>    <span class="k">def</span> <span class="nf">tk_caea_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">taetigkeitId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all possible access rights for an activity</span>
 
 <span class="sd">        Args:</span>
@@ -753,7 +674,7 @@
                                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_activities"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_activities">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_activities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mgl</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all activities of a member</span>
 
 <span class="sd">        Args:</span>
@@ -769,7 +690,7 @@
         <span class="k">return</span> <span class="n">SearchActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.get_activity"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_activity">[docs]</a>    <span class="k">def</span> <span class="nf">get_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mgl</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an activity by its id.</span>
 
 <span class="sd">        Args:</span>
@@ -786,7 +707,7 @@
         <span class="k">return</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.update_activity"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.update_activity">[docs]</a>    <span class="k">def</span> <span class="nf">update_activity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mgl</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update an activity</span>
 
 <span class="sd">        Args:</span>
@@ -811,7 +732,7 @@
         <span class="k">return</span> <span class="n">ActivitySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_ausbildungen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_ausbildungen">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_ausbildungen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all trainings from a Mitglied.</span>
 
 <span class="sd">        Args:</span>
@@ -828,7 +749,7 @@
         <span class="k">return</span> <span class="n">SearchAusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.get_ausbildung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_ausbildung">[docs]</a>    <span class="k">def</span> <span class="nf">get_ausbildung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a training by its id.</span>
 
 <span class="sd">        Args:</span>
@@ -846,7 +767,7 @@
         <span class="k">return</span> <span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.update_ausbildung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.update_ausbildung">[docs]</a>    <span class="k">def</span> <span class="nf">update_ausbildung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">ausbildung</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update a training</span>
 
 <span class="sd">        Args:</span>
@@ -865,7 +786,7 @@
         <span class="k">return</span> <span class="n">AusbildungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.mgl_history"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mgl_history">[docs]</a>    <span class="k">def</span> <span class="nf">mgl_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all history changes from a Mitglied.</span>
 
 <span class="sd">        Args:</span>
@@ -884,7 +805,7 @@
         <span class="k">return</span> <span class="n">HistoryEntrySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.get_mgl_history"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_mgl_history">[docs]</a>    <span class="k">def</span> <span class="nf">get_mgl_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a member history entry by its id.</span>
 
 <span class="sd">        Args:</span>
@@ -904,7 +825,7 @@
         <span class="k">return</span> <span class="n">MitgliedHistorySchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.tags"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.tags">[docs]</a>    <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all tags of a member</span>
 
 <span class="sd">        Args:</span>
@@ -921,7 +842,7 @@
         <span class="k">return</span> <span class="n">SearchTagSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.get_tag"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_tag">[docs]</a>    <span class="k">def</span> <span class="nf">get_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="p">,</span> <span class="n">tagId</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a tag by its id</span>
 
 <span class="sd">        Args:</span>
@@ -935,7 +856,7 @@
         <span class="k">return</span> <span class="n">TagSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="NaMi.bescheinigungen"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.bescheinigungen">[docs]</a>    <span class="k">def</span> <span class="nf">bescheinigungen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all certificates of inspection</span>
 
 <span class="sd">        Returns:</span>
@@ -950,7 +871,7 @@
         <span class="k">return</span> <span class="n">SearchBescheinigungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.get_bescheinigung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.get_bescheinigung">[docs]</a>    <span class="k">def</span> <span class="nf">get_bescheinigung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        View a certificate of inspection by its id</span>
 
 <span class="sd">        Args:</span>
@@ -965,7 +886,7 @@
         <span class="k">return</span> <span class="n">BescheinigungSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NaMi.download_bescheinigung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_bescheinigung">[docs]</a>    <span class="k">def</span> <span class="nf">download_bescheinigung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Open a certificate as a |PDF| file</span>
 
 <span class="sd">        Args:</span>
@@ -978,7 +899,7 @@
         <span class="n">open_download_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.download_beantragung"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.download_beantragung">[docs]</a>    <span class="k">def</span> <span class="nf">download_beantragung</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Open the application form for a certificate of good conduct as a |PDF|</span>
 <span class="sd">        file.</span>
 
@@ -991,7 +912,7 @@
 
 <div class="viewcode-block" id="NaMi.search_all"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.search_all">[docs]</a>    <span class="k">def</span> <span class="nf">search_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filterString</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">searchString</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                    <span class="n">sortproperty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sortdirection</span><span class="o">=</span><span class="s1">&#39;ASC&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Search function for filtering the whole member list with limited</span>
 <span class="sd">        filter options.</span>
 
@@ -1030,7 +951,7 @@
         <span class="k">return</span> <span class="n">SearchMitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.search"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run a search for members</span>
 
 <span class="sd">        Todo:</span>
@@ -1060,7 +981,7 @@
         <span class="k">return</span> <span class="n">SearchMitgliedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_response</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NaMi.mitglied"><a class="viewcode-back" href="../../pynami.html#pynami.nami.NaMi.mitglied">[docs]</a>    <span class="k">def</span> <span class="nf">mitglied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mglId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">grpId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets or updates a Mitglied.</span>
 
 <span class="sd">        The keyword arguments are passed on to the |HTTP| communication</span>
@@ -1187,46 +1108,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2019, Sebastian Scholz.
-
-    </p>
+    <p>&#169; Copyright 2019, Sebastian Scholz.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
